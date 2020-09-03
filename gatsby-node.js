@@ -2,32 +2,16 @@ const path = require('path');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const makePages = (data, pagePath) => {
-    data.forEach((d, i) => {
-      const { name } = d;
-      createPage({
-        path: `${pagePath}/${name.replace(/(\W+)/gm, '-').toLowerCase()}`,
-        component: path.resolve(`./src/templates/${pagePath || 'index'}.js`),
-        context: d,
-      });
-      if (i === 0) {
-        createPage({
-          path: `${pagePath}/`,
-          component: path.resolve(`./src/templates/${pagePath || 'index'}.js`),
-          context: d,
-        });
-      }
-    });
-  };
   const result = await graphql(`
     {
       data: allStatesCsv {
         nodes {
           id
           name
+          state
         }
       }
-      metadata: allMetadataCsv {
+      metadata: allIndicatorsCsv {
         nodes {
           id
           name: title
@@ -37,6 +21,30 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   const { data, metadata } = result.data;
-  makePages(metadata.nodes, '');
-  makePages(data.nodes, 'state');
+  metadata.nodes.forEach((meta, i) => {
+    const indicator = meta.name.replace(/(\W+)/gm, '-').toLowerCase();
+    createPage({
+      path: `/${indicator}`,
+      component: path.resolve('./src/templates/index.js'),
+      context: meta,
+    });
+    if (i === 0) {
+      createPage({
+        path: '/',
+        component: path.resolve('./src/templates/index.js'),
+        context: meta,
+      });
+    }
+    data.nodes.forEach(state => {
+      const stateName = state.name.replace(/(\W+)/gm, '-').toLowerCase();
+      createPage({
+        path: `/${indicator}/${stateName}`,
+        component: path.resolve('./src/templates/state.js'),
+        context: {
+          ...meta,
+          state: state.state,
+        },
+      });
+    })
+  });
 };

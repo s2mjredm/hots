@@ -27,65 +27,68 @@ Index.propTypes = {
 export default Index;
 
 export const query = graphql`
-  query indexPage($id: String, $variable: String ) {
-    metadata: metadataCsv(id: {eq: $id}) {
+  fragment States on IndicatorsCsv {
+    AL
+    AK
+    AZ
+    AR
+    CA
+    CO
+    CT
+    DE
+    DC
+    FL
+    GA
+    HI
+    ID
+    IL
+    IN
+    IA
+    KS
+    KY
+    LA
+    ME
+    MD
+    MA
+    MI
+    MN
+    MS
+    MO
+    MT
+    NE
+    NV
+    NH
+    NJ
+    NM
+    NY
+    NC
+    ND
+    OH
+    OK
+    OR
+    PA
+    RI
+    SC
+    SD
+    TN
+    TX
+    UT
+    VT
+    VA
+    WA
+    WV
+    WI
+    WY
+  }
+  query indexPage($id: String) {
+    metadata: indicatorsCsv(id: {eq: $id}) {
       title
       definition
       high
       low
     }
-    indicator: indicatorsCsv(indicator: {eq: $variable}) {
-      AL
-      AK
-      AZ
-      AR
-      CA
-      CO
-      CT
-      DE
-      DC
-      FL
-      GA
-      HI
-      ID
-      IL
-      IN
-      IA
-      KS
-      KY
-      LA
-      ME
-      MD
-      MA
-      MI
-      MN
-      MS
-      MO
-      MT
-      NE
-      NV
-      NH
-      NJ
-      NM
-      NY
-      NC
-      ND
-      OH
-      OK
-      OR
-      PA
-      RI
-      SC
-      SD
-      TN
-      TX
-      UT
-      VT
-      VA
-      WA
-      WV
-      WI
-      WY
+    indicator: indicatorsCsv(id: {eq: $id}) {
+      ...States
     }
   }
 `;
