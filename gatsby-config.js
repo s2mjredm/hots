@@ -15,5 +15,11 @@ module.exports = {
       },
     },
     `gatsby-transformer-csv`,
+    {
+      resolve: `gatsby-source-wordpress-experimental`,
+      options: {
+        url: 'http://cms.hots.axismaps.io/graphql',
+      },
+    }
   ],
 }

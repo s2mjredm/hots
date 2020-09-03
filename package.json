@@ -15,8 +15,11 @@
   },
   "dependencies": {
     "gatsby": "^2.24.50",
+    "gatsby-plugin-sharp": "^2.6.31",
     "gatsby-source-filesystem": "^2.3.27",
+    "gatsby-source-wordpress-experimental": "^1.3.8",
     "gatsby-transformer-csv": "^2.3.10",
+    "gatsby-transformer-sharp": "^2.5.14",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
