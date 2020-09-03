@@ -5,6 +5,11 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    title: `HOTS`,
+    description: ``,
+    author: `Axis Maps`,
+  },
   /* Your site config here */
   plugins: [
     "gatsby-plugin-chakra-ui",
@@ -24,5 +29,6 @@ module.exports = {
     },
     `gatsby-plugin-sharp`,
     "gatsby-transformer-sharp",
+    `gatsby-plugin-react-helmet`,
   ],
 }
