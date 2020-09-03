@@ -10,6 +10,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `data`,
         path: `${__dirname}/src/data/`,
       },
@@ -20,6 +27,8 @@ module.exports = {
       options: {
         url: 'http://cms.hots.axismaps.io/graphql',
       },
-    }
+    },
+    `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
   ],
 }
