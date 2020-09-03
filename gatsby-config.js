@@ -7,6 +7,7 @@
 module.exports = {
   /* Your site config here */
   plugins: [
+    "gatsby-plugin-chakra-ui",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -18,10 +19,10 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url: 'http://cms.hots.axismaps.io/graphql',
+        url: "http://cms.hots.axismaps.io/graphql",
       },
     },
     `gatsby-plugin-sharp`,
-    'gatsby-transformer-sharp',
+    "gatsby-transformer-sharp",
   ],
 }
