@@ -4,11 +4,9 @@ import { graphql } from "gatsby"
 import parse from "html-react-parser"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 
 const Index = ({ data: { metadata, indicator } }) => (
   <Layout>
-    <SEO />
     <h1>{metadata.title}</h1>
     {parse(metadata.definition)}
     <ul>
