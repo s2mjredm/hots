@@ -15,14 +15,14 @@ import {
 const Footer = () => {
   const data = useStaticQuery(graphql`
     {
-      csgLogo: file(relativePath: { eq: "logos/csh-logo.png" }) {
+      centerLogo: file(relativePath: { eq: "logos/center-logo.png" }) {
         childImageSharp {
           fluid {
             src
           }
         }
       }
-      hLogo: file(relativePath: { eq: "logos/h-logo.png" }) {
+      vcuLogo: file(relativePath: { eq: "logos/vcu-logo.png" }) {
         childImageSharp {
           fluid {
             src
@@ -73,13 +73,13 @@ const Footer = () => {
       <VStack align="flex-start">
         <Image
           minWidth={200}
-          src={data.csgLogo.childImageSharp.fluid.src}
-          alt="Segun Adebayo"
+          src={data.centerLogo.childImageSharp.fluid.src}
+          alt="Center on Society and Health"
         />
         <Image
           minWidth={200}
-          src={data.hLogo.childImageSharp.fluid.src}
-          alt="Segun Adebayo"
+          src={data.vcuLogo.childImageSharp.fluid.src}
+          alt="VCU"
         />
       </VStack>
     </Stack>
