@@ -1,9 +1,16 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Image, Divider } from "@chakra-ui/core"
-
-import { Flex, Box, Heading, Text, VStack } from "@chakra-ui/core"
+import {
+  Flex,
+  Box,
+  Heading,
+  Text,
+  VStack,
+  Stack,
+  Image,
+  Divider,
+} from "@chakra-ui/core"
 
 const Footer = () => {
   const data = useStaticQuery(graphql`
@@ -26,21 +33,20 @@ const Footer = () => {
   `)
 
   return (
-    <Flex
+    <Stack
       py={16}
-      px={[120]}
+      px={[5, 120]}
       color="white"
       bg="#184595"
       direction={["column", "row"]}
-      width="100%"
-      justify="space-between"
+      spacing="24px"
       fontSize="sm"
     >
       <Box pr={5}>
         <Heading size="md" pb={2}>
           ABOUT
         </Heading>
-        <Text width="sm" fontWeight="semi-bold">
+        <Text fontWeight="semi-bold">
           State of Health is an initiative conducted by the Center on Society
           and Health at Virginia Commonwealth University, and funded by the
           Robert Wood Johnson Foundation. Our aim is to provide a more complete
@@ -57,21 +63,26 @@ const Footer = () => {
         <Heading size="md" pb={2}>
           CONTACT
         </Heading>
-        <Text width={300} fontWeight="semi-bold">
+        <Text fontWeight="semi-bold">
           We would love to hear from you! <br /> Let us know how you’re using
           this data, or reach out with any comments or questions. <br /> We can
           be reached at: <br /> societyhealth@vcu.edu <br /> 804-628-2462
         </Text>
       </Box>
       <Divider color="#184595" />
-      <VStack minWidth="200px" w={500} align="flex-start">
+      <VStack align="flex-start">
         <Image
+          minWidth={200}
           src={data.csgLogo.childImageSharp.fluid.src}
           alt="Segun Adebayo"
         />
-        <Image src={data.hLogo.childImageSharp.fluid.src} alt="Segun Adebayo" />
+        <Image
+          minWidth={200}
+          src={data.hLogo.childImageSharp.fluid.src}
+          alt="Segun Adebayo"
+        />
       </VStack>
-    </Flex>
+    </Stack>
   )
 }
 export default Footer
