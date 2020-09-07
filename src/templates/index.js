@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
-import parse from 'html-react-parser';
+import React from "react"
+import PropTypes from "prop-types"
+import { graphql } from "gatsby"
+import parse from "html-react-parser"
 
-import Layout from '../components/layout';
+import Layout from "../components/layout"
 
 const Index = ({ data: { metadata, indicator } }) => (
   <Layout>
@@ -18,13 +18,13 @@ const Index = ({ data: { metadata, indicator } }) => (
       ))}
     </ul>
   </Layout>
-);
+)
 
 Index.propTypes = {
   data: PropTypes.shape().isRequired,
-};
+}
 
-export default Index;
+export default Index
 
 export const query = graphql`
   fragment States on IndicatorsCsv {
@@ -81,14 +81,14 @@ export const query = graphql`
     WY
   }
   query indexPage($id: String) {
-    metadata: indicatorsCsv(id: {eq: $id}) {
+    metadata: indicatorsCsv(id: { eq: $id }) {
       title
       definition
       high
       low
     }
-    indicator: indicatorsCsv(id: {eq: $id}) {
+    indicator: indicatorsCsv(id: { eq: $id }) {
       ...States
     }
   }
-`;
+`

@@ -5,8 +5,23 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    title: `HOTS`,
+    description: ``,
+    author: `Axis Maps`,
+  },
   /* Your site config here */
   plugins: [
+    "gatsby-plugin-chakra-ui",
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images/`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -18,10 +33,11 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url: 'http://cms.hots.axismaps.io/graphql',
+        url: "http://cms.hots.axismaps.io/graphql",
       },
     },
     `gatsby-plugin-sharp`,
-    'gatsby-transformer-sharp',
+    "gatsby-transformer-sharp",
+    `gatsby-plugin-react-helmet`,
   ],
 }
