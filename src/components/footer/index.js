@@ -69,7 +69,7 @@ const Footer = () => {
           be reached at: <br /> societyhealth@vcu.edu <br /> 804-628-2462
         </Text>
       </Box>
-      <Divider color="#184595" />
+      <Divider color="#184595" border="none" />
       <VStack align="flex-start">
         <Image
           minWidth={200}
