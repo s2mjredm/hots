@@ -1,9 +1,9 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { graphql } from "gatsby"
-import parse from "html-react-parser"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import parse from 'html-react-parser';
 
-import Layout from "../components/layout"
+import Layout from '../components/layout';
 
 const Index = ({ data: { metadata, indicator } }) => (
   <Layout>
@@ -11,20 +11,20 @@ const Index = ({ data: { metadata, indicator } }) => (
     {parse(metadata.definition)}
     <ul>
       {Object.keys(indicator).map(state => (
-        <li>
+        <li key={state}>
           <b>{`${state}: `}</b>
           {indicator[state]}
         </li>
       ))}
     </ul>
   </Layout>
-)
+);
 
 Index.propTypes = {
   data: PropTypes.shape().isRequired,
-}
+};
 
-export default Index
+export default Index;
 
 export const query = graphql`
   fragment States on IndicatorsCsv {
@@ -91,4 +91,4 @@ export const query = graphql`
       ...States
     }
   }
-`
+`;

@@ -7,25 +7,36 @@ import Layout from '../components/layout';
 
 export const query = graphql`
   {
-    page: wpPage(id: {eq: "cG9zdDo2OQ=="}) {
+    page: wpPage(id: { eq: "cG9zdDo2OQ==" }) {
       title
       content
     }
-    items: allWpPost(filter: {categories: {nodes: {elemMatch: {slug: {eq: "learnmore"}}}}}, sort: {fields: title, order: ASC}) {
+    items: allWpPost(
+      filter: { categories: { nodes: { elemMatch: { slug: { eq: "learnmore" } } } } }
+      sort: { fields: title, order: ASC }
+    ) {
       nodes {
+        id
         content
       }
     }
   }
 `;
 
-const LearnMore = ({ data: { items: { nodes }, page: { title, content } } }) => (
-    <Layout>
-      <h1>{title}</h1>
-      {parse(content)}
-      {nodes.map(item => (<div>{parse(item.content)}</div>))}
-    </Layout>
-  );
+const LearnMore = ({
+  data: {
+    items: { nodes },
+    page: { title, content },
+  },
+}) => (
+  <Layout>
+    <h1>{title}</h1>
+    {parse(content)}
+    {nodes.map(item => (
+      <div key={item.id}>{parse(item.content)}</div>
+    ))}
+  </Layout>
+);
 
 LearnMore.propTypes = {
   data: PropTypes.shape().isRequired,

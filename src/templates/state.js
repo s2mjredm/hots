@@ -6,59 +6,64 @@ import parse from 'html-react-parser';
 import Layout from '../components/layout';
 
 const State = ({ data: { metadata, indicator, allIndicators, stateName, state, ranking } }) => {
-  let ranks = Object.keys(ranking).map(variable => ({ variable, ranking: ranking[variable]}));
+  let ranks = Object.keys(ranking).map(variable => ({
+    variable,
+    ranking: ranking[variable],
+  }));
   ranks = ranks.sort((a, b) => a.ranking - b.ranking);
-  const bottom5 = ranks.slice(0, 3);
-  const top5 = ranks.slice(-3);
+  const bottom3 = ranks.slice(0, 3);
+  const top3 = ranks.slice(-3);
 
   return (
     <Layout>
       <h1>{metadata.title}</h1>
       {parse(metadata.definition)}
       <ul>
-        {Object.keys(indicator).map(state => (
-          <li>
-            <b>{`${state}: `}</b>
-            {indicator[state]}
+        {Object.keys(indicator).map(st => (
+          <li key={st}>
+            <b>{`${st}: `}</b>
+            {indicator[st]}
           </li>
         ))}
       </ul>
-      <h2>Bottom 5</h2>
+      <h2>Bottom 3</h2>
       <ul>
-        {bottom5.map(ind => {
+        {bottom3.map(ind => {
           const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
           return (
-            <li>
+            <li key={indicatorTitle}>
               {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
               {ind.ranking}
             </li>
-          )
+          );
         })}
       </ul>
-      <h2>Top 5</h2>
+      <h2>Top 3</h2>
       <ul>
-        {top5.map(ind => {
+        {top3.map(ind => {
           const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
           return (
-            <li>
+            <li key={indicatorTitle}>
               {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
               {ind.ranking}
             </li>
-          )
+          );
         })}
       </ul>
       <h2>{stateName.name}</h2>
       <ul>
-        {allIndicators.nodes.filter(ind => state[ind.variable]).map(ind => (
-          <li>
-            <b>{`${ind.title}: `}</b>
-            {`${state[ind.variable]} (rank ${ranking[ind.variable]})`}
-          </li>
-        ))}
+        {allIndicators.nodes
+          .filter(ind => state[ind.variable])
+          .map(ind => (
+            <li key={ind.variable}>
+              <b>{`${ind.title}: `}</b>
+              {`${state[ind.variable]} (rank ${ranking[ind.variable]})`}
+            </li>
+          ))}
       </ul>
     </Layout>
   );
-}
+};
 
 State.propTypes = {
   data: PropTypes.shape().isRequired,
@@ -68,13 +73,13 @@ export default State;
 
 export const query = graphql`
   query statePage($id: String, $state: String) {
-    metadata: indicatorsCsv(id: {eq: $id}) {
+    metadata: indicatorsCsv(id: { eq: $id }) {
       title
       definition
       high
       low
     }
-    indicator: indicatorsCsv(id: {eq: $id}) {
+    indicator: indicatorsCsv(id: { eq: $id }) {
       ...States
     }
     allIndicators: allIndicatorsCsv {
@@ -85,10 +90,10 @@ export const query = graphql`
         conditionDefinition
       }
     }
-    stateName: statesCsv(state: {eq: $state}) {
+    stateName: statesCsv(state: { eq: $state }) {
       name
     }
-    state: statesCsv(state: {eq: $state}) {
+    state: statesCsv(state: { eq: $state }) {
       D_H
       D_w
       D_b
@@ -174,7 +179,7 @@ export const query = graphql`
       HO11_MotorVehMort
       PS_PolicyRankings
     }
-    ranking: rankingCsv(state: {eq: $state}) {
+    ranking: rankingCsv(state: { eq: $state }) {
       D_H
       D_w
       D_b

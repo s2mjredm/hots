@@ -45,6 +45,6 @@ exports.createPages = async ({ graphql, actions }) => {
           state: state.state,
         },
       });
-    })
+    });
   });
 };

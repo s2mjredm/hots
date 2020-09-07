@@ -1,6 +1,6 @@
-import React from "react"
-import { Heading, Flex, Button } from "@chakra-ui/core"
-import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons"
+import React from 'react';
+import { Heading, Flex, Button } from '@chakra-ui/core';
+import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 
 const Header = () => (
   <Flex
@@ -16,7 +16,7 @@ const Header = () => (
     textStyle="header"
   >
     <Button
-      display={["block", "none"]}
+      display={['block', 'none']}
       leftIcon={<SearchIcon />}
       variant="link"
       size="lg"
@@ -26,7 +26,7 @@ const Header = () => (
       <Heading textStyle="header">State of Health</Heading>
     </Flex>
     <Button
-      display={["none", "block"]}
+      display={['none', 'block']}
       textStyle="header"
       variant="link"
       size="sm"
@@ -35,7 +35,7 @@ const Header = () => (
       MAP IT
     </Button>
     <Button
-      display={["none", "block"]}
+      display={['none', 'block']}
       textStyle="header"
       variant="link"
       size="sm"
@@ -44,7 +44,7 @@ const Header = () => (
       LEARN MORE
     </Button>
     <Button
-      display={["none", "block"]}
+      display={['none', 'block']}
       textStyle="header"
       variant="link"
       size="sm"
@@ -53,7 +53,7 @@ const Header = () => (
       TAKE ACTION
     </Button>
     <Button
-      display={["none", "block"]}
+      display={['none', 'block']}
       textStyle="header"
       variant="link"
       size="sm"
@@ -62,20 +62,20 @@ const Header = () => (
       ABOUT THE DATA
     </Button>
     <Button
-      display={["none", "block"]}
+      display={['none', 'block']}
       leftIcon={<SearchIcon />}
       variant="link"
       size="md"
       colorScheme="gray.800"
     />
     <Button
-      display={["block", "none"]}
+      display={['block', 'none']}
       leftIcon={<HamburgerIcon />}
       variant="link"
       size="lg"
       colorScheme="gray.800"
     />
   </Flex>
-)
+);
 
-export default Header
+export default Header;

@@ -7,14 +7,18 @@ import Layout from '../components/layout';
 
 export const query = graphql`
   {
-    wpPage(id: {eq: "cG9zdDo3"}) {
+    wpPage(id: { eq: "cG9zdDo3" }) {
       title
       content
     }
   }
 `;
 
-const About = ({ data: { wpPage: { title, content } } }) => (
+const About = ({
+  data: {
+    wpPage: { title, content },
+  },
+}) => (
   <Layout>
     <h1>{title}</h1>
     {parse(content)}
