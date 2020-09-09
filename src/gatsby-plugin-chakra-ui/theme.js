@@ -16,7 +16,7 @@ const theme = {
     titles: {
       fontFamily: 'Montserrat',
       color: '#403F3F',
-      letterSpacing: '-0.06rem',
+      letterSpacing: '-0.03rem',
       fontWeight: 'bold',
     },
   },
