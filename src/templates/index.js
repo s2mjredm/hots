@@ -38,7 +38,7 @@ const Index = ({ data: { metadata, indicator } }) => (
     </Grid>
 
     <Box
-      px={120}
+      px={[10, 20, 120]}
       py={120}
       bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
     >

@@ -85,6 +85,7 @@ const SearchSelectInput = ({ label, placeholder }) => {
           placeholder="Enter amount"
           border="1.3px solid #403F3F"
           fontFamily="Roboto Slab"
+          h={[20, 12]}
         />
         <InputRightElement children={<ChevronDownIcon />} />
       </InputGroup>
@@ -109,7 +110,7 @@ const SearchSelectInput = ({ label, placeholder }) => {
 
 const IndicatorDropdown = () => {
   return (
-    <Box p={20} color="gray.text">
+    <Box p={[10, 20]} color="gray.text">
       <Heading textStyle="titles">How is your state doing?</Heading>
       <Text my={3} fontSize={24} fontFamily="Roboto Slab" letterSpacing="-0.06rem">
         Map it! Choose a health statistic or outcome to see results mapped for the whole United
@@ -138,9 +139,10 @@ const IndicatorDropdown = () => {
           bg="#F06060"
           colorScheme="#184595"
           size="lg"
+          h={[20, 12]}
           w="100%"
           minWidth="190px"
-          fontSize="25px"
+          fontSize={['26px', '16px']}
         >
           EXPLORE STATE RANKINGS
         </Button>
