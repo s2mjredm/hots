@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import './index.css';
 
-import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons';
+// import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons';
 
 import {
+  Icon,
   Box,
   Button,
   FormControl,
@@ -18,7 +19,7 @@ import {
   Select,
   Stack,
   Text,
-  VStack,
+  Flex,
   InputGroup,
   InputLeftElement,
   InputRightElement,
@@ -87,10 +88,10 @@ const SearchSelectInput = ({ label, placeholder }) => {
           fontFamily="Roboto Slab"
           h={[20, 12]}
         />
-        <InputRightElement children={<ChevronDownIcon />} />
+        {/* <InputRightElement children={<ChevronDownIcon />} /> */}
       </InputGroup>
       {isOpen && (
-        <VStack
+        <Flex
           spacing="0"
           zIndex="9999"
           position="absolute"
@@ -102,7 +103,7 @@ const SearchSelectInput = ({ label, placeholder }) => {
           border="1px solid #F2F2F2"
         >
           <SelectButton label="Select" onClick={label => handleSelect(label)} />
-        </VStack>
+        </Flex>
       )}
     </FormControl>
   );
@@ -116,7 +117,7 @@ const IndicatorDropdown = () => {
         Map it! Choose a health statistic or outcome to see results mapped for the whole United
         States. Select a state for more detailed information on that state’s health:
       </Text>
-      <Stack
+      <Flex
         py={25}
         direction={['column', 'column', 'row']}
         fontSize="sm"
@@ -146,7 +147,7 @@ const IndicatorDropdown = () => {
         >
           EXPLORE STATE RANKINGS
         </Button>
-      </Stack>
+      </Flex>
     </Box>
   );
 };

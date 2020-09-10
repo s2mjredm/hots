@@ -1,12 +1,16 @@
-import defaultTheme from '@chakra-ui/theme';
+import { theme } from '@chakra-ui/core';
 
-const theme = {
-  ...defaultTheme,
-  colors: {
-    gray: {
-      text: '#403F3F',
-    },
-  },
+const ctheme = {
+  ...theme,
+  // colors: {
+  //   transparent: 'transparent',
+  //   black: '#000',
+  //   white: '#fff',
+  //   gray: {
+  //     50: '#f7fafc',
+  //     900: '#1a202c',
+  //   },
+  // },
   textStyles: {
     header: {
       fontFamily: 'News Cycle',
@@ -23,4 +27,4 @@ const theme = {
   breakpoints: ['40em', '52em', '70em'],
 };
 
-export default theme;
+export default ctheme;

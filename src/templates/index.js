@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 
-import { Box, Heading, Text, VStack, Stack, Image, Divider, Grid } from '@chakra-ui/core';
+import { Box, Heading, Text, Stack, Image, Divider, Grid } from '@chakra-ui/core';
 
 const Index = ({ data: { metadata, indicator } }) => (
   <Layout>
@@ -21,7 +21,6 @@ const Index = ({ data: { metadata, indicator } }) => (
         </li>
       ))}
     </ul> */}
-
     <Grid
       w="100%"
       h={500}
@@ -40,7 +39,8 @@ const Index = ({ data: { metadata, indicator } }) => (
     <Box
       px={[10, 20, 120]}
       py={120}
-      bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
+      // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
+      bg="blue.600"
     >
       <Box bg="white">
         <IndicatorDropdown />

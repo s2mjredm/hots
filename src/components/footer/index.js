@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { Box, Heading, Text, VStack, Stack, Image, Divider } from '@chakra-ui/core';
+import { Box, Heading, Text, Flex, Stack, Image, Divider } from '@chakra-ui/core';
 
 const Footer = () => {
   const data = useStaticQuery(graphql`
@@ -24,7 +24,7 @@ const Footer = () => {
   `);
 
   return (
-    <Stack
+    <Flex
       py={16}
       px={[5, 120]}
       color="white"
@@ -65,15 +65,15 @@ const Footer = () => {
         </Text>
       </Box>
       <Divider color="#184595" border="none" />
-      <VStack align="flex-start">
+      <Stack align="flex-start">
         <Image
           minWidth={200}
           src={data.centerLogo.childImageSharp.fluid.src}
           alt="Center on Society and Health"
         />
         <Image minWidth={200} src={data.vcuLogo.childImageSharp.fluid.src} alt="VCU" />
-      </VStack>
-    </Stack>
+      </Stack>
+    </Flex>
   );
 };
 export default Footer;
