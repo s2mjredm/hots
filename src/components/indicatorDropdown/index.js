@@ -2,30 +2,54 @@ import React, { useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import './index.css';
 
-// import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons';
-
 import {
-  Icon,
   Box,
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
-  Menu,
-  MenuButton,
-  MenuGroup,
-  MenuItem,
-  MenuList,
-  Select,
-  Stack,
-  Text,
-  Flex,
+  Icon,
+  Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Input,
+  PseudoBox,
+  Text,
   useDisclosure,
 } from '@chakra-ui/core';
+
+const SelectButton = ({ label, onClick }) => {
+  return (
+    <PseudoBox
+      as="button"
+      onClick={() => onClick(label)}
+      w="100%"
+      lineHeight="3.2rem"
+      borderBottom="1px solid #F2F2F2"
+      fontFamily="Roboto Slab"
+      transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+      fontSize="18px"
+      fontWeight="semibold"
+      bg="white"
+      borderColor="white"
+      color="#7F7F7F"
+      textAlign="start"
+      px={5}
+      _hover={{ bg: '#FFD285', color: '#2D3748' }}
+      _active={{
+        bg: '#FFD285',
+        transform: 'scale(0.99)',
+        border: 'none',
+      }}
+      _focus={{
+        border: 'none',
+      }}
+    >
+      {label}
+    </PseudoBox>
+  );
+};
 
 const SearchSelectInput = ({ label, placeholder }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,45 +63,13 @@ const SearchSelectInput = ({ label, placeholder }) => {
     onClose();
   };
 
-  const SelectButton = ({ label, onClick }) => {
-    return (
-      <Box
-        as="button"
-        onClick={() => onClick(label)}
-        w="100%"
-        lineHeight="3.2rem"
-        borderBottom="1px solid #F2F2F2"
-        fontFamily="Roboto Slab"
-        transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
-        fontSize="18px"
-        fontWeight="semibold"
-        bg="white"
-        borderColor="white"
-        color="#7F7F7F"
-        textAlign="start"
-        px={5}
-        _hover={{ bg: '#FFD285', color: '#2D3748' }}
-        _active={{
-          bg: '#FFD285',
-          transform: 'scale(0.99)',
-          border: 'none',
-        }}
-        _focus={{
-          border: 'none',
-        }}
-      >
-        {label}
-      </Box>
-    );
-  };
-
   return (
-    <FormControl id="email" className="search-dropdown">
-      <FormLabel textTransform="uppercase" textStyle="titles" fontSize="sm">
+    <FormControl className="search-dropdown" w={['100%', '100%', '20rem']} position="relative">
+      <FormLabel textTransform="uppercase" fontFamily="Montserrat" color="#403F3F" fontSize="sm">
         {label}
       </FormLabel>
       <InputGroup fontFamily="Roboto Slab" size="lg">
-        {/* <InputLeftElement color="gray.300" fontSize="1.2em" children={<SearchIcon />} /> */}
+        <InputLeftElement children={<Icon name="search" color="gray.700" />} />
         <Input
           autoComplete="off"
           value={value}
@@ -88,15 +80,14 @@ const SearchSelectInput = ({ label, placeholder }) => {
           fontFamily="Roboto Slab"
           h={[20, 12]}
         />
-        {/* <InputRightElement children={<ChevronDownIcon />} /> */}
+        <InputRightElement children={<Icon name="chevron-down" color="gray.700" />} />
       </InputGroup>
-      {isOpen && (
+      {!isOpen && (
         <Flex
-          spacing="0"
           zIndex="9999"
           position="absolute"
           bg="white"
-          width="100%"
+          w="100%"
           shadow="md"
           overflowY="auto"
           maxHeight="340px"
@@ -112,17 +103,20 @@ const SearchSelectInput = ({ label, placeholder }) => {
 const IndicatorDropdown = () => {
   return (
     <Box p={[10, 20]} color="gray.text">
-      <Heading textStyle="titles">How is your state doing?</Heading>
+      <Heading fontFamily="Montserrat" color="#403F3F">
+        How is your state doing?
+      </Heading>
       <Text my={3} fontSize={24} fontFamily="Roboto Slab" letterSpacing="-0.06rem">
         Map it! Choose a health statistic or outcome to see results mapped for the whole United
         States. Select a state for more detailed information on that state’s health:
       </Text>
+
       <Flex
         py={25}
         direction={['column', 'column', 'row']}
         fontSize="sm"
         alignItems="flex-end"
-        spacing={21}
+        justify={['start', 'space-between']}
       >
         <SearchSelectInput label="Health Statistics & Outcomes" placeholder="Select" />
         <Button
@@ -138,11 +132,11 @@ const IndicatorDropdown = () => {
         <SearchSelectInput label="State" placeholder="Select" />
         <Button
           bg="#F06060"
-          colorScheme="#184595"
+          color="white"
           size="lg"
           h={[20, 12]}
-          w="100%"
-          minWidth="190px"
+          w={['100%', '100%', 'xs']}
+          minWidth={['100&', '190px']}
           fontSize={['26px', '16px']}
         >
           EXPLORE STATE RANKINGS
