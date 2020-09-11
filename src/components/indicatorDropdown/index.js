@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Fuse from 'fuse.js';
+
 import './index.css';
 
 import {
@@ -51,15 +53,23 @@ const SelectButton = ({ label, onClick }) => {
   );
 };
 
-const SearchSelectInput = ({ label, placeholder }) => {
+const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelection }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [value, setValue] = useState('');
-  const handleChange = event => setValue(event.target.value);
+  const [inputValue, setInputValue] = useState(selectedItem);
+  const [itemsList, setItemsList] = useState(items);
 
-  const handleSelect = label => {
-    console.log(label);
-    setValue(label);
+  const handleChange = event => {
+    setInputValue(event.target.value);
+    const fuse = new Fuse(items);
+    const searchResults = fuse.search(event.target.value).map(i => i.item);
+    const newItemsList = searchResults.length > 0 ? searchResults : items;
+    setItemsList(newItemsList);
+  };
+
+  const handleSelect = item => {
+    setInputValue(item);
+    onSelection(item);
     onClose();
   };
 
@@ -72,17 +82,17 @@ const SearchSelectInput = ({ label, placeholder }) => {
         <InputLeftElement children={<Icon name="search" color="gray.700" />} />
         <Input
           autoComplete="off"
-          value={value}
+          value={inputValue}
           onChange={handleChange}
           onFocus={() => onOpen()}
-          placeholder="Enter amount"
+          placeholder={placeholder}
           border="1.3px solid #403F3F"
           fontFamily="Roboto Slab"
           h={[20, 12]}
         />
         <InputRightElement children={<Icon name="chevron-down" color="gray.700" />} />
       </InputGroup>
-      {!isOpen && (
+      {isOpen && (
         <Flex
           zIndex="9999"
           position="absolute"
@@ -92,15 +102,55 @@ const SearchSelectInput = ({ label, placeholder }) => {
           overflowY="auto"
           maxHeight="340px"
           border="1px solid #F2F2F2"
+          direction="column"
         >
-          <SelectButton label="Select" onClick={label => handleSelect(label)} />
+          {itemsList &&
+            itemsList.length > 0 &&
+            itemsList.map(item => (
+              <SelectButton label={item} onClick={item => handleSelect(item)} />
+            ))}
         </Flex>
       )}
     </FormControl>
   );
 };
 
+const useNavigate = (indicator, state) => {
+  const [isNavigationEnabled, setIsNavigationEnabled] = useState(false);
+  const [url, setUrl] = useState();
+
+  useEffect(() => {
+    if (indicator && state) {
+      setIsNavigationEnabled(true);
+      setUrl(`/${indicator}/${state}`);
+    } else {
+      setIsNavigationEnabled(false);
+    }
+  }, [indicator, state]);
+
+  return [isNavigationEnabled, url];
+};
+
 const IndicatorDropdown = () => {
+  const [selectedIndicator, setSelectedIndicator] = useState();
+  const [selectedState, setSelectedState] = useState();
+
+  const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
+
+  const indicatorList = ['a', 'b', 'c'];
+  const stateList = ['d', 'e', 'f'];
+
+  const handleIndicatorSelection = indicator => {
+    setSelectedIndicator(indicator);
+  };
+  const handleStateSelection = state => {
+    setSelectedState(state);
+  };
+
+  // const handleSubmit = values => {
+  //   console.log(values);
+  // };
+
   return (
     <Box p={[10, 20]} color="gray.text">
       <Heading fontFamily="Montserrat" color="#403F3F">
@@ -110,7 +160,6 @@ const IndicatorDropdown = () => {
         Map it! Choose a health statistic or outcome to see results mapped for the whole United
         States. Select a state for more detailed information on that state’s health:
       </Text>
-
       <Flex
         py={25}
         direction={['column', 'column', 'row']}
@@ -118,7 +167,13 @@ const IndicatorDropdown = () => {
         alignItems="flex-end"
         justify={['start', 'space-between']}
       >
-        <SearchSelectInput label="Health Statistics & Outcomes" placeholder="Select" />
+        <SearchSelectInput
+          label="Health Statistics & Outcomes"
+          placeholder="Select"
+          selectedItem={selectedIndicator}
+          items={indicatorList}
+          onSelection={indicator => handleIndicatorSelection(indicator)}
+        />
         <Button
           display={['none', 'block']}
           variant="link"
@@ -129,8 +184,15 @@ const IndicatorDropdown = () => {
         >
           SHOW ALL
         </Button>
-        <SearchSelectInput label="State" placeholder="Select" />
+        <SearchSelectInput
+          label="State"
+          placeholder="Select"
+          selectedItem={selectedState}
+          items={stateList}
+          onSelection={state => handleStateSelection(state)}
+        />
         <Button
+          isDisabled={!isNavigationEnabled}
           bg="#F06060"
           color="white"
           size="lg"

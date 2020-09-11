@@ -18,6 +18,7 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
+    "fuse.js": "^6.4.1",
     "gatsby": "^2.24.50",
     "gatsby-image": "^2.4.16",
     "gatsby-plugin-chakra-ui": "^0.1.4",
@@ -31,7 +32,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^6.8.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
