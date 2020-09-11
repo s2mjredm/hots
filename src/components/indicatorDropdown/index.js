@@ -134,11 +134,24 @@ const useNavigate = (indicator, state) => {
 const IndicatorDropdown = () => {
   const [selectedIndicator, setSelectedIndicator] = useState();
   const [selectedState, setSelectedState] = useState();
-
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
 
-  const indicatorList = ['a', 'b', 'c'];
-  const stateList = ['d', 'e', 'f'];
+  const { allStatesCsv, allIndicatorsCsv } = useStaticQuery(graphql`
+    query DataQuery {
+      allStatesCsv {
+        nodes {
+          name
+        }
+      }
+      allIndicatorsCsv {
+        nodes {
+          title
+        }
+      }
+    }
+  `);
+  const indicatorList = allIndicatorsCsv.nodes.map(indicator => indicator.title);
+  const stateList = allStatesCsv.nodes.map(state => state.name);
 
   const handleIndicatorSelection = indicator => {
     setSelectedIndicator(indicator);
@@ -147,9 +160,9 @@ const IndicatorDropdown = () => {
     setSelectedState(state);
   };
 
-  // const handleSubmit = values => {
-  //   console.log(values);
-  // };
+  const handleSubmit = () => {
+    console.log(values);
+  };
 
   return (
     <Box p={[10, 20]} color="gray.text">
