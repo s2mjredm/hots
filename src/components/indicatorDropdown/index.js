@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, navigate } from 'gatsby';
 import Fuse from 'fuse.js';
 
 import './index.css';
@@ -119,10 +119,22 @@ const useNavigate = (indicator, state) => {
   const [isNavigationEnabled, setIsNavigationEnabled] = useState(false);
   const [url, setUrl] = useState();
 
+  function slugify(string) {
+    return string
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+  }
+
   useEffect(() => {
     if (indicator && state) {
       setIsNavigationEnabled(true);
-      setUrl(`/${indicator}/${state}`);
+      setUrl(`/${slugify(indicator)}/${slugify(state)}`);
     } else {
       setIsNavigationEnabled(false);
     }
@@ -158,10 +170,6 @@ const IndicatorDropdown = () => {
   };
   const handleStateSelection = state => {
     setSelectedState(state);
-  };
-
-  const handleSubmit = () => {
-    console.log(values);
   };
 
   return (
@@ -213,6 +221,7 @@ const IndicatorDropdown = () => {
           w={['100%', '100%', 'xs']}
           minWidth={['100&', '190px']}
           fontSize={['26px', '16px']}
+          onClick={() => navigate(url)}
         >
           EXPLORE STATE RANKINGS
         </Button>
