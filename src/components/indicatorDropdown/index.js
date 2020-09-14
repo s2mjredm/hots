@@ -80,6 +80,7 @@ const IndicatorDropdown = () => {
         <Button
           isDisabled={!isNavigationEnabled}
           bg="#F06060"
+          _hover={{ bg: '#FFB3B3' }}
           color="white"
           size="lg"
           h={[20, 12]}
