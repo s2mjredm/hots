@@ -9,8 +9,8 @@ import './index.css';
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/core';
 
 const IndicatorDropdown = () => {
-  const [selectedIndicator, setSelectedIndicator] = useState();
-  const [selectedState, setSelectedState] = useState();
+  const [selectedIndicator, setSelectedIndicator] = useState('');
+  const [selectedState, setSelectedState] = useState('');
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
 
   const { allStatesCsv, allIndicatorsCsv } = useStaticQuery(graphql`
