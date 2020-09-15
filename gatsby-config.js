@@ -8,7 +8,10 @@ module.exports = {
   siteMetadata: {
     title: `HOTS`,
     description: ``,
+    titleTemplate: '',
     author: `Axis Maps`,
+    url: '',
+    image: '',
   },
   /* Your site config here */
   plugins: [
