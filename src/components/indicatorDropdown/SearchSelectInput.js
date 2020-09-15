@@ -161,7 +161,7 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             {itemsList &&
               itemsList.length > 0 &&
               itemsList.map(item => (
-                <SelectButton label={item} onClick={item => handleSelect(item)} />
+                <SelectButton key={item} label={item} onClick={item => handleSelect(item)} />
               ))}
           </Flex>
         )}
