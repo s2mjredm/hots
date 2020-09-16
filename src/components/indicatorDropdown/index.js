@@ -55,7 +55,7 @@ const IndicatorDropdown = () => {
       >
         <SearchSelectInput
           label="Health Statistics & Outcomes"
-          placeholder="Select"
+          placeholder="Select or Search"
           selectedItem={selectedIndicator}
           items={indicatorList}
           onSelection={indicator => handleIndicatorSelection(indicator)}

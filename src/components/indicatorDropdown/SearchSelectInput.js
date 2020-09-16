@@ -144,7 +144,22 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             fontFamily="Roboto Slab"
             h={[20, 12]}
           />
-          <InputRightElement zIndex="3" children={<Icon name="chevron-down" color="gray.700" />} />
+          {isOpen && (
+            <InputRightElement
+              zIndex="3"
+              cursor="pointer"
+              onClick={() => onClose()}
+              children={<Icon name="chevron-up" color="gray.700" />}
+            />
+          )}
+          {!isOpen && (
+            <InputRightElement
+              zIndex="3"
+              cursor="pointer"
+              onClick={() => onOpen()}
+              children={<Icon name="chevron-down" color="gray.700" />}
+            />
+          )}
         </InputGroup>
         {isOpen && (
           <Flex
