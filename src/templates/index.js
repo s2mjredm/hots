@@ -5,12 +5,12 @@ import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
+import IndicatorMap from '../components/indicatorMap';
 
 import { Box, Heading, Text, Stack, Image, Divider, Grid } from '@chakra-ui/core';
 
 const Index = ({ data: { metadata, indicator } }) => (
   <Layout>
-    {/* 
     <h1>{metadata.title}</h1>
     {parse(metadata.definition)}
     <ul>
@@ -20,7 +20,8 @@ const Index = ({ data: { metadata, indicator } }) => (
           {indicator[state]}
         </li>
       ))}
-    </ul> */}
+    </ul>
+
     <Grid
       w="100%"
       h={500}
@@ -35,7 +36,6 @@ const Index = ({ data: { metadata, indicator } }) => (
       <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
       <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
     </Grid>
-
     <Box
       px={[10, 20, 120]}
       py={120}
@@ -44,6 +44,7 @@ const Index = ({ data: { metadata, indicator } }) => (
     >
       <Box bg="white">
         <IndicatorDropdown />
+        <IndicatorMap indicator={indicator} />
       </Box>
     </Box>
   </Layout>
