@@ -72,7 +72,7 @@ const IndicatorDropdown = () => {
         </Button>
         <SearchSelectInput
           label="State"
-          placeholder="Select"
+          placeholder="Select or Search"
           selectedItem={selectedState}
           items={stateList}
           onSelection={state => handleStateSelection(state)}
