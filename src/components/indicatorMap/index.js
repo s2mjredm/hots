@@ -18,7 +18,6 @@ const IndicatorMap = ({ indicator }) => {
   useEffect(() => {
     const svg = select(svgRef.current);
     Object.keys(indicator).map(state => {
-      console.log(indicator[state], scale(parseFloat(indicator[state])));
       svg
         .select(`#${state}`)
         .join(`#${state}`)
@@ -27,7 +26,7 @@ const IndicatorMap = ({ indicator }) => {
   }, []);
 
   return (
-    <Box w="100%" h={792}>
+    <Box w="100%" px={10} bg="#E5E5E5">
       <svg
         ref={svgRef}
         version="1.1"
