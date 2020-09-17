@@ -50,11 +50,13 @@ const SelectButton = ({ label, onClick }) => {
 };
 
 const useIsMobile = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState();
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
+
   useEffect(() => {
+    handleWindowSizeChange();
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
