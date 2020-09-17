@@ -8,11 +8,28 @@ module.exports = {
   siteMetadata: {
     title: `HOTS`,
     description: ``,
+    titleTemplate: '',
     author: `Axis Maps`,
+    url: '',
+    image: '',
   },
   /* Your site config here */
   plugins: [
-    'gatsby-plugin-chakra-ui',
+    {
+      resolve: 'gatsby-plugin-chakra-ui',
+      options: {
+        /**
+         * @property {boolean} [isResettingCSS=true]
+         * if false, this plugin will not use `<CSSReset />
+         */
+        isResettingCSS: true,
+        /**
+         * @property {boolean} [isUsingColorMode=true]
+         * if false, this plugin will not use <ColorModeProvider />
+         */
+        isUsingColorMode: false,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

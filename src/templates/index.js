@@ -4,9 +4,13 @@ import { graphql } from 'gatsby';
 import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
+import IndicatorDropdown from '../components/indicatorDropdown';
+
+import { Box, Heading, Text, Stack, Image, Divider, Grid } from '@chakra-ui/core';
 
 const Index = ({ data: { metadata, indicator } }) => (
   <Layout>
+    {/* 
     <h1>{metadata.title}</h1>
     {parse(metadata.definition)}
     <ul>
@@ -16,7 +20,32 @@ const Index = ({ data: { metadata, indicator } }) => (
           {indicator[state]}
         </li>
       ))}
-    </ul>
+    </ul> */}
+    <Grid
+      w="100%"
+      h={500}
+      templateColumns={['repeat(5, 1fr)', 'repeat(7, 1fr)']}
+      gap={[35, 50, 90, 110]}
+    >
+      <Box w="100%" h="100%" bg="#EB474C" />
+      <Box w="100%" h="100%" bg="#EB474C" />
+      <Box w="100%" h="100%" bg="#EB474C" />
+      <Box w="100%" h="100%" bg="#EB474C" />
+      <Box w="100%" h="100%" bg="#EB474C" />
+      <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
+      <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
+    </Grid>
+
+    <Box
+      px={[10, 20, 120]}
+      py={120}
+      // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
+      bg="blue.600"
+    >
+      <Box bg="white">
+        <IndicatorDropdown />
+      </Box>
+    </Box>
   </Layout>
 );
 

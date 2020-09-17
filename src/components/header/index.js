@@ -1,6 +1,6 @@
 import React from 'react';
-import { Heading, Flex, Button } from '@chakra-ui/core';
-import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { Heading, Flex, Button, Icon } from '@chakra-ui/core';
+// import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 
 const Header = () => (
   <Flex
@@ -13,21 +13,27 @@ const Header = () => (
     width="100%"
     justify="space-between"
     fontSize="sm"
-    textStyle="header"
+    fontFamily="News Cycle"
+    color="#403F3F"
   >
     <Button
       display={['block', 'none']}
-      leftIcon={<SearchIcon />}
+      leftIcon="search"
       variant="link"
       size="lg"
       colorScheme="gray.800"
     />
     <Flex direction="row" align="center">
-      <Heading textStyle="header">State of Health</Heading>
+      <Heading fontFamily="News Cycle" color="#403F3F">
+        State of Health
+      </Heading>
     </Flex>
     <Button
       display={['none', 'block']}
-      textStyle="header"
+      fontFamily="News Cycle"
+      color="#403F3F"
+      fontFamily="News Cycle"
+      color="#403F3F"
       variant="link"
       size="sm"
       colorScheme="gray.800"
@@ -36,7 +42,8 @@ const Header = () => (
     </Button>
     <Button
       display={['none', 'block']}
-      textStyle="header"
+      fontFamily="News Cycle"
+      color="#403F3F"
       variant="link"
       size="sm"
       colorScheme="gray.800"
@@ -45,7 +52,8 @@ const Header = () => (
     </Button>
     <Button
       display={['none', 'block']}
-      textStyle="header"
+      fontFamily="News Cycle"
+      color="#403F3F"
       variant="link"
       size="sm"
       colorScheme="gray.800"
@@ -54,7 +62,8 @@ const Header = () => (
     </Button>
     <Button
       display={['none', 'block']}
-      textStyle="header"
+      fontFamily="News Cycle"
+      color="#403F3F"
       variant="link"
       size="sm"
       colorScheme="gray.800"
@@ -63,14 +72,14 @@ const Header = () => (
     </Button>
     <Button
       display={['none', 'block']}
-      leftIcon={<SearchIcon />}
+      leftIcon="search"
       variant="link"
       size="md"
       colorScheme="gray.800"
     />
     <Button
       display={['block', 'none']}
-      leftIcon={<HamburgerIcon />}
+      // leftIcon={<HamburgerIcon />}
       variant="link"
       size="lg"
       colorScheme="gray.800"

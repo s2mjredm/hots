@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { Box, Heading, Text, VStack, Stack, Image, Divider } from '@chakra-ui/core';
+import { Box, Heading, Text, Flex, Stack, Image, Divider } from '@chakra-ui/core';
 
 const Footer = () => {
   const data = useStaticQuery(graphql`
@@ -24,20 +24,21 @@ const Footer = () => {
   `);
 
   return (
-    <Stack
+    <Flex
       py={16}
       px={[5, 120]}
       color="white"
       bg="#184595"
-      direction={['column', 'row']}
+      direction={['column', 'column', 'row']}
       spacing="24px"
       fontSize="sm"
     >
-      <Box pr={5}>
+      <Box pr={5} pb={4}>
         <Heading size="md" pb={2}>
           ABOUT
         </Heading>
-        <Text fontWeight="semi-bold">
+
+        <Text fontWeight="semi-bold" w={['100%', 'md']}>
           State of Health is an initiative conducted by the Center on Society and Health at Virginia
           Commonwealth University, and funded by the Robert Wood Johnson Foundation. Our aim is to
           provide a more complete picture of health, and the conditions that shape health, at the
@@ -52,7 +53,7 @@ const Footer = () => {
         <Heading size="md" pb={2}>
           CONTACT
         </Heading>
-        <Text fontWeight="semi-bold">
+        <Text fontWeight="semi-bold" pb={4}>
           We would love to hear from you!
           <br />
           Let us know how you’re using this data, or reach out with any comments or questions.
@@ -64,16 +65,17 @@ const Footer = () => {
           804-628-2462
         </Text>
       </Box>
-      <Divider color="#184595" border="none" />
-      <VStack align="flex-start">
+      <Box w={['lg']} display={['none', 'none', 'none', 'block']} />
+      <Flex align="flex-start" w="md" direction={['row', 'row', 'column']}>
         <Image
-          minWidth={200}
+          minWidth={100}
+          width={230}
           src={data.centerLogo.childImageSharp.fluid.src}
           alt="Center on Society and Health"
         />
-        <Image minWidth={200} src={data.vcuLogo.childImageSharp.fluid.src} alt="VCU" />
-      </VStack>
-    </Stack>
+        <Image minWidth={100} width={230} src={data.vcuLogo.childImageSharp.fluid.src} alt="VCU" />
+      </Flex>
+    </Flex>
   );
 };
 export default Footer;
