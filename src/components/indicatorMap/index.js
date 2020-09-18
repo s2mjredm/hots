@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useStaticQuery, graphql, navigate } from 'gatsby';
-import MapSvg from '../../svg/map_low.svg';
+import React, { useEffect, useRef } from 'react';
 import { select, extent, scaleQuantize } from 'd3';
+import { Box, Button, Flex } from '@chakra-ui/core';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/core';
-
-const IndicatorMap = ({ indicator }) => {
+const IndicatorMap = ({ indicator, onShare }) => {
   const svgRef = useRef();
 
-  const values = Object.keys(indicator).map(state => parseFloat(indicator[state]));
+  const values = Object.keys(indicator).map(state => indicator[state]);
 
   const scale = scaleQuantize()
     .domain(extent(values))
@@ -18,15 +15,35 @@ const IndicatorMap = ({ indicator }) => {
   useEffect(() => {
     const svg = select(svgRef.current);
     Object.keys(indicator).map(state => {
-      svg
-        .select(`#${state}`)
-        .join(`#${state}`)
-        .attr('fill', scale(parseFloat(indicator[state])));
+      svg.select(`#${state}`).join(`#${state}`).attr('fill', scale(indicator[state]));
     });
   }, []);
 
   return (
-    <Box w="100%" px={10} bg="#E5E5E5">
+    <Box w="100%" px={10} bg="#E5E5E5" position="relative">
+      <Button
+        onClick={() => onShare}
+        position="absolute"
+        bottom={['20px', '45px', '100px']}
+        right={['30px', '70px', '100px']}
+        variant="link"
+        size={['sm', 'md']}
+        color="#403F3F"
+        colorScheme="gray.900"
+      >
+        SHARE
+        <Button
+          onClick={() => onShare}
+          marginLeft={2}
+          leftIcon="share"
+          fontSize={['30px', '60px']}
+          variant="link"
+          size="md"
+          color="#403F3F"
+          colorScheme="gray.900"
+        />
+      </Button>
+
       <svg
         ref={svgRef}
         version="1.1"
