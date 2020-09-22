@@ -33,6 +33,7 @@ const IndicatorMap = ({ indicator, onShare }) => {
       >
         SHARE
         <Button
+          as="div"
           onClick={() => onShare}
           marginLeft={2}
           leftIcon="share"
