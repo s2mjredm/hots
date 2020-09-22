@@ -12,6 +12,9 @@ import {
   CloseButton,
   Text,
   Icon,
+  PseudoBox,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/core';
 
 const CustomTab = React.forwardRef((props, ref) => {
@@ -32,9 +35,8 @@ const renderTabList = () => {
     return (
       <CustomTab
         key={tab}
-        h="auto"
+        h="46px"
         w="100%"
-        minWidth="120px"
         justifyContent="space-between"
         borderBottom="3px solid white"
         _selected={{
@@ -46,6 +48,26 @@ const renderTabList = () => {
       >
         One
       </CustomTab>
+    );
+  });
+};
+
+const renderTabPanel = () => {
+  return [1, 2, 3].map(i => {
+    return (
+      <PseudoBox
+        py={2}
+        px={4}
+        bg="white"
+        fontFamily="News Cycle"
+        fontSize="18px"
+        borderBottom="1px solid #E5E5E5"
+        color="#707070"
+        cursor="pointer"
+        _hover={{ fontWeight: 'bold' }}
+      >
+        lols
+      </PseudoBox>
     );
   });
 };
@@ -71,24 +93,25 @@ const IndicatorModal = () => {
         </Flex>
         <Box bg="#E5E5E5">
           <Flex align="center" justify="center" py={4} borderBottom="3px solid white">
-            <Input maxW="200px" borderRadius="100px" />
+            <InputGroup fontFamily="Roboto Slab" size="lg" color="gray.300">
+              <Input
+                autoComplete="off"
+                placeholder="Search"
+                fontFamily="Roboto Slab"
+                color="gray.600"
+                h="40px"
+                maxW="285px"
+                borderRadius="100px"
+              />
+              <InputRightElement children={<Icon h="40px" name="search" />} />
+            </InputGroup>
           </Flex>
-
           <Tabs variant="unstyled" display="flex">
-            <TabList flexDirection="column">{renderTabList()}</TabList>
+            <TabList minWidth="180px" flexDirection="column" borderRight="1px solid #F2F2F2">
+              {renderTabList()}
+            </TabList>
             <TabPanels width="100%" bg="#F7F7F7">
-              <TabPanel>
-                <p>two!</p>
-                <p>two!</p>
-                <p>three!</p>
-                <p>one!</p>
-                <p>one!</p>
-                <p>one!</p>
-                <p>one!</p>
-                <p>one!</p>
-                <p>one!</p>
-                <p>three!</p>
-              </TabPanel>
+              <TabPanel>{renderTabPanel()}</TabPanel>
               <TabPanel>
                 <p>two!</p>
               </TabPanel>
