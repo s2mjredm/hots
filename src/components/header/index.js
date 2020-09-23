@@ -1,6 +1,5 @@
 import React from 'react';
 import { Heading, Flex, Button, Icon } from '@chakra-ui/core';
-// import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 
 const Header = () => (
   <Flex
