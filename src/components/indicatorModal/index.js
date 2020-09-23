@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
+import { groupBy } from 'lodash';
 
 import './index.css';
 import {
@@ -32,8 +33,8 @@ const CustomTab = React.forwardRef((props, ref) => {
   );
 });
 
-const renderTabList = () => {
-  return [1, 2, 3].map(tab => {
+const renderTabList = categories => {
+  return categories.map(tab => {
     return (
       <CustomTab
         key={tab}
@@ -49,14 +50,14 @@ const renderTabList = () => {
           fontFamily: 'Jubilat',
         }}
       >
-        placeholder
+        {tab}
       </CustomTab>
     );
   });
 };
 
-const renderTabPanel = () => {
-  return [1, 2, 3].map(i => {
+const renderTabPanel = indicators => {
+  return indicators.map(i => {
     return (
       <PseudoBox
         py={2}
@@ -69,13 +70,33 @@ const renderTabPanel = () => {
         cursor="pointer"
         _hover={{ fontWeight: 'bold' }}
       >
-        placeholder
+        {i}
       </PseudoBox>
     );
   });
 };
 
 const IndicatorModal = () => {
+  const {
+    allIndicatorsCsv: { nodes },
+  } = useStaticQuery(
+    graphql`
+      query {
+        allIndicatorsCsv {
+          nodes {
+            title
+            category
+            tags
+          }
+        }
+      }
+    `
+  );
+  const categories = groupBy(
+    nodes.map(n => ({ ...n, tags: n.tags.split(';') })),
+    'category'
+  );
+
   return (
     <Flex
       className="blur"
@@ -112,16 +133,13 @@ const IndicatorModal = () => {
           </Flex>
           <Tabs variant="unstyled" display="flex">
             <TabList minWidth="256px" flexDirection="column" borderRight="1px solid #F2F2F2">
-              {renderTabList()}
+              {renderTabList(Object.keys(categories))}
             </TabList>
             <TabPanels width="100%" bg="#F7F7F7">
-              <TabPanel>{renderTabPanel()}</TabPanel>
-              <TabPanel>
-                <p>two!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>three!</p>
-              </TabPanel>
+              {Object.values(categories).map(category => {
+                const indicators = category.map(c => c.title);
+                return <TabPanel>{renderTabPanel(indicators)}</TabPanel>;
+              })}
             </TabPanels>
           </Tabs>
         </Box>
