@@ -48,7 +48,7 @@ const Index = ({ data: { metadata, indicator } }) => {
       >
         <Box bg="white">
           <IndicatorDropdown onShowAll={() => onOpen()} />
-          {isOpen && <IndicatorModal onClose={() => onClose()} />}
+          <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} />
         </Box>
       </Box>
