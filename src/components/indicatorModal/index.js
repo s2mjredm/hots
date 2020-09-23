@@ -75,7 +75,7 @@ const renderTabPanel = () => {
   });
 };
 
-const IndicatorModal = () => {
+const IndicatorModal = ({ onClose }) => {
   return (
     <Flex
       className="blur"
@@ -93,7 +93,7 @@ const IndicatorModal = () => {
           <Text fontSize="38px" fontFamily="jubilat">
             Health Statistics & Outcomes
           </Text>
-          <CloseButton size="lg" fontSize="32px" />
+          <CloseButton size="lg" fontSize="32px" onClick={onClose} />
         </Flex>
         <Box bg="#E5E5E5">
           <Flex align="center" justify="center" py={4} borderBottom="3px solid white">
