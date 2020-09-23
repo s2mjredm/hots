@@ -1,5 +1,7 @@
 import React from 'react';
+import { useStaticQuery, graphql, navigate } from 'gatsby';
 
+import './index.css';
 import {
   Flex,
   Box,
@@ -39,6 +41,7 @@ const renderTabList = () => {
         w="100%"
         justifyContent="space-between"
         borderBottom="3px solid white"
+        fontFamily="Roboto"
         _selected={{
           bg: 'white',
           borderLeft: '5px solid #FFD285',
@@ -46,7 +49,7 @@ const renderTabList = () => {
           fontFamily: 'Jubilat',
         }}
       >
-        One
+        placeholder
       </CustomTab>
     );
   });
@@ -66,7 +69,7 @@ const renderTabPanel = () => {
         cursor="pointer"
         _hover={{ fontWeight: 'bold' }}
       >
-        lols
+        placeholder
       </PseudoBox>
     );
   });
@@ -75,6 +78,7 @@ const renderTabPanel = () => {
 const IndicatorModal = () => {
   return (
     <Flex
+      className="blur"
       w="100%"
       h="100vh"
       bg="#2a69acc9"
@@ -84,9 +88,9 @@ const IndicatorModal = () => {
       justify="center"
       position="absolute"
     >
-      <Box width="500px">
+      <Box width="600px">
         <Flex justify="space-between" color="white" align="center">
-          <Text fontSize="32px" fontFamily="jubilat">
+          <Text fontSize="38px" fontFamily="jubilat">
             Health Statistics & Outcomes
           </Text>
           <CloseButton size="lg" fontSize="32px" />
@@ -107,7 +111,7 @@ const IndicatorModal = () => {
             </InputGroup>
           </Flex>
           <Tabs variant="unstyled" display="flex">
-            <TabList minWidth="180px" flexDirection="column" borderRight="1px solid #F2F2F2">
+            <TabList minWidth="256px" flexDirection="column" borderRight="1px solid #F2F2F2">
               {renderTabList()}
             </TabList>
             <TabPanels width="100%" bg="#F7F7F7">
