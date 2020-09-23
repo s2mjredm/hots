@@ -8,50 +8,53 @@ import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
 
-import { Box, Heading, Text, Stack, Image, Divider, Grid } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure } from '@chakra-ui/core';
 
-const Index = ({ data: { metadata, indicator } }) => (
-  <Layout>
-    {/* <h1>{metadata.title}</h1>
-    {parse(metadata.definition)}
-    <ul>
-      {Object.keys(indicator).map(state => (
-        <li key={state}>
-          <b>{`${state}: `}</b>
-          {indicator[state]}
-        </li>
-      ))}
-    </ul> */}
+const Index = ({ data: { metadata, indicator } }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-    <Grid
-      w="100%"
-      h={500}
-      templateColumns={['repeat(5, 1fr)', 'repeat(7, 1fr)']}
-      gap={[35, 50, 90, 110]}
-    >
-      <Box w="100%" h="100%" bg="#EB474C" />
-      <Box w="100%" h="100%" bg="#EB474C" />
-      <Box w="100%" h="100%" bg="#EB474C" />
-      <Box w="100%" h="100%" bg="#EB474C" />
-      <Box w="100%" h="100%" bg="#EB474C" />
-      <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
-      <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
-    </Grid>
-    <Box
-      px={[10, 20, 120]}
-      py={120}
-      // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
-      bg="blue.600"
-    >
-      <Box bg="white">
-        <IndicatorDropdown />
-        <IndicatorModal />
-        <IndicatorMap indicator={indicator} />
+  return (
+    <Layout>
+      {/* <h1>{metadata.title}</h1>
+      {parse(metadata.definition)}
+      <ul>
+        {Object.keys(indicator).map(state => (
+          <li key={state}>
+            <b>{`${state}: `}</b>
+            {indicator[state]}
+          </li>
+        ))}
+      </ul> */}
+
+      <Grid
+        w="100%"
+        h={500}
+        templateColumns={['repeat(5, 1fr)', 'repeat(7, 1fr)']}
+        gap={[35, 50, 90, 110]}
+      >
+        <Box w="100%" h="100%" bg="#EB474C" />
+        <Box w="100%" h="100%" bg="#EB474C" />
+        <Box w="100%" h="100%" bg="#EB474C" />
+        <Box w="100%" h="100%" bg="#EB474C" />
+        <Box w="100%" h="100%" bg="#EB474C" />
+        <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
+        <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
+      </Grid>
+      <Box
+        px={[10, 20, 120]}
+        py={120}
+        // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
+        bg="blue.600"
+      >
+        <Box bg="white">
+          <IndicatorDropdown onShowAll={() => onOpen()} />
+          <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+          <IndicatorMap indicator={indicator} />
+        </Box>
       </Box>
-    </Box>
-  </Layout>
-);
-
+    </Layout>
+  );
+};
 Index.propTypes = {
   data: PropTypes.shape().isRequired,
 };

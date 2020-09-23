@@ -18,6 +18,8 @@ import {
   PseudoBox,
   InputGroup,
   InputRightElement,
+  Modal,
+  ModalOverlay,
 } from '@chakra-ui/core';
 
 const CustomTab = React.forwardRef((props, ref) => {
@@ -76,7 +78,7 @@ const renderTabPanel = indicators => {
   });
 };
 
-const IndicatorModal = () => {
+const IndicatorModal = ({ onClose, isOpen }) => {
   const {
     allIndicatorsCsv: { nodes },
   } = useStaticQuery(
@@ -98,53 +100,56 @@ const IndicatorModal = () => {
   );
 
   return (
-    <Flex
-      className="blur"
-      w="100%"
-      h="100vh"
-      bg="#2a69acc9"
-      top="0"
-      left="0"
-      align="center"
-      justify="center"
-      position="absolute"
-    >
-      <Box width="600px">
-        <Flex justify="space-between" color="white" align="center">
-          <Text fontSize="38px" fontFamily="jubilat">
-            Health Statistics & Outcomes
-          </Text>
-          <CloseButton size="lg" fontSize="32px" />
-        </Flex>
-        <Box bg="#E5E5E5">
-          <Flex align="center" justify="center" py={4} borderBottom="3px solid white">
-            <InputGroup fontFamily="Roboto Slab" size="lg" color="gray.300">
-              <Input
-                autoComplete="off"
-                placeholder="Search"
-                fontFamily="Roboto Slab"
-                color="gray.600"
-                h="40px"
-                maxW="285px"
-                borderRadius="100px"
-              />
-              <InputRightElement children={<Icon h="40px" name="search" />} />
-            </InputGroup>
+    <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose} isCentered>
+      <ModalOverlay className="blur" bg="#2a69acc9" />
+      <Flex
+        w="100%"
+        h="100vh"
+        top="0"
+        left="0"
+        align="center"
+        justify="center"
+        position="absolute"
+        zIndex="1301"
+      >
+        <Box width="600px">
+          <Flex justify="space-between" color="white" align="center">
+            <Text fontSize="38px" fontFamily="jubilat">
+              Health Statistics & Outcomes
+            </Text>
+            <CloseButton size="lg" fontSize="32px" onClick={onClose} />
           </Flex>
+          <Box bg="#E5E5E5">
+            <Flex align="center" justify="center" py={4} borderBottom="3px solid white">
+              <InputGroup fontFamily="Roboto Slab" size="lg" color="gray.300">
+                <Input
+                  autoComplete="off"
+                  placeholder="Search"
+                  fontFamily="Roboto Slab"
+                  color="gray.600"
+                  h="40px"
+                  maxW="285px"
+                  borderRadius="100px"
+                />
+                <InputRightElement children={<Icon h="40px" name="search" />} />
+              </InputGroup>
+            </Flex>
           <Tabs variant="unstyled" display="flex">
             <TabList minWidth="256px" flexDirection="column" borderRight="1px solid #F2F2F2">
               {renderTabList(Object.keys(categories))}
             </TabList>
             <TabPanels width="100%" bg="#F7F7F7">
               {Object.values(categories).map(category => {
+                <TabPanel>
+                  <p>two!</p>
                 const indicators = category.map(c => c.title);
                 return <TabPanel>{renderTabPanel(indicators)}</TabPanel>;
               })}
             </TabPanels>
           </Tabs>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </Modal>
   );
 };
 
