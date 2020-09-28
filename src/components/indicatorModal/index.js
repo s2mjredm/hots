@@ -37,6 +37,7 @@ const CustomTab = React.forwardRef((props, ref) => {
     </Tab>
   );
 });
+CustomTab.displayName = 'CustomTab';
 
 const renderTabList = categories => {
   return categories.map(tab => {
