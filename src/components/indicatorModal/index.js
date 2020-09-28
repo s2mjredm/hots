@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
+
 import Fuse from 'fuse.js';
 import { groupBy } from 'lodash';
 
@@ -179,6 +181,11 @@ const IndicatorModal = ({ onClose, isOpen }) => {
       </Flex>
     </Modal>
   );
+};
+
+IndicatorModal.propTypes = {
+  onClose: PropTypes.string.isRequired,
+  isOpen: PropTypes.func.isRequired,
 };
 
 export default IndicatorModal;
