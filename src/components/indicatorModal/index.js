@@ -38,6 +38,13 @@ const CustomTab = React.forwardRef((props, ref) => {
   );
 });
 CustomTab.displayName = 'CustomTab';
+CustomTab.propTypes = {
+  isSelected: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+};
+CustomTab.defaultProps = {
+  isSelected: false,
+};
 
 const renderTabList = categories => {
   return categories.map(tab => {
