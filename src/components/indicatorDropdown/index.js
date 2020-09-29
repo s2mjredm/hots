@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
+
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/core';
 
 import SearchSelectInput from './SearchSelectInput';
 import useNavigate from './useNavigate';
 
 import './index.css';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/core';
-
-const IndicatorDropdown = () => {
+const IndicatorDropdown = ({ onShowAll }) => {
   const [selectedIndicator, setSelectedIndicator] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
@@ -67,6 +68,7 @@ const IndicatorDropdown = () => {
           color="#F06060"
           minW="100px"
           mb={3}
+          onClick={() => onShowAll()}
         >
           SHOW ALL
         </Button>
@@ -94,6 +96,10 @@ const IndicatorDropdown = () => {
       </Flex>
     </Box>
   );
+};
+
+IndicatorDropdown.propTypes = {
+  onShowAll: PropTypes.func.isRequired,
 };
 
 export default IndicatorDropdown;

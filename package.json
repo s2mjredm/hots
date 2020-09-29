@@ -30,6 +30,7 @@
     "gatsby-transformer-csv": "^2.3.10",
     "gatsby-transformer-sharp": "^2.5.14",
     "html-react-parser": "^0.13.0",
+    "lodash": "^4.17.20",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

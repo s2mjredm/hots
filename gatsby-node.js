@@ -1,4 +1,5 @@
 const path = require('path');
+const { slugify } = require('./src/utils/slugify');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -22,7 +23,7 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
   const { data, metadata } = result.data;
   metadata.nodes.forEach((meta, i) => {
-    const indicator = meta.name.replace(/(\W+)/gm, '-').toLowerCase();
+    const indicator = slugify(meta.name);
     createPage({
       path: `/${indicator}`,
       component: path.resolve('./src/templates/index.js'),
@@ -36,7 +37,7 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     }
     data.nodes.forEach(state => {
-      const stateName = state.name.replace(/(\W+)/gm, '-').toLowerCase();
+      const stateName = slugify(state.name);
       createPage({
         path: `/${indicator}/${stateName}`,
         component: path.resolve('./src/templates/state.js'),

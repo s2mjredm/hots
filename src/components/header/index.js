@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Flex, Button, Icon } from '@chakra-ui/core';
+import { Heading, Flex, Button } from '@chakra-ui/core';
 
 const Header = () => (
   <Flex
@@ -29,8 +29,6 @@ const Header = () => (
     </Flex>
     <Button
       display={['none', 'block']}
-      fontFamily="News Cycle"
-      color="#403F3F"
       fontFamily="News Cycle"
       color="#403F3F"
       variant="link"
