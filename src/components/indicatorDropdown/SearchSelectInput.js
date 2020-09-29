@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Fuse from 'fuse.js';
 
 import './index.css';
@@ -49,6 +50,14 @@ const SelectButton = ({ label, onClick }) => {
   );
 };
 
+SelectButton.propTypes = {
+  label: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+};
+SelectButton.defaultProps = {
+  label: null,
+};
+
 const useIsMobile = () => {
   const [width, setWidth] = useState();
   function handleWindowSizeChange() {
@@ -63,7 +72,7 @@ const useIsMobile = () => {
     };
   }, []);
 
-  let isMobile = width <= 768;
+  const isMobile = width <= 768;
   return isMobile;
 };
 
@@ -134,7 +143,9 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
           {label}
         </FormLabel>
         <InputGroup fontFamily="Roboto Slab" size="lg">
-          <InputLeftElement children={<Icon name="search" color="gray.700" />} zIndex="3" />
+          <InputLeftElement zIndex="3">
+            <Icon name="search" color="gray.700" />
+          </InputLeftElement>
           <Input
             zIndex="3"
             autoComplete="off"
@@ -147,20 +158,14 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             h={[20, 12]}
           />
           {isOpen && (
-            <InputRightElement
-              zIndex="3"
-              cursor="pointer"
-              onClick={() => onClose()}
-              children={<Icon name="chevron-up" color="gray.700" />}
-            />
+            <InputRightElement zIndex="3" cursor="pointer" onClick={() => onClose()}>
+              <Icon name="chevron-up" color="gray.700" />
+            </InputRightElement>
           )}
           {!isOpen && (
-            <InputRightElement
-              zIndex="3"
-              cursor="pointer"
-              onClick={() => onOpen()}
-              children={<Icon name="chevron-down" color="gray.700" />}
-            />
+            <InputRightElement zIndex="3" cursor="pointer" onClick={() => onOpen()}>
+              <Icon name="chevron-down" color="gray.700" />
+            </InputRightElement>
           )}
         </InputGroup>
         {isOpen && (
@@ -178,7 +183,7 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             {itemsList &&
               itemsList.length > 0 &&
               itemsList.map(item => (
-                <SelectButton key={item} label={item} onClick={item => handleSelect(item)} />
+                <SelectButton key={item} label={item} onClick={i => handleSelect(i)} />
               ))}
           </Flex>
         )}
@@ -198,6 +203,20 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
       )}
     </>
   );
+};
+
+SearchSelectInput.propTypes = {
+  label: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  placeholder: PropTypes.string,
+  selectedItem: PropTypes.string,
+  onSelection: PropTypes.func.isRequired,
+};
+
+SearchSelectInput.defaultProps = {
+  label: null,
+  placeholder: null,
+  selectedItem: null,
 };
 
 export default SearchSelectInput;

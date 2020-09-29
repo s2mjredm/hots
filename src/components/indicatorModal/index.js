@@ -182,7 +182,9 @@ const IndicatorModal = ({ onClose, isOpen }) => {
               <TabPanels width="100%" bg="#F7F7F7">
                 {Object.values(categories).map(category => {
                   const indicators = category.map(c => c.title);
-                  return <TabPanel key={category}>{renderTabPanel(indicators)}</TabPanel>;
+                  return (
+                    <TabPanel key={category[0].category}>{renderTabPanel(indicators)}</TabPanel>
+                  );
                 })}
               </TabPanels>
             </Tabs>
@@ -194,8 +196,12 @@ const IndicatorModal = ({ onClose, isOpen }) => {
 };
 
 IndicatorModal.propTypes = {
-  onClose: PropTypes.string.isRequired,
-  isOpen: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool,
+};
+
+IndicatorModal.defaultProps = {
+  isOpen: false,
 };
 
 export default IndicatorModal;

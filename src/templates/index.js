@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 
+import { Box, Grid, useDisclosure } from '@chakra-ui/core';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
 
-import { Box, Grid, useDisclosure } from '@chakra-ui/core';
-
-const Index = ({ data: { metadata, indicator } }) => {
+const Index = ({ data: { /* metadata, */ indicator } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

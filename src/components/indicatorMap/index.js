@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { select, extent, scaleQuantize } from 'd3';
-import { Box, Button, Flex } from '@chakra-ui/core';
+import { Box, Button } from '@chakra-ui/core';
 
 const IndicatorMap = ({ indicator, onShare }) => {
   const svgRef = useRef();
@@ -14,7 +15,7 @@ const IndicatorMap = ({ indicator, onShare }) => {
 
   useEffect(() => {
     const svg = select(svgRef.current);
-    Object.keys(indicator).map(state => {
+    Object.keys(indicator).forEach(state => {
       svg.select(`#${state}`).join(`#${state}`).attr('fill', scale(indicator[state]));
     });
   }, []);
@@ -295,4 +296,10 @@ const IndicatorMap = ({ indicator, onShare }) => {
     </Box>
   );
 };
+
+IndicatorMap.propTypes = {
+  indicator: PropTypes.shape().isRequired,
+  onShare: PropTypes.func.isRequired,
+};
+
 export default IndicatorMap;

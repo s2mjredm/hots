@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { Box, Heading, Text, Flex, Stack, Image, Divider } from '@chakra-ui/core';
+import { Box, Heading, Text, Flex, Image } from '@chakra-ui/core';
 
 const Footer = () => {
   const data = useStaticQuery(graphql`

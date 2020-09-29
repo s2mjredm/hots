@@ -56,12 +56,12 @@ function SEO({ title, description, image, article }) {
       <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
         rel="stylesheet"
-      ></link>
+      />
       <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
         rel="stylesheet"
-      ></link>
-      <link rel="stylesheet" href="https://use.typekit.net/zou6trd.css"></link>
+      />
+      <link rel="stylesheet" href="https://use.typekit.net/zou6trd.css" />
     </Helmet>
   );
 }
