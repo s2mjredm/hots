@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import Fuse from 'fuse.js';
@@ -79,7 +79,7 @@ const renderTabPanel = indicators => {
         cursor="pointer"
         _hover={{ fontWeight: 'bold' }}
       >
-        {i}
+        <Link to={`/${i.replace(/(\W+)/gm, '-').toLowerCase()}`}>{i}</Link>
       </PseudoBox>
     );
   });
