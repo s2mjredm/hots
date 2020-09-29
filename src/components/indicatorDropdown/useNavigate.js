@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { slugify } from '../../utils/slugify';
 
 const useNavigate = (indicator, state) => {
   const [isNavigationEnabled, setIsNavigationEnabled] = useState(false);
   const [url, setUrl] = useState();
-
-  function slugify(string) {
-    return string
-      .toString()
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-  }
 
   useEffect(() => {
     if (indicator && state) {

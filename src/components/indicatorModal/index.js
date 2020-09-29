@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Fuse from 'fuse.js';
 import { groupBy } from 'lodash';
 
-import './index.css';
 import {
   Flex,
   Box,
@@ -24,6 +23,9 @@ import {
   Modal,
   ModalOverlay,
 } from '@chakra-ui/core';
+
+import { slugify } from '../../utils/slugify';
+import './index.css';
 
 const CustomTab = React.forwardRef((props, ref) => {
   return (
@@ -86,7 +88,7 @@ const renderTabPanel = indicators => {
         cursor="pointer"
         _hover={{ fontWeight: 'bold' }}
       >
-        <Link to={`/${i.replace(/(\W+)/gm, '-').toLowerCase()}`}>{i}</Link>
+        <Link to={`/${slugify(i)}`}>{i}</Link>
       </PseudoBox>
     );
   });
