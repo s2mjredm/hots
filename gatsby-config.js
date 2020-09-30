@@ -53,8 +53,14 @@ module.exports = {
         url: 'http://cms.hots.axismaps.io/graphql',
       },
     },
-    `gatsby-plugin-sharp`,
-    'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /svg/,
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
   ],
 };
