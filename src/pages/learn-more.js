@@ -1,23 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
+import '../css/learn-more.css';
 
 export const query = graphql`
   {
     page: wpPage(id: { eq: "cG9zdDo2OQ==" }) {
       title
       content
-    }
-    items: allWpPost(
-      filter: { categories: { nodes: { elemMatch: { slug: { eq: "learnmore" } } } } }
-      sort: { fields: title, order: ASC }
-    ) {
-      nodes {
-        id
-        content
+      featuredImage {
+        node {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+      pageMeta {
+        subtitle
       }
     }
   }
@@ -25,16 +32,25 @@ export const query = graphql`
 
 const LearnMore = ({
   data: {
-    items: { nodes },
-    page: { title, content },
+    page: {
+      title,
+      content,
+      featuredImage,
+      pageMeta: { subtitle },
+    },
   },
 }) => (
   <Layout>
-    <h1>{title}</h1>
-    {parse(content)}
-    {nodes.map(item => (
-      <div key={item.id}>{parse(item.content)}</div>
-    ))}
+    <div className="hero">
+      <div className="item">
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+      </div>
+      <div className="item" style={{ flex: 2 }}>
+        <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
+      </div>
+    </div>
+    <div className="learn-more">{parse(content)}</div>
   </Layout>
 );
 
