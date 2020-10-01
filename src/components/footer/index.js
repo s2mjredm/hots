@@ -9,14 +9,14 @@ const Footer = () => {
     {
       centerLogo: file(relativePath: { eq: "logos/center-logo.png" }) {
         childImageSharp {
-          fluid {
+          fluid(maxWidth: 230) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       vcuLogo: file(relativePath: { eq: "logos/vcu-logo.png" }) {
         childImageSharp {
-          fluid {
+          fluid(maxWidth: 230) {
             ...GatsbyImageSharpFluid
           }
         }
