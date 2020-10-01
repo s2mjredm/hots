@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import parse from 'html-react-parser';
+import { Box, Grid } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
 
@@ -14,53 +15,67 @@ const State = ({ data: { metadata, indicator, allIndicators, stateName, state, r
   const bottom3 = ranks.slice(0, 3);
   const top3 = ranks.slice(-3);
 
+  const indicatorValues = Object.values(indicator)
+    .map(a => parseFloat(a))
+    .filter(a => a && !Number.isNaN(a))
+    .sort((a, b) => b - a);
+  const indicatorRank = indicatorValues.indexOf(parseFloat(indicator[stateName.state])) + 1;
+
   return (
     <Layout>
-      <h1>{metadata.title}</h1>
-      {parse(metadata.definition)}
-      <ul>
-        {Object.keys(indicator).map(st => (
-          <li key={st}>
-            <b>{`${st}: `}</b>
-            {indicator[st]}
-          </li>
-        ))}
-      </ul>
-      <h2>Bottom 3</h2>
-      <ul>
-        {bottom3.map(ind => {
-          const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
-          return (
-            <li key={indicatorTitle}>
-              {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
-              {ind.ranking}
-            </li>
-          );
-        })}
-      </ul>
-      <h2>Top 3</h2>
-      <ul>
-        {top3.map(ind => {
-          const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
-          return (
-            <li key={indicatorTitle}>
-              {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
-              {ind.ranking}
-            </li>
-          );
-        })}
-      </ul>
-      <h2>{stateName.name}</h2>
-      <ul>
-        {allIndicators.nodes
-          .filter(ind => state[ind.variable])
-          .map(ind => (
-            <li key={ind.variable}>
-              <b>{`${ind.title}: `}</b>
-              {`${state[ind.variable]} (rank ${ranking[ind.variable]})`}
-            </li>
-          ))}
-      </ul>
+      <Grid w="100%" templateColumns="35% 1fr">
+        <Box>
+          <h1>{stateName.name}</h1>
+          <h2>{metadata.title}</h2>
+          <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
+          <p>{parse(metadata.definition)}</p>
+        </Box>
+        <Box style={{ backgroundColor: 'red' }} />
+      </Grid>
+      <Grid w="100%" h="75vw">
+        <Box w="100%" bg="#FFD285">
+          <h3>{`How ${stateName.name} ranks on some of the most important conditions for health`}</h3>
+        </Box>
+      </Grid>
+      <Grid>
+        <Box>
+          <h2>Bottom 3</h2>
+          <ul>
+            {bottom3.map(ind => {
+              const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
+              return (
+                <li key={indicatorTitle}>
+                  {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
+                  {ind.ranking}
+                </li>
+              );
+            })}
+          </ul>
+          <h2>Top 3</h2>
+          <ul>
+            {top3.map(ind => {
+              const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
+              return (
+                <li key={indicatorTitle}>
+                  {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
+                  {ind.ranking}
+                </li>
+              );
+            })}
+          </ul>
+          <h2>{stateName.name}</h2>
+          <ul>
+            {allIndicators.nodes
+              .filter(ind => state[ind.variable])
+              .map(ind => (
+                <li key={ind.variable}>
+                  <b>{`${ind.title}: `}</b>
+                  {`${state[ind.variable]} (rank ${ranking[ind.variable]})`}
+                </li>
+              ))}
+          </ul>
+        </Box>
+      </Grid>
     </Layout>
   );
 };
@@ -92,6 +107,7 @@ export const query = graphql`
     }
     stateName: statesCsv(state: { eq: $state }) {
       name
+      state
     }
     state: statesCsv(state: { eq: $state }) {
       D_H
