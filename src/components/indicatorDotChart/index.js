@@ -42,22 +42,42 @@ const useScale = (width, range) => {
   return scale;
 };
 
+const domainToTicks = domain => {
+  const ticks = [];
+  for (let index = domain[1]; index > domain[0]; index -= 1) {
+    ticks.push(Math.trunc(index));
+  }
+  return ticks;
+};
+
 const IndicatorDotChart = ({ indicator, metadata }) => {
   const trackRef = useRef();
   const { width } = useContainerDimensions(trackRef);
   const [range, setRange] = useState(Object.keys(indicator).map(state => indicator[state]));
   const scale = useScale(width, range);
 
-  console.log(extent(range));
-  try {
-    // scale.range();
-    console.log('wdi', width, scale(81.4));
-    // console.log(scale(81.4));
-  } catch (error) {
-    // console.log(error);
-  }
+  const renderTicks = domain => {
+    const ticks = domainToTicks(domain);
 
-  // const renderTicks = () => {};
+    return ticks.map(tick => {
+      return (
+        <Box
+          key={tick}
+          position="absolute"
+          left={scale(tick) - 1}
+          h="inherit"
+          w="1px"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <Box display="table" bg="white" h="68px" w="1px" />
+          <Text>{tick}</Text>
+        </Box>
+      );
+    });
+  };
+
   if (!scale) return null;
   return (
     <Box p={[10, 20]} color="gray.text">
@@ -68,6 +88,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         width="100%"
         className="indicator-dot-background"
       >
+        {scale && renderTicks(scale.domain())}
         <Box
           position="absolute"
           left={scale(82.3) - 7}
@@ -77,19 +98,6 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           w="14px"
           h="14px"
         />
-
-        <Box
-          position="absolute"
-          left={scale(80) - 1}
-          h="inherit"
-          w="1px"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Box display="table" bg="white" h="68px" w="1px" />
-          <Text>80</Text>
-        </Box>
       </Box>
     </Box>
   );
