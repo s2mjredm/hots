@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
-import { find } from 'lodash';
+import { find, groupBy } from 'lodash';
 import parse from 'html-react-parser';
 import { Box, Grid, useDisclosure, Heading, Flex } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
+import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
 import Arrow from '../svg/arrow.svg';
 
@@ -40,6 +41,19 @@ const State = ({
     .filter(a => a && !Number.isNaN(a))
     .sort((a, b) => b - a);
   const indicatorRank = indicatorValues.indexOf(parseFloat(indicator[stateName.state])) + 1;
+
+  const categoryRankings = ranks
+    .filter(r =>
+      allIndicators.nodes
+        .filter(i => i.condition)
+        .map(v => v.variable.toLowerCase())
+        .includes(r.variable.toLowerCase())
+    )
+    .map(r => ({
+      ...groupBy(allIndicators.nodes, n => n.variable.toLowerCase())[r.variable.toLowerCase()][0],
+      ...r,
+      value: state[r.variable],
+    }));
 
   return (
     <Layout>
@@ -98,6 +112,7 @@ const State = ({
           </Link>
         </Flex>
         <Img fluid={pentagon.childImageSharp.fluid} />
+        <RankGraphic rankings={categoryRankings} />
       </Grid>
       <Grid w="100%" templateColumns="1fr 1fr" px={100} py={200} columnGap={10}>
         <Box

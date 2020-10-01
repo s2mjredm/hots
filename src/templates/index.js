@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-// import parse from 'html-react-parser';
-
 import { Box, Grid, useDisclosure, Heading, Text } from '@chakra-ui/core';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
