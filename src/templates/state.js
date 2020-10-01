@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { find } from 'lodash';
 import parse from 'html-react-parser';
-import { Box, Grid } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
@@ -49,9 +49,10 @@ const State = ({
           <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
           <p>{parse(metadata.definition)}</p>
         </Box>
-        <Box>
+        <Box px={100}>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+          <Box w="100%" h={580} bg="#e5e5e5" mb={100} />
         </Box>
       </Grid>
       <Grid w="100%" h="75vw">

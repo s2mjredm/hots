@@ -45,8 +45,8 @@ const Index = ({ data: { /* metadata, */ indicator } }) => {
         // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
         bg="blue.600"
       >
-        <Box bg="white">
-          <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
+        <Box px={[10, 20]} bg="white">
+          <Box pt={[10, 20]} color="gray.text">
             <Heading fontFamily="Montserrat" color="#403F3F">
               How is your state doing?
             </Heading>
