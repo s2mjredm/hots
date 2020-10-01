@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { find } from 'lodash';
 import parse from 'html-react-parser';
-import { Box, Grid, useDisclosure } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure, Heading, Flex } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
 import RankResult from '../components/rankResult';
+import Arrow from '../svg/arrow.svg';
 
 const State = ({
   data: {
@@ -42,14 +43,41 @@ const State = ({
 
   return (
     <Layout>
-      <Grid w="100%" templateColumns="35% 1fr">
-        <Box>
-          <h1>{stateName.name}</h1>
-          <h2>{metadata.title}</h2>
-          <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
-          <p>{parse(metadata.definition)}</p>
+      <Grid w="100%" templateColumns="35% 1fr" px={100} pb={100}>
+        <Box py={[10, 20]} pr={200}>
+          <Flex direction="column" h="100%" justify="space-between" pb={100}>
+            <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
+              <Arrow
+                style={{
+                  display: 'inline',
+                  transform: 'rotate(180deg)',
+                  width: 16,
+                  marginRight: 5,
+                }}
+              />
+              BACK TO NATIONAL MAP AND RESULTS
+            </Link>
+            <Box>
+              <Heading as="h1" fontFamily="serif">
+                {stateName.name}
+              </Heading>
+              <Heading as="h2">{metadata.title}</Heading>
+            </Box>
+            <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
+            <p>{parse(metadata.definition)}</p>
+            <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+              Learn more about what shapes health
+              <Arrow
+                style={{
+                  display: 'inline',
+                  width: 16,
+                  marginLeft: 5,
+                }}
+              />
+            </Link>
+          </Flex>
         </Box>
-        <Box px={100}>
+        <Box>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <Box w="100%" h={580} bg="#e5e5e5" mb={100} />
