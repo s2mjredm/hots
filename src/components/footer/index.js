@@ -1,7 +1,8 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 
-import { Box, Heading, Text, Flex, Image } from '@chakra-ui/core';
+import { Box, Heading, Text, Flex } from '@chakra-ui/core';
 
 const Footer = () => {
   const data = useStaticQuery(graphql`
@@ -9,14 +10,14 @@ const Footer = () => {
       centerLogo: file(relativePath: { eq: "logos/center-logo.png" }) {
         childImageSharp {
           fluid {
-            src
+            ...GatsbyImageSharpFluid
           }
         }
       }
       vcuLogo: file(relativePath: { eq: "logos/vcu-logo.png" }) {
         childImageSharp {
           fluid {
-            src
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -67,13 +68,24 @@ const Footer = () => {
       </Box>
       <Box w={['lg']} display={['none', 'none', 'none', 'block']} />
       <Flex align="flex-start" w="md" direction={['row', 'row', 'column']}>
-        <Image
-          minWidth={100}
-          width={230}
-          src={data.centerLogo.childImageSharp.fluid.src}
+        <Img
+          style={{
+            minWidth: 100,
+            width: 230,
+            marginRight: 40,
+          }}
+          fluid={data.centerLogo.childImageSharp.fluid}
           alt="Center on Society and Health"
         />
-        <Image minWidth={100} width={230} src={data.vcuLogo.childImageSharp.fluid.src} alt="VCU" />
+        <Img
+          style={{
+            minWidth: 100,
+            width: 230,
+            marginTop: 40,
+          }}
+          fluid={data.vcuLogo.childImageSharp.fluid}
+          alt="VCU"
+        />
       </Flex>
     </Flex>
   );
