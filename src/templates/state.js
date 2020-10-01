@@ -83,10 +83,21 @@ const State = ({
           <Box w="100%" h={580} bg="#e5e5e5" mb={100} />
         </Box>
       </Grid>
-      <Grid w="100%" h="75vw">
-        <Box w="100%" bg="#FFD285">
-          <h3>{`How ${stateName.name} ranks on some of the most important conditions for health`}</h3>
-        </Box>
+      <Grid w="100%" templateColumns="50% 50%" bg="#FFD285" p={100}>
+        <Flex direction="column" justify="space-around">
+          <Heading as="h3">{`How ${stateName.name} ranks on some of the most important conditions for health`}</Heading>
+          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+            Learn more about why these matter so much for health
+            <Arrow
+              style={{
+                display: 'inline',
+                width: 18,
+                marginLeft: 5,
+              }}
+            />
+          </Link>
+        </Flex>
+        <Img fluid={pentagon.childImageSharp.fluid} />
       </Grid>
       <Grid w="100%" templateColumns="1fr 1fr" px={100} py={200} columnGap={10}>
         <Box
@@ -362,6 +373,13 @@ export const query = graphql`
       SEF48_foodinsecure
       HO11_MotorVehMort
       PS_PolicyRankings
+    }
+    pentagon: file(relativePath: { eq: "social-determinants-pentagon.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 800) {
+          ...GatsbyImageSharpFluid
+        }
+      }
     }
     bottomPerforming: file(relativePath: { eq: "bottom-performing.png" }) {
       childImageSharp {
