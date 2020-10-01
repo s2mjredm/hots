@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 // import parse from 'html-react-parser';
 
-import { Box, Grid, useDisclosure } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure, Heading, Text } from '@chakra-ui/core';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
@@ -46,6 +46,15 @@ const Index = ({ data: { /* metadata, */ indicator } }) => {
         bg="blue.600"
       >
         <Box bg="white">
+          <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
+            <Heading fontFamily="Montserrat" color="#403F3F">
+              How is your state doing?
+            </Heading>
+            <Text my={3} fontSize={24} fontFamily="Roboto Slab" letterSpacing="-0.06rem">
+              Map it! Choose a health statistic or outcome to see results mapped for the whole
+              United States. Select a state for more detailed information on that state’s health:
+            </Text>
+          </Box>
           <IndicatorDropdown onShowAll={() => onOpen()} />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} />

@@ -7,6 +7,8 @@ import parse from 'html-react-parser';
 import { Box, Grid } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
+import IndicatorDropdown from '../components/indicatorDropdown';
+import IndicatorModal from '../components/indicatorModal';
 import RankResult from '../components/rankResult';
 
 const State = ({
@@ -22,6 +24,8 @@ const State = ({
     bottomPerforming,
   },
 }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   let ranks = Object.keys(ranking).map(variable => ({
     variable,
     ranking: ranking[variable],
@@ -45,7 +49,10 @@ const State = ({
           <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
           <p>{parse(metadata.definition)}</p>
         </Box>
-        <Box style={{ backgroundColor: 'red' }} />
+        <Box>
+          <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+          <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+        </Box>
       </Grid>
       <Grid w="100%" h="75vw">
         <Box w="100%" bg="#FFD285">
