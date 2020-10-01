@@ -1,12 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import { find } from 'lodash';
 import parse from 'html-react-parser';
 import { Box, Grid } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
+import RankResult from '../components/rankResult';
 
-const State = ({ data: { metadata, indicator, allIndicators, stateName, state, ranking } }) => {
+const State = ({
+  data: {
+    metadata,
+    indicator,
+    allIndicators,
+    stateName,
+    state,
+    ranking,
+    pentagon,
+    topPerforming,
+    bottomPerforming,
+  },
+}) => {
   let ranks = Object.keys(ranking).map(variable => ({
     variable,
     ranking: ranking[variable],
@@ -37,43 +52,74 @@ const State = ({ data: { metadata, indicator, allIndicators, stateName, state, r
           <h3>{`How ${stateName.name} ranks on some of the most important conditions for health`}</h3>
         </Box>
       </Grid>
-      <Grid>
-        <Box>
-          <h2>Bottom 3</h2>
-          <ul>
-            {bottom3.map(ind => {
-              const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
-              return (
-                <li key={indicatorTitle}>
-                  {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
-                  {ind.ranking}
-                </li>
-              );
-            })}
-          </ul>
-          <h2>Top 3</h2>
-          <ul>
-            {top3.map(ind => {
-              const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
-              return (
-                <li key={indicatorTitle}>
-                  {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
-                  {ind.ranking}
-                </li>
-              );
-            })}
-          </ul>
-          <h2>{stateName.name}</h2>
-          <ul>
-            {allIndicators.nodes
-              .filter(ind => state[ind.variable])
-              .map(ind => (
-                <li key={ind.variable}>
-                  <b>{`${ind.title}: `}</b>
-                  {`${state[ind.variable]} (rank ${ranking[ind.variable]})`}
-                </li>
-              ))}
-          </ul>
+      <Grid w="100%" templateColumns="1fr 1fr" px={100} py={200} columnGap={10}>
+        <Box
+          p={100}
+          background="transparent linear-gradient(322deg, #009FFA 0%, #A0DDF9 80%, #A0DDF9 100%) 0% 0% no-repeat padding-box"
+        >
+          <Img
+            fixed={topPerforming.childImageSharp.fixed}
+            style={{
+              position: 'absolute',
+              marginTop: -250,
+              right: '50%',
+            }}
+          />
+          <Box h={100} mb={1}>
+            Of the health statistics & outcomes on this site
+            <br />
+            <b>{`${stateName.name} ranks best in these areas`}</b>
+          </Box>
+          {top3.map(ind => {
+            const result = find(
+              allIndicators.nodes,
+              i => i.variable.toLowerCase() === ind.variable.toLowerCase()
+            );
+            return (
+              <RankResult
+                key={result.title}
+                indicator={result.title}
+                state={stateName.name}
+                rank={ind.ranking}
+                value={parseFloat(state[ind.variable])}
+                best
+              />
+            );
+          })}
+        </Box>
+        <Box
+          p={100}
+          background="transparent linear-gradient(322deg, #1E306E 0%, #009FFA 100%) 0% 0% no-repeat padding-box"
+          color="white"
+        >
+          <Box h={100} mb={1}>
+            Of the health statistics & outcomes on this site
+            <br />
+            <b>{`${stateName.name} ranks poorest in these areas`}</b>
+          </Box>
+          {bottom3.map(ind => {
+            const result = find(
+              allIndicators.nodes,
+              i => i.variable.toLowerCase() === ind.variable.toLowerCase()
+            );
+            return (
+              <RankResult
+                key={result.title}
+                indicator={result.title}
+                state={stateName.name}
+                rank={ind.ranking}
+                value={parseFloat(state[ind.variable])}
+              />
+            );
+          })}
+          <Img
+            fixed={bottomPerforming.childImageSharp.fixed}
+            style={{
+              position: 'absolute',
+              marginTop: 150,
+              right: 100,
+            }}
+          />
         </Box>
       </Grid>
     </Layout>
@@ -280,6 +326,20 @@ export const query = graphql`
       SEF48_foodinsecure
       HO11_MotorVehMort
       PS_PolicyRankings
+    }
+    bottomPerforming: file(relativePath: { eq: "bottom-performing.png" }) {
+      childImageSharp {
+        fixed(height: 150) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    topPerforming: file(relativePath: { eq: "top-performing.png" }) {
+      childImageSharp {
+        fixed(height: 150) {
+          ...GatsbyImageSharpFixed
+        }
+      }
     }
   }
 `;
