@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { select, extent, scaleQuantize, scaleLinear } from 'd3';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { select, extent, scaleLinear } from 'd3';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/core';
+import { Box, PseudoBox, Button, Flex, Heading, Text } from '@chakra-ui/core';
 
+import StateDotMarker from './StateDotMarker';
 import './index.css';
+
+// The number of tick markers in the chart
+const TICK_COUNT = 6;
 
 const useContainerDimensions = myRef => {
   const getDimensions = () => ({
@@ -19,6 +23,8 @@ const useContainerDimensions = myRef => {
     };
 
     if (myRef.current) {
+      console.log('slol');
+
       setDimensions(getDimensions());
     }
 
@@ -27,44 +33,46 @@ const useContainerDimensions = myRef => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [myRef]);
+  }, [myRef.current]);
 
   return dimensions;
 };
 
 const useScale = (width, range) => {
-  const [scale, setScale] = useState();
+  const [scale, setScale] = useState(
+    scaleLinear().domain(extent(range)).range([0, width]).clamp(true)
+  );
+  const [tickScale, setTickScale] = useState(
+    scaleLinear().domain([0, TICK_COUNT]).range([0, width]).clamp(true)
+  );
 
   useEffect(() => {
     setScale(() => scaleLinear().domain(extent(range)).range([0, width]).clamp(true));
+    setTickScale(() => scaleLinear().domain([0, TICK_COUNT]).range([0, width]).clamp(true));
   }, [width, range]);
 
-  return scale;
-};
-
-const domainToTicks = domain => {
-  const ticks = [];
-  for (let index = domain[1]; index > domain[0]; index -= 1) {
-    ticks.push(Math.trunc(index));
-  }
-  return ticks;
+  return [scale, tickScale];
 };
 
 const IndicatorDotChart = ({ indicator, metadata }) => {
-  const trackRef = useRef();
+  const [trackRef, setTrackRef] = useState({ current: null });
   const { width } = useContainerDimensions(trackRef);
-  const [range, setRange] = useState(Object.keys(indicator).map(state => indicator[state]));
-  const scale = useScale(width, range);
+  const [range /* ,setRange */] = useState(Object.keys(indicator).map(state => indicator[state]));
+  const [scale, tickScale] = useScale(width, range);
 
-  const renderTicks = domain => {
-    const ticks = domainToTicks(domain);
+  const getTrackRef = useCallback(node => {
+    if (node !== null) {
+      setTrackRef({ current: node });
+    }
+  }, []);
 
-    return ticks.map(tick => {
+  const renderTicks = () => {
+    return [...Array(TICK_COUNT).keys()].map(tick => {
       return (
         <Box
           key={tick}
           position="absolute"
-          left={scale(tick) - 1}
+          left={tickScale(tick) - 1}
           h="inherit"
           w="1px"
           display="flex"
@@ -72,8 +80,21 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           alignItems="center"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
-          <Text>{tick}</Text>
+          <Text>{scale.invert(tickScale(tick)).toFixed(1)}</Text>
         </Box>
+      );
+    });
+  };
+
+  const renderDots = () => {
+    return Object.keys(indicator).map(state => {
+      return (
+        <StateDotMarker
+          key={state}
+          state={state}
+          indicatorValue={indicator[state]}
+          leftPosition={scale(indicator[state]) - 7}
+        />
       );
     });
   };
@@ -82,22 +103,14 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
   return (
     <Box p={[10, 20]} color="gray.text">
       <Box
-        ref={trackRef}
+        ref={getTrackRef}
         position="relative"
         h="58px"
         width="100%"
         className="indicator-dot-background"
       >
-        {scale && renderTicks(scale.domain())}
-        <Box
-          position="absolute"
-          left={scale(82.3) - 7}
-          borderRadius="100%"
-          bg="black"
-          border="1px solid white"
-          w="14px"
-          h="14px"
-        />
+        {scale && renderTicks()}
+        {scale && renderDots()}
       </Box>
     </Box>
   );
