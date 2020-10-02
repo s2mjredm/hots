@@ -1,21 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   PseudoBox,
   Box,
-  Button,
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
   Text,
 } from '@chakra-ui/core';
 
-const StateDotMarker = ({ state, indicatorValue, leftPosition }) => {
+const StateDotMarker = ({
+  state,
+  indicatorValue,
+  indicatorColor,
+  indicatorPosition,
+  leftPosition,
+}) => {
   if (!leftPosition) return null;
 
   return (
@@ -33,20 +35,12 @@ const StateDotMarker = ({ state, indicatorValue, leftPosition }) => {
           _hover={{ bg: 'white' }}
         />
       </PopoverTrigger>
-      <PopoverContent
-        zIndex={4}
-        marginBottom="40px"
-        w="121px"
-        h="62px"
-        borderRadius="0px"
-        // position="relative"
-        // display="flex"
-      >
+      <PopoverContent zIndex={4} marginBottom="40px" w="121px" h="62px" borderRadius="0px">
         <PopoverArrow />
         <Box
           w="48px"
           h="48px"
-          bg="blue.600"
+          bg={indicatorColor}
           borderRadius="100%"
           position="absolute"
           left="-24px"
@@ -57,13 +51,13 @@ const StateDotMarker = ({ state, indicatorValue, leftPosition }) => {
           fontFamily="Jubilat"
           fontSize="24px"
         >
-          54
+          {indicatorPosition}
         </Box>
         <PopoverBody paddingLeft="28px">
           <Text fontFamily="Montserrat" color="#403F3F" size="16px" fontWeight="800" mb="3px">
             {state}
           </Text>
-          <Text fontFamily="Montserrat" color="#009FFA" size="16px" fontWeight="600">
+          <Text fontFamily="Montserrat" color={indicatorColor} size="16px" fontWeight="600">
             {indicatorValue}
           </Text>
         </PopoverBody>
@@ -75,5 +69,7 @@ StateDotMarker.propTypes = {
   state: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
   leftPosition: PropTypes.string.isRequired,
+  indicatorColor: PropTypes.string.isRequired,
+  indicatorPosition: PropTypes.string.isRequired,
 };
 export default StateDotMarker;

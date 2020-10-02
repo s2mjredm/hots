@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { select, extent, scaleLinear } from 'd3';
+import React, { useEffect, useState, useCallback } from 'react';
+import { extent, scaleLinear, scaleQuantize } from 'd3';
+import PropTypes from 'prop-types';
 
-import { Box, PseudoBox, Button, Flex, Heading, Text } from '@chakra-ui/core';
+import { Box, Text } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
 import './index.css';
@@ -23,8 +24,6 @@ const useContainerDimensions = myRef => {
     };
 
     if (myRef.current) {
-      console.log('slol');
-
       setDimensions(getDimensions());
     }
 
@@ -38,27 +37,73 @@ const useContainerDimensions = myRef => {
   return dimensions;
 };
 
-const useScale = (width, range) => {
-  const [scale, setScale] = useState(
-    scaleLinear().domain(extent(range)).range([0, width]).clamp(true)
-  );
-  const [tickScale, setTickScale] = useState(
-    scaleLinear().domain([0, TICK_COUNT]).range([0, width]).clamp(true)
-  );
+const useScale = (width, domain, tickCount) => {
+  const genColorScale = () => {
+    return scaleQuantize()
+      .domain(extent(domain))
+      .range([
+        '#042351',
+        '#1E306E',
+        '#293989',
+        '#184FAA',
+        '#0066CB',
+        '#0083E2',
+        '#50BEFA',
+        '#A2DCEE',
+      ])
+      .nice();
+  };
+
+  const genDotScale = () => {
+    return scaleLinear().domain(extent(domain)).range([0, width]).clamp(true);
+  };
+
+  const genTickScale = () => {
+    return scaleLinear().domain([0, tickCount]).range([0, width]).clamp(true);
+  };
+
+  const [dotScale, setScale] = useState(genDotScale());
+  const [tickScale, setTickScale] = useState(genTickScale());
+  const [colorScale, setColorScale] = useState(genColorScale());
 
   useEffect(() => {
-    setScale(() => scaleLinear().domain(extent(range)).range([0, width]).clamp(true));
-    setTickScale(() => scaleLinear().domain([0, TICK_COUNT]).range([0, width]).clamp(true));
-  }, [width, range]);
+    setScale(() => genDotScale());
+    setTickScale(() => genTickScale());
+    setColorScale(() => genColorScale());
+  }, [width, domain]);
 
-  return [scale, tickScale];
+  return [dotScale, tickScale, colorScale];
+};
+
+const useGenStateDotMarkers = indicator => {
+  const [dotMarkers, setDotMarkers] = useState();
+
+  const genStateDotMarkers = () =>
+    Object.keys(indicator)
+      .map(state => {
+        return {
+          state,
+          indicatorValue: indicator[state],
+        };
+      })
+      .sort((a, b) => {
+        return b.indicatorValue - a.indicatorValue;
+      });
+
+  useEffect(() => {
+    if (!indicator) return;
+    setDotMarkers(() => genStateDotMarkers());
+  }, [indicator]);
+
+  return dotMarkers;
 };
 
 const IndicatorDotChart = ({ indicator, metadata }) => {
   const [trackRef, setTrackRef] = useState({ current: null });
   const { width } = useContainerDimensions(trackRef);
   const [range /* ,setRange */] = useState(Object.keys(indicator).map(state => indicator[state]));
-  const [scale, tickScale] = useScale(width, range);
+  const [dotScale, tickScale, colorScale] = useScale(width, range, TICK_COUNT);
+  const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
 
   const getTrackRef = useCallback(node => {
     if (node !== null) {
@@ -80,26 +125,28 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           alignItems="center"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
-          <Text>{scale.invert(tickScale(tick)).toFixed(1)}</Text>
+          <Text>{dotScale.invert(tickScale(tick)).toFixed(1)}</Text>
         </Box>
       );
     });
   };
 
   const renderDots = () => {
-    return Object.keys(indicator).map(state => {
+    return dotMarkers.map((marker, index) => {
       return (
         <StateDotMarker
-          key={state}
-          state={state}
-          indicatorValue={indicator[state]}
-          leftPosition={scale(indicator[state]) - 7}
+          key={marker.state}
+          state={marker.state}
+          indicatorValue={marker.indicatorValue}
+          indicatorPosition={index + 1}
+          leftPosition={dotScale(marker.indicatorValue) - 7}
+          indicatorColor={colorScale(marker.indicatorValue)}
         />
       );
     });
   };
 
-  if (!scale) return null;
+  if (!dotScale) return null;
   return (
     <Box p={[10, 20]} color="gray.text">
       <Box
@@ -109,11 +156,16 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         width="100%"
         className="indicator-dot-background"
       >
-        {scale && renderTicks()}
-        {scale && renderDots()}
+        {dotScale && renderTicks()}
+        {dotScale && renderDots()}
       </Box>
     </Box>
   );
+};
+
+IndicatorDotChart.propTypes = {
+  indicator: PropTypes.shape().isRequired,
+  metadata: PropTypes.shape().isRequired,
 };
 
 export default IndicatorDotChart;
