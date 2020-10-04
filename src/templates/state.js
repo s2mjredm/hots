@@ -72,7 +72,7 @@ const State = ({
               BACK TO NATIONAL MAP AND RESULTS
             </Link>
             <Box>
-              <Heading as="h1" fontFamily="serif">
+              <Heading as="h1" fontFamily="Jubilat">
                 {stateName.name}
               </Heading>
               <Heading as="h2">{metadata.title}</Heading>

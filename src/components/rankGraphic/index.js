@@ -71,12 +71,12 @@ const RankGraphic = ({ rankings }) => {
             lineHeight="60px"
             textAlign="center"
             color="white"
-            fontFamily="serif"
+            fontFamily="Jubilat"
             fontSize={24}
           >
             {r.ranking}
           </Box>
-          <Heading as="h2" fontFamily="serif" fontSize={24} mx={5}>
+          <Heading as="h2" fontFamily="Jubilat" fontSize={24} mx={5}>
             {r.condition}
           </Heading>
           {i === 0 && (
@@ -86,7 +86,7 @@ const RankGraphic = ({ rankings }) => {
                 fixed={images[r.condition.replace(/\W/, '').toLowerCase()].childImageSharp.fixed}
               />
               <Text
-                fontFamily="serif"
+                fontFamily="Jubilat"
                 fontSize={48}
                 color="white"
                 lineHeight="50px"

@@ -21,7 +21,7 @@ const RankResult = ({ state, indicator, rank, value, best }) => {
         textAlign="center"
         color="white"
         fontSize={50}
-        fontFamily="serif"
+        fontFamily="Jubilat"
       >
         {rank}
       </Box>

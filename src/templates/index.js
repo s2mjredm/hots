@@ -48,7 +48,7 @@ const Index = ({ data: { /* metadata, */ indicator } }) => {
             <Heading fontFamily="Montserrat" color="#403F3F">
               How is your state doing?
             </Heading>
-            <Text my={3} fontSize={24} fontFamily="Roboto Slab" letterSpacing="-0.06rem">
+            <Text my={3} fontSize={24} fontFamily="Jubilat" letterSpacing="-0.06rem">
               Map it! Choose a health statistic or outcome to see results mapped for the whole
               United States. Select a state for more detailed information on that state’s health:
             </Text>
