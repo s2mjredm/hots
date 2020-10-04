@@ -1,42 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import { Box, Grid, useDisclosure, Heading, Text } from '@chakra-ui/core';
+import { Box, useDisclosure, Heading, Text } from '@chakra-ui/core';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
 
-const Index = ({ data: { /* metadata, */ indicator } }) => {
+const Index = ({ location, data: { /* metadata, */ indicator } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Layout>
-      {/* <h1>{metadata.title}</h1>
-      {parse(metadata.definition)}
-      <ul>
-        {Object.keys(indicator).map(state => (
-          <li key={state}>
-            <b>{`${state}: `}</b>
-            {indicator[state]}
-          </li>
-        ))}
-      </ul> */}
-
-      <Grid
-        w="100%"
-        h={500}
-        templateColumns={['repeat(5, 1fr)', 'repeat(7, 1fr)']}
-        gap={[35, 50, 90, 110]}
-      >
-        <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
-        <Box w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
-      </Grid>
+    <Layout location={location}>
       <Box
         px={[10, 20, 120]}
         py={120}
@@ -63,6 +38,7 @@ const Index = ({ data: { /* metadata, */ indicator } }) => {
 };
 Index.propTypes = {
   data: PropTypes.shape().isRequired,
+  location: PropTypes.shape().isRequired,
 };
 
 export default Index;

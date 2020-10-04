@@ -5,17 +5,26 @@ import SEO from '../seo';
 import Header from '../header';
 import Footer from '../footer';
 
-const Layout = ({ children }) => (
-  <>
-    <SEO />
-    <Header />
-    <main>{children}</main>
-    <Footer />
-  </>
-);
+const Layout = ({ location: { pathname }, children }) => {
+  return (
+    <>
+      <SEO />
+      <Header flag={pathname === '/'} />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.shape(),
+};
+
+Layout.defaultProps = {
+  location: {
+    pathname: null,
+  },
 };
 
 export default Layout;
