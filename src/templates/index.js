@@ -6,8 +6,9 @@ import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
+import IndicatorDotChart from '../components/indicatorDotChart';
 
-const Index = ({ location, data: { /* metadata, */ indicator } }) => {
+const Index = ({ data: { metadata, indicator } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -31,6 +32,7 @@ const Index = ({ location, data: { /* metadata, */ indicator } }) => {
           <IndicatorDropdown onShowAll={() => onOpen()} />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} />
+          <IndicatorDotChart indicator={indicator} metadata={metadata} />
         </Box>
       </Box>
     </Layout>
