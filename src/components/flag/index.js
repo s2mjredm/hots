@@ -72,7 +72,7 @@ const Flag = ({ active }) => {
         h="100%"
         bg="#EB474C"
         transition="width 500"
-        style={active === 'take-action' ? hoverStyle(learnMore) : null}
+        style={active === 'take-action' ? hoverStyle(takeAction) : null}
         _hover={hoverStyle(takeAction)}
       />
       <PseudoBox
