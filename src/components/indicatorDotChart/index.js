@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { extent, scaleLinear, scaleQuantize } from 'd3';
 import PropTypes from 'prop-types';
 
-import { Box, Text } from '@chakra-ui/core';
+import { Box, Text, Flex, Divider, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
 import './index.css';
@@ -125,7 +125,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           alignItems="center"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
-          <Text>{dotScale.invert(tickScale(tick)).toFixed(1)}</Text>
+          <Text fontFamily="Montserrat">{dotScale.invert(tickScale(tick)).toFixed(1)}</Text>
         </Box>
       );
     });
@@ -133,6 +133,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
 
   const renderDots = () => {
     return dotMarkers.map((marker, index) => {
+      const isAllwaysVisible = index === 0 || index === 50;
       return (
         <StateDotMarker
           key={marker.state}
@@ -141,6 +142,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           indicatorPosition={index + 1}
           leftPosition={dotScale(marker.indicatorValue) - 7}
           indicatorColor={colorScale(marker.indicatorValue)}
+          isAllwaysVisible={isAllwaysVisible}
         />
       );
     });
@@ -148,16 +150,37 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
 
   if (!dotScale) return null;
   return (
-    <Box p={[10, 20]} color="gray.text">
-      <Box
-        ref={getTrackRef}
-        position="relative"
-        h="58px"
-        width="100%"
-        className="indicator-dot-background"
-      >
-        {dotScale && renderTicks()}
-        {dotScale && renderDots()}
+    <Box>
+      <Box px={[10, 20]} py={16} bg="#E5E5E5" color="gray.text">
+        <Box
+          ref={getTrackRef}
+          position="relative"
+          h="58px"
+          width="100%"
+          className="indicator-dot-background"
+        >
+          {dotScale && renderTicks()}
+          {dotScale && renderDots()}
+        </Box>
+        <Flex color="#403F3F" paddingTop="46px" justify="space-between">
+          <Flex justify="space-between">
+            <Icon name="arrow-back" size="24px" />
+            <Text>{metadata.low}</Text>
+          </Flex>
+          <Divider />
+          <Flex justify="space-between">
+            <Text>{metadata.high}</Text>
+            <Icon name="arrow-forward" size="24px" />
+          </Flex>
+        </Flex>
+      </Box>
+      <Box px={[10, 20]} py="22px" color="gray.text" fontSize="14px">
+        <Text bg="white">
+          <Text fontFamily="Montserrat" as="span" paddingRight="5px">
+            VARIABLE DEFINITION
+          </Text>
+          {metadata.definition}
+        </Text>
       </Box>
     </Box>
   );

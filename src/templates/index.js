@@ -50,6 +50,9 @@ const Index = ({ data: { metadata, indicator } }) => {
           <IndicatorDropdown onShowAll={() => onOpen()} />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} />
+          <Box px={[10, 20]} py={16} fontFamily="Montserrat" fontSize="18px" fontWeight="600">
+            Click to explore how U.S. States rank for Life Expectancy.
+          </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} />
         </Box>
       </Box>

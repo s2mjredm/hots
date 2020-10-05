@@ -17,11 +17,26 @@ const StateDotMarker = ({
   indicatorColor,
   indicatorPosition,
   leftPosition,
+  isAllwaysVisible,
 }) => {
+  const [isOpen, setIsOpen] = React.useState(isAllwaysVisible);
+  const open = () => setIsOpen(!isOpen);
+  const close = () => {
+    if (!isAllwaysVisible) {
+      setIsOpen(false);
+    }
+  };
+
   if (!leftPosition) return null;
 
   return (
-    <Popover placement="top" closeOnBlur={false} transformOrigin="45px">
+    <Popover
+      placement="top"
+      closeOnBlur={false}
+      transformOrigin="45px"
+      isOpen={isOpen}
+      onClose={close}
+    >
       <PopoverTrigger>
         <PseudoBox
           position="absolute"
@@ -33,6 +48,8 @@ const StateDotMarker = ({
           w="14px"
           h="14px"
           _hover={{ bg: 'white' }}
+          onMouseEnter={open}
+          onMouseLeave={close}
         />
       </PopoverTrigger>
       <PopoverContent zIndex={4} marginBottom="40px" w="121px" h="62px" borderRadius="0px">
@@ -71,5 +88,6 @@ StateDotMarker.propTypes = {
   leftPosition: PropTypes.string.isRequired,
   indicatorColor: PropTypes.string.isRequired,
   indicatorPosition: PropTypes.string.isRequired,
+  isAllwaysVisible: PropTypes.bool.isRequired,
 };
 export default StateDotMarker;
