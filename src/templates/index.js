@@ -8,7 +8,7 @@ import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
 
-const Index = ({ data: { metadata, indicator } }) => {
+const Index = ({ location, data: { metadata, indicator } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
