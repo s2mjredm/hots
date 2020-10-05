@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/core';
+import { Box, Button, Flex } from '@chakra-ui/core';
 
 import SearchSelectInput from './SearchSelectInput';
 import useNavigate from './useNavigate';
 
 import './index.css';
 
-const IndicatorDropdown = ({ onShowAll }) => {
+const IndicatorDropdown = ({ onShowAll, buttonText }) => {
   const [selectedIndicator, setSelectedIndicator] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
@@ -39,14 +39,7 @@ const IndicatorDropdown = ({ onShowAll }) => {
   };
 
   return (
-    <Box p={[10, 20]} color="gray.text">
-      <Heading fontFamily="Montserrat" color="#403F3F">
-        How is your state doing?
-      </Heading>
-      <Text my={3} fontSize={24} fontFamily="Roboto Slab" letterSpacing="-0.06rem">
-        Map it! Choose a health statistic or outcome to see results mapped for the whole United
-        States. Select a state for more detailed information on that state’s health:
-      </Text>
+    <Box py={[10, 20]} color="gray.text">
       <Flex
         py={25}
         direction={['column', 'column', 'row']}
@@ -86,12 +79,12 @@ const IndicatorDropdown = ({ onShowAll }) => {
           color="white"
           size="lg"
           h={[20, 12]}
-          w={['100%', '100%', 'xs']}
-          minWidth={['100&', '190px']}
+          w="auto"
+          flex="0 0 auto"
           fontSize={['26px', '16px']}
           onClick={() => navigate(url)}
         >
-          EXPLORE STATE RANKINGS
+          {buttonText}
         </Button>
       </Flex>
     </Box>
@@ -100,6 +93,11 @@ const IndicatorDropdown = ({ onShowAll }) => {
 
 IndicatorDropdown.propTypes = {
   onShowAll: PropTypes.func.isRequired,
+  buttonText: PropTypes.string,
+};
+
+IndicatorDropdown.defaultProps = {
+  buttonText: 'EXPLORE STATE RANKINGS',
 };
 
 export default IndicatorDropdown;

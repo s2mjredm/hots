@@ -26,7 +26,7 @@ const SelectButton = ({ label, onClick }) => {
       w="100%"
       lineHeight="3.2rem"
       borderBottom="1px solid #F2F2F2"
-      fontFamily="Roboto Slab"
+      fontFamily="Jubilat"
       transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
       fontSize="18px"
       fontWeight="semibold"
@@ -142,7 +142,7 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
         >
           {label}
         </FormLabel>
-        <InputGroup fontFamily="Roboto Slab" size="lg">
+        <InputGroup fontFamily="Jubilat" size="lg">
           <InputLeftElement zIndex="3">
             <Icon name="search" color="gray.700" />
           </InputLeftElement>
@@ -154,7 +154,7 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             onFocus={() => onOpen()}
             placeholder={placeholder}
             border="1.3px solid #403F3F"
-            fontFamily="Roboto Slab"
+            fontFamily="Jubilat"
             h={[20, 12]}
           />
           {isOpen && (

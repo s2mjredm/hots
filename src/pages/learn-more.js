@@ -8,24 +8,27 @@ import Layout from '../components/layout';
 import '../css/learn-more.css';
 
 export const query = graphql`
-  {
-    page: wpPage(id: { eq: "cG9zdDo2OQ==" }) {
-      title
-      content
-      featuredImage {
-        node {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 800) {
-                ...GatsbyImageSharpFluid
-              }
+  fragment PageInfo on WpPage {
+    title
+    content
+    featuredImage {
+      node {
+        localFile {
+          childImageSharp {
+            fluid(maxWidth: 800) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
       }
-      pageMeta {
-        subtitle
-      }
+    }
+    pageMeta {
+      subtitle
+    }
+  }
+  query {
+    page: wpPage(id: { eq: "cG9zdDo2OQ==" }) {
+      ...PageInfo
     }
   }
 `;
