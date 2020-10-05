@@ -158,13 +158,13 @@ const IndicatorModal = ({ onClose, isOpen }) => {
           </Flex>
           <Box bg="#E5E5E5">
             <Flex align="center" justify="center" py={4} borderBottom="3px solid white">
-              <InputGroup fontFamily="Roboto Slab" size="lg" color="gray.300">
+              <InputGroup fontFamily="Jubilat" size="lg" color="gray.300">
                 <Input
                   autoComplete="off"
                   onChange={e => handleChange(e)}
                   value={inputValue}
                   placeholder="Search"
-                  fontFamily="Roboto Slab"
+                  fontFamily="Jubilat"
                   color="gray.600"
                   h="40px"
                   maxW="285px"

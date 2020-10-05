@@ -1,11 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
+import { find, groupBy } from 'lodash';
 import parse from 'html-react-parser';
+import { Box, Grid, useDisclosure, Heading, Flex } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
+import IndicatorDropdown from '../components/indicatorDropdown';
+import IndicatorModal from '../components/indicatorModal';
+import RankGraphic from '../components/rankGraphic';
+import RankResult from '../components/rankResult';
+import Arrow from '../svg/arrow.svg';
 
-const State = ({ data: { metadata, indicator, allIndicators, stateName, state, ranking } }) => {
+const State = ({
+  data: {
+    metadata,
+    indicator,
+    allIndicators,
+    stateName,
+    state,
+    ranking,
+    pentagon,
+    topPerforming,
+    bottomPerforming,
+  },
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   let ranks = Object.keys(ranking).map(variable => ({
     variable,
     ranking: ranking[variable],
@@ -14,53 +36,154 @@ const State = ({ data: { metadata, indicator, allIndicators, stateName, state, r
   const bottom3 = ranks.slice(0, 3);
   const top3 = ranks.slice(-3);
 
+  const indicatorValues = Object.values(indicator)
+    .map(a => parseFloat(a))
+    .filter(a => a && !Number.isNaN(a))
+    .sort((a, b) => b - a);
+  const indicatorRank = indicatorValues.indexOf(parseFloat(indicator[stateName.state])) + 1;
+
+  const categoryRankings = ranks
+    .filter(r =>
+      allIndicators.nodes
+        .filter(i => i.condition)
+        .map(v => v.variable.toLowerCase())
+        .includes(r.variable.toLowerCase())
+    )
+    .map(r => ({
+      ...groupBy(allIndicators.nodes, n => n.variable.toLowerCase())[r.variable.toLowerCase()][0],
+      ...r,
+      value: state[r.variable],
+    }));
+
   return (
     <Layout>
-      <h1>{metadata.title}</h1>
-      {parse(metadata.definition)}
-      <ul>
-        {Object.keys(indicator).map(st => (
-          <li key={st}>
-            <b>{`${st}: `}</b>
-            {indicator[st]}
-          </li>
-        ))}
-      </ul>
-      <h2>Bottom 3</h2>
-      <ul>
-        {bottom3.map(ind => {
-          const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
-          return (
-            <li key={indicatorTitle}>
-              {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
-              {ind.ranking}
-            </li>
-          );
-        })}
-      </ul>
-      <h2>Top 3</h2>
-      <ul>
-        {top3.map(ind => {
-          const indicatorTitle = allIndicators.nodes.find(i => i.variable === ind.variable);
-          return (
-            <li key={indicatorTitle}>
-              {indicatorTitle && <b>{`${indicatorTitle.title}: `}</b>}
-              {ind.ranking}
-            </li>
-          );
-        })}
-      </ul>
-      <h2>{stateName.name}</h2>
-      <ul>
-        {allIndicators.nodes
-          .filter(ind => state[ind.variable])
-          .map(ind => (
-            <li key={ind.variable}>
-              <b>{`${ind.title}: `}</b>
-              {`${state[ind.variable]} (rank ${ranking[ind.variable]})`}
-            </li>
-          ))}
-      </ul>
+      <Grid w="100%" templateColumns="35% 1fr" px={100} pb={100}>
+        <Box py={[10, 20]} pr={200}>
+          <Flex direction="column" h="100%" justify="space-between" pb={100}>
+            <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
+              <Arrow
+                style={{
+                  display: 'inline',
+                  transform: 'rotate(180deg)',
+                  width: 16,
+                  marginRight: 5,
+                }}
+              />
+              BACK TO NATIONAL MAP AND RESULTS
+            </Link>
+            <Box>
+              <Heading as="h1" fontFamily="Jubilat">
+                {stateName.name}
+              </Heading>
+              <Heading as="h2">{metadata.title}</Heading>
+            </Box>
+            <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
+            <p>{parse(metadata.definition)}</p>
+            <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+              Learn more about what shapes health
+              <Arrow
+                style={{
+                  display: 'inline',
+                  width: 16,
+                  marginLeft: 5,
+                }}
+              />
+            </Link>
+          </Flex>
+        </Box>
+        <Box>
+          <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+          <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+          <Box w="100%" h={580} bg="#e5e5e5" mb={100} />
+        </Box>
+      </Grid>
+      <Grid w="100%" templateColumns="50% 50%" bg="#FFD285" p={100}>
+        <Flex direction="column" justify="space-around">
+          <Heading as="h3">{`How ${stateName.name} ranks on some of the most important conditions for health`}</Heading>
+          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+            Learn more about why these matter so much for health
+            <Arrow
+              style={{
+                display: 'inline',
+                width: 18,
+                marginLeft: 5,
+              }}
+            />
+          </Link>
+        </Flex>
+        <Img fluid={pentagon.childImageSharp.fluid} />
+        <RankGraphic rankings={categoryRankings} />
+      </Grid>
+      <Grid w="100%" templateColumns="1fr 1fr" px={100} py={200} columnGap={10}>
+        <Box
+          p={100}
+          background="transparent linear-gradient(322deg, #009FFA 0%, #A0DDF9 80%, #A0DDF9 100%) 0% 0% no-repeat padding-box"
+        >
+          <Img
+            fixed={topPerforming.childImageSharp.fixed}
+            style={{
+              position: 'absolute',
+              marginTop: -250,
+              right: '50%',
+            }}
+          />
+          <Box h={100} mb={1}>
+            Of the health statistics & outcomes on this site
+            <br />
+            <b>{`${stateName.name} ranks best in these areas`}</b>
+          </Box>
+          {top3.map(ind => {
+            const result = find(
+              allIndicators.nodes,
+              i => i.variable.toLowerCase() === ind.variable.toLowerCase()
+            );
+            return (
+              <RankResult
+                key={result.title}
+                indicator={result.title}
+                state={stateName.name}
+                rank={ind.ranking}
+                value={parseFloat(state[ind.variable])}
+                best
+              />
+            );
+          })}
+        </Box>
+        <Box
+          p={100}
+          background="transparent linear-gradient(322deg, #1E306E 0%, #009FFA 100%) 0% 0% no-repeat padding-box"
+          color="white"
+        >
+          <Box h={100} mb={1}>
+            Of the health statistics & outcomes on this site
+            <br />
+            <b>{`${stateName.name} ranks poorest in these areas`}</b>
+          </Box>
+          {bottom3.map(ind => {
+            const result = find(
+              allIndicators.nodes,
+              i => i.variable.toLowerCase() === ind.variable.toLowerCase()
+            );
+            return (
+              <RankResult
+                key={result.title}
+                indicator={result.title}
+                state={stateName.name}
+                rank={ind.ranking}
+                value={parseFloat(state[ind.variable])}
+              />
+            );
+          })}
+          <Img
+            fixed={bottomPerforming.childImageSharp.fixed}
+            style={{
+              position: 'absolute',
+              marginTop: 150,
+              right: 100,
+            }}
+          />
+        </Box>
+      </Grid>
     </Layout>
   );
 };
@@ -92,6 +215,7 @@ export const query = graphql`
     }
     stateName: statesCsv(state: { eq: $state }) {
       name
+      state
     }
     state: statesCsv(state: { eq: $state }) {
       D_H
@@ -264,6 +388,27 @@ export const query = graphql`
       SEF48_foodinsecure
       HO11_MotorVehMort
       PS_PolicyRankings
+    }
+    pentagon: file(relativePath: { eq: "social-determinants-pentagon.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 800) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    bottomPerforming: file(relativePath: { eq: "bottom-performing.png" }) {
+      childImageSharp {
+        fixed(height: 150) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    topPerforming: file(relativePath: { eq: "top-performing.png" }) {
+      childImageSharp {
+        fixed(height: 150) {
+          ...GatsbyImageSharpFixed
+        }
+      }
     }
   }
 `;

@@ -48,20 +48,6 @@ function SEO({ title, description, image, article }) {
       {seo.title && <meta name="twitter:title" content={seo.title} />}
       {seo.description && <meta name="twitter:description" content={seo.description} />}
       {seo.image && <meta name="twitter:image" content={seo.image} />}
-
-      <link
-        href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href="https://use.typekit.net/zou6trd.css" />
     </Helmet>
   );
 }

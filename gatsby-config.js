@@ -53,8 +53,37 @@ module.exports = {
         url: 'http://cms.hots.axismaps.io/graphql',
       },
     },
-    `gatsby-plugin-sharp`,
-    'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /svg/,
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        typekit: {
+          id: 'zou6trd',
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `News Cycle`,
+            variants: [`400`, `700`],
+          },
+          {
+            family: `Montserrat`,
+            variants: [`400`, `500`, `700`],
+          },
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
   ],
 };
