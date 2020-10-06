@@ -39,7 +39,7 @@ const IndicatorDropdown = ({ onShowAll, buttonText }) => {
   };
 
   return (
-    <Box py={[10, 20]} color="gray.text">
+    <Box px={[10, 20]} paddingBottom={[10]} color="gray.text">
       <Flex
         py={25}
         direction={['column', 'column', 'row']}
