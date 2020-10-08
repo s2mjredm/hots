@@ -7,9 +7,11 @@ import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
+import Social from '../components/social';
 
 const Index = ({ location, data: { metadata, indicator } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: socialIsOpen, onOpen: socialOnOpen, onClose: socialOnClose } = useDisclosure();
 
   return (
     <Layout location={location}>
@@ -36,6 +38,7 @@ const Index = ({ location, data: { metadata, indicator } }) => {
             Click to explore how U.S. States rank for Life Expectancy.
           </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} />
+          <Social isOpen={true} onOpen={socialOnOpen} onClose={() => socialOnClose()} />
         </Box>
       </Box>
     </Layout>
