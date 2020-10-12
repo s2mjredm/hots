@@ -134,6 +134,17 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
   const renderDots = () => {
     return dotMarkers.map((marker, index) => {
       const isAllwaysVisible = index === 0 || index === 50;
+
+      const placement = () => {
+        switch (index) {
+          case 0:
+            return 'top-end';
+          case 50:
+            return 'top-start';
+          default:
+            return 'top';
+        }
+      };
       return (
         <StateDotMarker
           key={marker.state}
@@ -143,6 +154,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           leftPosition={dotScale(marker.indicatorValue) - 7}
           indicatorColor={colorScale(marker.indicatorValue)}
           isAllwaysVisible={isAllwaysVisible}
+          placement={placement()}
         />
       );
     });

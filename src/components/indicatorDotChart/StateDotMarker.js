@@ -18,6 +18,7 @@ const StateDotMarker = ({
   indicatorPosition,
   leftPosition,
   isAllwaysVisible,
+  placement,
 }) => {
   const [isOpen, setIsOpen] = React.useState(isAllwaysVisible);
   const open = () => setIsOpen(!isOpen);
@@ -31,7 +32,7 @@ const StateDotMarker = ({
 
   return (
     <Popover
-      placement="top"
+      placement={placement}
       closeOnBlur={false}
       transformOrigin="45px"
       isOpen={isOpen}
@@ -82,12 +83,18 @@ const StateDotMarker = ({
     </Popover>
   );
 };
+
+StateDotMarker.defaultProps = {
+  placement: 'top',
+};
+
 StateDotMarker.propTypes = {
   state: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
-  leftPosition: PropTypes.string.isRequired,
+  leftPosition: PropTypes.number.isRequired,
   indicatorColor: PropTypes.string.isRequired,
-  indicatorPosition: PropTypes.string.isRequired,
+  indicatorPosition: PropTypes.number.isRequired,
   isAllwaysVisible: PropTypes.bool.isRequired,
+  placement: PropTypes.string,
 };
 export default StateDotMarker;

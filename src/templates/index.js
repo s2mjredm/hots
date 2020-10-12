@@ -7,9 +7,11 @@ import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
 import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
+import Social from '../components/social';
 
 const Index = ({ location, data: { metadata, indicator } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: socialIsOpen, onOpen: socialOnOpen, onClose: socialOnClose } = useDisclosure();
 
   return (
     <Layout location={location}>
@@ -19,8 +21,8 @@ const Index = ({ location, data: { metadata, indicator } }) => {
         // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
         bg="blue.600"
       >
-        <Box px={[10, 20]} bg="white">
-          <Box pt={[10, 20]} color="gray.text">
+        <Box bg="white">
+          <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
             <Heading fontFamily="Montserrat" color="#403F3F">
               How is your state doing?
             </Heading>
@@ -31,11 +33,17 @@ const Index = ({ location, data: { metadata, indicator } }) => {
           </Box>
           <IndicatorDropdown onShowAll={() => onOpen()} />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <IndicatorMap indicator={indicator} />
+          <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
           <Box px={[10, 20]} py={16} fontFamily="Montserrat" fontSize="18px" fontWeight="600">
             Click to explore how U.S. States rank for Life Expectancy.
           </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} />
+          <Social
+            isOpen={socialIsOpen}
+            url={location.href}
+            onOpen={() => socialOnOpen()}
+            onClose={() => socialOnClose()}
+          />
         </Box>
       </Box>
     </Layout>

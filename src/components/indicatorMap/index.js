@@ -23,7 +23,7 @@ const IndicatorMap = ({ indicator, onShare }) => {
   return (
     <Box w="100%" px={10} bg="#E5E5E5" position="relative">
       <Button
-        onClick={() => onShare}
+        onClick={() => onShare()}
         position="absolute"
         bottom={['20px', '45px', '100px']}
         right={['30px', '70px', '100px']}
@@ -35,7 +35,6 @@ const IndicatorMap = ({ indicator, onShare }) => {
         SHARE
         <Button
           as="div"
-          onClick={() => onShare}
           marginLeft={2}
           leftIcon="share"
           fontSize={['30px', '60px']}
@@ -45,7 +44,6 @@ const IndicatorMap = ({ indicator, onShare }) => {
           colorScheme="gray.900"
         />
       </Button>
-
       <svg
         ref={svgRef}
         version="1.1"
