@@ -91,9 +91,9 @@ StateDotMarker.defaultProps = {
 StateDotMarker.propTypes = {
   state: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
-  leftPosition: PropTypes.string.isRequired,
+  leftPosition: PropTypes.number.isRequired,
   indicatorColor: PropTypes.string.isRequired,
-  indicatorPosition: PropTypes.string.isRequired,
+  indicatorPosition: PropTypes.number.isRequired,
   isAllwaysVisible: PropTypes.bool.isRequired,
   placement: PropTypes.string,
 };

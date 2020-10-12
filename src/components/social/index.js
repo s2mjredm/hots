@@ -1,19 +1,31 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import { useStaticQuery, graphql } from 'gatsby';
+
 import { FacebookShareButton, TwitterShareButton, PinterestShareButton } from 'react-share';
 
 import { Box, Button, CloseButton, Flex, Icon, Modal, ModalOverlay, Text } from '@chakra-ui/core';
 
-const Social = ({ onClose, isOpen }) => {
-  const url = 'https://stateofhealth.us/life-expectancy-us';
+const Social = ({ onClose, isOpen, url }) => {
+  // const { site } = useStaticQuery(
+  //   graphql`
+  //     query {
+  //       site {
+  //         siteMetadata {
+  //           defaultTitle: title
+  //           titleTemplate
+  //           defaultDescription: description
+  //           siteUrl: url
+  //           defaultImage: image
+  //         }
+  //       }
+  //     }
+  //   `
+  // );
 
   const handleCopyLink = () => {
-    try {
-      navigator.clipboard.writeText(url);
-    } catch (error) {
-      console.log(error);
-    }
+    navigator.clipboard.writeText(url);
   };
 
   return (
@@ -98,7 +110,7 @@ const Social = ({ onClose, isOpen }) => {
             </Flex>
             <Flex p={2} bg="#F7F7F7" borderRadius="4px" justify="space-between" width="100%">
               <Text fontSize="18px" fontFamily="Proxima Nova">
-                https://stateofhealth.us/life-expectancy-us
+                {url}
               </Text>
               <Button variantColor="red" variant="link" size="sm" onClick={() => handleCopyLink()}>
                 copy link
@@ -114,6 +126,7 @@ const Social = ({ onClose, isOpen }) => {
 Social.propTypes = {
   onClose: propTypes.func.isRequired,
   isOpen: propTypes.bool,
+  url: propTypes.string.isRequired,
 };
 
 Social.defaultProps = {

@@ -33,12 +33,17 @@ const Index = ({ location, data: { metadata, indicator } }) => {
           </Box>
           <IndicatorDropdown onShowAll={() => onOpen()} />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <IndicatorMap indicator={indicator} />
+          <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
           <Box px={[10, 20]} py={16} fontFamily="Montserrat" fontSize="18px" fontWeight="600">
             Click to explore how U.S. States rank for Life Expectancy.
           </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} />
-          <Social isOpen={true} onOpen={socialOnOpen} onClose={() => socialOnClose()} />
+          <Social
+            isOpen={socialIsOpen}
+            url={location.href}
+            onOpen={() => socialOnOpen()}
+            onClose={() => socialOnClose()}
+          />
         </Box>
       </Box>
     </Layout>
