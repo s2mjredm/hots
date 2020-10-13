@@ -11,6 +11,8 @@ import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
+import StageMap from '../components/stageMap';
+
 import Arrow from '../svg/arrow.svg';
 
 const State = ({
@@ -94,7 +96,7 @@ const State = ({
         <Box>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <Box w="100%" h={580} bg="#e5e5e5" mb={100} />
+          <StageMap indicator={indicator} selectedState={stateName.state} />
         </Box>
       </Grid>
       <Grid w="100%" templateColumns="50% 50%" bg="#FFD285" p={100}>
