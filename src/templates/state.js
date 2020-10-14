@@ -96,7 +96,14 @@ const State = ({
         <Box>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <StageMap indicator={indicator} selectedState={stateName.state} />
+          <StageMap
+            indicator={indicator}
+            selectedState={stateName.state}
+            selectedStateName={stateName.name}
+            indicatorRank={indicatorRank}
+            indicatorName={metadata.title}
+            indicatorValue={indicator[stateName.state]}
+          />
         </Box>
       </Grid>
       <Grid w="100%" templateColumns="50% 50%" bg="#FFD285" p={100}>

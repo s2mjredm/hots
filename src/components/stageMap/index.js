@@ -1,11 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { select, extent, scaleQuantize } from 'd3';
+
 import { Box, Button } from '@chakra-ui/core';
 
-const StageMap = ({ indicator, onShare, selectedState }) => {
+import DataPobre from './DataPobre';
+
+const StageMap = ({
+  indicator,
+  onShare,
+  selectedState,
+  indicatorRank,
+  selectedStateName,
+  indicatorName,
+  indicatorValue,
+}) => {
   const svgRef = useRef();
-  const mapContainerRef = useRef();
+  const [dataPobreLeftPos, setDataPobreLeftPos] = useState();
 
   useEffect(() => {
     const values = Object.keys(indicator).map(state => indicator[state]);
@@ -28,10 +39,9 @@ const StageMap = ({ indicator, onShare, selectedState }) => {
     Object.keys(indicator).forEach(state => {
       svg.select(`#${state}`).join(`#${state}`).attr('fill', scale(indicator[state]));
     });
-  }, []);
+  }, [indicator]);
 
   useEffect(() => {
-    // const selectedState = 'NY';
     const svg = svgRef.current;
 
     // the main SVG object and its current viewBox
@@ -47,7 +57,6 @@ const StageMap = ({ indicator, onShare, selectedState }) => {
     const cy = vbox[1] + vbox[3] / 2;
 
     // state is the state I want to zoom to
-    console.log(selectedState);
     const state = svg.querySelector(`#${selectedState}`);
     const bbox = state.getBBox();
 
@@ -70,10 +79,23 @@ const StageMap = ({ indicator, onShare, selectedState }) => {
     const scaledHeight = vbox[3] * scale;
 
     svg.setAttribute('viewBox', `${scaledOffsetX} ${scaledOffsetY} ${scaledWidth} ${scaledHeight}`);
+  }, [selectedState]);
+
+  const mapContainerRef = useCallback(node => {
+    if (node !== null) {
+      setDataPobreLeftPos(node.getBoundingClientRect().width / 2);
+    }
   }, []);
 
   return (
-    <Box w="100%" bg="#E5E5E5" ref={mapContainerRef} position="relative">
+    <Box bg="#E5E5E5" ref={mapContainerRef} position="relative">
+      <DataPobre
+        leftPosition={dataPobreLeftPos}
+        indicatorRank={indicatorRank}
+        selectedStateName={selectedStateName}
+        indicatorName={indicatorName}
+        indicatorValue={indicatorValue}
+      />
       <Button
         onClick={() => onShare()}
         position="absolute"
@@ -350,6 +372,11 @@ const StageMap = ({ indicator, onShare, selectedState }) => {
 StageMap.propTypes = {
   indicator: PropTypes.shape().isRequired,
   onShare: PropTypes.func.isRequired,
+  indicatorRank: PropTypes.number.isRequired,
+  selectedStateName: PropTypes.string.isRequired,
+  indicatorName: PropTypes.string.isRequired,
+  indicatorValue: PropTypes.number.isRequired,
+  selectedState: PropTypes.string.isRequired,
 };
 
 export default StageMap;
