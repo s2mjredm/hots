@@ -43,16 +43,21 @@ const Flag = ({ active }) => {
   });
 
   // this is necessary as gradient is not supported by chakra-ui "bg" prop
-  const linearGradientBackground = {
-    background:
-      'linear-gradient(180deg, rgba(0,127,235,1) 0%, rgba(115,186,246,1) 59%, rgba(188,224,253,1) 100%)',
+  const linearGradientBackgrounds = {
+    gray: {
+      background: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%)',
+    },
+    blue: {
+      background:
+        'linear-gradient(180deg, rgba(0,127,235,1) 0%, rgba(115,186,246,1) 59%, rgba(188,224,253,1) 100%)',
+    },
   };
 
   return (
-    <Box>
+    <Box h={500} bg="#EB474C">
       <Flex
         position="absolute"
-        style={linearGradientBackground}
+        style={linearGradientBackgrounds.blue}
         w={['225px', '405px']}
         h={['225px', '396px']}
         align="center"
@@ -68,15 +73,10 @@ const Flag = ({ active }) => {
           Health, and the conditions for health, are different in each state
         </Text>
       </Flex>
-
-      <Grid
-        w="100%"
-        h={500}
-        templateColumns={['repeat(5, 1fr)', 'repeat(7, 1fr)']}
-        gap={[35, 50, 90, 110]}
-      >
+      <Grid px="120px" h={600} w="100%" templateColumns={['repeat(5, 1fr)', 'repeat(11, 1fr)']}>
+        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
         <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" bg="#EB474C" />
+        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
         <PseudoBox
           w="100%"
           h="100%"
@@ -86,6 +86,7 @@ const Flag = ({ active }) => {
           _hover={hoverStyle(mapIt)}
           display={['none', 'block']}
         />
+        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
         <PseudoBox w="100%" h="100%" bg="#EB474C" display={['block', 'none']} />
         <PseudoBox
           w="100%"
@@ -100,10 +101,7 @@ const Flag = ({ active }) => {
         <PseudoBox
           w="100%"
           h="100%"
-          bg="#EB474C"
-          transition="width 500"
-          style={active === 'take-action' ? hoverStyle(takeAction) : null}
-          _hover={hoverStyle(takeAction)}
+          style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
         />
         <PseudoBox w="100%" h="100%" bg="#EB474C" display={['block', 'none']} />
@@ -112,11 +110,31 @@ const Flag = ({ active }) => {
           h="100%"
           bg="#EB474C"
           transition="width 500"
-          style={active === 'about' ? hoverStyle(learnMore) : null}
+          style={active === 'take-action' ? hoverStyle(takeAction) : null}
+          _hover={hoverStyle(takeAction)}
+          display={['none', 'block']}
+        />
+        <PseudoBox
+          w="100%"
+          h="100%"
+          style={linearGradientBackgrounds.gray}
+          display={['none', 'block']}
+        />
+        <PseudoBox
+          w="100%"
+          h="100%"
+          bg="#EB474C"
+          transition="width 500"
+          style={active === 'about' ? hoverStyle(about) : null}
           _hover={hoverStyle(about)}
           display={['none', 'block']}
         />
-        <PseudoBox w="100%" h="100%" bg="#EB474C" display={['none', 'block']} />
+        <PseudoBox
+          w="100%"
+          h="100%"
+          style={linearGradientBackgrounds.gray}
+          display={['none', 'block']}
+        />
       </Grid>
     </Box>
   );

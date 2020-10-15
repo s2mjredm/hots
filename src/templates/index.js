@@ -17,9 +17,10 @@ const Index = ({ location, data: { metadata, indicator } }) => {
     <Layout location={location}>
       <Box
         px={[10, 20, 120]}
-        py={120}
+        py={90}
         // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
         bg="blue.600"
+        zIndex="2"
       >
         <Box bg="white">
           <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
