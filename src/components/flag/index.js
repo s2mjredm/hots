@@ -58,8 +58,8 @@ const Flag = ({ active }) => {
       <Flex
         position="absolute"
         style={linearGradientBackgrounds.blue}
-        w={['225px', '405px']}
-        h={['225px', '396px']}
+        w={['295px', '405px']}
+        h={['295px', '396px']}
         align="center"
         justify="center"
         p={['43px', '100px']}
@@ -67,13 +67,18 @@ const Flag = ({ active }) => {
         <Text
           color="white"
           fontFamily="Jubilat"
-          fontSize={['16px', '28px']}
+          fontSize={['23px', '28px']}
           line-height={['normal', '35px']}
         >
           Health, and the conditions for health, are different in each state
         </Text>
       </Flex>
-      <Grid px="120px" h={600} w="100%" templateColumns={['repeat(5, 1fr)', 'repeat(11, 1fr)']}>
+      <Grid
+        px={['40px', '80px', '120px']}
+        h={590}
+        w="100%"
+        templateColumns={['repeat(7, 1fr)', 'repeat(11, 1fr)']}
+      >
         <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
         <Box w="100%" h="100%" bg="#EB474C" />
         <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
@@ -86,8 +91,8 @@ const Flag = ({ active }) => {
           _hover={hoverStyle(mapIt)}
           display={['none', 'block']}
         />
-        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
         <PseudoBox w="100%" h="100%" bg="#EB474C" display={['block', 'none']} />
+        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
         <PseudoBox
           w="100%"
           h="100%"
@@ -104,7 +109,12 @@ const Flag = ({ active }) => {
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
         />
-        <PseudoBox w="100%" h="100%" bg="#EB474C" display={['block', 'none']} />
+        <PseudoBox
+          w="100%"
+          h="90%"
+          style={linearGradientBackgrounds.gray}
+          display={['block', 'none']}
+        />
         <PseudoBox
           w="100%"
           h="100%"
@@ -131,7 +141,7 @@ const Flag = ({ active }) => {
         />
         <PseudoBox
           w="100%"
-          h="100%"
+          h="90%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
         />
