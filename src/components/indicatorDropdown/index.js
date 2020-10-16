@@ -73,15 +73,16 @@ const IndicatorDropdown = ({ onShowAll, buttonText }) => {
           onSelection={state => handleStateSelection(state)}
         />
         <Button
+          marginLeft={[0, 5]}
           isDisabled={!isNavigationEnabled}
           bg="#F06060"
           _hover={{ bg: '#FFB3B3' }}
           color="white"
           size="lg"
           h={[20, 12]}
-          w="auto"
+          w={['-webkit-fill-available', 'auto']}
           flex="0 0 auto"
-          fontSize={['26px', '16px']}
+          fontSize={['large', '16px']}
           onClick={() => navigate(url)}
         >
           {buttonText}
