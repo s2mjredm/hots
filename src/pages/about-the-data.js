@@ -53,11 +53,29 @@ const About = ({
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>
-    <Grid templateColumns="1fr 320px" gap={300} px={100} py={200} bg="#F0F0F0">
-      <Box fontFamily="Jubilat" fontSize={18}>
+    <Grid
+      templateColumns={['40px 1fr 40px', '1fr 320px']}
+      templateRows={['1fr 520px', '1fr']}
+      gap={[0, 100, 300]}
+      px={[0, 100]}
+      paddingTop={[100]}
+      bg="#F0F0F0"
+    >
+      <Box
+        fontFamily="Jubilat"
+        fontSize={18}
+        gridArea={['1 / 2 / 2 / 3', '1 / 1 / 2 / 2']}
+        mb="30px"
+      >
         {parse(content)}
       </Box>
-      <Box bg="#FFD285" p={30} shadow="lg">
+      <Box
+        bg="#FFD285"
+        p={30}
+        shadow="lg"
+        gridArea={['2 / 1 / 3 / 4', '1 / 2 / 2 / 3']}
+        maxHeight="570px"
+      >
         <Heading as="h4" fontSize={24} fontWeight={900} mb={4}>
           {download.dataTitle}
         </Heading>
