@@ -1,46 +1,53 @@
-.hero{
+.hero {
   display: flex;
   align-items: center;
 }
 
-.hero h1{
+.hero h1 {
   font-family: 'Jubilat', serif;
   font-size: 38px;
   font-weight: normal;
 }
 
-.hero h2{
+.hero h2 {
   font-family: 'Proxima Nova', sans-serif;
   font-size: 24px;
   font-weight: normal;
 }
 
-.hero .item{
+.hero .item {
   flex: 1;
-  padding: 80px
+  padding: 80px 100px;
 }
 
-.learn-more{
+.learn-more {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.learn-more .wp-block-group{
+.learn-more .wp-block-group {
   width: 33.5vw;
   padding: 80px;
 }
 
-.learn-more figure{
+.learn-more figure {
   width: 66.5vw;
 }
 
 @media (max-width: 1125px) {
-  .learn-more, .hero{
+  .learn-more,
+  .hero {
     display: block;
   }
 
-  .learn-more .wp-block-group, .learn-more figure{
+  .learn-more .wp-block-group,
+  .learn-more figure {
     width: 100vw;
+  }
+}
+@media (max-width: 40em) {
+  .hero .item {
+    padding: 50px;
   }
 }

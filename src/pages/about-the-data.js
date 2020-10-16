@@ -58,7 +58,7 @@ const About = ({
       templateRows={['1fr 520px', '1fr']}
       gap={[0, 100, 300]}
       px={[0, 100]}
-      paddingTop={[100]}
+      paddingTop={[130]}
       bg="#F0F0F0"
     >
       <Box
