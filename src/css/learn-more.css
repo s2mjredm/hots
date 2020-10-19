@@ -25,6 +25,9 @@
   flex-wrap: wrap;
   align-items: center;
 }
+.learn-more p {
+  padding-top: 20px;
+}
 
 .learn-more .wp-block-group {
   width: 33.5vw;
@@ -49,5 +52,8 @@
 @media (max-width: 40em) {
   .hero .item {
     padding: 50px;
+  }
+  .learn-more .wp-block-group {
+    padding: 40px;
   }
 }

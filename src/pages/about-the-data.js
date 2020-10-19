@@ -66,6 +66,8 @@ const About = ({
         fontSize={18}
         gridArea={['1 / 2 / 2 / 3', '1 / 1 / 2 / 2']}
         mb="30px"
+        display="grid"
+        gridGap="20px"
       >
         {parse(content)}
       </Box>
