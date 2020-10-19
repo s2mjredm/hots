@@ -83,7 +83,7 @@ const State = ({
         <Flex justify="space-between" align="center" px={100} py={18}>
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Icon name="arrow-back" />
-            BACK TO NATIONAL MAP AND RESULTSs
+            BACK TO NATIONAL MAP AND RESULTS
           </Link>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
         </Flex>
@@ -156,7 +156,7 @@ const State = ({
         pb={[0, 100]}
       >
         <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
-          <Heading as="h1" fontFamily="Jubilat">
+          <Heading as="h1" fontFamily="jubilat">
             {stateName.name}
           </Heading>
           <Heading as="h2">{metadata.title}</Heading>
