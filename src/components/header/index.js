@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { Heading, Flex, Button } from '@chakra-ui/core';
+import { Heading, Flex, Button, IconButton } from '@chakra-ui/core';
 
 import Flag from '../flag';
 import Logo from '../../svg/logo.svg';
@@ -105,7 +105,7 @@ const Header = ({ flag }) => {
         />
         <Button
           display={['block', 'none']}
-          // leftIcon={<HamburgerIcon />}
+          leftIcon="bars"
           variant="link"
           size="lg"
           colorScheme="gray.800"
