@@ -21,7 +21,7 @@ import {
 const SelectButton = ({ label, onClick }) => {
   return (
     <PseudoBox
-      as="button"
+      as="div"
       onClick={() => onClick(label)}
       w="100%"
       lineHeight="3.2rem"
