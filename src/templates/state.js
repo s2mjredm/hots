@@ -11,7 +11,7 @@ import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
-import StageMap from '../components/stageMap';
+import StateMap from '../components/stateMap';
 
 import Arrow from '../svg/arrow.svg';
 
@@ -96,7 +96,7 @@ const State = ({
         <Box>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <StageMap
+          <StateMap
             indicator={indicator}
             selectedState={stateName.state}
             selectedStateName={stateName.name}
