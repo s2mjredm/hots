@@ -15,6 +15,7 @@ import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
 import StateMap from '../components/stateMap';
 
+import './state.css';
 import Arrow from '../svg/arrow.svg';
 
 const State = ({
@@ -122,14 +123,26 @@ const State = ({
               cursor="pointer"
             >
               <span />
-              <Text paddingLeft={2}>Life Expectancy, Virginia</Text>
+              <Text paddingLeft={2}>Life Expectancy, Virginia </Text>
               {!isIndicatorOpen && <Icon name="edit" fontSize="27px" />}
               {isIndicatorOpen && <Icon name="small-close" fontSize="27px" />}
             </Flex>
           </Flex>
           {isIndicatorOpen && (
-            <Box bg="white" p={6} position="absolute" right="0" zIndex="20">
-              <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+            <Box
+              position="absolute"
+              right="0"
+              w="100%"
+              h="100vh"
+              zIndex="20"
+              display="flex"
+              justifyContent="flex-end"
+              bg="#024475bd"
+              className="blur"
+            >
+              <Box bg="white" p={6} w="400px" height="400px">
+                <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+              </Box>
             </Box>
           )}
         </Box>
