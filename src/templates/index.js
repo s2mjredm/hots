@@ -32,7 +32,9 @@ const Index = ({ location, data: { metadata, indicator } }) => {
               United States. Select a state for more detailed information on that state’s health:
             </Text>
           </Box>
-          <IndicatorDropdown onShowAll={() => onOpen()} />
+          <Box px={[10, 20]} paddingBottom={[10]}>
+            <IndicatorDropdown onShowAll={() => onOpen()} />
+          </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
           <Box px={[10, 20]} py={16} fontFamily="Montserrat" fontSize="18px" fontWeight="600">

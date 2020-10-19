@@ -18,6 +18,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/core';
 
+import useIsMobile from '../../utils/useIsMobile';
+
 const SelectButton = ({ label, onClick }) => {
   return (
     <PseudoBox
@@ -56,24 +58,6 @@ SelectButton.propTypes = {
 };
 SelectButton.defaultProps = {
   label: null,
-};
-
-const useIsMobile = () => {
-  const [width, setWidth] = useState();
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-
-  useEffect(() => {
-    handleWindowSizeChange();
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    };
-  }, []);
-
-  const isMobile = width <= 768;
-  return isMobile;
 };
 
 const useIsModalStyles = isOpen => {
@@ -188,7 +172,6 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
           </Flex>
         )}
       </FormControl>
-
       {isOpen && (
         <Box
           position="fixed"

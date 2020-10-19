@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql, Link } from 'gatsby';
+import { graphql, Link, navigate } from 'gatsby';
 import Img from 'gatsby-image';
 import { find, groupBy } from 'lodash';
 import parse from 'html-react-parser';
-import { Box, Grid, useDisclosure, Heading, Flex } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure, Heading, Flex, Icon, Button, Text } from '@chakra-ui/core';
+
+import useIsMobile from '../utils/useIsMobile';
 
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
@@ -29,6 +31,21 @@ const State = ({
   },
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isIndicatorOpen,
+    onOpen: onIndicatorOpen,
+    onClose: onIndicatorClose,
+  } = useDisclosure();
+
+  const isMobile = useIsMobile();
+
+  const handleMobileIndicatorToggle = () => {
+    if (isIndicatorOpen) {
+      onIndicatorClose();
+    } else {
+      onIndicatorOpen();
+    }
+  };
 
   let ranks = Object.keys(ranking).map(variable => ({
     variable,
@@ -59,20 +76,68 @@ const State = ({
 
   return (
     <Layout>
+      {/* header */}
+      <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+      {!isMobile && (
+        <Flex justify="space-between" align="center" px={100} py={18}>
+          <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
+            <Icon name="arrow-back" />
+            BACK TO NATIONAL MAP AND RESULTSs
+          </Link>
+          <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+        </Flex>
+      )}
+      {/* header mobile */}
+      {isMobile && (
+        <Box>
+          <Flex h="60px" justify="space-between" align="center" px={2} bg="#F06060">
+            <Link
+              to="/"
+              style={{
+                justifyContent: 'space-between',
+                borderRight: '1.5px solid #8a2525',
+                height: '100%',
+                width: '50%',
+                fontSize: '15px',
+                fontWeight: '900',
+                color: 'white',
+                alignItems: 'center',
+                display: 'flex',
+              }}
+            >
+              <Icon name="arrow-back" fontSize="27px" />
+              <Text>BACK</Text>
+              <span />
+            </Link>
+            <Flex
+              h="100%"
+              w="50%"
+              color="white"
+              fontSize="13px"
+              lineHeight="15px"
+              fontWeight="900"
+              justify="space-between"
+              align="center"
+              onClick={() => handleMobileIndicatorToggle()}
+              cursor="pointer"
+            >
+              <span />
+              <Text paddingLeft={2}>Life Expectancy, Virginia</Text>
+              {!isIndicatorOpen && <Icon name="edit" fontSize="27px" />}
+              {isIndicatorOpen && <Icon name="small-close" fontSize="27px" />}
+            </Flex>
+          </Flex>
+          {isIndicatorOpen && (
+            <Box bg="white" p={6} position="absolute" right="0" zIndex="20">
+              <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+            </Box>
+          )}
+        </Box>
+      )}
+
       <Grid w="100%" templateColumns="35% 1fr" px={100} pb={100}>
         <Box py={[10, 20]} pr={200}>
           <Flex direction="column" h="100%" justify="space-between" pb={100}>
-            <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
-              <Arrow
-                style={{
-                  display: 'inline',
-                  transform: 'rotate(180deg)',
-                  width: 16,
-                  marginRight: 5,
-                }}
-              />
-              BACK TO NATIONAL MAP AND RESULTS
-            </Link>
             <Box>
               <Heading as="h1" fontFamily="Jubilat">
                 {stateName.name}
@@ -94,8 +159,6 @@ const State = ({
           </Flex>
         </Box>
         <Box>
-          <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
-          <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <StateMap
             indicator={indicator}
             selectedState={stateName.state}
