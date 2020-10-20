@@ -4,15 +4,18 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { find, groupBy } from 'lodash';
 import parse from 'html-react-parser';
-import { Box, Grid, useDisclosure, Heading, Flex } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure, Heading, Flex, Icon, Text } from '@chakra-ui/core';
+
+import useIsMobile from '../utils/useIsMobile';
 
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
-import StageMap from '../components/stageMap';
+import StateMap from '../components/stateMap';
 
+import './state.css';
 import Arrow from '../svg/arrow.svg';
 
 const State = ({
@@ -29,6 +32,21 @@ const State = ({
   },
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isIndicatorOpen,
+    onOpen: onIndicatorOpen,
+    onClose: onIndicatorClose,
+  } = useDisclosure();
+
+  const isMobile = useIsMobile();
+
+  const handleMobileIndicatorToggle = () => {
+    if (isIndicatorOpen) {
+      onIndicatorClose();
+    } else {
+      onIndicatorOpen();
+    }
+  };
 
   let ranks = Object.keys(ranking).map(variable => ({
     variable,
@@ -59,44 +77,116 @@ const State = ({
 
   return (
     <Layout>
-      <Grid w="100%" templateColumns="35% 1fr" px={100} pb={100}>
-        <Box py={[10, 20]} pr={200}>
-          <Flex direction="column" h="100%" justify="space-between" pb={100}>
-            <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
-              <Arrow
-                style={{
-                  display: 'inline',
-                  transform: 'rotate(180deg)',
-                  width: 16,
-                  marginRight: 5,
-                }}
-              />
-              BACK TO NATIONAL MAP AND RESULTS
-            </Link>
-            <Box>
-              <Heading as="h1" fontFamily="Jubilat">
-                {stateName.name}
-              </Heading>
-              <Heading as="h2">{metadata.title}</Heading>
-            </Box>
-            <p>{`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}</p>
-            <p>{parse(metadata.definition)}</p>
-            <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
-              Learn more about what shapes health
-              <Arrow
-                style={{
-                  display: 'inline',
-                  width: 16,
-                  marginLeft: 5,
-                }}
-              />
-            </Link>
-          </Flex>
-        </Box>
-        <Box>
+      {/* header */}
+      <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+      {!isMobile && (
+        <Flex justify="space-between" align="center" px={100} py={18}>
+          <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
+            <Icon name="arrow-back" />
+            BACK TO NATIONAL MAP AND RESULTS
+          </Link>
           <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
-          <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <StageMap
+        </Flex>
+      )}
+      {/* header mobile */}
+      {isMobile && (
+        <Box>
+          <Flex h="60px" justify="space-between" align="center" px={2} bg="#F06060">
+            <Link
+              to="/"
+              style={{
+                justifyContent: 'space-between',
+                borderRight: '1.5px solid #8a2525',
+                height: '100%',
+                width: '50%',
+                fontSize: '15px',
+                fontWeight: '900',
+                color: 'white',
+                alignItems: 'center',
+                display: 'flex',
+              }}
+            >
+              <Icon name="arrow-back" fontSize="27px" />
+              <Text>BACK</Text>
+              <span />
+            </Link>
+            <Flex
+              h="100%"
+              w="50%"
+              color="white"
+              fontSize="13px"
+              lineHeight="15px"
+              fontWeight="900"
+              justify="space-between"
+              align="center"
+              onClick={() => handleMobileIndicatorToggle()}
+              cursor="pointer"
+            >
+              <span />
+              <Text paddingLeft={2}>Life Expectancy, Virginia </Text>
+              {!isIndicatorOpen && <Icon name="edit" fontSize="27px" />}
+              {isIndicatorOpen && <Icon name="small-close" fontSize="27px" />}
+            </Flex>
+          </Flex>
+          {isIndicatorOpen && (
+            <Box
+              position="absolute"
+              right="0"
+              w="100%"
+              h="100vh"
+              zIndex="20"
+              display="flex"
+              justifyContent="flex-end"
+              bg="#024475bd"
+              className="blur"
+            >
+              <Box bg="white" p={6} w="400px" height="400px">
+                <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+              </Box>
+            </Box>
+          )}
+        </Box>
+      )}
+      <Grid
+        w="100%"
+        templateColumns={['1fr', '35% 1fr']}
+        gridTemplateRows={['0.3fr 1fr 1fr', '1fr 1fr 1fr']}
+        gridColumnGap={[0, '29px']}
+        px={[0, 100]}
+        pb={[0, 100]}
+      >
+        <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
+          <Heading as="h1" fontFamily="jubilat">
+            {stateName.name}
+          </Heading>
+          <Heading as="h2">{metadata.title}</Heading>
+        </Box>
+        <Flex
+          gridArea={['3 / 1 / 4 / 3', '2 / 1 / 4 / 2']}
+          bg={['#F0F0F0', 'white']}
+          direction="column"
+          h="100%"
+          justify="space-between"
+          pb={100}
+          p={['40px', 0]}
+        >
+          <Text fontFamily="Proxima Nova" fontSize="18px" pb="20px">
+            {`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
+          </Text>
+          <p>{parse(metadata.definition)}</p>
+          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+            Learn more about what shapes health
+            <Arrow
+              style={{
+                display: 'inline',
+                width: 16,
+                marginLeft: 5,
+              }}
+            />
+          </Link>
+        </Flex>
+        <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
+          <StateMap
             indicator={indicator}
             selectedState={stateName.state}
             selectedStateName={stateName.name}
@@ -106,10 +196,12 @@ const State = ({
           />
         </Box>
       </Grid>
-      <Grid w="100%" templateColumns="50% 50%" bg="#FFD285" p={100}>
+      <Grid w="100%" templateColumns={['1fr', '50% 50%']} bg="#FFD285" p={['40px', '100px']}>
         <Flex direction="column" justify="space-around">
-          <Heading as="h3">{`How ${stateName.name} ranks on some of the most important conditions for health`}</Heading>
-          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+          <Heading display={['none', 'block']} as="h3">
+            {`How ${stateName.name} ranks on some of the most important conditions for health`}
+          </Heading>
+          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700, paddingBottom: '24px' }}>
             Learn more about why these matter so much for health
             <Arrow
               style={{
@@ -121,9 +213,19 @@ const State = ({
           </Link>
         </Flex>
         <Img fluid={pentagon.childImageSharp.fluid} />
-        <RankGraphic rankings={categoryRankings} />
+        <Box display={['none', 'block']}>
+          <RankGraphic rankings={categoryRankings} />
+        </Box>
       </Grid>
-      <Grid w="100%" templateColumns="1fr 1fr" px={100} py={200} columnGap={10}>
+
+      <Grid
+        w="100%"
+        templateColumns="1fr 1fr"
+        px={100}
+        py={200}
+        columnGap={10}
+        display={['none', 'grid']}
+      >
         <Box
           p={100}
           background="transparent linear-gradient(322deg, #009FFA 0%, #A0DDF9 80%, #A0DDF9 100%) 0% 0% no-repeat padding-box"

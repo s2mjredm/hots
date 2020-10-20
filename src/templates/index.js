@@ -17,9 +17,10 @@ const Index = ({ location, data: { metadata, indicator } }) => {
     <Layout location={location}>
       <Box
         px={[10, 20, 120]}
-        py={120}
+        py={90}
         // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
         bg="blue.600"
+        zIndex="2"
       >
         <Box bg="white">
           <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
@@ -31,7 +32,9 @@ const Index = ({ location, data: { metadata, indicator } }) => {
               United States. Select a state for more detailed information on that state’s health:
             </Text>
           </Box>
-          <IndicatorDropdown onShowAll={() => onOpen()} />
+          <Box px={[10, 20]} paddingBottom={[10]}>
+            <IndicatorDropdown onShowAll={() => onOpen()} />
+          </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
           <Box px={[10, 20]} py={16} fontFamily="Montserrat" fontSize="18px" fontWeight="600">

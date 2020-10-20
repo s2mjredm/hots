@@ -105,7 +105,7 @@ const Header = ({ flag }) => {
         />
         <Button
           display={['block', 'none']}
-          // leftIcon={<HamburgerIcon />}
+          leftIcon="bars"
           variant="link"
           size="lg"
           colorScheme="gray.800"

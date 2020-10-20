@@ -67,7 +67,7 @@ const Footer = () => {
         </Text>
       </Box>
       <Box w={['lg']} display={['none', 'none', 'none', 'block']} />
-      <Flex align="flex-start" w="md" direction={['row', 'row', 'column']}>
+      <Flex align="flex-start" w={['100%', 'md']} direction={['column', 'row', 'column']}>
         <Img
           style={{
             minWidth: 100,

@@ -6,7 +6,7 @@ import { Box, Button } from '@chakra-ui/core';
 
 import DataPobre from './DataPobre';
 
-const StageMap = ({
+const StateMap = ({
   indicator,
   onShare,
   selectedState,
@@ -369,7 +369,7 @@ const StageMap = ({
   );
 };
 
-StageMap.propTypes = {
+StateMap.propTypes = {
   indicator: PropTypes.shape().isRequired,
   onShare: PropTypes.func.isRequired,
   indicatorRank: PropTypes.number.isRequired,
@@ -379,4 +379,4 @@ StageMap.propTypes = {
   selectedState: PropTypes.string.isRequired,
 };
 
-export default StageMap;
+export default StateMap;
