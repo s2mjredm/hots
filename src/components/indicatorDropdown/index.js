@@ -9,7 +9,7 @@ import useNavigate from './useNavigate';
 
 import './index.css';
 
-const IndicatorDropdown = ({ onShowAll, buttonText }) => {
+const IndicatorDropdown = ({ onShowAll, buttonText, buttonColor, showAllColor }) => {
   const [selectedIndicator, setSelectedIndicator] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
@@ -41,7 +41,7 @@ const IndicatorDropdown = ({ onShowAll, buttonText }) => {
   return (
     <Box color="gray.text">
       <Flex
-        py={25}
+        py={15}
         direction={['column', 'column', 'row']}
         fontSize="sm"
         alignItems="flex-end"
@@ -58,7 +58,7 @@ const IndicatorDropdown = ({ onShowAll, buttonText }) => {
           display={['none', 'block']}
           variant="link"
           size="md"
-          color="#F06060"
+          color={showAllColor}
           minW="100px"
           mb={3}
           onClick={() => onShowAll()}
@@ -75,7 +75,7 @@ const IndicatorDropdown = ({ onShowAll, buttonText }) => {
         <Button
           marginLeft={[0, 5]}
           isDisabled={!isNavigationEnabled}
-          bg="#F06060"
+          bg={buttonColor}
           _hover={{ bg: '#FFB3B3' }}
           color="white"
           size="lg"
@@ -95,10 +95,14 @@ const IndicatorDropdown = ({ onShowAll, buttonText }) => {
 IndicatorDropdown.propTypes = {
   onShowAll: PropTypes.func.isRequired,
   buttonText: PropTypes.string,
+  buttonColor: PropTypes.string,
+  showAllColor: PropTypes.string,
 };
 
 IndicatorDropdown.defaultProps = {
   buttonText: 'EXPLORE STATE RANKINGS',
+  buttonColor: '#F06060',
+  showAllColor: '#F06060',
 };
 
 export default IndicatorDropdown;
