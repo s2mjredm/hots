@@ -41,7 +41,7 @@ const State = ({
 
   const isMobile = useIsMobile();
 
-  const [displayOnScroll, setDisplayOnScroll] = useState(true);
+  const [displayOnScroll, setDisplayOnScroll] = useState(false);
 
   useScrollPosition(
     ({ currPos }) => {
