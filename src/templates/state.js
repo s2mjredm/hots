@@ -59,13 +59,20 @@ const State = ({
     }
   };
 
-  let ranks = Object.keys(ranking).map(variable => ({
-    variable,
-    ranking: ranking[variable],
-  }));
+  const variables = groupBy(allIndicators.nodes, 'variable');
+  let ranks = Object.keys(ranking)
+    .map(variable => ({
+      variable,
+      ranking: ranking[variable],
+    }))
+    .filter(
+      r =>
+        variables[r.variable] &&
+        variables[r.variable][0].category !== 'Race, ethnicity, and immigration'
+    );
   ranks = ranks.sort((a, b) => a.ranking - b.ranking);
-  const bottom3 = ranks.slice(0, 3);
-  const top3 = ranks.slice(-3);
+  const top3 = ranks.slice(0, 3);
+  const bottom3 = ranks.slice(-3).reverse();
 
   const indicatorValues = Object.values(indicator)
     .map(a => parseFloat(a))
@@ -360,6 +367,7 @@ export const query = graphql`
       nodes {
         title
         variable
+        category
         condition
         conditionDefinition
       }
