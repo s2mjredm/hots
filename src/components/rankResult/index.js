@@ -28,7 +28,7 @@ const RankResult = ({ state, indicator, rank, value, best }) => {
       <Box pl={60} d="flex" alignItems="center" h="100%" w="100%" color="black">
         <div>
           <b>{indicator}</b>
-          <p>{value}</p>
+          <p>{Math.round(value)}</p>
         </div>
         <Link
           to={`/${slugify(indicator)}/${slugify(state)}`}

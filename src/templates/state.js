@@ -59,16 +59,14 @@ const State = ({
     }
   };
 
-  const variables = groupBy(allIndicators.nodes, 'variable');
+  const variables = groupBy(allIndicators.nodes, v => v.variable.toLowerCase());
   let ranks = Object.keys(ranking)
     .map(variable => ({
       variable,
       ranking: ranking[variable],
     }))
     .filter(
-      r =>
-        variables[r.variable] &&
-        variables[r.variable][0].category !== 'Race, ethnicity, and immigration'
+      r => variables[r.variable.toLowerCase()][0].category !== 'Race, ethnicity, and immigration'
     );
   ranks = ranks.sort((a, b) => a.ranking - b.ranking);
   const top3 = ranks.slice(0, 3);
