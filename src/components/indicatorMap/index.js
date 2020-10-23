@@ -1,10 +1,28 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
+import { groupBy } from 'lodash';
 import { Box, Button } from '@chakra-ui/core';
+
+import { slugify } from '../../utils/slugify';
 
 const IndicatorMap = ({ indicator, onShare }) => {
   const svgRef = useRef();
+
+  let {
+    allStatesJson: { states },
+  } = useStaticQuery(graphql`
+    {
+      allStatesJson {
+        states: nodes {
+          state
+          name
+        }
+      }
+    }
+  `);
+  states = groupBy(states, 'state');
 
   const values = Object.keys(indicator).map(state => indicator[state]);
 
@@ -16,7 +34,15 @@ const IndicatorMap = ({ indicator, onShare }) => {
   useEffect(() => {
     const svg = select(svgRef.current);
     Object.keys(indicator).forEach(state => {
-      svg.select(`#${state}`).join(`#${state}`).attr('fill', scale(indicator[state]));
+      svg
+        .select(`#${state}`)
+        .join(`#${state}`)
+        .attr('fill', scale(indicator[state]))
+        .attr('title', state)
+        .on('click', () => {
+          const path = window.location.pathname === '/' ? 'life-expectancy/' : '';
+          navigate(`${path}${slugify(states[state][0].name)}`);
+        });
     });
   }, []);
 
