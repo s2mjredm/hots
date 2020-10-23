@@ -117,6 +117,7 @@ export const query = graphql`
     metadata: indicatorsJson(id: { eq: $id }) {
       title
       definition
+      positive
       high
       low
     }
