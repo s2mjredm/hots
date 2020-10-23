@@ -242,7 +242,7 @@ const State = ({
             selectedStateName={stateName.name}
             indicatorRank={indicatorRank}
             indicatorName={metadata.title}
-            indicatorValue={indicator[stateName.state]}
+            indicatorValue={parseFloat(indicator[stateName.state])}
           />
         </Box>
       </Grid>
@@ -302,7 +302,7 @@ const State = ({
                 key={result.title}
                 indicator={result.title}
                 state={stateName.name}
-                rank={ind.ranking}
+                rank={parseFloat(ind.ranking)}
                 value={parseFloat(state[ind.variable])}
                 best
               />
@@ -329,7 +329,7 @@ const State = ({
                 key={result.title}
                 indicator={result.title}
                 state={stateName.name}
-                rank={ind.ranking}
+                rank={parseFloat(ind.ranking)}
                 value={parseFloat(state[ind.variable])}
               />
             );

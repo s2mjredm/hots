@@ -16,7 +16,7 @@ const StateMap = ({
   indicatorValue,
 }) => {
   const svgRef = useRef();
-  const [dataPobreLeftPos, setDataPobreLeftPos] = useState();
+  const [dataPobreLeftPos, setDataPobreLeftPos] = useState(0);
 
   useEffect(() => {
     const values = Object.keys(indicator).map(state => indicator[state]);
@@ -96,28 +96,30 @@ const StateMap = ({
         indicatorName={indicatorName}
         indicatorValue={indicatorValue}
       />
-      <Button
-        onClick={() => onShare()}
-        position="absolute"
-        bottom={['20px', '45px', '100px']}
-        right={['30px', '70px', '100px']}
-        variant="link"
-        size={['sm', 'md']}
-        color="#403F3F"
-        colorScheme="gray.900"
-      >
-        SHARE
+      {onShare && (
         <Button
-          as="div"
-          marginLeft={2}
-          leftIcon="share"
-          fontSize={['30px', '60px']}
+          onClick={() => onShare()}
+          position="absolute"
+          bottom={['20px', '45px', '100px']}
+          right={['30px', '70px', '100px']}
           variant="link"
-          size="md"
+          size={['sm', 'md']}
           color="#403F3F"
           colorScheme="gray.900"
-        />
-      </Button>
+        >
+          SHARE
+          <Button
+            as="div"
+            marginLeft={2}
+            leftIcon="share"
+            fontSize={['30px', '60px']}
+            variant="link"
+            size="md"
+            color="#403F3F"
+            colorScheme="gray.900"
+          />
+        </Button>
+      )}
       <svg
         ref={svgRef}
         version="1.1"
@@ -371,12 +373,16 @@ const StateMap = ({
 
 StateMap.propTypes = {
   indicator: PropTypes.shape().isRequired,
-  onShare: PropTypes.func.isRequired,
+  onShare: PropTypes.func,
   indicatorRank: PropTypes.number.isRequired,
   selectedStateName: PropTypes.string.isRequired,
   indicatorName: PropTypes.string.isRequired,
   indicatorValue: PropTypes.number.isRequired,
   selectedState: PropTypes.string.isRequired,
+};
+
+StateMap.defaultProps = {
+  onShare: null,
 };
 
 export default StateMap;
