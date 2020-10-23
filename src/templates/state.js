@@ -117,6 +117,8 @@ const State = ({
             buttonText="GO"
             buttonColor="#184595"
             showAllColor="#403F3F"
+            initialIndicator={metadata.title}
+            initialState={stateName.name}
           />
         </Flex>
       )}
@@ -131,6 +133,8 @@ const State = ({
             buttonText="GO"
             buttonColor="#184595"
             showAllColor="#184595"
+            initialIndicator={metadata.title}
+            initialState={stateName.name}
           />
         </Flex>
       )}

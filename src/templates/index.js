@@ -33,7 +33,7 @@ const Index = ({ location, data: { metadata, indicator } }) => {
             </Text>
           </Box>
           <Box px={[10, 20]} paddingBottom={[10]}>
-            <IndicatorDropdown onShowAll={() => onOpen()} />
+            <IndicatorDropdown onShowAll={() => onOpen()} initialIndicator={metadata.title} />
           </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
