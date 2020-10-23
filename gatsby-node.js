@@ -5,14 +5,14 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      data: allStatesCsv {
+      data: allStatesJson {
         nodes {
           id
           name
           state
         }
       }
-      metadata: allIndicatorsCsv {
+      metadata: allIndicatorsJson {
         nodes {
           id
           name: title

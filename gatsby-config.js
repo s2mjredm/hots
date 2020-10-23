@@ -46,7 +46,7 @@ module.exports = {
         path: `${__dirname}/src/data/`,
       },
     },
-    `gatsby-transformer-csv`,
+    `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {

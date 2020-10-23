@@ -60,7 +60,7 @@ Index.propTypes = {
 export default Index;
 
 export const query = graphql`
-  fragment States on IndicatorsCsv {
+  fragment States on IndicatorsJson {
     AL
     AK
     AZ
@@ -114,13 +114,13 @@ export const query = graphql`
     WY
   }
   query indexPage($id: String) {
-    metadata: indicatorsCsv(id: { eq: $id }) {
+    metadata: indicatorsJson(id: { eq: $id }) {
       title
       definition
       high
       low
     }
-    indicator: indicatorsCsv(id: { eq: $id }) {
+    indicator: indicatorsJson(id: { eq: $id }) {
       ...States
     }
   }

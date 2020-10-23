@@ -96,11 +96,11 @@ const renderTabPanel = indicators => {
 
 const IndicatorModal = ({ onClose, isOpen }) => {
   const {
-    allIndicatorsCsv: { nodes },
+    allIndicatorsJson: { nodes },
   } = useStaticQuery(
     graphql`
       query {
-        allIndicatorsCsv {
+        allIndicatorsJson {
           nodes {
             title
             category

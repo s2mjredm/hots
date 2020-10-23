@@ -347,16 +347,16 @@ export default State;
 
 export const query = graphql`
   query statePage($id: String, $state: String) {
-    metadata: indicatorsCsv(id: { eq: $id }) {
+    metadata: indicatorsJson(id: { eq: $id }) {
       title
       definition
       high
       low
     }
-    indicator: indicatorsCsv(id: { eq: $id }) {
+    indicator: indicatorsJson(id: { eq: $id }) {
       ...States
     }
-    allIndicators: allIndicatorsCsv {
+    allIndicators: allIndicatorsJson {
       nodes {
         title
         variable
@@ -364,11 +364,11 @@ export const query = graphql`
         conditionDefinition
       }
     }
-    stateName: statesCsv(state: { eq: $state }) {
+    stateName: statesJson(state: { eq: $state }) {
       name
       state
     }
-    state: statesCsv(state: { eq: $state }) {
+    state: statesJson(state: { eq: $state }) {
       D_H
       D_w
       D_b
@@ -454,7 +454,7 @@ export const query = graphql`
       HO11_MotorVehMort
       PS_PolicyRankings
     }
-    ranking: rankingCsv(state: { eq: $state }) {
+    ranking: rankingJson(state: { eq: $state }) {
       D_H
       D_w
       D_b

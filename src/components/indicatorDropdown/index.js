@@ -14,22 +14,22 @@ const IndicatorDropdown = ({ onShowAll, buttonText, buttonColor, showAllColor })
   const [selectedState, setSelectedState] = useState('');
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
 
-  const { allStatesCsv, allIndicatorsCsv } = useStaticQuery(graphql`
+  const { allStatesJson, allIndicatorsJson } = useStaticQuery(graphql`
     query DataQuery {
-      allStatesCsv {
+      allStatesJson {
         nodes {
           name
         }
       }
-      allIndicatorsCsv {
+      allIndicatorsJson {
         nodes {
           title
         }
       }
     }
   `);
-  const indicatorList = allIndicatorsCsv.nodes.map(indicator => indicator.title);
-  const stateList = allStatesCsv.nodes.map(state => state.name);
+  const indicatorList = allIndicatorsJson.nodes.map(indicator => indicator.title);
+  const stateList = allStatesJson.nodes.map(state => state.name);
 
   const handleIndicatorSelection = indicator => {
     setSelectedIndicator(indicator);
