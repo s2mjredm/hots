@@ -6,12 +6,20 @@ import { Box, Button, Flex } from '@chakra-ui/core';
 
 import SearchSelectInput from './SearchSelectInput';
 import useNavigate from './useNavigate';
+import { slugify } from '../../utils/slugify';
 
 import './index.css';
 
-const IndicatorDropdown = ({ onShowAll, buttonText, buttonColor, showAllColor }) => {
-  const [selectedIndicator, setSelectedIndicator] = useState('');
-  const [selectedState, setSelectedState] = useState('');
+const IndicatorDropdown = ({
+  onShowAll,
+  buttonText,
+  buttonColor,
+  showAllColor,
+  initialIndicator,
+  initialState,
+}) => {
+  const [selectedIndicator, setSelectedIndicator] = useState(initialIndicator);
+  const [selectedState, setSelectedState] = useState(initialState);
   const [isNavigationEnabled, url] = useNavigate(selectedIndicator, selectedState);
 
   const { allStatesJson, allIndicatorsJson } = useStaticQuery(graphql`
@@ -32,6 +40,9 @@ const IndicatorDropdown = ({ onShowAll, buttonText, buttonColor, showAllColor })
   const stateList = allStatesJson.nodes.map(state => state.name);
 
   const handleIndicatorSelection = indicator => {
+    const pathParts = window.location.pathname.split('/');
+    pathParts[1] = slugify(indicator);
+    navigate(pathParts.join('/'));
     setSelectedIndicator(indicator);
   };
   const handleStateSelection = state => {
@@ -97,12 +108,16 @@ IndicatorDropdown.propTypes = {
   buttonText: PropTypes.string,
   buttonColor: PropTypes.string,
   showAllColor: PropTypes.string,
+  initialIndicator: PropTypes.string,
+  initialState: PropTypes.string,
 };
 
 IndicatorDropdown.defaultProps = {
   buttonText: 'EXPLORE STATE RANKINGS',
   buttonColor: '#F06060',
   showAllColor: '#F06060',
+  initialIndicator: '',
+  initialState: '',
 };
 
 export default IndicatorDropdown;
