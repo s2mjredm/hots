@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { find, groupBy } from 'lodash';
 import parse from 'html-react-parser';
 import { Box, Grid, useDisclosure, Heading, Flex, Icon, Text } from '@chakra-ui/core';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import useIsMobile from '../utils/useIsMobile';
 
@@ -39,6 +40,16 @@ const State = ({
   } = useDisclosure();
 
   const isMobile = useIsMobile();
+
+  const [displayOnScroll, setDisplayOnScroll] = useState(false);
+
+  useScrollPosition(
+    ({ currPos }) => {
+      const isShow = currPos.y < -216;
+      if (isShow !== displayOnScroll) setDisplayOnScroll(isShow);
+    },
+    [displayOnScroll]
+  );
 
   const handleMobileIndicatorToggle = () => {
     if (isIndicatorOpen) {
@@ -79,16 +90,46 @@ const State = ({
     <Layout>
       {/* header */}
       <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+      {displayOnScroll && !isMobile && (
+        <Flex
+          justify="space-between"
+          align="center"
+          w="100%"
+          px={100}
+          py={3}
+          bg="#F06060"
+          position="fixed"
+          top="0"
+          zIndex="30"
+          shadow="lg"
+        >
+          <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
+            <Icon name="arrow-back" />
+            BACK TO NATIONAL MAP AND RESULTS
+          </Link>
+          <IndicatorDropdown
+            onShowAll={() => onOpen()}
+            buttonText="GO"
+            buttonColor="#184595"
+            showAllColor="#403F3F"
+          />
+        </Flex>
+      )}
       {!isMobile && (
         <Flex justify="space-between" align="center" px={100} py={18}>
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Icon name="arrow-back" />
             BACK TO NATIONAL MAP AND RESULTS
           </Link>
-          <IndicatorDropdown onShowAll={() => onOpen()} buttonText="GO" />
+          <IndicatorDropdown
+            onShowAll={() => onOpen()}
+            buttonText="GO"
+            buttonColor="#184595"
+            showAllColor="#184595"
+          />
         </Flex>
       )}
-      {/* header mobile */}
+      {/* mobile header  */}
       {isMobile && (
         <Box>
           <Flex h="60px" justify="space-between" align="center" px={2} bg="#F06060">
@@ -217,7 +258,6 @@ const State = ({
           <RankGraphic rankings={categoryRankings} />
         </Box>
       </Grid>
-
       <Grid
         w="100%"
         templateColumns="1fr 1fr"
