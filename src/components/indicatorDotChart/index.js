@@ -128,7 +128,12 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         >
           <Box display="table" bg="white" h="68px" w="1px" />
           <Text fontFamily="Montserrat">
-            {format(dotScale.invert(tickScale(tick)), metadata.unit, metadata.rounding)}
+            {format(
+              dotScale.invert(tickScale(tick)),
+              metadata.unit,
+              metadata.rounding,
+              metadata.decimals
+            )}
           </Text>
         </Box>
       );

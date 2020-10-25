@@ -119,6 +119,7 @@ export const query = graphql`
       definition
       unit
       rounding
+      decimals
       positive
       high
       low
