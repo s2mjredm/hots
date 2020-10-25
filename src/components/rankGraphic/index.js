@@ -4,6 +4,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import { Box, Grid, Heading, Text } from '@chakra-ui/core';
 
+import format from '../../utils/numberFormat';
+
 const RankGraphic = ({ rankings }) => {
   const images = useStaticQuery(graphql`
     {
@@ -95,7 +97,7 @@ const RankGraphic = ({ rankings }) => {
                 left="5px"
                 mb="-50px"
               >
-                {r.value}
+                {format(r.value, r.unit, r.rounding, r.decimals)}
               </Text>
             </>
           )}

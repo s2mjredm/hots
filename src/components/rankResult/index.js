@@ -28,7 +28,7 @@ const RankResult = ({ state, indicator, rank, value, best }) => {
       <Box pl={60} d="flex" alignItems="center" h="100%" w="100%" color="black">
         <div>
           <b>{indicator}</b>
-          <p>{Math.round(value)}</p>
+          <p>{value}</p>
         </div>
         <Link
           to={`/${slugify(indicator)}/${slugify(state)}`}
@@ -45,7 +45,7 @@ RankResult.propTypes = {
   state: PropTypes.string.isRequired,
   indicator: PropTypes.string.isRequired,
   rank: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   best: PropTypes.bool,
 };
 
