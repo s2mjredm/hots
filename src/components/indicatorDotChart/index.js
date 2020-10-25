@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { Box, Text, Flex, Divider, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
+import format from '../../utils/numberFormat';
+
 import './index.css';
 
 // The number of tick markers in the chart
@@ -125,7 +127,9 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           alignItems="center"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
-          <Text fontFamily="Montserrat">{dotScale.invert(tickScale(tick)).toFixed(1)}</Text>
+          <Text fontFamily="Montserrat">
+            {format(dotScale.invert(tickScale(tick)), metadata.unit, metadata.rounding)}
+          </Text>
         </Box>
       );
     });
@@ -149,7 +153,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         <StateDotMarker
           key={marker.state}
           state={marker.state}
-          indicatorValue={marker.indicatorValue}
+          indicatorValue={format(marker.indicatorValue, metadata.unit, metadata.rounding)}
           indicatorPosition={index + 1}
           leftPosition={dotScale(marker.indicatorValue) - 7}
           indicatorColor={colorScale(marker.indicatorValue)}
