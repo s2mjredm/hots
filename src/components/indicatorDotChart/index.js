@@ -114,7 +114,8 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
   }, []);
 
   const renderTicks = () => {
-    return [...Array(TICK_COUNT).keys()].map(tick => {
+    const tickCountPlusLastTick = TICK_COUNT + 1;
+    return [...Array(tickCountPlusLastTick).keys()].map(tick => {
       return (
         <Box
           key={tick}
