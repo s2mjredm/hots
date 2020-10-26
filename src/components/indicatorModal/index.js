@@ -151,7 +151,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
       <Flex w="100%" h="100vh" top="0" left="0" justify="center" position="absolute" zIndex="1301">
         <Box width="600px">
           <Flex justify="space-between" color="white" align="center">
-            <Text fontSize="38px" fontFamily="jubilat">
+            <Text fontSize="38px" fontFamily="Jubilat">
               Health Statistics & Outcomes
             </Text>
             <CloseButton size="lg" fontSize="32px" onClick={onClose} />
