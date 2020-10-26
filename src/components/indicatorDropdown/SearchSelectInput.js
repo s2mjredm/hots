@@ -21,23 +21,29 @@ import {
 import useIsMobile from '../../utils/useIsMobile';
 
 const SelectButton = ({ label, onClick }) => {
+  const [isMouseOver, setIsMouseOver] = useState(false);
   return (
     <PseudoBox
       as="div"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
       onClick={() => onClick(label)}
+      onMouseEnter={() => setIsMouseOver(true)}
+      onMouseLeave={() => setIsMouseOver(false)}
+      cursor="pointer"
       w="100%"
       lineHeight="3.2rem"
       borderBottom="1px solid #F2F2F2"
       fontFamily="Jubilat"
       transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
       fontSize="18px"
-      fontWeight="semibold"
       bg="white"
       borderColor="white"
       color="#7F7F7F"
       textAlign="start"
       px={5}
-      _hover={{ bg: '#FFD285', color: '#2D3748' }}
+      _hover={{ bg: '#FFD285', color: '#2D3748', fontWeight: 'semibold' }}
       _active={{
         bg: '#FFD285',
         transform: 'scale(0.99)',
@@ -48,6 +54,7 @@ const SelectButton = ({ label, onClick }) => {
       }}
     >
       {label}
+      {isMouseOver && <Icon name="chevron-down" color="gray.700" />}
     </PseudoBox>
   );
 };
