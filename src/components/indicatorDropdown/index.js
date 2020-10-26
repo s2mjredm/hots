@@ -32,11 +32,15 @@ const IndicatorDropdown = ({
       allIndicatorsJson {
         nodes {
           title
+          shortlist
         }
       }
     }
   `);
   const indicatorList = allIndicatorsJson.nodes.map(indicator => indicator.title);
+  const indicatorShortList = allIndicatorsJson.nodes
+    .filter(indicator => indicator.shortlist === 'TRUE')
+    .map(indicator => indicator.title);
   const stateList = allStatesJson.nodes.map(state => state.name);
 
   const handleIndicatorSelection = indicator => {
@@ -63,6 +67,7 @@ const IndicatorDropdown = ({
           placeholder="Select or Search"
           selectedItem={selectedIndicator}
           items={indicatorList}
+          itemsShortList={indicatorShortList}
           onSelection={indicator => handleIndicatorSelection(indicator)}
         />
         <Button
