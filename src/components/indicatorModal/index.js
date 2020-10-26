@@ -134,6 +134,13 @@ const SearchInput = ({ inputValue, onChange }) => {
     </Flex>
   );
 };
+
+SearchInput.displayName = 'SearchInput';
+SearchInput.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 const IndicatorModal = ({ onClose, isOpen }) => {
   const {
     allIndicatorsJson: { nodes },
