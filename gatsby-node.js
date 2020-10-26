@@ -1,4 +1,5 @@
 const path = require('path');
+const { createOpenGraphImage } = require('gatsby-plugin-open-graph-images');
 const { slugify } = require('./src/utils/slugify');
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -44,6 +45,14 @@ exports.createPages = async ({ graphql, actions }) => {
         context: {
           ...meta,
           state: state.state,
+          ogImage: createOpenGraphImage(createPage, {
+            path: `og-images/${indicator}/${stateName}.png`,
+            component: path.resolve(`src/templates/og-image.js`),
+            context: {
+              ...meta,
+              state: state.state,
+            },
+          }),
         },
       });
     });
