@@ -117,6 +117,9 @@ export const query = graphql`
     metadata: indicatorsJson(id: { eq: $id }) {
       title
       definition
+      unit
+      rounding
+      decimals
       positive
       high
       low

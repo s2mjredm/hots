@@ -15,6 +15,7 @@ import IndicatorModal from '../components/indicatorModal';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
 import StateMap from '../components/stateMap';
+import format from '../utils/numberFormat';
 
 import './state.css';
 import Arrow from '../svg/arrow.svg';
@@ -86,7 +87,7 @@ const State = ({
         .includes(r.variable.toLowerCase())
     )
     .map(r => ({
-      ...groupBy(allIndicators.nodes, n => n.variable.toLowerCase())[r.variable.toLowerCase()][0],
+      ...variables[r.variable.toLowerCase()][0],
       ...r,
       value: state[r.variable],
     }));
@@ -242,7 +243,12 @@ const State = ({
             selectedStateName={stateName.name}
             indicatorRank={indicatorRank}
             indicatorName={metadata.title}
-            indicatorValue={parseFloat(indicator[stateName.state])}
+            indicatorValue={format(
+              indicator[stateName.state],
+              metadata.unit,
+              metadata.rounding,
+              metadata.decimals
+            )}
           />
         </Box>
       </Grid>
@@ -303,7 +309,12 @@ const State = ({
                 indicator={result.title}
                 state={stateName.name}
                 rank={parseFloat(ind.ranking)}
-                value={parseFloat(state[ind.variable])}
+                value={format(
+                  state[ind.variable],
+                  variables[ind.variable.toLowerCase()][0].unit,
+                  variables[ind.variable.toLowerCase()][0].rounding,
+                  variables[ind.variable.toLowerCase()][0].decimals
+                )}
                 best
               />
             );
@@ -330,7 +341,12 @@ const State = ({
                 indicator={result.title}
                 state={stateName.name}
                 rank={parseFloat(ind.ranking)}
-                value={parseFloat(state[ind.variable])}
+                value={format(
+                  state[ind.variable],
+                  variables[ind.variable.toLowerCase()][0].unit,
+                  variables[ind.variable.toLowerCase()][0].rounding,
+                  variables[ind.variable.toLowerCase()][0].decimals
+                )}
               />
             );
           })}
@@ -359,6 +375,9 @@ export const query = graphql`
     metadata: indicatorsJson(id: { eq: $id }) {
       title
       definition
+      unit
+      rounding
+      decimals
       high
       low
     }
@@ -369,6 +388,9 @@ export const query = graphql`
       nodes {
         title
         variable
+        unit
+        rounding
+        decimals
         category
         condition
         conditionDefinition

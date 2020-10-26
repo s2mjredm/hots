@@ -377,7 +377,7 @@ StateMap.propTypes = {
   indicatorRank: PropTypes.number.isRequired,
   selectedStateName: PropTypes.string.isRequired,
   indicatorName: PropTypes.string.isRequired,
-  indicatorValue: PropTypes.number.isRequired,
+  indicatorValue: PropTypes.string.isRequired,
   selectedState: PropTypes.string.isRequired,
 };
 
