@@ -97,6 +97,7 @@ const SearchSelectInput = ({
   selectedItem,
   onSelection,
   itemsShortList,
+  onShowAll,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -189,6 +190,7 @@ const SearchSelectInput = ({
               <Box
                 as="div"
                 display="flex"
+                onClick={() => onShowAll()}
                 alignItems="center"
                 justifyContent="space-between"
                 cursor="pointer"
@@ -204,6 +206,7 @@ const SearchSelectInput = ({
                 px={5}
               >
                 See all 84 Variables
+                <Icon name="bigArrow" />
               </Box>
             )}
           </Box>
@@ -232,6 +235,7 @@ SearchSelectInput.propTypes = {
   selectedItem: PropTypes.string,
   onSelection: PropTypes.func.isRequired,
   itemsShortList: PropTypes.arrayOf(PropTypes.string),
+  onShowAll: PropTypes.func,
 };
 
 SearchSelectInput.defaultProps = {
@@ -239,6 +243,7 @@ SearchSelectInput.defaultProps = {
   label: null,
   placeholder: null,
   selectedItem: null,
+  onShowAll: PropTypes.func,
 };
 
 export default SearchSelectInput;

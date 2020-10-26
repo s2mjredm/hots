@@ -69,6 +69,7 @@ const IndicatorDropdown = ({
           items={indicatorList}
           itemsShortList={indicatorShortList}
           onSelection={indicator => handleIndicatorSelection(indicator)}
+          onShowAll={onShowAll}
         />
         <Button
           display={['none', 'block']}
