@@ -122,7 +122,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
     metadata.positive
   );
   const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
-  if (metadata.positive === 'FALSE') dotMarkers.reverse();
+  if (dotMarkers && metadata.positive === 'FALSE') dotMarkers.reverse();
 
   const getTrackRef = useCallback(node => {
     if (node !== null) {
