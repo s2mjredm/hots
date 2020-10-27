@@ -47,6 +47,15 @@ const customIcons = {
     ),
     viewBox: '0 0 448 512',
   },
+  bigArrow: {
+    path: (
+      <path
+        fill="currentColor"
+        d="M15.525,0,12.7,2.823,23.388,13.509H0v4.032H23.388L12.7,28.227l2.823,2.823L31.05,15.525Z"
+      />
+    ),
+    viewBox: '0 0 31.05 31.05',
+  },
 };
 
 const ctheme = {

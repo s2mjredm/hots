@@ -207,7 +207,7 @@ const State = ({
         pb={[0, 100]}
       >
         <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
-          <Heading as="h1" fontFamily="jubilat">
+          <Heading as="h1" fontFamily="Jubilat">
             {stateName.name}
           </Heading>
           <Heading as="h2">{metadata.title}</Heading>

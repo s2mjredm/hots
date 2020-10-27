@@ -12,11 +12,11 @@ const Social = ({ onClose, isOpen, url }) => {
 
   return (
     <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay bg="#4F5394" />
-      <Flex w="100%" h="100vh" top="0" left="0" justify="center" position="absolute" zIndex="1301">
+      <ModalOverlay bg="#014284bd" className="blur" />
+      <Flex w="100%" h="100vh" top="10" left="0" justify="center" position="absolute" zIndex="1301">
         <Box width={['360px', '600px']}>
           <Flex justify="space-between" color="white" align="center">
-            <Text fontSize="38px" fontFamily="jubilat">
+            <Text fontSize="38px" fontFamily="Jubilat">
               Share
             </Text>
             <CloseButton size="lg" fontSize="32px" onClick={onClose} />

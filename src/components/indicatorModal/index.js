@@ -20,6 +20,7 @@ import {
   PseudoBox,
   InputGroup,
   InputRightElement,
+  InputLeftElement,
   Modal,
   ModalOverlay,
 } from '@chakra-ui/core';
@@ -86,12 +87,58 @@ const renderTabPanel = indicators => {
         borderBottom="1px solid #E5E5E5"
         color="#707070"
         cursor="pointer"
-        _hover={{ fontWeight: 'bold' }}
+        _hover={{ fontWeight: 'bold', bg: '#FFD285' }}
       >
         <Link to={`/${slugify(i)}`}>{i}</Link>
       </PseudoBox>
     );
   });
+};
+
+const SearchInput = ({ inputValue, onChange }) => {
+  const [isOnFocus, setIsOnFocus] = useState(false);
+
+  const focusedStyles = { paddingLeft: '290px' };
+
+  return (
+    <Flex
+      transition="0.6s ease-in-out"
+      align="center"
+      justify="center"
+      py={4}
+      borderBottom="3px solid white"
+      style={isOnFocus ? focusedStyles : null}
+    >
+      <InputGroup fontFamily="Jubilat" size="lg" color="gray.300">
+        <InputLeftElement>
+          {isOnFocus && <Icon h="40px" name="search" paddingBottom="7px" />}
+        </InputLeftElement>
+        <Input
+          autoComplete="off"
+          onChange={e => onChange(e)}
+          onFocus={() => setIsOnFocus(true)}
+          onBlur={() => setIsOnFocus(false)}
+          value={inputValue}
+          placeholder="Search"
+          fontFamily="Jubilat"
+          color="gray.600"
+          h="40px"
+          maxW="285px"
+          borderRadius="100px"
+          focusBorderColor="#FFD285"
+        />
+        <InputRightElement>
+          <Icon h="40px" name={isOnFocus ? 'small-close' : 'search'} paddingBottom="7px" />
+        </InputRightElement>
+      </InputGroup>
+    </Flex>
+  );
+};
+
+SearchInput.displayName = 'SearchInput';
+SearchInput.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 const IndicatorModal = ({ onClose, isOpen }) => {
@@ -151,30 +198,13 @@ const IndicatorModal = ({ onClose, isOpen }) => {
       <Flex w="100%" h="100vh" top="0" left="0" justify="center" position="absolute" zIndex="1301">
         <Box width="600px">
           <Flex justify="space-between" color="white" align="center">
-            <Text fontSize="38px" fontFamily="jubilat">
+            <Text fontSize="38px" fontFamily="Jubilat">
               Health Statistics & Outcomes
             </Text>
             <CloseButton size="lg" fontSize="32px" onClick={onClose} />
           </Flex>
           <Box bg="#E5E5E5">
-            <Flex align="center" justify="center" py={4} borderBottom="3px solid white">
-              <InputGroup fontFamily="Jubilat" size="lg" color="gray.300">
-                <Input
-                  autoComplete="off"
-                  onChange={e => handleChange(e)}
-                  value={inputValue}
-                  placeholder="Search"
-                  fontFamily="Jubilat"
-                  color="gray.600"
-                  h="40px"
-                  maxW="285px"
-                  borderRadius="100px"
-                />
-                <InputRightElement>
-                  <Icon h="40px" name="search" />
-                </InputRightElement>
-              </InputGroup>
-            </Flex>
+            <SearchInput inputValue={inputValue} onChange={e => handleChange(e)} />
             <Tabs variant="unstyled" display="flex">
               <TabList minWidth="276px" flexDirection="column" borderRight="1px solid #F2F2F2">
                 {renderTabList(Object.keys(categories))}

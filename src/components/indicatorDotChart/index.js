@@ -6,7 +6,7 @@ import { Box, Text, Flex, Divider, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
 import format from '../../utils/numberFormat';
-
+import genRankingFromIndex from '../../utils/genRankingFromIndex';
 import './index.css';
 
 // The number of tick markers in the chart
@@ -114,7 +114,8 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
   }, []);
 
   const renderTicks = () => {
-    return [...Array(TICK_COUNT).keys()].map(tick => {
+    const tickCountPlusLastTick = TICK_COUNT + 1;
+    return [...Array(tickCountPlusLastTick).keys()].map(tick => {
       return (
         <Box
           key={tick}
@@ -159,7 +160,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           key={marker.state}
           state={marker.state}
           indicatorValue={format(marker.indicatorValue, metadata.unit, metadata.rounding)}
-          indicatorPosition={index + 1}
+          indicatorPosition={genRankingFromIndex(index, 51, metadata.positive === 'FALSE')}
           leftPosition={dotScale(marker.indicatorValue) - 7}
           indicatorColor={colorScale(marker.indicatorValue)}
           isAllwaysVisible={isAllwaysVisible}

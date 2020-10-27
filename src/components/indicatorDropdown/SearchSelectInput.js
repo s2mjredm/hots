@@ -21,23 +21,29 @@ import {
 import useIsMobile from '../../utils/useIsMobile';
 
 const SelectButton = ({ label, onClick }) => {
+  const [isMouseOver, setIsMouseOver] = useState(false);
   return (
     <PseudoBox
       as="div"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
       onClick={() => onClick(label)}
+      onMouseEnter={() => setIsMouseOver(true)}
+      onMouseLeave={() => setIsMouseOver(false)}
+      cursor="pointer"
       w="100%"
       lineHeight="3.2rem"
       borderBottom="1px solid #F2F2F2"
       fontFamily="Jubilat"
       transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
       fontSize="18px"
-      fontWeight="semibold"
       bg="white"
       borderColor="white"
       color="#7F7F7F"
       textAlign="start"
       px={5}
-      _hover={{ bg: '#FFD285', color: '#2D3748' }}
+      _hover={{ bg: '#FFD285', color: '#2D3748', fontWeight: 'semibold' }}
       _active={{
         bg: '#FFD285',
         transform: 'scale(0.99)',
@@ -48,6 +54,7 @@ const SelectButton = ({ label, onClick }) => {
       }}
     >
       {label}
+      {isMouseOver && <Icon name="chevron-down" color="gray.700" />}
     </PseudoBox>
   );
 };
@@ -83,13 +90,21 @@ const useIsModalStyles = isOpen => {
   return [position, padding, zIndex, labelColor];
 };
 
-const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelection }) => {
+const SearchSelectInput = ({
+  label,
+  placeholder,
+  items,
+  selectedItem,
+  onSelection,
+  itemsShortList,
+  onShowAll,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [position, padding, zIndex, labelColor] = useIsModalStyles(isOpen);
 
   const [inputValue, setInputValue] = useState(selectedItem);
-  const [itemsList, setItemsList] = useState(items);
+  const [itemsList, setItemsList] = useState(itemsShortList || items);
 
   const handleChange = event => {
     setInputValue(event.target.value);
@@ -131,6 +146,7 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             <Icon name="search" color="gray.700" />
           </InputLeftElement>
           <Input
+            focusBorderColor="yellow.400"
             zIndex="3"
             autoComplete="off"
             value={inputValue}
@@ -140,6 +156,7 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             border="1.3px solid #403F3F"
             fontFamily="Jubilat"
             h={[20, 12]}
+            className="search-input"
           />
           {isOpen && (
             <InputRightElement zIndex="3" cursor="pointer" onClick={() => onClose()}>
@@ -152,24 +169,47 @@ const SearchSelectInput = ({ label, placeholder, items, selectedItem, onSelectio
             </InputRightElement>
           )}
         </InputGroup>
+
         {isOpen && (
-          <Flex
+          <Box
             zIndex="9999"
+            border="1px solid #F2F2F2"
             position={['initial', 'absolute']}
             bg="white"
             w="100%"
             shadow="md"
-            overflowY="auto"
-            maxHeight="340px"
-            border="1px solid #F2F2F2"
-            direction="column"
           >
-            {itemsList &&
-              itemsList.length > 0 &&
-              itemsList.map(item => (
-                <SelectButton key={item} label={item} onClick={i => handleSelect(i)} />
-              ))}
-          </Flex>
+            <Flex overflowY="auto" direction="column" maxHeight="340px">
+              {itemsList &&
+                itemsList.length > 0 &&
+                itemsList.map(item => (
+                  <SelectButton key={item} label={item} onClick={i => handleSelect(i)} />
+                ))}
+            </Flex>
+            {itemsShortList && (
+              <Box
+                as="div"
+                display="flex"
+                onClick={() => onShowAll()}
+                alignItems="center"
+                justifyContent="space-between"
+                cursor="pointer"
+                w="100%"
+                lineHeight="3.2rem"
+                fontFamily="Jubilat"
+                transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+                fontSize="18px"
+                bg="#F06060"
+                color="white"
+                fontStyle="italic"
+                textAlign="start"
+                px={5}
+              >
+                See all 84 Variables
+                <Icon name="bigArrow" />
+              </Box>
+            )}
+          </Box>
         )}
       </FormControl>
       {isOpen && (
@@ -194,12 +234,16 @@ SearchSelectInput.propTypes = {
   placeholder: PropTypes.string,
   selectedItem: PropTypes.string,
   onSelection: PropTypes.func.isRequired,
+  itemsShortList: PropTypes.arrayOf(PropTypes.string),
+  onShowAll: PropTypes.func,
 };
 
 SearchSelectInput.defaultProps = {
+  itemsShortList: null,
   label: null,
   placeholder: null,
   selectedItem: null,
+  onShowAll: PropTypes.func,
 };
 
 export default SearchSelectInput;
