@@ -66,7 +66,7 @@ const useScale = (width, domain, tickCount) => {
 
   const bins = bin()
     .domain(extent(domain))
-    .thresholds(Math.ceil(width / 15));
+    .thresholds(Math.ceil(width / 15) + 1);
 
   const [dotScale, setScale] = useState(genDotScale());
   const [tickScale, setTickScale] = useState(genTickScale());
@@ -107,7 +107,11 @@ const useGenStateDotMarkers = indicator => {
 const IndicatorDotChart = ({ indicator, metadata }) => {
   const [trackRef, setTrackRef] = useState({ current: null });
   const { width } = useContainerDimensions(trackRef);
-  const [range /* ,setRange */] = useState(Object.keys(indicator).map(state => indicator[state]));
+  const [range /* ,setRange */] = useState(
+    Object.keys(indicator)
+      .map(state => parseFloat(indicator[state]))
+      .filter(d => d)
+  );
   const [dotScale, tickScale, colorScale, bins] = useScale(width, range, TICK_COUNT);
   const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
 
