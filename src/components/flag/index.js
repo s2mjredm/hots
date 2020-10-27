@@ -68,7 +68,8 @@ const Flag = ({ active }) => {
           color="white"
           fontFamily="Jubilat"
           fontSize={['23px', '28px']}
-          line-height={['normal', '35px']}
+          lineHeight={['normal', '35px']}
+          letterSpacing="1.14px"
         >
           Health, and the conditions for health, are different in each state
         </Text>
