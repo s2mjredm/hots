@@ -39,10 +39,13 @@ const useContainerDimensions = myRef => {
   return dimensions;
 };
 
-const useScale = (width, domain, tickCount) => {
+const useScale = (width, domain, tickCount, positive) => {
+  const range = extent(domain);
+  if (positive === 'FALSE') range.reverse();
+
   const genColorScale = () => {
     return scaleQuantize()
-      .domain(extent(domain))
+      .domain(range)
       .range([
         '#042351',
         '#1E306E',
@@ -57,7 +60,7 @@ const useScale = (width, domain, tickCount) => {
   };
 
   const genDotScale = () => {
-    return scaleLinear().domain(extent(domain)).range([0, width]).clamp(true);
+    return scaleLinear().domain(range).range([0, width]).clamp(true);
   };
 
   const genTickScale = () => {
@@ -112,8 +115,14 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
       .map(state => parseFloat(indicator[state]))
       .filter(d => d)
   );
-  const [dotScale, tickScale, colorScale, bins] = useScale(width, range, TICK_COUNT);
+  const [dotScale, tickScale, colorScale, bins] = useScale(
+    width,
+    range,
+    TICK_COUNT,
+    metadata.positive
+  );
   const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
+  if (metadata.positive === 'FALSE') dotMarkers.reverse();
 
   const getTrackRef = useCallback(node => {
     if (node !== null) {
@@ -203,11 +212,11 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         <Flex color="#403F3F" paddingTop="46px" justify="space-between">
           <Flex justify="space-between">
             <Icon name="arrow-back" size="24px" />
-            <Text>{metadata.low}</Text>
+            <Text>{metadata.positive === 'TRUE' ? metadata.low : metadata.high}</Text>
           </Flex>
           <Divider />
           <Flex justify="space-between">
-            <Text>{metadata.high}</Text>
+            <Text>{metadata.positive === 'TRUE' ? metadata.high : metadata.low}</Text>
             <Icon name="arrow-forward" size="24px" />
           </Flex>
         </Flex>
