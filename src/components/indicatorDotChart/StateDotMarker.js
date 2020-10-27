@@ -17,6 +17,7 @@ const StateDotMarker = ({
   indicatorColor,
   indicatorPosition,
   leftPosition,
+  bottom,
   isAllwaysVisible,
   placement,
 }) => {
@@ -47,7 +48,7 @@ const StateDotMarker = ({
           <PseudoBox
             position="absolute"
             left={leftPosition}
-            bottom="1px"
+            bottom={bottom * 14}
             borderRadius="100%"
             bg="black"
             border="1px solid white"
@@ -90,17 +91,20 @@ const StateDotMarker = ({
   );
 };
 
-StateDotMarker.defaultProps = {
-  placement: 'top',
-};
-
 StateDotMarker.propTypes = {
   state: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
   leftPosition: PropTypes.number.isRequired,
+  bottom: PropTypes.number,
   indicatorColor: PropTypes.string.isRequired,
   indicatorPosition: PropTypes.number.isRequired,
   isAllwaysVisible: PropTypes.bool.isRequired,
   placement: PropTypes.string,
 };
+
+StateDotMarker.defaultProps = {
+  placement: 'top',
+  bottom: 0,
+};
+
 export default StateDotMarker;

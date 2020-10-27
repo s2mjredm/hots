@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { extent, scaleLinear, scaleQuantize } from 'd3';
+import { extent, scaleLinear, scaleQuantize, bin } from 'd3';
+import { findIndex } from 'lodash';
 import PropTypes from 'prop-types';
 
 import { Box, Text, Flex, Divider, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
 import format from '../../utils/numberFormat';
-import genRankingFromIndex from '../../utils/genRankingFromIndex';
 import './index.css';
 
 // The number of tick markers in the chart
@@ -64,6 +64,10 @@ const useScale = (width, domain, tickCount) => {
     return scaleLinear().domain([0, tickCount]).range([0, width]).clamp(true);
   };
 
+  const bins = bin()
+    .domain(extent(domain))
+    .thresholds(Math.ceil(width / 15));
+
   const [dotScale, setScale] = useState(genDotScale());
   const [tickScale, setTickScale] = useState(genTickScale());
   const [colorScale, setColorScale] = useState(genColorScale());
@@ -74,7 +78,7 @@ const useScale = (width, domain, tickCount) => {
     setColorScale(() => genColorScale());
   }, [width, domain]);
 
-  return [dotScale, tickScale, colorScale];
+  return [dotScale, tickScale, colorScale, bins];
 };
 
 const useGenStateDotMarkers = indicator => {
@@ -104,7 +108,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
   const [trackRef, setTrackRef] = useState({ current: null });
   const { width } = useContainerDimensions(trackRef);
   const [range /* ,setRange */] = useState(Object.keys(indicator).map(state => indicator[state]));
-  const [dotScale, tickScale, colorScale] = useScale(width, range, TICK_COUNT);
+  const [dotScale, tickScale, colorScale, bins] = useScale(width, range, TICK_COUNT);
   const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
 
   const getTrackRef = useCallback(node => {
@@ -142,31 +146,39 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
   };
 
   const renderDots = () => {
-    return dotMarkers.map((marker, index) => {
-      const isAllwaysVisible = index === 0 || index === 50;
+    const histo = bins
+      .value(d => parseFloat(d.indicatorValue))(dotMarkers)
+      .filter(h => h.length);
+
+    return histo.map((group, index) => {
+      const isAllwaysVisible = index === 0 || index === histo.length - 1;
 
       const placement = () => {
         switch (index) {
           case 0:
             return 'top-end';
-          case 50:
+          case histo.length - 1:
             return 'top-start';
           default:
             return 'top';
         }
       };
-      return (
+
+      return group.map((marker, bottom) => (
         <StateDotMarker
           key={marker.state}
           state={marker.state}
           indicatorValue={format(marker.indicatorValue, metadata.unit, metadata.rounding)}
-          indicatorPosition={genRankingFromIndex(index, 51, metadata.positive === 'FALSE')}
-          leftPosition={dotScale(marker.indicatorValue) - 7}
+          indicatorPosition={findIndex(dotMarkers, d => marker.state === d.state) + 1}
+          leftPosition={
+            placement() === 'top-start' ? dotScale(group.x1) - 7 : dotScale(group.x0) - 7
+          }
+          bottom={bottom}
           indicatorColor={colorScale(marker.indicatorValue)}
           isAllwaysVisible={isAllwaysVisible}
           placement={placement()}
         />
-      );
+      ));
     });
   };
 
