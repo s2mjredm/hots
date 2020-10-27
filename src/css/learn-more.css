@@ -1,6 +1,7 @@
 .hero {
   display: flex;
   align-items: center;
+  background-color: #f7f7f7;
 }
 
 .hero h1 {
@@ -20,22 +21,16 @@
   padding: 80px 100px;
 }
 
-.learn-more {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
 .learn-more p {
+  font-family: 'Proxima Nova', sans-serif;
+
   padding-top: 20px;
 }
 
 .learn-more .wp-block-group {
-  width: 33.5vw;
-  padding: 80px;
-}
-
-.learn-more figure {
-  width: 66.5vw;
+  padding: 0px 80px;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 1125px) {

@@ -4,6 +4,8 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import parse from 'html-react-parser';
 
+import { Grid } from '@chakra-ui/core';
+
 import Layout from '../components/layout';
 import '../css/learn-more.css';
 
@@ -53,7 +55,9 @@ const LearnMore = ({
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>
-    <div className="learn-more">{parse(content)}</div>
+    <Grid templateColumns={['1fr', '1fr 60%']} className="learn-more">
+      {parse(content)}
+    </Grid>
   </Layout>
 );
 
