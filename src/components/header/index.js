@@ -30,12 +30,14 @@ const Header = ({ flag }) => {
           size="lg"
           colorScheme="gray.800"
         />
-        <Flex direction="row" align="center">
-          <Logo style={{ width: 40, margin: '5px 10px 0 0' }} />
-          <Heading fontFamily="News Cycle" color="#403F3F">
-            State of Health
-          </Heading>
-        </Flex>
+        <Link to="/">
+          <Flex direction="row" align="center">
+            <Logo style={{ width: 40, margin: '5px 10px 0 0' }} />
+            <Heading fontFamily="News Cycle" color="#403F3F">
+              State of Health
+            </Heading>
+          </Flex>
+        </Link>
         <Link to="/" onMouseEnter={() => setHover('/')} onMouseLeave={() => setHover(null)}>
           <Button
             display={['none', 'block']}
