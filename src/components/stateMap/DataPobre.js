@@ -40,13 +40,25 @@ const DataPobre = ({
             {indicatorRank}
           </Box>
           <Box paddingLeft={3}>
-            <Text fontFamily="Montserrat" color="#B4B4B4" fontSize="16px" fontWeight="800" mb="1px">
+            <Text
+              fontFamily="proxima-nova"
+              color="#B4B4B4"
+              fontSize="16px"
+              fontWeight="800"
+              mb="1px"
+            >
               {indicatorName}
             </Text>
-            <Text fontFamily="Montserrat" color="#403F3F" fontSize="20px" fontWeight="800" mb="2px">
+            <Text
+              fontFamily="proxima-nova"
+              color="#403F3F"
+              fontSize="20px"
+              fontWeight="800"
+              mb="2px"
+            >
               {selectedStateName}
             </Text>
-            <Text fontFamily="Montserrat" color="#0083E2" fontSize="20px" fontWeight="600">
+            <Text fontFamily="proxima-nova" color="#0083E2" fontSize="20px" fontWeight="600">
               {indicatorValue}
             </Text>
           </Box>

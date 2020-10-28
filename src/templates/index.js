@@ -24,7 +24,7 @@ const Index = ({ location, data: { metadata, indicator } }) => {
       >
         <Box bg="white">
           <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
-            <Heading fontFamily="Montserrat" color="#403F3F">
+            <Heading fontFamily="proxima-nova" color="#403F3F">
               How is your state doing?
             </Heading>
             <Text my={3} fontSize={24} fontFamily="Jubilat" letterSpacing="-0.06rem">
@@ -37,7 +37,7 @@ const Index = ({ location, data: { metadata, indicator } }) => {
           </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
-          <Box px={[10, 20]} py={16} fontFamily="Montserrat" fontSize="18px" fontWeight="600">
+          <Box px={[10, 20]} py={16} fontFamily="proxima-nova" fontSize="18px" fontWeight="600">
             Click to explore how U.S. States rank for Life Expectancy.
           </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} />

@@ -78,10 +78,10 @@ const StateDotMarker = ({
             {indicatorPosition}
           </Box>
           <PopoverBody paddingLeft="28px">
-            <Text fontFamily="Montserrat" color="#403F3F" size="16px" fontWeight="800" mb="3px">
+            <Text fontFamily="proxima-nova" color="#403F3F" size="16px" fontWeight="800" mb="3px">
               {state}
             </Text>
-            <Text fontFamily="Montserrat" color={indicatorColor} size="16px" fontWeight="600">
+            <Text fontFamily="proxima-nova" color={indicatorColor} size="16px" fontWeight="600">
               {indicatorValue}
             </Text>
           </PopoverBody>

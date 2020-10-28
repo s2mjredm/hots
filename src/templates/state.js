@@ -221,7 +221,7 @@ const State = ({
           pb={100}
           p={['40px', 0]}
         >
-          <Text fontFamily="Proxima Nova" fontSize="18px" pb="20px">
+          <Text fontFamily="proxima-nova" fontSize="18px" pb="20px">
             {`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
           </Text>
           <p>{parse(metadata.definition)}</p>

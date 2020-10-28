@@ -35,7 +35,7 @@ const Social = ({ onClose, isOpen, url }) => {
                   <Icon name="chevron-left" color="#707070" fontSize="30px" />
                   <Icon name="chevron-right" color="#707070" fontSize="30px" />
                 </Flex>
-                <Text fontSize="14px" fontFamily="Proxima Nova" paddingTop={2}>
+                <Text fontSize="14px" fontFamily="proxima-nova" paddingTop={2}>
                   Embed
                 </Text>
               </Flex>
@@ -51,7 +51,7 @@ const Social = ({ onClose, isOpen, url }) => {
                   >
                     <Icon name="facebook" color="white" fontSize="30px" />
                   </Flex>
-                  <Text fontSize="14px" fontFamily="Proxima Nova" paddingTop={2}>
+                  <Text fontSize="14px" fontFamily="proxima-nova" paddingTop={2}>
                     Facebook
                   </Text>
                 </Flex>
@@ -68,7 +68,7 @@ const Social = ({ onClose, isOpen, url }) => {
                   >
                     <Icon name="pinterest" color="white" fontSize="30px" />
                   </Flex>
-                  <Text fontSize="14px" fontFamily="Proxima Nova" paddingTop={2}>
+                  <Text fontSize="14px" fontFamily="proxima-nova" paddingTop={2}>
                     Pinterest
                   </Text>
                 </Flex>
@@ -85,14 +85,14 @@ const Social = ({ onClose, isOpen, url }) => {
                   >
                     <Icon name="twitter" color="white" fontSize="30px" />
                   </Flex>
-                  <Text fontSize="14px" fontFamily="Proxima Nova" paddingTop={2}>
+                  <Text fontSize="14px" fontFamily="proxima-nova" paddingTop={2}>
                     Twitter
                   </Text>
                 </Flex>
               </TwitterShareButton>
             </Flex>
             <Flex p={2} bg="#F7F7F7" borderRadius="4px" justify="space-between" width="100%">
-              <Text fontSize="18px" fontFamily="Proxima Nova" fontWeight="semi-bold">
+              <Text fontSize="18px" fontFamily="proxima-nova" fontWeight="semi-bold">
                 {url}
               </Text>
               <Button variantColor="red" variant="link" size="sm" onClick={() => handleCopyLink()}>

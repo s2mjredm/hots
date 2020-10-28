@@ -134,7 +134,7 @@ const SearchSelectInput = ({
       >
         <FormLabel
           textTransform="uppercase"
-          fontFamily="Montserrat"
+          fontFamily="proxima-nova"
           color={labelColor}
           fontSize={['md', 'sm']}
           fontWeight={['bold', 'normal']}

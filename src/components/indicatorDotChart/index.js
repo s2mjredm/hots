@@ -145,7 +145,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
           alignItems="center"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
-          <Text fontFamily="Montserrat">
+          <Text fontFamily="proxima-nova">
             {format(
               dotScale.invert(tickScale(tick)),
               metadata.unit,
@@ -223,7 +223,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
       </Box>
       <Box px={[10, 20]} py="22px" color="gray.text" fontSize="14px">
         <Text bg="white">
-          <Text fontFamily="Montserrat" as="span" paddingRight="5px">
+          <Text fontFamily="proxima-nova" as="span" paddingRight="5px">
             VARIABLE DEFINITION
           </Text>
           {metadata.definition}

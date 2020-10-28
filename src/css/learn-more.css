@@ -11,7 +11,7 @@
 }
 
 .hero h2 {
-  font-family: 'Proxima Nova', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   font-size: 24px;
   font-weight: normal;
 }
@@ -22,7 +22,7 @@
 }
 
 .learn-more p {
-  font-family: 'Proxima Nova', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
 
   padding-top: 20px;
 }
