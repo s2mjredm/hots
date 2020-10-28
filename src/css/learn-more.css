@@ -18,17 +18,17 @@
 
 .hero .item {
   flex: 1;
-  padding: 80px 100px;
+  padding: 80px 120px;
 }
 
 .learn-more p {
   font-family: 'proxima-nova', sans-serif;
-
+  font-weight: 600;
   padding-top: 20px;
 }
 
 .learn-more .wp-block-group {
-  padding: 0px 80px;
+  padding: 0px 120px;
   display: flex;
   align-items: center;
 }
