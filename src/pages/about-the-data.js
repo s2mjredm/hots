@@ -56,9 +56,10 @@ const About = ({
     <Grid
       templateColumns={['40px 1fr 40px', '1fr 320px']}
       templateRows={['1fr 520px', '1fr']}
-      gap={[0, 100, 300]}
-      px={[0, 100]}
+      gap={[0, 100, 220]}
+      px={[0, 120]}
       paddingTop={[130]}
+      paddingBottom={[0, 130]}
       bg="#F0F0F0"
     >
       <Box
