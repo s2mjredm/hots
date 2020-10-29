@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
-import { Box, useDisclosure, Heading, Text } from '@chakra-ui/core';
+import { graphql, Link } from 'gatsby';
+
+import { Box, useDisclosure, Heading, Text, Icon } from '@chakra-ui/core';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorMap from '../components/indicatorMap';
@@ -18,9 +19,12 @@ const Index = ({ location, data: { metadata, indicator } }) => {
       <Box
         px={[10, 20, 120]}
         py={90}
-        // bg="linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(24,69,149,1) 31%, rgba(24,69,149,1) 70%, rgba(255,255,255,1) 100%)"
-        bg="blue.600"
+        // bg="blue.600"
         zIndex="2"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(24,69,149,1) 0%, rgba(24,69,149,1) 45%, rgba(255,255,255,1) 100%)',
+        }}
       >
         <Box bg="white">
           <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
@@ -48,6 +52,21 @@ const Index = ({ location, data: { metadata, indicator } }) => {
             onClose={() => socialOnClose()}
           />
         </Box>
+        <Heading fontFamily="Jubilat" color="#403F3F" paddingTop="120px" w="920px">
+          Living conditions in states play a large role in shaping opportunities for health.
+        </Heading>
+        <Link to="/learn-more">
+          <Text
+            paddingTop="90px"
+            fontFamily="proxima-nova"
+            fontSize="18px"
+            textDecoration="underline"
+            w="260px"
+          >
+            Learn how, and what states can do to improve health
+            <Icon name="arrow-forward" />
+          </Text>
+        </Link>
       </Box>
     </Layout>
   );
