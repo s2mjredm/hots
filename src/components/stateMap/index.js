@@ -17,6 +17,7 @@ const StateMap = ({
 }) => {
   const svgRef = useRef();
   const [dataPobreLeftPos, setDataPobreLeftPos] = useState(0);
+  const [isZoomOut, setIsZoomOut] = useState(false);
 
   useEffect(() => {
     const values = Object.keys(indicator).map(state => indicator[state]);
@@ -44,6 +45,12 @@ const StateMap = ({
   useEffect(() => {
     const svg = svgRef.current;
 
+    const zoomPaddingFactor = isZoomOut ? 1.1 : 2.8;
+    // state is the state I want to zoom to
+    const state = isZoomOut ? svg : svg.querySelector(`#${selectedState}`);
+
+    const bbox = state.getBBox();
+
     // the main SVG object and its current viewBox
     const viewBox = svg.getAttribute('viewBox');
     const vbox = viewBox.split(' ');
@@ -56,10 +63,6 @@ const StateMap = ({
     const cx = vbox[0] + vbox[2] / 2;
     const cy = vbox[1] + vbox[3] / 2;
 
-    // state is the state I want to zoom to
-    const state = svg.querySelector(`#${selectedState}`);
-    const bbox = state.getBBox();
-
     const matrix = svg.getScreenCTM().inverse().multiply(state.getScreenCTM());
 
     // the new center
@@ -71,7 +74,7 @@ const StateMap = ({
     const absoluteOffsetY = vbox[1] + newy - cy;
 
     // the new scale
-    const scale = ((bbox.width * matrix.a) / vbox[2]) * 2.8;
+    const scale = ((bbox.width * matrix.a) / vbox[2]) * zoomPaddingFactor;
 
     const scaledOffsetX = absoluteOffsetX + (vbox[2] * (1 - scale)) / 2;
     const scaledOffsetY = absoluteOffsetY + (vbox[3] * (1 - scale)) / 2;
@@ -79,7 +82,7 @@ const StateMap = ({
     const scaledHeight = vbox[3] * scale;
 
     svg.setAttribute('viewBox', `${scaledOffsetX} ${scaledOffsetY} ${scaledWidth} ${scaledHeight}`);
-  }, [selectedState]);
+  }, [selectedState, isZoomOut]);
 
   const mapContainerRef = useCallback(node => {
     if (node !== null) {
@@ -89,13 +92,15 @@ const StateMap = ({
 
   return (
     <Box bg="#E5E5E5" ref={mapContainerRef} position="relative">
-      <DataPobre
-        leftPosition={dataPobreLeftPos}
-        indicatorRank={indicatorRank}
-        selectedStateName={selectedStateName}
-        indicatorName={indicatorName}
-        indicatorValue={indicatorValue}
-      />
+      {!isZoomOut && (
+        <DataPobre
+          leftPosition={dataPobreLeftPos}
+          indicatorRank={indicatorRank}
+          selectedStateName={selectedStateName}
+          indicatorName={indicatorName}
+          indicatorValue={indicatorValue}
+        />
+      )}
       {onShare && (
         <Button
           onClick={() => onShare()}
@@ -120,6 +125,27 @@ const StateMap = ({
           />
         </Button>
       )}
+      <Button
+        onClick={() => setIsZoomOut(true)}
+        position="absolute"
+        bottom={['20px', '45px', '100px']}
+        right={['30px', '70px', '100px']}
+        variant="link"
+        size={['sm', 'md']}
+        color="#403F3F"
+        colorScheme="gray.900"
+      >
+        Zoom Out
+        <Button
+          as="div"
+          marginLeft={2}
+          fontSize={['30px', '60px']}
+          variant="link"
+          size="md"
+          color="white"
+          colorScheme="gray.900"
+        />
+      </Button>
       <svg
         ref={svgRef}
         version="1.1"
