@@ -182,7 +182,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
 
     const options = {
       includeScore: false,
-      keys: ['category'],
+      keys: ['title', 'tags'],
     };
 
     const fuse = new Fuse(nodes, options);
