@@ -38,7 +38,7 @@ const Index = ({ location, data: { metadata, indicator } }) => {
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
           <Box px={[10, 20]} py={16} fontFamily="proxima-nova" fontSize="18px" fontWeight="600">
-            Click to explore how U.S. States rank for Life Expectancy.
+            {`Click to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} />
           <Social
