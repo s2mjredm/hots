@@ -84,6 +84,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-open-graph-images`,
     `gatsby-plugin-react-helmet`,
   ],
 };

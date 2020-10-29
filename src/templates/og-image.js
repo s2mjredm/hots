@@ -355,7 +355,7 @@ State.propTypes = {
 export default State;
 
 export const query = graphql`
-  query statePage($id: String, $state: String) {
+  query statePageOG($id: String, $state: String) {
     metadata: indicatorsJson(id: { eq: $id }) {
       title
       definition
