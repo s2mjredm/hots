@@ -55,6 +55,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }),
         },
       });
+      // createPage({
+      //   path: `/og/${indicator}/${stateName}`,
+      //   component: path.resolve(`src/templates/og-image.js`),
+      //   context: {
+      //     ...meta,
+      //     state: state.state,
+      //   },
+      // });
     });
   });
 };
