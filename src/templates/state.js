@@ -252,7 +252,8 @@ const State = ({
               indicator[stateName.state],
               metadata.unit,
               metadata.rounding,
-              metadata.decimals
+              metadata.decimals,
+              metadata.factor
             )}
           />
         </Box>
@@ -318,7 +319,8 @@ const State = ({
                   state[ind.variable],
                   variables[ind.variable.toLowerCase()][0].unit,
                   variables[ind.variable.toLowerCase()][0].rounding,
-                  variables[ind.variable.toLowerCase()][0].decimals
+                  variables[ind.variable.toLowerCase()][0].decimals,
+                  variables[ind.variable.toLowerCase()][0].factor
                 )}
                 best
               />
@@ -350,7 +352,8 @@ const State = ({
                   state[ind.variable],
                   variables[ind.variable.toLowerCase()][0].unit,
                   variables[ind.variable.toLowerCase()][0].rounding,
-                  variables[ind.variable.toLowerCase()][0].decimals
+                  variables[ind.variable.toLowerCase()][0].decimals,
+                  variables[ind.variable.toLowerCase()][0].factor
                 )}
               />
             );
@@ -384,6 +387,7 @@ export const query = graphql`
       unit
       rounding
       decimals
+      factor
       high
       low
     }
@@ -397,6 +401,7 @@ export const query = graphql`
         unit
         rounding
         decimals
+        factor
         category
         condition
         conditionDefinition

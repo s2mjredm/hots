@@ -97,7 +97,7 @@ const RankGraphic = ({ rankings }) => {
                 left="5px"
                 mb="-50px"
               >
-                {format(r.value, r.unit, r.rounding, r.decimals)}
+                {format(r.value, r.unit, r.rounding, r.decimals, r.factor)}
               </Text>
             </>
           )}

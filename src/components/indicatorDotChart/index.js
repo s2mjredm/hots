@@ -150,7 +150,8 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
               dotScale.invert(tickScale(tick)),
               metadata.unit,
               metadata.rounding,
-              metadata.decimals
+              metadata.decimals,
+              metadata.factor
             )}
           </Text>
         </Box>
@@ -181,7 +182,13 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         <StateDotMarker
           key={marker.state}
           state={marker.state}
-          indicatorValue={format(marker.indicatorValue, metadata.unit, metadata.rounding)}
+          indicatorValue={format(
+            marker.indicatorValue,
+            metadata.unit,
+            metadata.rounding,
+            metadata.decimals,
+            metadata.factor
+          )}
           indicatorPosition={findIndex(dotMarkers, d => marker.state === d.state) + 1}
           leftPosition={
             placement() === 'top-start' ? dotScale(group.x1) - 7 : dotScale(group.x0) - 7
