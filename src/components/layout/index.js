@@ -6,12 +6,11 @@ import Header from '../header';
 import Footer from '../footer';
 
 const Layout = ({ location: { pathname }, children, ogImage, description }) => {
-  const path = pathname || window.location.pathname;
   return (
     <>
       <SEO
         description={description}
-        image={ogImage ? `og-images${path.replace(/\/$/, '')}.png` : null}
+        image={ogImage && pathname ? `og-images${pathname.replace(/\/$/, '')}.png` : null}
       />
       <Header flag={pathname === '/'} />
       <main>{children}</main>

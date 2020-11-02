@@ -21,6 +21,7 @@ import './state.css';
 import Arrow from '../svg/arrow.svg';
 
 const State = ({
+  location,
   data: {
     metadata,
     indicator,
@@ -94,6 +95,7 @@ const State = ({
 
   return (
     <Layout
+      location={location}
       description={`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
       ogImage
     >
@@ -369,6 +371,7 @@ const State = ({
 
 State.propTypes = {
   data: PropTypes.shape().isRequired,
+  location: PropTypes.shape().isRequired,
 };
 
 export default State;
