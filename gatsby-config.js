@@ -10,7 +10,7 @@ module.exports = {
     description: ``,
     titleTemplate: '',
     author: `Axis Maps`,
-    url: '',
+    url: 'https://hots.netlify.app/',
     image: '',
   },
   /* Your site config here */

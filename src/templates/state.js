@@ -92,7 +92,10 @@ const State = ({
     }));
 
   return (
-    <Layout>
+    <Layout
+      description={`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
+      ogImage
+    >
       {/* header */}
       <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
       {displayOnScroll && !isMobile && (

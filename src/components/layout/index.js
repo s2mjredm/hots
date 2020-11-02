@@ -5,10 +5,14 @@ import SEO from '../seo';
 import Header from '../header';
 import Footer from '../footer';
 
-const Layout = ({ location: { pathname }, children }) => {
+const Layout = ({ location: { pathname }, children, ogImage, description }) => {
+  const path = pathname || window.location.pathname;
   return (
     <>
-      <SEO />
+      <SEO
+        description={description}
+        image={ogImage ? `og-images${path.replace(/\/$/, '')}.png` : null}
+      />
       <Header flag={pathname === '/'} />
       <main>{children}</main>
       <Footer />
@@ -19,12 +23,16 @@ const Layout = ({ location: { pathname }, children }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.shape(),
+  ogImage: PropTypes.bool,
+  description: PropTypes.string,
 };
 
 Layout.defaultProps = {
   location: {
     pathname: null,
   },
+  ogImage: false,
+  description: null,
 };
 
 export default Layout;
