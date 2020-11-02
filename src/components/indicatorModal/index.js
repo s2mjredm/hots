@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
@@ -206,15 +206,14 @@ const IndicatorModal = ({ onClose, isOpen }) => {
       }
     `
   );
+  const nodesWithTagsAsArray = useRef(nodes.map(n => ({ ...n, tags: n.tags.split(';') })));
+
   const [inputValue, setInputValue] = useState('');
 
   const [searchResults, setSearchResults] = useState();
 
   const [categories /* , setCategories */] = useState(
-    groupBy(
-      nodes.map(n => ({ ...n, tags: n.tags.split(';') })),
-      'category'
-    )
+    groupBy(nodesWithTagsAsArray.current, 'category')
   );
 
   const handleChange = event => {
@@ -227,7 +226,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
     };
 
     if (input.length > 0) {
-      const fuse = new Fuse(nodes, options);
+      const fuse = new Fuse(nodesWithTagsAsArray.current, options);
 
       const results = fuse.search(input).map(i => {
         return i.item;
