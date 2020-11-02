@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, navigate } from 'gatsby';
 import { Grid, Box, PseudoBox, Flex, Text } from '@chakra-ui/core';
 
 const Flag = ({ active }) => {
@@ -100,6 +100,7 @@ const Flag = ({ active }) => {
           bg="#EB474C"
           transition="width 500"
           style={active === 'learn-more' ? hoverStyle(learnMore) : null}
+          onClick={() => navigate('/learn-more')}
           _hover={hoverStyle(learnMore)}
           display={['none', 'block']}
         />
@@ -122,6 +123,7 @@ const Flag = ({ active }) => {
           bg="#EB474C"
           transition="width 500"
           style={active === 'take-action' ? hoverStyle(takeAction) : null}
+          onClick={() => navigate('/take-action')}
           _hover={hoverStyle(takeAction)}
           display={['none', 'block']}
         />
@@ -137,6 +139,7 @@ const Flag = ({ active }) => {
           bg="#EB474C"
           transition="width 500"
           style={active === 'about' ? hoverStyle(about) : null}
+          onClick={() => navigate('/about')}
           _hover={hoverStyle(about)}
           display={['none', 'block']}
         />
