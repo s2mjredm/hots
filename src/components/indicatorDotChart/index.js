@@ -107,7 +107,7 @@ const useGenStateDotMarkers = indicator => {
   return dotMarkers;
 };
 
-const IndicatorDotChart = ({ indicator, metadata }) => {
+const IndicatorDotChart = ({ indicator, metadata, states }) => {
   const [trackRef, setTrackRef] = useState({ current: null });
   const { width } = useContainerDimensions(trackRef);
   const [range /* ,setRange */] = useState(
@@ -182,6 +182,8 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
         <StateDotMarker
           key={marker.state}
           state={marker.state}
+          stateName={states.find(s => s.state === marker.state).name}
+          indicator={metadata.title}
           indicatorValue={format(
             marker.indicatorValue,
             metadata.unit,
@@ -243,6 +245,7 @@ const IndicatorDotChart = ({ indicator, metadata }) => {
 IndicatorDotChart.propTypes = {
   indicator: PropTypes.shape().isRequired,
   metadata: PropTypes.shape().isRequired,
+  states: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default IndicatorDotChart;

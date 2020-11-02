@@ -10,7 +10,14 @@ import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
 import Social from '../components/social';
 
-const Index = ({ location, data: { metadata, indicator } }) => {
+const Index = ({
+  location,
+  data: {
+    metadata,
+    indicator,
+    allStatesJson: { stateName },
+  },
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: socialIsOpen, onOpen: socialOnOpen, onClose: socialOnClose } = useDisclosure();
 
@@ -44,7 +51,7 @@ const Index = ({ location, data: { metadata, indicator } }) => {
           <Box px={[10, 20]} py={16} fontFamily="proxima-nova" fontSize="18px" fontWeight="600">
             {`Click to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
-          <IndicatorDotChart indicator={indicator} metadata={metadata} />
+          <IndicatorDotChart indicator={indicator} metadata={metadata} states={stateName} />
           <Social
             isOpen={socialIsOpen}
             url={location.href}
@@ -146,6 +153,12 @@ export const query = graphql`
     }
     indicator: indicatorsJson(id: { eq: $id }) {
       ...States
+    }
+    allStatesJson {
+      stateName: nodes {
+        name
+        state
+      }
     }
   }
 `;

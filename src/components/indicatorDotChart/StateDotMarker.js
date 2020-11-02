@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { navigate } from 'gatsby';
 import {
   PseudoBox,
   Box,
@@ -11,8 +12,12 @@ import {
   Text,
 } from '@chakra-ui/core';
 
+import { slugify } from '../../utils/slugify';
+
 const StateDotMarker = ({
   state,
+  stateName,
+  indicator,
   indicatorValue,
   indicatorColor,
   indicatorPosition,
@@ -57,6 +62,7 @@ const StateDotMarker = ({
             _hover={{ bg: 'white' }}
             onMouseEnter={open}
             onMouseLeave={close}
+            onClick={() => navigate(`/${slugify(indicator)}/${slugify(stateName)}`)}
           />
         </PopoverTrigger>
         <PopoverContent zIndex={4} marginBottom="40px" w="121px" h="62px" borderRadius="0px">
@@ -93,6 +99,8 @@ const StateDotMarker = ({
 
 StateDotMarker.propTypes = {
   state: PropTypes.string.isRequired,
+  stateName: PropTypes.string.isRequired,
+  indicator: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
   leftPosition: PropTypes.number.isRequired,
   bottom: PropTypes.number,
