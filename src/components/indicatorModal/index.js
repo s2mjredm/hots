@@ -99,7 +99,7 @@ const renderSearchResults = results => {
   return results.map(i => {
     return (
       <PseudoBox
-        key={i}
+        key={i.title}
         my={6}
         mx={8}
         py={4}
@@ -208,6 +208,13 @@ const IndicatorModal = ({ onClose, isOpen }) => {
   );
   const nodesWithTagsAsArray = useRef(nodes.map(n => ({ ...n, tags: n.tags.split(';') })));
 
+  const fuseSearchOptions = {
+    includeScore: true,
+    keys: ['tags'],
+  };
+
+  const fuse = useRef(new Fuse(nodesWithTagsAsArray.current, fuseSearchOptions));
+
   const [inputValue, setInputValue] = useState('');
 
   const [searchResults, setSearchResults] = useState();
@@ -220,17 +227,15 @@ const IndicatorModal = ({ onClose, isOpen }) => {
     const input = event.target.value;
     setInputValue(input);
 
-    const options = {
-      includeScore: true,
-      keys: ['tags'],
-    };
-
     if (input.length > 0) {
-      const fuse = new Fuse(nodesWithTagsAsArray.current, options);
+      const fuseSearch = fuse.current;
 
-      const results = fuse.search(input).map(i => {
-        return i.item;
-      });
+      const results = fuseSearch
+        .search(input)
+        .filter(i => i.score > 0)
+        .map(i => {
+          return i.item;
+        });
       setSearchResults(results);
     } else {
       setSearchResults();
