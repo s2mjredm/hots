@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
@@ -95,7 +95,55 @@ const renderTabPanel = indicators => {
   });
 };
 
-const SearchInput = ({ inputValue, onChange }) => {
+const renderSearchResults = results => {
+  return results.map(i => {
+    return (
+      <PseudoBox
+        key={i.title}
+        my={6}
+        mx={8}
+        py={4}
+        bg="white"
+        textAlign="start"
+        display="flex"
+        borderBottom="1px solid #E5E5E5"
+      >
+        <Box
+          w="30px"
+          h="30px"
+          lineHeight="31px"
+          borderRadius="100%"
+          background="#184595"
+          textAlign="center"
+          color="white"
+          marginRight="12px"
+        >
+          1
+        </Box>
+        <Box>
+          <Text
+            fontSize="18px"
+            color="#184595"
+            fontFamily="News Cycle"
+            fontWeight="600"
+            paddingBottom="5px"
+          >
+            {i.title}
+          </Text>
+          <Link to={`/${slugify(i.title)}`}>
+            <Text fontStyle="italic" color="red.500" cursor="pointer">
+              <span style={{ fontWeight: 'bold', paddingRight: '4px' }}>on</span>
+              Map it
+              <Icon name="arrow-forward" size="24px" paddingLeft="8px" />
+            </Text>
+          </Link>
+        </Box>
+      </PseudoBox>
+    );
+  });
+};
+
+const SearchInput = ({ inputValue, onChange, onCloseSearch }) => {
   const [isOnFocus, setIsOnFocus] = useState(false);
 
   const focusedStyles = { paddingLeft: '290px' };
@@ -127,7 +175,7 @@ const SearchInput = ({ inputValue, onChange }) => {
           borderRadius="100px"
           focusBorderColor="#FFD285"
         />
-        <InputRightElement>
+        <InputRightElement onClick={() => onCloseSearch()}>
           <Icon h="40px" name={isOnFocus ? 'small-close' : 'search'} paddingBottom="7px" />
         </InputRightElement>
       </InputGroup>
@@ -139,6 +187,7 @@ SearchInput.displayName = 'SearchInput';
 SearchInput.propTypes = {
   inputValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onCloseSearch: PropTypes.func.isRequired,
 };
 
 const IndicatorModal = ({ onClose, isOpen }) => {
@@ -157,46 +206,52 @@ const IndicatorModal = ({ onClose, isOpen }) => {
       }
     `
   );
+  const nodesWithTagsAsArray = useRef(nodes.map(n => ({ ...n, tags: n.tags.split(';') })));
+
+  const fuseSearchOptions = {
+    includeScore: true,
+    keys: ['tags'],
+  };
+
+  const fuse = useRef(new Fuse(nodesWithTagsAsArray.current, fuseSearchOptions));
+
   const [inputValue, setInputValue] = useState('');
 
-  const [searchResults, setSearchResults] = useState(nodes);
+  const [searchResults, setSearchResults] = useState();
 
-  const [categories, setCategories] = useState(
-    groupBy(
-      searchResults.map(n => ({ ...n, tags: n.tags.split(';') })),
-      'category'
-    )
+  const [categories /* , setCategories */] = useState(
+    groupBy(nodesWithTagsAsArray.current, 'category')
   );
 
-  useEffect(() => {
-    setCategories(
-      groupBy(
-        searchResults.map(n => ({ ...n, tags: n.tags.split(';') })),
-        'category'
-      )
-    );
-  }, [searchResults]);
-
   const handleChange = event => {
-    setInputValue(event.target.value);
+    const input = event.target.value;
+    setInputValue(input);
 
-    const options = {
-      includeScore: false,
-      keys: ['title', 'tags'],
-    };
+    if (input.length > 0) {
+      const fuseSearch = fuse.current;
 
-    const fuse = new Fuse(nodes, options);
+      const results = fuseSearch
+        .search(input)
+        .filter(i => i.score > 0)
+        .map(i => {
+          return i.item;
+        });
+      setSearchResults(results);
+    } else {
+      setSearchResults();
+    }
+  };
 
-    const results = fuse.search(event.target.value).map(i => i.item);
-    const newItemsList = results.length > 0 ? results : nodes;
-    setSearchResults(newItemsList);
+  const handleCloseSearch = () => {
+    setSearchResults();
+    setInputValue('');
   };
 
   return (
     <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay className="blur" bg="#2a69acc9" />
       <Flex w="100%" h="100vh" top="0" left="0" justify="center" position="absolute" zIndex="1301">
-        <Box width="600px">
+        <Box width="630px">
           <Flex justify="space-between" color="white" align="center">
             <Text fontSize="38px" fontFamily="Jubilat">
               Health Statistics & Outcomes
@@ -204,18 +259,25 @@ const IndicatorModal = ({ onClose, isOpen }) => {
             <CloseButton size="lg" fontSize="32px" onClick={onClose} />
           </Flex>
           <Box bg="#E5E5E5">
-            <SearchInput inputValue={inputValue} onChange={e => handleChange(e)} />
+            <SearchInput
+              inputValue={inputValue}
+              onChange={e => handleChange(e)}
+              onCloseSearch={() => handleCloseSearch()}
+            />
             <Tabs variant="unstyled" display="flex">
               <TabList minWidth="276px" flexDirection="column" borderRight="1px solid #F2F2F2">
                 {renderTabList(Object.keys(categories))}
               </TabList>
-              <TabPanels width="100%" bg="#F7F7F7">
-                {Object.values(categories).map(category => {
-                  const indicators = category.map(c => c.title);
-                  return (
-                    <TabPanel key={category[0].category}>{renderTabPanel(indicators)}</TabPanel>
-                  );
-                })}
+              <TabPanels width="100%" bg="white">
+                {!searchResults &&
+                  Object.values(categories).map(category => {
+                    const indicators = category.map(c => c.title);
+                    return (
+                      <TabPanel key={category[0].category}>{renderTabPanel(indicators)}</TabPanel>
+                    );
+                  })}
+
+                {searchResults && <TabPanel>{renderSearchResults(searchResults)}</TabPanel>}
               </TabPanels>
             </Tabs>
           </Box>
