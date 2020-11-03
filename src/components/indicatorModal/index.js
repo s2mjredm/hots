@@ -206,6 +206,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
       }
     `
   );
+
   const nodesWithTagsAsArray = useRef(nodes.map(n => ({ ...n, tags: n.tags.split(';') })));
 
   const fuseSearchOptions = {
@@ -213,7 +214,11 @@ const IndicatorModal = ({ onClose, isOpen }) => {
     keys: ['tags'],
   };
 
-  const fuse = useRef(new Fuse(nodesWithTagsAsArray.current, fuseSearchOptions));
+  const nodesWithTagsAsArrayPlusCovid = [
+    ...nodesWithTagsAsArray.current,
+    { title: 'covid', categories: 'covid', tags: ['covid', 'corona', 'covid-19'] },
+  ];
+  const fuse = useRef(new Fuse(nodesWithTagsAsArrayPlusCovid, fuseSearchOptions));
 
   const [inputValue, setInputValue] = useState('');
 
@@ -222,6 +227,8 @@ const IndicatorModal = ({ onClose, isOpen }) => {
   const [categories /* , setCategories */] = useState(
     groupBy(nodesWithTagsAsArray.current, 'category')
   );
+
+  const [isSearchingCovid, setIsSearchingCovid] = useState(false);
 
   const handleChange = event => {
     const input = event.target.value;
@@ -237,8 +244,14 @@ const IndicatorModal = ({ onClose, isOpen }) => {
           return i.item;
         });
       setSearchResults(results);
+      if (results[0].title === 'covid') {
+        setIsSearchingCovid(true);
+      } else {
+        setIsSearchingCovid(false);
+      }
     } else {
       setSearchResults();
+      setIsSearchingCovid(false);
     }
   };
 
@@ -277,7 +290,29 @@ const IndicatorModal = ({ onClose, isOpen }) => {
                     );
                   })}
 
-                {searchResults && <TabPanel>{renderSearchResults(searchResults)}</TabPanel>}
+                {searchResults && !isSearchingCovid && (
+                  <TabPanel>{renderSearchResults(searchResults)}</TabPanel>
+                )}
+                {searchResults && isSearchingCovid && (
+                  <TabPanel>
+                    <Flex
+                      align="center"
+                      justify="center"
+                      h="600px"
+                      w="100%"
+                      textAlign="center"
+                      direction="column"
+                      px={8}
+                      color="red.500"
+                    >
+                      <Icon name="warning" fontSize="79px" />
+                      <Text py={6} fontSize="14px">
+                        Content for this site was developed prior to COVID-19. Please contact your
+                        health department for current COVID-19 data.
+                      </Text>
+                    </Flex>
+                  </TabPanel>
+                )}
               </TabPanels>
             </Tabs>
           </Box>
