@@ -275,7 +275,7 @@ const State = ({
           </Link>
         </Flex>
         <Img fluid={pentagon.childImageSharp.fluid} />
-        <Box display={['none', 'block']}>
+        <Box>
           <RankGraphic rankings={categoryRankings} />
         </Box>
       </Grid>
