@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
@@ -54,11 +54,14 @@ const RankGraphic = ({ rankings }) => {
   `);
 
   const [numSlides, setNumSlides] = useState(5);
-  const resize = e => {
-    const { innerWidth } = e.target;
-    setNumSlides(Math.min(Math.floor((innerWidth - 80) / 220), 5));
-  };
-  window.addEventListener('resize', resize);
+
+  useEffect(() => {
+    const resize = e => {
+      const { innerWidth } = e.target;
+      setNumSlides(Math.min(Math.floor((innerWidth - 80) / 220), 5));
+    };
+    window.addEventListener('resize', resize);
+  });
 
   const order = [3, 2, 4, 1, 5];
 
