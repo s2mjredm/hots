@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
 import { groupBy } from 'lodash';
 import { Box, Button } from '@chakra-ui/core';
+import DataPobre from './DataPobre';
 
 import { slugify } from '../../utils/slugify';
+import format from '../../utils/numberFormat';
 
-const IndicatorMap = ({ indicator, onShare }) => {
+const IndicatorMap = ({ indicator, onShare, metadata }) => {
   const svgRef = useRef();
 
   let {
@@ -24,7 +26,11 @@ const IndicatorMap = ({ indicator, onShare }) => {
   `);
   states = groupBy(states, 'state');
 
-  const values = Object.keys(indicator).map(state => indicator[state]);
+  const [dataPobreData, setDataPobreData] = useState(null);
+
+  const values = Object.values(indicator)
+    .map(a => parseFloat(a))
+    .sort((a, b) => b - a);
 
   const scale = scaleQuantize()
     .domain(extent(values))
@@ -42,12 +48,39 @@ const IndicatorMap = ({ indicator, onShare }) => {
         .on('click', () => {
           const path = window.location.pathname === '/' ? 'life-expectancy/' : '';
           navigate(`${path}${slugify(states[state][0].name)}`);
+        })
+        .on('mousemove', event => {
+          setDataPobreData({
+            selectedStateName: state,
+            pos: [event.pageX, event.pageY],
+            indicatorRank: values.indexOf(parseFloat(indicator[state])) + 1,
+            indicatorName: metadata.title,
+            indicatorValue: format(
+              indicator[state],
+              metadata.unit,
+              metadata.rounding,
+              metadata.decimals,
+              metadata.factor
+            ),
+          });
+        })
+        .on('mouseleave', () => {
+          setDataPobreData(null);
         });
     });
   }, []);
 
   return (
     <Box w="100%" px={10} bg="#E5E5E5" position="relative">
+      {dataPobreData && (
+        <DataPobre
+          selectedStateName={dataPobreData.selectedStateName}
+          indicatorRank={dataPobreData.indicatorRank}
+          indicatorName={dataPobreData.indicatorName}
+          indicatorValue={dataPobreData.indicatorValue}
+          pos={dataPobreData.pos}
+        />
+      )}
       <Button
         onClick={() => onShare()}
         position="absolute"
@@ -324,6 +357,7 @@ const IndicatorMap = ({ indicator, onShare }) => {
 IndicatorMap.propTypes = {
   indicator: PropTypes.shape().isRequired,
   onShare: PropTypes.func.isRequired,
+  metadata: PropTypes.shape().isRequired,
 };
 
 export default IndicatorMap;

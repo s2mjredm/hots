@@ -47,7 +47,7 @@ const Index = ({
             <IndicatorDropdown onShowAll={() => onOpen()} initialIndicator={metadata.title} />
           </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} />
+          <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} metadata={metadata} />
           <Box px={[10, 20]} py={16} fontFamily="proxima-nova" fontSize="18px" fontWeight="600">
             {`Click to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
