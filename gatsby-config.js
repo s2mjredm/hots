@@ -30,6 +30,7 @@ module.exports = {
         isUsingColorMode: false,
       },
     },
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
