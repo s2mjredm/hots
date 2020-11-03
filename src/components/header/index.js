@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { Heading, Flex, Button } from '@chakra-ui/core';
+import { Heading, Flex, Button, useDisclosure } from '@chakra-ui/core';
 
+import IndicatorModal from '../indicatorModal';
 import Flag from '../flag';
 import Logo from '../../svg/logo.svg';
 
 const Header = ({ flag }) => {
   const [hover, setHover] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
+      <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
       <Flex
         py={4}
         pl={[2, 120]}
@@ -26,6 +30,7 @@ const Header = ({ flag }) => {
         <Button
           display={['block', 'none']}
           leftIcon="search"
+          onClick={onOpen}
           variant="link"
           size="lg"
           colorScheme="gray.800"
@@ -104,6 +109,7 @@ const Header = ({ flag }) => {
           variant="link"
           size="md"
           colorScheme="gray.800"
+          onClick={onOpen}
         />
         <Button
           display={['block', 'none']}
