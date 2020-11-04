@@ -21,7 +21,6 @@ import {
 import useIsMobile from '../../utils/useIsMobile';
 
 const SelectButton = ({ label, onClick }) => {
-  const [isMouseOver, setIsMouseOver] = useState(false);
   return (
     <PseudoBox
       as="div"
@@ -29,8 +28,6 @@ const SelectButton = ({ label, onClick }) => {
       alignItems="center"
       justifyContent="space-between"
       onClick={() => onClick(label)}
-      onMouseEnter={() => setIsMouseOver(true)}
-      onMouseLeave={() => setIsMouseOver(false)}
       cursor="pointer"
       w="100%"
       lineHeight="3.2rem"
@@ -54,7 +51,6 @@ const SelectButton = ({ label, onClick }) => {
       }}
     >
       {label}
-      {isMouseOver && <Icon name="chevron-down" color="gray.700" />}
     </PseudoBox>
   );
 };
