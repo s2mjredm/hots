@@ -26,7 +26,6 @@ const Index = ({
       <Box
         px={[10, 20, 120]}
         py={90}
-        // bg="blue.600"
         zIndex="2"
         style={{
           background:
@@ -59,7 +58,7 @@ const Index = ({
             onClose={() => socialOnClose()}
           />
         </Box>
-        <Heading fontFamily="Jubilat" color="#403F3F" paddingTop="120px" w="920px">
+        <Heading fontFamily="Jubilat" color="#403F3F" paddingTop="120px" w="920px" fontWeight="500">
           Living conditions in states play a large role in shaping opportunities for health.
         </Heading>
         <Link to="/learn-more">
