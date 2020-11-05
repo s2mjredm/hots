@@ -222,14 +222,16 @@ const State = ({
           bg={['#F0F0F0', 'white']}
           direction="column"
           h="100%"
-          justify="space-between"
+          justify="flex-end"
           pb={100}
           p={['40px', 0]}
         >
-          <Text fontFamily="proxima-nova" fontSize="18px" pb="20px">
-            {`Out of 50 states, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
-          </Text>
-          <p>{parse(metadata.definition)}</p>
+          <Box marginBottom={[0, '50px']} marginRight={[0, '80px']}>
+            <Text fontFamily="proxima-nova" fontSize="18px" fontWeight="500" pb={['20px', '40px']}>
+              {`Out of 51, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
+            </Text>
+            <p>{parse(metadata.definition)}</p>
+          </Box>
           <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
             Learn more about what shapes health
             <Arrow
