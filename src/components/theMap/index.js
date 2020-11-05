@@ -187,7 +187,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
         />
       </Button>
       <Button
-        onClick={() => setIsZoomOut(true)}
+        onClick={() => setIsZoomOut(current => !current)}
         position="absolute"
         bottom={['20px', '45px', '100px']}
         right={['30px', '70px', '100px']}
@@ -196,7 +196,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
         color="#403F3F"
         colorScheme="gray.900"
       >
-        Zoom Out
+        Zoom
         <Button
           as="div"
           marginLeft={2}
@@ -207,6 +207,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
           colorScheme="gray.900"
         />
       </Button>
+
       <svg
         ref={svgRef}
         version="1.1"
