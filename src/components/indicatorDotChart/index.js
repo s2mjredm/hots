@@ -207,6 +207,9 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
   if (!dotScale) return null;
   return (
     <Box>
+      <Box px={[10, 20]} py="22px" color="gray.text" fontSize="14px">
+        <Text bg="white">{metadata.definition}</Text>
+      </Box>
       <Box px={[10, 20]} py={16} bg="#E5E5E5" color="gray.text">
         <Box
           ref={getTrackRef}
@@ -229,14 +232,6 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
             <Icon name="arrow-forward" size="24px" />
           </Flex>
         </Flex>
-      </Box>
-      <Box px={[10, 20]} py="22px" color="gray.text" fontSize="14px">
-        <Text bg="white">
-          <Text fontFamily="proxima-nova" as="span" paddingRight="5px">
-            VARIABLE DEFINITION
-          </Text>
-          {metadata.definition}
-        </Text>
       </Box>
     </Box>
   );
