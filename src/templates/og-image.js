@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { Box, Grid, Flex, Text } from '@chakra-ui/core';
 
-import StateMap from '../components/stateMap';
+import TheMap from '../components/theMap';
 
 import './state.css';
 import Logo from '../svg/logo.svg';
@@ -57,13 +57,11 @@ const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
         </Box>
       </Flex>
       <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
-        <StateMap
+        <TheMap
           indicator={indicator}
-          selectedState={state.state}
-          selectedStateName={state.name}
-          indicatorRank={ranking[metadata.variable]}
-          indicatorName={metadata.title}
-          indicatorValue={parseFloat(indicator[state.state])}
+          selectedState={state}
+          metadata={metadata}
+          onShare={() => console.log('share')}
         />
       </Box>
     </Grid>
