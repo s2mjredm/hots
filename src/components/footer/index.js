@@ -35,11 +35,10 @@ const Footer = () => {
       fontSize="sm"
     >
       <Box pr={5} pb={4}>
-        <Heading size="md" pb={2}>
+        <Heading size="md" pb={2} fontFamily="proxima-nova" fontWeight="500">
           ABOUT
         </Heading>
-
-        <Text fontWeight="semi-bold" w={['100%', 'md']}>
+        <Text w={['100%', 'md']} fontFamily="proxima-nova" fontWeight="500">
           State of Health is an initiative conducted by the Center on Society and Health at Virginia
           Commonwealth University, and funded by the Robert Wood Johnson Foundation. Our aim is to
           provide a more complete picture of health, and the conditions that shape health, at the
@@ -51,10 +50,10 @@ const Footer = () => {
         </Text>
       </Box>
       <Box>
-        <Heading size="md" pb={2}>
+        <Heading size="md" pb={2} fontFamily="proxima-nova" fontWeight="500">
           CONTACT
         </Heading>
-        <Text fontWeight="semi-bold" pb={4}>
+        <Text pb={4} fontFamily="proxima-nova" fontWeight="500">
           We would love to hear from you!
           <br />
           Let us know how you’re using this data, or reach out with any comments or questions.
