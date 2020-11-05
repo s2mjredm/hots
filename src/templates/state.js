@@ -212,10 +212,12 @@ const State = ({
         pb={[0, 100]}
       >
         <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
-          <Heading as="h1" fontFamily="Jubilat">
+          <Heading as="h1" fontFamily="Jubilat" fontWeight="normal">
             {stateName.name}
           </Heading>
-          <Heading as="h2">{metadata.title}</Heading>
+          <Heading as="h2" fontWeight="normal" color="#403F3F">
+            {metadata.title}
+          </Heading>
         </Box>
         <Flex
           gridArea={['3 / 1 / 4 / 3', '2 / 1 / 4 / 2']}
@@ -228,9 +230,11 @@ const State = ({
         >
           <Box marginBottom={[0, '50px']} marginRight={[0, '80px']}>
             <Text fontFamily="proxima-nova" fontSize="18px" fontWeight="500" pb={['20px', '40px']}>
-              {`Out of 51, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}`}
+              {`Out of 51, ${stateName.name} ranks ${indicatorRank} for ${metadata.title}.`}
             </Text>
-            <p>{parse(metadata.definition)}</p>
+            <Text color="#403F3F" fontFamily="proxima-nova">
+              {parse(metadata.definition)}
+            </Text>
           </Box>
           <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
             Learn more about what shapes health
@@ -257,7 +261,15 @@ const State = ({
           <Heading display={['none', 'block']} as="h3">
             {`How ${stateName.name} ranks on some of the most important conditions for health`}
           </Heading>
-          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700, paddingBottom: '24px' }}>
+          <Link
+            to="/learn-more"
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              paddingBottom: '24px',
+              textDecoration: 'underline',
+            }}
+          >
             Learn more about why these matter so much for health
             <Arrow
               style={{
