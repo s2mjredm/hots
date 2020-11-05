@@ -9,9 +9,7 @@ import DataPobre from './DataPobre';
 import { slugify } from '../../utils/slugify';
 import format from '../../utils/numberFormat';
 
-const IndicatorMap = ({ indicator, onShare, metadata }) => {
-  const svgRef = useRef();
-
+const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
   let {
     allStatesJson: { states },
   } = useStaticQuery(graphql`
@@ -26,18 +24,34 @@ const IndicatorMap = ({ indicator, onShare, metadata }) => {
   `);
   states = groupBy(states, 'state');
 
+  const svgRef = useRef();
+
+  const { state: stateId } = selectedState;
+
+  const [isZoomOut, setIsZoomOut] = useState(false);
+
   const [dataPobreData, setDataPobreData] = useState(null);
 
   const values = Object.values(indicator)
     .map(a => parseFloat(a))
     .sort((a, b) => b - a);
 
-  const scale = scaleQuantize()
-    .domain(extent(values))
-    .range(['#042351', '#1E306E', '#293989', '#184FAA', '#0066CB', '#0083E2', '#50BEFA', '#A2DCEE'])
-    .nice();
-
+  // cores e mouse over: setDataPobreData
   useEffect(() => {
+    const scale = scaleQuantize()
+      .domain(extent(values))
+      .range([
+        '#042351',
+        '#1E306E',
+        '#293989',
+        '#184FAA',
+        '#0066CB',
+        '#0083E2',
+        '#50BEFA',
+        '#A2DCEE',
+      ])
+      .nice();
+
     const svg = select(svgRef.current);
     Object.keys(indicator).forEach(state => {
       svg
@@ -70,6 +84,75 @@ const IndicatorMap = ({ indicator, onShare, metadata }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!stateId) return;
+    const svg = svgRef.current;
+
+    const zoomPaddingFactor = isZoomOut ? 1.1 : 2.8;
+    // state is the state I want to zoom to
+    const state = isZoomOut ? svg : svg.querySelector(`#${stateId}`);
+
+    const bbox = state.getBBox();
+
+    function getOffset(element) {
+      const bound = element.getBoundingClientRect();
+      const html = document.documentElement;
+
+      return {
+        top: bound.top + window.pageYOffset - html.clientTop + bound.height / 2,
+        left: bound.left + window.pageXOffset - html.clientLeft + bound.width / 2,
+      };
+    }
+
+    const pos = [getOffset(svg).left, getOffset(svg).top];
+
+    setDataPobreData({
+      selectedStateName: stateId,
+      pos,
+      indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
+      indicatorName: metadata.title,
+      indicatorValue: format(
+        indicator[stateId],
+        metadata.unit,
+        metadata.rounding,
+        metadata.decimals,
+        metadata.factor
+      ),
+    });
+
+    // the main SVG object and its current viewBox
+    const viewBox = svg.getAttribute('viewBox');
+    const vbox = viewBox.split(' ');
+    vbox[0] = parseFloat(vbox[0]);
+    vbox[1] = parseFloat(vbox[1]);
+    vbox[2] = parseFloat(vbox[2]);
+    vbox[3] = parseFloat(vbox[3]);
+
+    // the current center of the viewBox
+    const cx = vbox[0] + vbox[2] / 2;
+    const cy = vbox[1] + vbox[3] / 2;
+
+    const matrix = svg.getScreenCTM().inverse().multiply(state.getScreenCTM());
+
+    // the new center
+    const newx = (bbox.x + bbox.width / 2) * matrix.a + matrix.e;
+    const newy = (bbox.y + bbox.height / 2) * matrix.d + matrix.f;
+
+    // the corresponding top left corner in the current scale
+    const absoluteOffsetX = vbox[0] + newx - cx;
+    const absoluteOffsetY = vbox[1] + newy - cy;
+
+    // the new scale
+    const scale = ((bbox.width * matrix.a) / vbox[2]) * zoomPaddingFactor;
+
+    const scaledOffsetX = absoluteOffsetX + (vbox[2] * (1 - scale)) / 2;
+    const scaledOffsetY = absoluteOffsetY + (vbox[3] * (1 - scale)) / 2;
+    const scaledWidth = vbox[2] * scale;
+    const scaledHeight = vbox[3] * scale;
+
+    svg.setAttribute('viewBox', `${scaledOffsetX} ${scaledOffsetY} ${scaledWidth} ${scaledHeight}`);
+  }, [stateId, isZoomOut]);
+
   return (
     <Box w="100%" px={10} bg="#E5E5E5" position="relative">
       {dataPobreData && (
@@ -100,6 +183,27 @@ const IndicatorMap = ({ indicator, onShare, metadata }) => {
           variant="link"
           size="md"
           color="#403F3F"
+          colorScheme="gray.900"
+        />
+      </Button>
+      <Button
+        onClick={() => setIsZoomOut(true)}
+        position="absolute"
+        bottom={['20px', '45px', '100px']}
+        right={['30px', '70px', '100px']}
+        variant="link"
+        size={['sm', 'md']}
+        color="#403F3F"
+        colorScheme="gray.900"
+      >
+        Zoom Out
+        <Button
+          as="div"
+          marginLeft={2}
+          fontSize={['30px', '60px']}
+          variant="link"
+          size="md"
+          color="white"
           colorScheme="gray.900"
         />
       </Button>
@@ -354,10 +458,15 @@ const IndicatorMap = ({ indicator, onShare, metadata }) => {
   );
 };
 
-IndicatorMap.propTypes = {
+TheMap.propTypes = {
   indicator: PropTypes.shape().isRequired,
   onShare: PropTypes.func.isRequired,
   metadata: PropTypes.shape().isRequired,
+  selectedState: PropTypes.shape(),
 };
 
-export default IndicatorMap;
+TheMap.defaultProps = {
+  selectedState: { stateName: null, stateId: null },
+};
+
+export default TheMap;

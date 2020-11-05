@@ -14,7 +14,7 @@ import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
-import StateMap from '../components/stateMap';
+import TheMap from '../components/theMap';
 import format from '../utils/numberFormat';
 
 import './state.css';
@@ -242,19 +242,11 @@ const State = ({
           </Link>
         </Flex>
         <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
-          <StateMap
+          <TheMap
             indicator={indicator}
-            selectedState={stateName.state}
-            selectedStateName={stateName.name}
-            indicatorRank={indicatorRank}
-            indicatorName={metadata.title}
-            indicatorValue={format(
-              indicator[stateName.state],
-              metadata.unit,
-              metadata.rounding,
-              metadata.decimals,
-              metadata.factor
-            )}
+            selectedState={stateName}
+            metadata={metadata}
+            onShare={() => console.log('share')}
           />
         </Box>
       </Grid>

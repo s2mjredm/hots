@@ -5,7 +5,7 @@ import { graphql, Link } from 'gatsby';
 import { Box, useDisclosure, Heading, Text, Icon } from '@chakra-ui/core';
 import Layout from '../components/layout';
 import IndicatorDropdown from '../components/indicatorDropdown';
-import IndicatorMap from '../components/indicatorMap';
+import TheMap from '../components/theMap';
 import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
 import Social from '../components/social';
@@ -46,7 +46,7 @@ const Index = ({
             <IndicatorDropdown onShowAll={() => onOpen()} initialIndicator={metadata.title} />
           </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <IndicatorMap indicator={indicator} onShare={() => socialOnOpen()} metadata={metadata} />
+          <TheMap indicator={indicator} onShare={() => socialOnOpen()} metadata={metadata} />
           <Box px={[10, 20]} py={16} fontFamily="proxima-nova" fontSize="18px" fontWeight="600">
             {`Click to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
