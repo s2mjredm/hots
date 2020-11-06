@@ -33,22 +33,49 @@ const Index = ({
         }}
       >
         <Box bg="white">
-          <Box px={[10, 20]} pt={[10, 20]} color="gray.text">
-            <Heading fontFamily="proxima-nova" color="#403F3F">
+          <Box px={[5, 20]} pt={[10, 20]} color="gray.text">
+            <Heading
+              fontFamily="proxima-nova"
+              color="#403F3F"
+              fontWeight={['900', '600']}
+              fontSize={['20px', '1.875rem']}
+            >
               How is your state doing?
             </Heading>
-            <Text my={3} fontSize={24} fontFamily="Jubilat">
+            <Text
+              my={3}
+              fontSize={[15, 24]}
+              fontFamily={['proxima-nova', 'Jubilat']}
+              color="#403F3F"
+            >
               Map it! Choose a health statistic or outcome to see results mapped for the whole
               United States. Select a state for more detailed information on that state’s health:
             </Text>
           </Box>
-          <Box px={[10, 20]} paddingBottom={[10]}>
+          <Box px={[5, 20]} paddingBottom={[10]}>
             <IndicatorDropdown onShowAll={() => onOpen()} initialIndicator={metadata.title} />
           </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
           <TheMap indicator={indicator} onShare={() => socialOnOpen()} metadata={metadata} />
-          <Box px={[10, 20]} py={16} fontFamily="proxima-nova" fontSize="18px" fontWeight="600">
+          <Box
+            px={[5, 20]}
+            py={[5, 16]}
+            fontFamily="proxima-nova"
+            fontSize="18px"
+            fontWeight="600"
+            display={['none', 'block']}
+          >
             {`Click to explore how U.S. States rank for ${metadata.title}.`}
+          </Box>
+          <Box
+            px={[5, 20]}
+            py={[5, 16]}
+            fontFamily="proxima-nova"
+            fontSize="12px"
+            fontWeight="600"
+            display={['block', 'none']}
+          >
+            {`Tap to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
           <IndicatorDotChart indicator={indicator} metadata={metadata} states={stateName} />
           <Social
@@ -58,12 +85,19 @@ const Index = ({
             onClose={() => socialOnClose()}
           />
         </Box>
-        <Heading fontFamily="Jubilat" color="#403F3F" paddingTop="120px" w="920px" fontWeight="500">
+        <Heading
+          fontFamily="Jubilat"
+          fontSize={['18px']}
+          color="#403F3F"
+          paddingTop={['100px', '120px']}
+          w={['100%', '920px']}
+          fontWeight="500"
+        >
           Living conditions in states play a large role in shaping opportunities for health.
         </Heading>
         <Link to="/learn-more">
           <Text
-            paddingTop="90px"
+            paddingTop={['40px', '90px']}
             fontFamily="proxima-nova"
             fontSize="18px"
             textDecoration="underline"
