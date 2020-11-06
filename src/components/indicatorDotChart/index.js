@@ -207,10 +207,10 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
   if (!dotScale) return null;
   return (
     <Box>
-      <Box px={[10, 20]} py="22px" color="gray.text" fontSize="14px">
+      <Box px={[5, 20]} py="22px" color="gray.text" fontSize="14px">
         <Text bg="white">{metadata.definition}</Text>
       </Box>
-      <Box px={[10, 20]} py={16} bg="#E5E5E5" color="gray.text">
+      <Box px={[5, 20]} py={16} bg="#E5E5E5" color="gray.text">
         <Box
           ref={getTrackRef}
           position="relative"
