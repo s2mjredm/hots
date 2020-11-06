@@ -96,10 +96,10 @@ const IndicatorDropdown = ({
           _hover={{ bg: '#FFB3B3' }}
           color="white"
           size="lg"
-          h={[20, 12]}
-          w={['-webkit-fill-available', 'auto']}
+          h={[12, 12]}
+          w={['100%', 'auto']}
           flex="0 0 auto"
-          fontSize={['large', '16px']}
+          fontSize={['10px', '16px']}
           onClick={() => navigate(url)}
         >
           {buttonText}
