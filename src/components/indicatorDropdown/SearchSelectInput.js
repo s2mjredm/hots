@@ -72,8 +72,8 @@ const useIsModalStyles = isOpen => {
 
   useEffect(() => {
     if (isMobile && isOpen) {
-      setPosition('fixed');
-      setPadding('40px');
+      setPosition('sticky');
+      setPadding('0px');
       setZIndex('3');
       setLabelColor('white');
     } else {
