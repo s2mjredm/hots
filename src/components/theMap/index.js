@@ -8,6 +8,7 @@ import DataPobre from './DataPobre';
 
 import { slugify } from '../../utils/slugify';
 import format from '../../utils/numberFormat';
+import useIsMobile from '../../utils/useIsMobile';
 
 const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
   let {
@@ -30,13 +31,15 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
 
   const [isZoomOut, setIsZoomOut] = useState(false);
 
+  const isMobile = useIsMobile();
+
   const [dataPobreData, setDataPobreData] = useState(null);
 
   const values = Object.values(indicator)
     .map(a => parseFloat(a))
     .sort((a, b) => b - a);
 
-  // cores e mouse over: setDataPobreData
+  console.log(isMobile);
   useEffect(() => {
     const scale = scaleQuantize()
       .domain(extent(values))
@@ -164,49 +167,54 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
           pos={dataPobreData.pos}
         />
       )}
-      <Button
-        onClick={() => onShare()}
-        position="absolute"
-        bottom={['20px', '45px', '100px']}
-        right={['30px', '70px', '100px']}
-        variant="link"
-        size={['sm', 'md']}
-        color="#403F3F"
-        colorScheme="gray.900"
-      >
-        SHARE
+
+      {!isMobile && (
         <Button
-          as="div"
-          marginLeft={2}
-          leftIcon="share"
-          fontSize={['30px', '60px']}
+          onClick={() => onShare()}
+          position="absolute"
+          bottom={['20px', '45px', '100px']}
+          right={['30px', '70px', '100px']}
           variant="link"
-          size="md"
+          size={['sm', 'md']}
           color="#403F3F"
           colorScheme="gray.900"
-        />
-      </Button>
-      <Button
-        onClick={() => setIsZoomOut(current => !current)}
-        position="absolute"
-        bottom={['20px', '45px', '100px']}
-        right={['30px', '70px', '100px']}
-        variant="link"
-        size={['sm', 'md']}
-        color="#403F3F"
-        colorScheme="gray.900"
-      >
-        Zoom
+        >
+          SHARE
+          <Button
+            as="div"
+            marginLeft={2}
+            leftIcon="share"
+            fontSize={['30px', '60px']}
+            variant="link"
+            size="md"
+            color="#403F3F"
+            colorScheme="gray.900"
+          />
+        </Button>
+      )}
+      {!isMobile && (
         <Button
-          as="div"
-          marginLeft={2}
-          fontSize={['30px', '60px']}
+          onClick={() => setIsZoomOut(current => !current)}
+          position="absolute"
+          bottom={['20px', '45px', '100px']}
+          right={['30px', '70px', '100px']}
           variant="link"
-          size="md"
-          color="white"
+          size={['sm', 'md']}
+          color="#403F3F"
           colorScheme="gray.900"
-        />
-      </Button>
+        >
+          Zoom
+          <Button
+            as="div"
+            marginLeft={2}
+            fontSize={['30px', '60px']}
+            variant="link"
+            size="md"
+            color="white"
+            colorScheme="gray.900"
+          />
+        </Button>
+      )}
 
       <svg
         ref={svgRef}
