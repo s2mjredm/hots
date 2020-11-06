@@ -212,10 +212,16 @@ const State = ({
         pb={[0, 100]}
       >
         <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
-          <Heading as="h1" fontFamily="Jubilat" fontWeight="normal">
+          <Heading as="h1" fontFamily="Jubilat" fontSize="38px" fontWeight="normal" color="#403F3F">
             {stateName.name}
           </Heading>
-          <Heading as="h2" fontWeight="normal" color="#403F3F">
+          <Heading
+            as="h2"
+            fontFamily="proxima-nova"
+            fontWeight="normal"
+            fontSize="24px"
+            color="#403F3F"
+          >
             {metadata.title}
           </Heading>
         </Box>
@@ -236,7 +242,10 @@ const State = ({
               {parse(metadata.definition)}
             </Text>
           </Box>
-          <Link to="/learn-more" style={{ fontSize: 16, fontWeight: 700 }}>
+          <Link
+            to="/learn-more"
+            style={{ fontSize: 16, fontWeight: 700, textDecoration: 'underline', color: '#403F3F' }}
+          >
             Learn more about what shapes health
             <Arrow
               style={{
