@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
@@ -39,7 +39,6 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
     .map(a => parseFloat(a))
     .sort((a, b) => b - a);
 
-  console.log(isMobile);
   useEffect(() => {
     const scale = scaleQuantize()
       .domain(extent(values))
@@ -172,8 +171,8 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
         <Button
           onClick={() => onShare()}
           position="absolute"
-          bottom={['20px', '45px', '100px']}
-          right={['30px', '70px', '100px']}
+          bottom={['10%']}
+          right={['10%']}
           variant="link"
           size={['sm', 'md']}
           color="#403F3F"
