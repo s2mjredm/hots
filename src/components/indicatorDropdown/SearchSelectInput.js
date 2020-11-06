@@ -102,6 +102,8 @@ const SearchSelectInput = ({
   const [inputValue, setInputValue] = useState(selectedItem);
   const [itemsList, setItemsList] = useState(itemsShortList || items);
 
+  const isMobile = useIsMobile();
+
   const handleChange = event => {
     setInputValue(event.target.value);
     const fuse = new Fuse(items);
@@ -138,9 +140,11 @@ const SearchSelectInput = ({
           {label}
         </FormLabel>
         <InputGroup fontFamily="Jubilat" size="lg">
-          <InputLeftElement zIndex="3">
-            <Icon name="search" color="gray.700" />
-          </InputLeftElement>
+          {!isMobile && (
+            <InputLeftElement zIndex="3">
+              <Icon name="search" color="gray.700" />
+            </InputLeftElement>
+          )}
           <Input
             focusBorderColor="yellow.400"
             zIndex="3"
@@ -151,7 +155,7 @@ const SearchSelectInput = ({
             placeholder={placeholder}
             border="1.3px solid #403F3F"
             fontFamily="Jubilat"
-            h={[20, 12]}
+            h={[16, 12]}
             className="search-input"
           />
           {isOpen && (
@@ -160,12 +164,16 @@ const SearchSelectInput = ({
             </InputRightElement>
           )}
           {!isOpen && (
-            <InputRightElement zIndex="3" cursor="pointer" onClick={() => onOpen()}>
+            <InputRightElement
+              zIndex="3"
+              cursor="pointer"
+              onClick={() => onOpen()}
+              paddingTop={['15px', 0]}
+            >
               <Icon name="chevron-down" color="gray.700" />
             </InputRightElement>
           )}
         </InputGroup>
-
         {isOpen && (
           <Box
             zIndex="9999"
