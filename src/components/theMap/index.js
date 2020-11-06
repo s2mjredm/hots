@@ -157,7 +157,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState }) => {
   }, [stateId, isZoomOut]);
 
   return (
-    <Box w="100%" px={10} bg="#E5E5E5" position="relative">
+    <Box w="100%" px={[5, 10]} bg="#E5E5E5" position="relative">
       {dataPobreData && (
         <DataPobre
           selectedStateName={dataPobreData.selectedStateName}
