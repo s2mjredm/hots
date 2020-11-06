@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
-import { find, groupBy } from 'lodash';
-import parse from 'html-react-parser';
 import { Box, Grid, useDisclosure, Heading, Flex, Icon, Text } from '@chakra-ui/core';
+import { find, groupBy } from 'lodash';
+import { graphql, Link } from 'gatsby';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import Img from 'gatsby-image';
+import parse from 'html-react-parser';
 
 import useIsMobile from '../utils/useIsMobile';
 
-import Layout from '../components/layout';
+import format from '../utils/numberFormat';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
+import Layout from '../components/layout';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
+import Social from '../components/social';
 import TheMap from '../components/theMap';
-import format from '../utils/numberFormat';
 
 import './state.css';
 import Arrow from '../svg/arrow.svg';
@@ -35,6 +36,8 @@ const State = ({
   },
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: socialIsOpen, onOpen: socialOnOpen, onClose: socialOnClose } = useDisclosure();
+
   const {
     isOpen: isIndicatorOpen,
     onOpen: onIndicatorOpen,
@@ -203,6 +206,12 @@ const State = ({
           )}
         </Box>
       )}
+      <Social
+        isOpen={socialIsOpen}
+        url={location.href}
+        onOpen={() => socialOnOpen()}
+        onClose={() => socialOnClose()}
+      />
       <Grid
         w="100%"
         templateColumns={['1fr', '35% 1fr']}
@@ -261,7 +270,7 @@ const State = ({
             indicator={indicator}
             selectedState={stateName}
             metadata={metadata}
-            onShare={() => console.log('share')}
+            onShare={() => socialOnOpen()}
           />
         </Box>
       </Grid>
