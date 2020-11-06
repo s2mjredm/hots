@@ -27,7 +27,7 @@ const Footer = () => {
   return (
     <Flex
       py={16}
-      px={[5, 120]}
+      px={[10, 120]}
       color="white"
       bg="#184595"
       direction={['column', 'column', 'row']}
