@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
@@ -173,8 +173,8 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
         <Button
           onClick={() => onShare()}
           position="absolute"
-          bottom={['20px', '45px', '100px']}
-          right={['30px', '70px', '100px']}
+          bottom={['10%']}
+          right={['10%']}
           variant="link"
           size={['sm', 'md']}
           color="#403F3F"
