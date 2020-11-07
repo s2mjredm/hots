@@ -57,12 +57,7 @@ const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
         </Box>
       </Flex>
       <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
-        <TheMap
-          indicator={indicator}
-          selectedState={state}
-          metadata={metadata}
-          onShare={() => console.log('share')}
-        />
+        <TheMap indicator={indicator} selectedState={state} metadata={metadata} highRes />
       </Box>
     </Grid>
   );

@@ -271,6 +271,7 @@ const State = ({
             selectedState={stateName}
             metadata={metadata}
             onShare={() => socialOnOpen()}
+            highRes
           />
         </Box>
       </Grid>
