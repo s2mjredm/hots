@@ -25,6 +25,7 @@ const StateDotMarker = ({
   bottom,
   isAllwaysVisible,
   placement,
+  size,
 }) => {
   const [isOpen, setIsOpen] = useState(isAllwaysVisible);
   const open = () => setIsOpen(!isOpen);
@@ -53,12 +54,12 @@ const StateDotMarker = ({
           <PseudoBox
             position="absolute"
             left={leftPosition}
-            bottom={bottom * 14}
+            bottom={`${bottom * size}px`}
             borderRadius="100%"
             bg="black"
             border="1px solid white"
-            w="14px"
-            h="14px"
+            w={`${size}px`}
+            h={`${size}px`}
             _hover={{ bg: 'white' }}
             onMouseEnter={open}
             onMouseLeave={close}
@@ -108,11 +109,13 @@ StateDotMarker.propTypes = {
   indicatorPosition: PropTypes.number.isRequired,
   isAllwaysVisible: PropTypes.bool.isRequired,
   placement: PropTypes.string,
+  size: PropTypes.number,
 };
 
 StateDotMarker.defaultProps = {
   placement: 'top',
   bottom: 0,
+  size: 14,
 };
 
 export default StateDotMarker;

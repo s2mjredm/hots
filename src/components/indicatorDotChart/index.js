@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { extent, scaleLinear, scaleQuantize, bin } from 'd3';
-import { findIndex } from 'lodash';
+import { findIndex, some } from 'lodash';
 import PropTypes from 'prop-types';
 
 import { Box, Text, Flex, Divider, Icon } from '@chakra-ui/core';
@@ -39,6 +39,11 @@ const useContainerDimensions = myRef => {
   return dimensions;
 };
 
+const useBins = (width, domain, factor, size = 14) =>
+  bin()
+    .domain(extent(domain).map(r => r * factor))
+    .thresholds(Math.ceil(width / (size + 1)) + 1);
+
 const useScale = (width, domain, tickCount, positive, factor) => {
   const range = extent(domain).map(r => r * factor);
   if (positive === 'FALSE') range.reverse();
@@ -67,9 +72,7 @@ const useScale = (width, domain, tickCount, positive, factor) => {
     return scaleLinear().domain([0, tickCount]).range([0, width]).clamp(true);
   };
 
-  const bins = bin()
-    .domain(extent(domain).map(r => r * factor))
-    .thresholds(Math.ceil(width / 15) + 1);
+  const bins = useBins(width, domain, factor);
 
   const [dotScale, setScale] = useState(genDotScale());
   const [tickScale, setTickScale] = useState(genTickScale());
@@ -160,9 +163,17 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
   };
 
   const renderDots = () => {
-    const histo = bins
+    let size = 14;
+    let histo = bins
       .value(d => parseFloat(d.indicatorValue) * metadata.factor)(dotMarkers)
       .filter(h => h.length);
+
+    if (some(histo, h => h.length > 4)) {
+      size = 10;
+      histo = useBins(width, range, metadata.factor, size)
+        .value(d => parseFloat(d.indicatorValue) * metadata.factor)(dotMarkers)
+        .filter(h => h.length);
+    }
 
     return histo.map((group, index) => {
       const isAllwaysVisible = index === 0 || index === histo.length - 1;
@@ -193,12 +204,15 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           )}
           indicatorPosition={findIndex(dotMarkers, d => marker.state === d.state) + 1}
           leftPosition={
-            placement() === 'top-start' ? dotScale(group.x1) - 7 : dotScale(group.x0) - 7
+            placement() === 'top-start'
+              ? dotScale(group.x1) - size / 2
+              : dotScale(group.x0) - size / 2
           }
           bottom={bottom}
           indicatorColor={colorScale(marker.indicatorValue)}
           isAllwaysVisible={isAllwaysVisible}
           placement={placement()}
+          size={size}
         />
       ));
     });
