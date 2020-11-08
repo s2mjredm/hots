@@ -39,8 +39,8 @@ const useContainerDimensions = myRef => {
   return dimensions;
 };
 
-const useScale = (width, domain, tickCount, positive) => {
-  const range = extent(domain);
+const useScale = (width, domain, tickCount, positive, factor) => {
+  const range = extent(domain).map(r => r * factor);
   if (positive === 'FALSE') range.reverse();
 
   const genColorScale = () => {
@@ -68,7 +68,7 @@ const useScale = (width, domain, tickCount, positive) => {
   };
 
   const bins = bin()
-    .domain(extent(domain))
+    .domain(extent(domain).map(r => r * factor))
     .thresholds(Math.ceil(width / 15) + 1);
 
   const [dotScale, setScale] = useState(genDotScale());
@@ -119,7 +119,8 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
     width,
     range,
     TICK_COUNT,
-    metadata.positive
+    metadata.positive,
+    metadata.factor
   );
   const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
   if (dotMarkers && metadata.positive === 'FALSE') dotMarkers.reverse();
@@ -150,8 +151,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
               dotScale.invert(tickScale(tick)),
               metadata.unit,
               metadata.rounding,
-              metadata.decimals,
-              metadata.factor
+              metadata.decimals
             )}
           </Text>
         </Box>
@@ -161,7 +161,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
 
   const renderDots = () => {
     const histo = bins
-      .value(d => parseFloat(d.indicatorValue))(dotMarkers)
+      .value(d => parseFloat(d.indicatorValue) * metadata.factor)(dotMarkers)
       .filter(h => h.length);
 
     return histo.map((group, index) => {
