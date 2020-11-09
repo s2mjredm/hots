@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { Heading, Flex, Button, useDisclosure } from '@chakra-ui/core';
 
+import MobileMenu from './MobileMenu';
 import IndicatorModal from '../indicatorModal';
 import Flag from '../flag';
 import Logo from '../../svg/logo.svg';
@@ -10,10 +11,17 @@ import Logo from '../../svg/logo.svg';
 const Header = ({ flag }) => {
   const [hover, setHover] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isMobileMenuOpen,
+    onOpen: onOpenMobileMenu,
+    onClose: onCloseMobileMenu,
+  } = useDisclosure();
 
   return (
     <>
       <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => onCloseMobileMenu()} />
+
       <Flex
         py={4}
         pl={[2, 120]}
@@ -117,6 +125,7 @@ const Header = ({ flag }) => {
           variant="link"
           size="lg"
           colorScheme="gray.800"
+          onClick={onOpenMobileMenu}
         />
       </Flex>
       {flag && <Flag active={hover} />}
