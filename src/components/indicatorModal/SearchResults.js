@@ -7,16 +7,16 @@ import { Flex, Box, Text, Icon, PseudoBox } from '@chakra-ui/core';
 import { slugify } from '../../utils/slugify';
 import './index.css';
 
-const SearchResults = ({ results, isSearchingCovid, isMobile }) => {
+const SearchResults = ({ results, isSearchingCovid }) => {
   const renderSearchResults = () => {
     return results.map(i => {
       return (
         <PseudoBox
           key={i.title}
-          my={6}
-          mx={8}
+          my={[0, 6]}
+          mx={[4, 8]}
           py={4}
-          bg="white"
+          bg={['none', 'white']}
           textAlign="start"
           display="flex"
           borderBottom="1px solid #E5E5E5"
@@ -56,9 +56,10 @@ const SearchResults = ({ results, isSearchingCovid, isMobile }) => {
     });
   };
 
-  if (isMobile) {
+  if (!results) {
     return null;
   }
+
   if (isSearchingCovid) {
     return (
       <Flex
@@ -85,7 +86,6 @@ const SearchResults = ({ results, isSearchingCovid, isMobile }) => {
 SearchResults.propTypes = {
   results: PropTypes.arrayOf(PropTypes.object).isRequired,
   isSearchingCovid: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
 };
 
 export default SearchResults;

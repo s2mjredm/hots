@@ -6,27 +6,31 @@ import Fuse from 'fuse.js';
 import { groupBy } from 'lodash';
 
 import {
-  Flex,
   Box,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Input,
   CloseButton,
-  Text,
+  Flex,
   Icon,
-  PseudoBox,
+  Input,
   InputGroup,
-  InputRightElement,
   InputLeftElement,
+  InputRightElement,
   Modal,
+  ModalContent,
+  ModalBody,
   ModalOverlay,
+  PseudoBox,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
 } from '@chakra-ui/core';
 
 import SearchResults from './SearchResults';
 import { slugify } from '../../utils/slugify';
+import useIsMobile from '../../utils/useIsMobile';
+
 import './index.css';
 
 const CustomTab = React.forwardRef((props, ref) => {
@@ -143,6 +147,34 @@ SearchInput.propTypes = {
   onCloseSearch: PropTypes.func.isRequired,
 };
 
+const SearchInputMobile = ({ inputValue, onChange }) => {
+  return (
+    <InputGroup fontFamily="Jubilat" size="lg" color="#403F3F">
+      <InputLeftElement>
+        <Icon size="20px" h="40px" name="search" paddingBottom="8px" />
+      </InputLeftElement>
+      <Input
+        variant="unstyled"
+        autoComplete="off"
+        onChange={e => onChange(e)}
+        value={inputValue}
+        placeholder="Search"
+        fontFamily="proxima-nova"
+        fontWeight="900"
+        fontSize="30px"
+        h="40px"
+        border="none"
+      />
+    </InputGroup>
+  );
+};
+
+SearchInputMobile.displayName = 'SearchInput';
+SearchInputMobile.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 const IndicatorModal = ({ onClose, isOpen }) => {
   const {
     allIndicatorsJson: { nodes },
@@ -183,6 +215,8 @@ const IndicatorModal = ({ onClose, isOpen }) => {
 
   const [isSearchingCovid, setIsSearchingCovid] = useState(false);
 
+  const isMobile = useIsMobile();
+
   const handleChange = event => {
     const input = event.target.value;
     setInputValue(input);
@@ -213,50 +247,72 @@ const IndicatorModal = ({ onClose, isOpen }) => {
     setInputValue('');
   };
 
-  return (
-    <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay className="blur" bg="#2a69acc9" />
-      <Flex w="100%" h="100vh" top="0" left="0" justify="center" position="absolute" zIndex="1301">
-        <Box width="630px">
-          <Flex justify="space-between" color="white" align="center">
-            <Text fontSize="38px" fontFamily="Jubilat">
-              Health Statistics & Outcomes
-            </Text>
-            <CloseButton size="lg" fontSize="32px" onClick={onClose} />
-          </Flex>
-          <Box bg="#E5E5E5">
-            <SearchInput
-              inputValue={inputValue}
-              onChange={e => handleChange(e)}
-              onCloseSearch={() => handleCloseSearch()}
-            />
-            <Tabs variant="unstyled" display="flex">
-              <TabList minWidth="276px" flexDirection="column" borderRight="1px solid #F2F2F2">
-                {renderTabList(Object.keys(categories))}
-              </TabList>
-              <TabPanels width="100%" bg="white">
-                {!searchResults &&
-                  Object.values(categories).map(category => {
-                    const indicators = category.map(c => c.title);
-                    return (
-                      <TabPanel key={category[0].category}>{renderTabPanel(indicators)}</TabPanel>
-                    );
-                  })}
+  if (!isMobile) {
+    return (
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay className="blur" bg="#2a69acc9" />
+        <Flex
+          w="100%"
+          h="100vh"
+          top="0"
+          left="0"
+          justify="center"
+          position="absolute"
+          zIndex="1301"
+        >
+          <Box width="630px">
+            <Flex justify="space-between" color="white" align="center">
+              <Text fontSize="38px" fontFamily="Jubilat">
+                Health Statistics & Outcomes
+              </Text>
+              <CloseButton size="lg" fontSize="32px" onClick={onClose} />
+            </Flex>
+            <Box bg="#E5E5E5">
+              <SearchInput
+                inputValue={inputValue}
+                onChange={e => handleChange(e)}
+                onCloseSearch={() => handleCloseSearch()}
+              />
+              <Tabs variant="unstyled" display="flex">
+                <TabList minWidth="276px" flexDirection="column" borderRight="1px solid #F2F2F2">
+                  {renderTabList(Object.keys(categories))}
+                </TabList>
+                <TabPanels width="100%" bg="white">
+                  {!searchResults &&
+                    Object.values(categories).map(category => {
+                      const indicators = category.map(c => c.title);
+                      return (
+                        <TabPanel key={category[0].category}>{renderTabPanel(indicators)}</TabPanel>
+                      );
+                    })}
 
-                {searchResults && (
-                  <TabPanel>
-                    <SearchResults
-                      isSearchingCovid={isSearchingCovid}
-                      results={searchResults}
-                      isMobile={false}
-                    />
-                  </TabPanel>
-                )}
-              </TabPanels>
-            </Tabs>
+                  {searchResults && (
+                    <TabPanel>
+                      <SearchResults isSearchingCovid={isSearchingCovid} results={searchResults} />
+                    </TabPanel>
+                  )}
+                </TabPanels>
+              </Tabs>
+            </Box>
           </Box>
+        </Flex>
+      </Modal>
+    );
+  }
+  return (
+    <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose} size="full" isCentered>
+      <ModalOverlay bg="#F0F0F0" />
+      <ModalContent bg="white" shadow="none" h="100%">
+        <Box ml="40px" mt="20px" onClick={onClose}>
+          <Icon name="arrow-back" size="26px" />
         </Box>
-      </Flex>
+        <Box mx="32px" my={8}>
+          <SearchInputMobile inputValue={inputValue} onChange={e => handleChange(e)} />
+        </Box>
+        <ModalBody pb={6} display="flex" flexDirection="column" bg="#F0F0F0">
+          <SearchResults isSearchingCovid={isSearchingCovid} results={searchResults} />
+        </ModalBody>
+      </ModalContent>
     </Modal>
   );
 };
