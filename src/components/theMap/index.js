@@ -66,8 +66,9 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
         .attr('fill', scale(indicator[state]))
         .attr('title', state)
         .on('click', () => {
-          const path = window.location.pathname === '/' ? 'life-expectancy/' : '';
-          navigate(`${path}${slugify(states[state][0].name)}`);
+          let [, path] = window.location.pathname.split('/');
+          path = path || 'life-expectancy';
+          navigate(`/${path}/${slugify(states[state][0].name)}`);
         })
         .on('mousemove', event => {
           setDataPobreData({
