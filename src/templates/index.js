@@ -93,7 +93,7 @@ const Index = ({
           fontSize={['38px']}
           color="#403F3F"
           paddingTop={['100px', '120px']}
-          w={['100%', '920px']}
+          w={['100%', '100%', '920px']}
           fontWeight="500"
         >
           Living conditions in states play a large role in shaping opportunities for health.
