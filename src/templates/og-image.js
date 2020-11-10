@@ -12,19 +12,19 @@ import Logo from '../svg/logo.svg';
 const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
   return (
     <Grid
-      w="100%"
-      h="100%"
-      templateColumns={['1fr', '35% 1fr']}
-      gridColumnGap={[0, '29px']}
+      w="1200px"
+      h="630px"
+      templateColumns="35% 1fr"
+      gridColumnGap="29px"
       pl={50}
       fontSize="24px"
     >
-      <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
+      <Box gridArea="1 / 1 / 2 / 2" mt={80} p={['80px', 0]}>
         <Text>stateofhealth.org</Text>
       </Box>
       <Flex
-        gridArea={['3 / 1 / 4 / 3', '2 / 1 / 4 / 2']}
-        bg={['#F0F0F0', 'white']}
+        gridArea="2 / 1 / 4 / 2"
+        bg="white"
         direction="column"
         h="100%"
         justify="space-between"
@@ -56,8 +56,14 @@ const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
           </Flex>
         </Box>
       </Flex>
-      <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
-        <TheMap indicator={indicator} selectedState={state} metadata={metadata} highRes />
+      <Box gridArea="1 / 2 / 4 / 3">
+        <TheMap
+          indicator={indicator}
+          selectedState={state}
+          metadata={metadata}
+          highRes
+          hideButtons
+        />
       </Box>
     </Grid>
   );
