@@ -72,26 +72,30 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
           navigate(`/${path}/${slugify(states[state][0].name)}`);
         })
         .on('mousemove', event => {
-          setDataPobreData({
-            selectedStateName: state,
-            pos: [event.pageX, event.pageY],
-            indicatorRank: values.indexOf(parseFloat(indicator[state])) + 1,
-            indicatorName: metadata.title,
-            dotColor: scale(indicator[state]),
-            indicatorValue: format(
-              indicator[state],
-              metadata.unit,
-              metadata.rounding,
-              metadata.decimals,
-              metadata.factor
-            ),
-          });
+          if (isZoomOut) {
+            setDataPobreData({
+              selectedStateName: state,
+              pos: [event.pageX, event.pageY],
+              indicatorRank: values.indexOf(parseFloat(indicator[state])) + 1,
+              indicatorName: metadata.title,
+              dotColor: scale(indicator[state]),
+              indicatorValue: format(
+                indicator[state],
+                metadata.unit,
+                metadata.rounding,
+                metadata.decimals,
+                metadata.factor
+              ),
+            });
+          }
         })
         .on('mouseleave', () => {
-          setDataPobreData(null);
+          if (isZoomOut) {
+            setDataPobreData(null);
+          }
         });
     });
-  }, []);
+  }, [isZoomOut]);
 
   useEffect(() => {
     if (!stateId) return;

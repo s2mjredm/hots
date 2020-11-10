@@ -60,7 +60,7 @@ const customIcons = {
 
 const ctheme = {
   ...theme,
-  breakpoints: ['40em', '52em', '70em'],
+  breakpoints: ['52em', '72em', '80em'],
   icons: {
     ...theme.icons,
     ...customIcons,
