@@ -63,6 +63,7 @@ const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
           metadata={metadata}
           highRes
           hideButtons
+          zoomOut={false}
         />
       </Box>
     </Grid>

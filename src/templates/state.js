@@ -272,6 +272,7 @@ const State = ({
             metadata={metadata}
             onShare={() => socialOnOpen()}
             highRes
+            zoomOut={false}
           />
         </Box>
       </Grid>

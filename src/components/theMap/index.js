@@ -13,7 +13,7 @@ import ZoomButton from '../../svg/zoom.svg';
 
 import './index.css';
 
-const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
+const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut }) => {
   let {
     allStatesJson: { states },
   } = useStaticQuery(graphql`
@@ -32,7 +32,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
 
   const { state: stateId } = selectedState;
 
-  const [isZoomOut, setIsZoomOut] = useState(false);
+  const [isZoomOut, setIsZoomOut] = useState(!!zoomOut);
 
   const isMobile = useIsMobile();
 
@@ -944,12 +944,14 @@ TheMap.propTypes = {
   metadata: PropTypes.shape().isRequired,
   selectedState: PropTypes.shape(),
   highRes: PropTypes.bool,
+  zoomOut: PropTypes.bool,
 };
 
 TheMap.defaultProps = {
   selectedState: { stateName: null, stateId: null },
   onShare: () => {},
   highRes: false,
+  zoomOut: true,
 };
 
 export default TheMap;
