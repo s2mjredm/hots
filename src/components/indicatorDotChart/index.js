@@ -177,8 +177,6 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
     if (metadata.positive === 'FALSE') values.reverse();
 
     return histo.map((group, index) => {
-      const isAllwaysVisible = index === 0 || index === histo.length - 1;
-
       const placement = () => {
         switch (index) {
           case 0:
@@ -190,32 +188,36 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
         }
       };
 
-      return group.map((marker, bottom) => (
-        <StateDotMarker
-          key={marker.state}
-          state={marker.state}
-          stateName={states.find(s => s.state === marker.state).name}
-          indicator={metadata.title}
-          indicatorValue={format(
-            marker.indicatorValue,
-            metadata.unit,
-            metadata.rounding,
-            metadata.decimals,
-            metadata.factor
-          )}
-          indicatorPosition={findIndex(values, d => marker.state === d.state) + 1}
-          leftPosition={
-            placement() === 'top-start'
-              ? dotScale(group.x1) - size / 2
-              : dotScale(group.x0) - size / 2
-          }
-          bottom={bottom}
-          indicatorColor={colorScale(marker.indicatorValue)}
-          isAllwaysVisible={isAllwaysVisible}
-          placement={placement()}
-          size={size}
-        />
-      ));
+      return group.map((marker, bottom) => {
+        const rank = findIndex(values, d => marker.state === d.state) + 1;
+        const isAllwaysVisible = rank === 1 || rank === values.length;
+        return (
+          <StateDotMarker
+            key={marker.state}
+            state={marker.state}
+            stateName={states.find(s => s.state === marker.state).name}
+            indicator={metadata.title}
+            indicatorValue={format(
+              marker.indicatorValue,
+              metadata.unit,
+              metadata.rounding,
+              metadata.decimals,
+              metadata.factor
+            )}
+            indicatorPosition={rank}
+            leftPosition={
+              placement() === 'top-start'
+                ? dotScale(group.x1) - size / 2
+                : dotScale(group.x0) - size / 2
+            }
+            bottom={bottom}
+            indicatorColor={colorScale(marker.indicatorValue)}
+            isAllwaysVisible={isAllwaysVisible}
+            placement={placement()}
+            size={size}
+          />
+        );
+      });
     });
   };
 
