@@ -137,7 +137,7 @@ const SearchSelectInput = ({
           {label}
         </FormLabel>
         <InputGroup fontFamily="Jubilat" size="lg">
-          {!isMobile && (
+          {!isMobile && isOpen && (
             <InputLeftElement zIndex="3">
               <Icon name="search" color="gray.700" />
             </InputLeftElement>
