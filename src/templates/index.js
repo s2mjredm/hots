@@ -10,6 +10,8 @@ import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
 import Social from '../components/social';
 
+import Cursor from '../svg/cursor.svg';
+
 const Index = ({
   location,
   data: {
@@ -65,7 +67,8 @@ const Index = ({
             fontWeight="600"
             display={['none', 'block']}
           >
-            {`Click to explore how U.S. States rank for ${metadata.title}.`}
+            <Cursor style={{ display: 'inline-block', marginRight: 15 }} />
+            {`Hover to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
           <Box
             px={[5, 20]}
