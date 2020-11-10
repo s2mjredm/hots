@@ -119,20 +119,24 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
 
     const pos = [getOffset(svg).left, getOffset(svg).top];
 
-    setDataPobreData({
-      selectedStateName: stateId,
-      pos,
-      indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
-      indicatorName: metadata.title,
-      dotColor: colorScale.scale(indicator[stateId]),
-      indicatorValue: format(
-        indicator[stateId],
-        metadata.unit,
-        metadata.rounding,
-        metadata.decimals,
-        metadata.factor
-      ),
-    });
+    if (!isZoomOut) {
+      setDataPobreData({
+        selectedStateName: stateId,
+        pos,
+        indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
+        indicatorName: metadata.title,
+        dotColor: colorScale.scale(indicator[stateId]),
+        indicatorValue: format(
+          indicator[stateId],
+          metadata.unit,
+          metadata.rounding,
+          metadata.decimals,
+          metadata.factor
+        ),
+      });
+    } else {
+      setDataPobreData(null);
+    }
 
     // the main SVG object and its current viewBox
     const viewBox = svg.getAttribute('viewBox');
