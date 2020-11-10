@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
-import { Flex, Box, Text, Icon, PseudoBox } from '@chakra-ui/core';
+import { Flex, Box, Text, Icon } from '@chakra-ui/core';
 
 import { slugify } from '../../utils/slugify';
 import './index.css';
@@ -11,14 +11,14 @@ const SearchResults = ({ results, isSearchingCovid }) => {
   const renderSearchResults = () => {
     return results.map(i => {
       return (
-        <PseudoBox
+        <Flex
+          style={{ display: '-webkit-box' }}
           key={i.title}
           my={[0, 6]}
           mx={[4, 8]}
           py={4}
           bg={['none', 'white']}
           textAlign="start"
-          display="flex"
           borderBottom="1px solid #E5E5E5"
         >
           <Box
@@ -51,7 +51,7 @@ const SearchResults = ({ results, isSearchingCovid }) => {
               </Text>
             </Link>
           </Box>
-        </PseudoBox>
+        </Flex>
       );
     });
   };
