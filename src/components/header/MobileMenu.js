@@ -76,7 +76,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
             </Button>
           </Link>
         </ModalBody>
-        <ModalFooter bg="#F06060" justifyContent="center">
+        <ModalFooter style={{ display: '-webkit-box' }} bg="#F06060" justifyContent="center">
           <Logo style={{ width: 40, margin: '5px 10px 0 0' }} />
           <Heading fontFamily="News Cycle" color="white">
             State of Health
