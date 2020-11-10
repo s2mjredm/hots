@@ -67,7 +67,10 @@ const StateDotMarker = ({
           />
         </PopoverTrigger>
         <PopoverContent zIndex={4} marginBottom="40px" w="121px" h="62px" borderRadius="0px">
-          <PopoverArrow />
+          <PopoverArrow
+            ml={placement === 'top-start' ? '2px' : 0}
+            mr={placement === 'top-end' ? '2px' : 0}
+          />
           <Box
             w="48px"
             h="48px"
