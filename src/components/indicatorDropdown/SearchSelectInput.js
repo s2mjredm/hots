@@ -24,9 +24,6 @@ const SelectButton = ({ label, onClick }) => {
   return (
     <PseudoBox
       as="div"
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
       onClick={() => onClick(label)}
       cursor="pointer"
       w="100%"
