@@ -44,9 +44,16 @@ const Footer = () => {
           provide a more complete picture of health, and the conditions that shape health, at the
           state level. Armed with this knowledge, our hope is that this information can help
           policymakers and other change agents better understand the health of the states and
-          conditions that could be prioritized to improve health and wellbeing. The Center on
-          Society and Health is an academic research center studying the impact of social factors on
-          health. Learn more at societyhealth.vcu.edu
+          conditions that could be prioritized to improve health and wellbeing.
+          <br />
+          The Center on Society and Health is an academic research center studying the impact of
+          social factors on health. Learn more at
+          <a
+            href="https://societyhealth.vcu.edu/"
+            style={{ textDecoration: 'underline', paddingLeft: '5px' }}
+          >
+            societyhealth.vcu.edu
+          </a>
         </Text>
       </Box>
       <Box>
@@ -60,31 +67,37 @@ const Footer = () => {
           <br />
           We can be reached at:
           <br />
-          societyhealth@vcu.edu
+          <a href="mailto:societyhealth@vcu.edu" style={{ textDecoration: 'underline' }}>
+            societyhealth@vcu.edu
+          </a>
           <br />
           804-628-2462
         </Text>
       </Box>
       <Box w={['lg']} display={['none', 'none', 'none', 'block']} />
       <Flex align="flex-start" w={['100%', 'md']} direction={['column', 'row', 'column']}>
-        <Img
-          style={{
-            minWidth: 100,
-            width: 230,
-            marginRight: 40,
-          }}
-          fluid={data.centerLogo.childImageSharp.fluid}
-          alt="Center on Society and Health"
-        />
-        <Img
-          style={{
-            minWidth: 100,
-            width: 230,
-            marginTop: 40,
-          }}
-          fluid={data.vcuLogo.childImageSharp.fluid}
-          alt="VCU"
-        />
+        <a href="https://societyhealth.vcu.edu/">
+          <Img
+            style={{
+              minWidth: 100,
+              width: 230,
+              marginRight: 40,
+            }}
+            fluid={data.centerLogo.childImageSharp.fluid}
+            alt="Center on Society and Health"
+          />
+        </a>
+        <a href="https://www.vcu.edu">
+          <Img
+            style={{
+              minWidth: 100,
+              width: 230,
+              marginTop: 40,
+            }}
+            fluid={data.vcuLogo.childImageSharp.fluid}
+            alt="VCU"
+          />
+        </a>
       </Flex>
     </Flex>
   );
