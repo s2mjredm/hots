@@ -55,104 +55,104 @@ const Flag = ({ active }) => {
 
   return (
     <Box h={500} bg="#EB474C">
-      <Flex
-        position="absolute"
-        style={linearGradientBackgrounds.blue}
-        w={[
-          'calc(((100vw - 80px) / 11) * 3)',
-          'calc(((100vw - 160px) / 11) * 3)',
-          'calc(((100vw - 240px) / 11) * 3)',
-        ]}
-        h={['295px', '396px']}
-        align="center"
-        justify="center"
-        p={['43px', '100px']}
-      >
-        <Text
-          color="white"
-          fontFamily="Jubilat"
-          fontSize={['23px', '28px']}
-          lineHeight={['normal', '35px']}
-          letterSpacing="1.14px"
-        >
-          Health, and the conditions for health, are different in each state
-        </Text>
-      </Flex>
       <Grid
         px={['40px', '80px', '120px']}
         h={590}
         w="100%"
         templateColumns={['repeat(7, 1fr)', 'repeat(11, 1fr)']}
+        templateRows={['295px 205px', '396px 104px']}
       >
-        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
-        <Box w="100%" h="100%" bg="#EB474C" />
-        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
+        <Flex
+          style={linearGradientBackgrounds.blue}
+          h={['295px', '396px']}
+          align="center"
+          justify="center"
+          p={['43px', '100px']}
+          gridColumn={['1 / span 4', '1 / span 3']}
+          gridRow="1 / 1"
+          ml={['-40px', '-80px', '-120px']}
+        >
+          <Text
+            as="div"
+            minWidth={['auto', 255]}
+            color="white"
+            fontFamily="Jubilat"
+            fontSize={['23px', '28px']}
+            lineHeight={['normal', '35px']}
+            letterSpacing="1.14px"
+          >
+            Health, and the conditions for health, are different in each state
+          </Text>
+        </Flex>
         <PseudoBox
           w="100%"
-          h="100%"
           bg="#EB474C"
           transition="width 500"
           style={active === '/' ? hoverStyle(mapIt) : null}
           _hover={hoverStyle(mapIt)}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
-        <PseudoBox w="100%" h="100%" bg="#EB474C" display={['block', 'none']} />
-        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} />
+        <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} gridRow="1 / span 2" />
+        <PseudoBox w="100%" bg="#EB474C" display={['block', 'none']} gridRow="1 / span 2" />
         <PseudoBox
           w="100%"
-          h="100%"
           bg="#EB474C"
           transition="width 500"
           style={active === 'learn-more' ? hoverStyle(learnMore) : null}
           onClick={() => navigate('/learn-more')}
           _hover={hoverStyle(learnMore)}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
-        <PseudoBox w="100%" h="100%" bg="#EB474C" display={['block', 'none']} />
         <PseudoBox
           w="100%"
-          h="100%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
         <PseudoBox
           w="100%"
-          h="100%"
           style={linearGradientBackgrounds.gray}
           display={['block', 'none']}
+          gridRow="1 / span 2"
         />
+        <PseudoBox w="100%" bg="#EB474C" display={['block', 'none']} gridRow="1 / span 2" />
         <PseudoBox
           w="100%"
-          h="100%"
           bg="#EB474C"
           transition="width 500"
           style={active === 'take-action' ? hoverStyle(takeAction) : null}
           onClick={() => navigate('/take-action')}
           _hover={hoverStyle(takeAction)}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
         <PseudoBox
           w="100%"
-          h="100%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
         <PseudoBox
           w="100%"
-          h="100%"
           bg="#EB474C"
           transition="width 500"
           style={active === 'about' ? hoverStyle(about) : null}
           onClick={() => navigate('/about')}
           _hover={hoverStyle(about)}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
         <PseudoBox
           w="100%"
-          h="100%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
+          gridRow="1 / span 2"
         />
+        <Box style={linearGradientBackgrounds.gray} />
+        <Box bg="#EB474C" />
+        <Box style={linearGradientBackgrounds.gray} />
       </Grid>
     </Box>
   );

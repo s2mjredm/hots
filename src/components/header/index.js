@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { Heading, Flex, Button, useDisclosure } from '@chakra-ui/core';
+import { Heading, Box, Flex, Grid, Button, useDisclosure } from '@chakra-ui/core';
 
 import MobileMenu from './MobileMenu';
 import IndicatorModal from '../indicatorModal';
@@ -22,10 +22,14 @@ const Header = ({ flag }) => {
       <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => onCloseMobileMenu()} />
 
-      <Flex
+      <Grid
+        w="100%"
+        templateColumns={[
+          '80px 1fr 80px',
+          '80px 3fr repeat(4, 2fr) 80px',
+          '120px 3fr repeat(4, 2fr) 120px',
+        ]}
         py={4}
-        pl={[2, 120]}
-        pr={[2, 12]}
         shadow="lg"
         direction="row"
         align="center"
@@ -34,6 +38,7 @@ const Header = ({ flag }) => {
         fontSize="sm"
         fontFamily="News Cycle"
         color="#403F3F"
+        alignItems="center"
       >
         <Button
           display={['block', 'none']}
@@ -43,74 +48,80 @@ const Header = ({ flag }) => {
           size="lg"
           colorScheme="gray.800"
         />
-        <Link to="/">
-          <Flex direction="row" align="center">
-            <Logo style={{ width: 40, margin: '5px 10px 0 0' }} />
-            <Heading fontFamily="News Cycle" color="#403F3F">
-              State of Health
-            </Heading>
-          </Flex>
-        </Link>
-        <Link to="/" onMouseEnter={() => setHover('/')} onMouseLeave={() => setHover(null)}>
-          <Button
-            display={['none', 'block']}
-            fontFamily="News Cycle"
-            color="#403F3F"
-            variant="link"
-            size="sm"
-            colorScheme="gray.800"
+        <Box gridColumn={[2, '1 / span 2']}>
+          <Link to="/">
+            <Flex direction="row" align="center" justify="center" w="100%">
+              <Logo style={{ width: 40, margin: '5px 10px 0 0' }} />
+              <Heading fontFamily="News Cycle" color="#403F3F">
+                State of Health
+              </Heading>
+            </Flex>
+          </Link>
+        </Box>
+        <Box display={['none', 'block']}>
+          <Link to="/" onMouseEnter={() => setHover('/')} onMouseLeave={() => setHover(null)}>
+            <Button
+              fontFamily="News Cycle"
+              color="#403F3F"
+              variant="link"
+              size="sm"
+              colorScheme="gray.800"
+            >
+              MAP IT
+            </Button>
+          </Link>
+        </Box>
+        <Box display={['none', 'block']}>
+          <Link
+            to="/learn-more"
+            onMouseEnter={() => setHover('learn-more')}
+            onMouseLeave={() => setHover(null)}
           >
-            MAP IT
-          </Button>
-        </Link>
-        <Link
-          to="/learn-more"
-          onMouseEnter={() => setHover('learn-more')}
-          onMouseLeave={() => setHover(null)}
-        >
-          <Button
-            display={['none', 'block']}
-            fontFamily="News Cycle"
-            color="#403F3F"
-            variant="link"
-            size="sm"
-            colorScheme="gray.800"
+            <Button
+              fontFamily="News Cycle"
+              color="#403F3F"
+              variant="link"
+              size="sm"
+              colorScheme="gray.800"
+            >
+              LEARN MORE
+            </Button>
+          </Link>
+        </Box>
+        <Box display={['none', 'block']}>
+          <Link
+            to="/take-action"
+            onMouseEnter={() => setHover('take-action')}
+            onMouseLeave={() => setHover(null)}
           >
-            LEARN MORE
-          </Button>
-        </Link>
-        <Link
-          to="/take-action"
-          onMouseEnter={() => setHover('take-action')}
-          onMouseLeave={() => setHover(null)}
-        >
-          <Button
-            display={['none', 'block']}
-            fontFamily="News Cycle"
-            color="#403F3F"
-            variant="link"
-            size="sm"
-            colorScheme="gray.800"
+            <Button
+              fontFamily="News Cycle"
+              color="#403F3F"
+              variant="link"
+              size="sm"
+              colorScheme="gray.800"
+            >
+              TAKE ACTION
+            </Button>
+          </Link>
+        </Box>
+        <Box display={['none', 'block']}>
+          <Link
+            to="/about-the-data"
+            onMouseEnter={() => setHover('about')}
+            onMouseLeave={() => setHover(null)}
           >
-            TAKE ACTION
-          </Button>
-        </Link>
-        <Link
-          to="/about-the-data"
-          onMouseEnter={() => setHover('about')}
-          onMouseLeave={() => setHover(null)}
-        >
-          <Button
-            display={['none', 'block']}
-            fontFamily="News Cycle"
-            color="#403F3F"
-            variant="link"
-            size="sm"
-            colorScheme="gray.800"
-          >
-            ABOUT THE DATA
-          </Button>
-        </Link>
+            <Button
+              fontFamily="News Cycle"
+              color="#403F3F"
+              variant="link"
+              size="sm"
+              colorScheme="gray.800"
+            >
+              ABOUT THE DATA
+            </Button>
+          </Link>
+        </Box>
         <Button
           display={['none', 'block']}
           leftIcon="search"
@@ -127,7 +138,7 @@ const Header = ({ flag }) => {
           colorScheme="gray.800"
           onClick={onOpenMobileMenu}
         />
-      </Flex>
+      </Grid>
       {flag && <Flag active={hover} />}
     </>
   );
