@@ -59,8 +59,8 @@ const IndicatorDropdown = ({
         py={15}
         direction={['column', 'column', 'row']}
         fontSize="sm"
-        alignItems="flex-end"
-        justify={['start', 'space-between']}
+        alignItems={['center', 'center', 'flex-end']}
+        justify={['start', 'start', 'space-between']}
       >
         <SearchSelectInput
           label="Health Statistics & Outcomes"
@@ -77,7 +77,7 @@ const IndicatorDropdown = ({
           size="md"
           color={showAllColor}
           minW="100px"
-          mb={3}
+          my={3}
           onClick={() => onShowAll()}
         >
           SHOW ALL
@@ -90,14 +90,15 @@ const IndicatorDropdown = ({
           onSelection={state => handleStateSelection(state)}
         />
         <Button
-          marginLeft={[0, 5]}
+          marginLeft={[0, 0, 5]}
+          mt={[3, 3, 0]}
           isDisabled={!isNavigationEnabled}
           bg={buttonColor}
           _hover={{ bg: '#FFB3B3' }}
           color="white"
           size="lg"
           h={[12, 12]}
-          w={['100%', 'auto']}
+          w={['100%', '100%', 'auto']}
           flex="0 0 auto"
           fontSize={['10px', '16px']}
           onClick={() => navigate(url)}
