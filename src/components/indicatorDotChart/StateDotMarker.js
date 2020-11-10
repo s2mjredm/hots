@@ -71,7 +71,13 @@ const StateDotMarker = ({
             onClick={() => navigate(`/${slugify(indicator)}/${slugify(stateName)}`)}
           />
         </PopoverTrigger>
-        <PopoverContent zIndex={4} marginBottom="40px" w="121px" h="62px" borderRadius="0px">
+        <PopoverContent
+          zIndex={isAllwaysVisible ? 3 : 4}
+          marginBottom="40px"
+          w="121px"
+          h="62px"
+          borderRadius="0px"
+        >
           <PopoverArrow
             ml={placement === 'top-start' ? '2px' : 0}
             mr={placement === 'top-end' ? '2px' : 0}
