@@ -79,7 +79,15 @@ const TakeAction = ({
         }}
       >
         {nodes.map(item => (
-          <Box key={item.id} w={260} p={30} m={35} bg="white" shadow="lg">
+          <Box
+            key={item.id}
+            w={['calc(100% - 80px)', 'calc(50% - 80px)', 260]}
+            p={30}
+            my={35}
+            mx={[0, 5, 35]}
+            bg="white"
+            shadow="lg"
+          >
             <Heading as="h4" fontSize={18}>
               {item.title}
             </Heading>

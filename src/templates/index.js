@@ -90,7 +90,7 @@ const Index = ({
         </Box>
         <Heading
           fontFamily="Jubilat"
-          fontSize={['18px']}
+          fontSize={['38px']}
           color="#403F3F"
           paddingTop={['100px', '120px']}
           w={['100%', '920px']}
