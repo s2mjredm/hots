@@ -191,7 +191,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
           />
         </Button>
       )}
-      {!isMobile && (
+      {!isMobile && highRes && (
         <Button
           onClick={() => setIsZoomOut(current => !current)}
           position="absolute"
