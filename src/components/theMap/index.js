@@ -35,26 +35,28 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
 
   const isMobile = useIsMobile();
 
+  const [colorScale, setColorScale] = useState({ scale: () => '#0083E2' });
+
   const [dataPobreData, setDataPobreData] = useState(null);
 
   const values = Object.values(indicator)
     .map(a => parseFloat(a))
-    .sort((a, b) => b - a);
+    .sort((a, b) => (metadata.positive === 'TRUE' ? b - a : a - b));
 
   useEffect(() => {
-    const scale = scaleQuantize()
-      .domain(extent(values))
-      .range([
-        '#042351',
-        '#1E306E',
-        '#293989',
-        '#184FAA',
-        '#0066CB',
-        '#0083E2',
-        '#50BEFA',
-        '#A2DCEE',
-      ])
-      .nice();
+    const colors = [
+      '#042351',
+      '#1E306E',
+      '#293989',
+      '#184FAA',
+      '#0066CB',
+      '#0083E2',
+      '#50BEFA',
+      '#A2DCEE',
+    ];
+    if (metadata.positive === 'FALSE') colors.reverse();
+    const scale = scaleQuantize().domain(extent(values)).range(colors).nice();
+    setColorScale({ scale });
 
     const svg = select(svgRef.current);
     Object.keys(indicator).forEach(state => {
@@ -73,6 +75,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
             pos: [event.pageX, event.pageY],
             indicatorRank: values.indexOf(parseFloat(indicator[state])) + 1,
             indicatorName: metadata.title,
+            dotColor: scale(indicator[state]),
             indicatorValue: format(
               indicator[state],
               metadata.unit,
@@ -115,6 +118,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
       pos,
       indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
       indicatorName: metadata.title,
+      dotColor: colorScale.scale(indicator[stateId]),
       indicatorValue: format(
         indicator[stateId],
         metadata.unit,
@@ -155,19 +159,11 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
     const scaledHeight = vbox[3] * scale;
 
     svg.setAttribute('viewBox', `${scaledOffsetX} ${scaledOffsetY} ${scaledWidth} ${scaledHeight}`);
-  }, [stateId, isZoomOut]);
+  }, [stateId, isZoomOut, colorScale]);
 
   return (
     <Box w="100%" px={[5, 10]} bg="#E5E5E5" position="relative">
-      {dataPobreData && (
-        <DataPobre
-          selectedStateName={dataPobreData.selectedStateName}
-          indicatorRank={dataPobreData.indicatorRank}
-          indicatorName={dataPobreData.indicatorName}
-          indicatorValue={dataPobreData.indicatorValue}
-          pos={dataPobreData.pos}
-        />
-      )}
+      {dataPobreData && <DataPobre {...dataPobreData} />}
 
       {!isMobile && (
         <Button

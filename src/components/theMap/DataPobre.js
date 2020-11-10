@@ -4,7 +4,14 @@ import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
 import { Box, Flex, Text } from '@chakra-ui/core';
 
-const DataPobre = ({ selectedStateName, indicatorRank, indicatorName, indicatorValue, pos }) => {
+const DataPobre = ({
+  selectedStateName,
+  indicatorRank,
+  indicatorName,
+  indicatorValue,
+  pos,
+  dotColor,
+}) => {
   const height = 100;
   const width = 280;
   return (
@@ -16,7 +23,7 @@ const DataPobre = ({ selectedStateName, indicatorRank, indicatorName, indicatorV
         zIndex={1}
         py="8px"
         px="12px"
-        border="1px solid  #E2E8F0"
+        border="1px solid #E2E8F0"
         align="center"
         pointerEvents="none"
         position="absolute"
@@ -27,7 +34,7 @@ const DataPobre = ({ selectedStateName, indicatorRank, indicatorName, indicatorV
         <Box
           w="64px"
           h="64px"
-          bg="#0083E2"
+          bg={dotColor}
           borderRadius="100%"
           top="8px"
           color="white"
@@ -59,6 +66,7 @@ DataPobre.propTypes = {
   indicatorName: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
   pos: PropTypes.arrayOf(PropTypes.number).isRequired,
+  dotColor: PropTypes.string.isRequired,
 };
 
 export default DataPobre;

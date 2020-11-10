@@ -49,19 +49,18 @@ const useScale = (width, domain, tickCount, positive, factor) => {
   if (positive === 'FALSE') range.reverse();
 
   const genColorScale = () => {
-    return scaleQuantize()
-      .domain(range)
-      .range([
-        '#042351',
-        '#1E306E',
-        '#293989',
-        '#184FAA',
-        '#0066CB',
-        '#0083E2',
-        '#50BEFA',
-        '#A2DCEE',
-      ])
-      .nice();
+    const colors = [
+      '#042351',
+      '#1E306E',
+      '#293989',
+      '#184FAA',
+      '#0066CB',
+      '#0083E2',
+      '#50BEFA',
+      '#A2DCEE',
+    ];
+    if (positive) colors.reverse();
+    return scaleQuantize().domain(extent(domain)).range(colors).nice();
   };
 
   const genDotScale = () => {
@@ -126,7 +125,6 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
     metadata.factor
   );
   const dotMarkers = useGenStateDotMarkers(indicator, colorScale, dotScale);
-  if (dotMarkers && metadata.positive === 'FALSE') dotMarkers.reverse();
 
   const getTrackRef = useCallback(node => {
     if (node !== null) {
@@ -175,6 +173,9 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
         .filter(h => h.length);
     }
 
+    const values = dotMarkers;
+    if (metadata.positive === 'FALSE') values.reverse();
+
     return histo.map((group, index) => {
       const isAllwaysVisible = index === 0 || index === histo.length - 1;
 
@@ -202,7 +203,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
             metadata.decimals,
             metadata.factor
           )}
-          indicatorPosition={findIndex(dotMarkers, d => marker.state === d.state) + 1}
+          indicatorPosition={findIndex(values, d => marker.state === d.state) + 1}
           leftPosition={
             placement() === 'top-start'
               ? dotScale(group.x1) - size / 2
