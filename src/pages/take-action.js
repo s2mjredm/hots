@@ -90,22 +90,24 @@ const TakeAction = ({
               <Img fixed={item.featuredImage.node.localFile.childImageSharp.fixed} />
             )}
             <Box borderTop="1px solid #707070" mt={6} pt={4}>
-              <a href={item.link.url}>
-                <Globe style={{ display: 'inline-block' }} />
-                <Text
-                  display="inline-block"
-                  w={140}
-                  overflow="hidden"
-                  whiteSpace="nowrap"
-                  mx={1}
-                  position="relative"
-                  top="6px"
-                  target="_blank"
-                >
-                  {item.link.url.replace(/https?:\/\/(www\.)?(.*)\/?.*/gm, '$2')}
-                </Text>
-                <Arrow style={{ display: 'inline-block', height: 16 }} />
-              </a>
+              {item.link.url && (
+                <a href={item.link.url}>
+                  <Globe style={{ display: 'inline-block' }} />
+                  <Text
+                    display="inline-block"
+                    w={140}
+                    overflow="hidden"
+                    whiteSpace="nowrap"
+                    mx={1}
+                    position="relative"
+                    top="6px"
+                    target="_blank"
+                  >
+                    {item.link.url.replace(/https?:\/\/(www\.)?(.*)\/?.*/gm, '$2')}
+                  </Text>
+                  <Arrow style={{ display: 'inline-block', height: 16 }} />
+                </a>
+              )}
             </Box>
           </Box>
         ))}
