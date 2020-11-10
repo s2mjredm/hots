@@ -58,7 +58,11 @@ const Flag = ({ active }) => {
       <Flex
         position="absolute"
         style={linearGradientBackgrounds.blue}
-        w={['295px', '405px']}
+        w={[
+          'calc(((100vw - 80px) / 11) * 3)',
+          'calc(((100vw - 160px) / 11) * 3)',
+          'calc(((100vw - 240px) / 11) * 3)',
+        ]}
         h={['295px', '396px']}
         align="center"
         justify="center"
