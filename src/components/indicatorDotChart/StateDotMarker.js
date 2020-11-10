@@ -27,8 +27,13 @@ const StateDotMarker = ({
   placement,
   size,
 }) => {
-  const [isOpen, setIsOpen] = useState(isAllwaysVisible);
-  const open = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(!!isAllwaysVisible);
+  const open = () => {
+    if (!isAllwaysVisible) {
+      setIsOpen(true);
+    }
+  };
+
   const close = () => {
     if (!isAllwaysVisible) {
       setIsOpen(false);
