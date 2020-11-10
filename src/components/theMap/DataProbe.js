@@ -4,7 +4,7 @@ import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
 import { Box, Flex, Text } from '@chakra-ui/core';
 
-const DataPobre = ({
+const DataProbe = ({
   selectedStateName,
   indicatorRank,
   indicatorName,
@@ -60,7 +60,7 @@ const DataPobre = ({
     </Portal>
   );
 };
-DataPobre.propTypes = {
+DataProbe.propTypes = {
   indicatorRank: PropTypes.number.isRequired,
   selectedStateName: PropTypes.string.isRequired,
   indicatorName: PropTypes.string.isRequired,
@@ -69,4 +69,4 @@ DataPobre.propTypes = {
   dotColor: PropTypes.string.isRequired,
 };
 
-export default DataPobre;
+export default DataProbe;

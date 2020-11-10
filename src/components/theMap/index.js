@@ -4,7 +4,7 @@ import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
 import { groupBy } from 'lodash';
 import { Box, Button } from '@chakra-ui/core';
-import DataPobre from './DataPobre';
+import DataProbe from './DataProbe';
 
 import { slugify } from '../../utils/slugify';
 import format from '../../utils/numberFormat';
@@ -173,7 +173,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes }) => {
 
   return (
     <Box w="100%" h="100%" px={[5, 10]} bg="#E5E5E5" position="relative">
-      {dataPobreData && <DataPobre {...dataPobreData} />}
+      {dataPobreData && <DataProbe {...dataPobreData} />}
 
       {!isMobile && (
         <Button
