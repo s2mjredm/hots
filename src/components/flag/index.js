@@ -8,29 +8,29 @@ const Flag = ({ active }) => {
     {
       about: file(relativePath: { eq: "flag/about.png" }) {
         childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid
+          fixed(width: 400, pngQuality: 100) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
       learnMore: file(relativePath: { eq: "flag/learn-more.png" }) {
         childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid
+          fixed(width: 400, pngQuality: 100) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
       mapIt: file(relativePath: { eq: "flag/map-it.png" }) {
         childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid
+          fixed(width: 400, pngQuality: 100) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
       takeAction: file(relativePath: { eq: "flag/take-action.png" }) {
         childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid
+          fixed(width: 400, pngQuality: 100) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
@@ -39,7 +39,7 @@ const Flag = ({ active }) => {
 
   const hoverStyle = img => ({
     width: 400,
-    backgroundImage: `url(${img.childImageSharp.fluid.src})`,
+    backgroundImage: `url(${img.childImageSharp.fixed.src})`,
   });
 
   // this is necessary as gradient is not supported by chakra-ui "bg" prop
