@@ -13,16 +13,15 @@ const DataProbe = ({
   dotColor,
 }) => {
   const height = 100;
-  const width = 280;
+  const width = 240;
   return (
     <Portal>
       <Flex
-        w={width}
         h={height}
         borderRadius="1px"
         zIndex={1}
         py="8px"
-        px="12px"
+        px="20px"
         border="1px solid #E2E8F0"
         align="center"
         pointerEvents="none"
@@ -30,6 +29,7 @@ const DataProbe = ({
         top={pos[1] - height - 10}
         left={pos[0] - width / 2}
         bg="white"
+        shadow="lg"
       >
         <Box
           w="64px"
@@ -45,14 +45,27 @@ const DataProbe = ({
         >
           {indicatorRank}
         </Box>
-        <Box paddingLeft={3}>
-          <Text fontFamily="proxima-nova" color="#B4B4B4" fontSize="16px" fontWeight="800" mb="1px">
+        <Box paddingLeft="20px">
+          <Text
+            fontFamily="News Cycle"
+            color="#B4B4B4"
+            fontSize="14px"
+            fontWeight="800"
+            textTransform="uppercase"
+            my="-3px"
+          >
             {indicatorName}
           </Text>
-          <Text fontFamily="proxima-nova" color="#403F3F" fontSize="20px" fontWeight="800" mb="2px">
+          <Text fontFamily="proxima-nova" color="#403F3F" fontSize="20px" fontWeight="800">
             {selectedStateName}
           </Text>
-          <Text fontFamily="proxima-nova" color="#0083E2" fontSize="20px" fontWeight="600">
+          <Text
+            my="-7px"
+            fontFamily="proxima-nova"
+            color="#0083E2"
+            fontSize="20px"
+            fontWeight="600"
+          >
             {indicatorValue}
           </Text>
         </Box>
