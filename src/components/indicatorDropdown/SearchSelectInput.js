@@ -132,7 +132,7 @@ const SearchSelectInput = ({
           fontFamily="proxima-nova"
           color={labelColor}
           fontSize={['12px', 'sm']}
-          fontWeight={['900', 'normal']}
+          fontWeight={['900']}
         >
           {label}
         </FormLabel>
