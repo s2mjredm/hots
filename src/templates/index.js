@@ -39,7 +39,7 @@ const Index = ({
             <Heading
               fontFamily="proxima-nova"
               color="#403F3F"
-              fontWeight={['900', '600']}
+              fontWeight={['900', '800']}
               fontSize={['20px', '1.875rem']}
             >
               How is your state doing?

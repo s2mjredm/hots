@@ -278,7 +278,13 @@ const State = ({
       </Grid>
       <Grid w="100%" templateColumns={['1fr', '50% 50%']} bg="#FFD285" p={['40px', '100px']}>
         <Flex direction="column" justify="space-around">
-          <Heading display={['none', 'block']} as="h3">
+          <Heading
+            display={['none', 'block']}
+            fontSize="30px"
+            fontFamily="proxima-nova"
+            fontWeight="800"
+            color="#403F3F"
+          >
             {`How ${stateName.name} ranks on some of the most important conditions for health`}
           </Heading>
           <Link
