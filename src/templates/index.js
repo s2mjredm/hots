@@ -61,7 +61,7 @@ const Index = ({
           <TheMap indicator={indicator} onShare={() => socialOnOpen()} metadata={metadata} />
           <Box
             px={[5, 20]}
-            py={[5, 16]}
+            pt={[5, 16]}
             fontFamily="proxima-nova"
             fontSize="18px"
             fontWeight="600"
