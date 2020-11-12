@@ -62,16 +62,19 @@ const IndicatorDropdown = ({
         alignItems={['center', 'center', 'flex-end']}
         justify={['start', 'start', 'space-between']}
       >
-        <SearchSelectInput
-          label="Health Statistics & Outcomes"
-          placeholder="Select or Search"
-          selectedItem={selectedIndicator}
-          items={indicatorList}
-          itemsShortList={indicatorShortList}
-          onSelection={indicator => handleIndicatorSelection(indicator)}
-          onShowAll={onShowAll}
-        />
+        <Box zIndex="2" width="100%">
+          <SearchSelectInput
+            label="Health Statistics & Outcomes"
+            placeholder="Select or Search"
+            selectedItem={selectedIndicator}
+            items={indicatorList}
+            itemsShortList={indicatorShortList}
+            onSelection={indicator => handleIndicatorSelection(indicator)}
+            onShowAll={onShowAll}
+          />
+        </Box>
         <Button
+          width="100%"
           display={['none', 'block']}
           variant="link"
           size="md"
@@ -82,13 +85,15 @@ const IndicatorDropdown = ({
         >
           SHOW ALL
         </Button>
-        <SearchSelectInput
-          label="State"
-          placeholder="Select or Search"
-          selectedItem={selectedState}
-          items={stateList}
-          onSelection={state => handleStateSelection(state)}
-        />
+        <Box zIndex="1" width="100%">
+          <SearchSelectInput
+            label="State"
+            placeholder="Select or Search"
+            selectedItem={selectedState}
+            items={stateList}
+            onSelection={state => handleStateSelection(state)}
+          />
+        </Box>
         <Button
           marginLeft={[0, 0, 5]}
           mt={[3, 3, 0]}

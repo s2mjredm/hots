@@ -144,7 +144,7 @@ const SearchSelectInput = ({
           )}
           <Input
             focusBorderColor="yellow.400"
-            zIndex="3"
+            zIndex="1"
             autoComplete="off"
             value={inputValue}
             onChange={e => handleChange(e)}
@@ -173,6 +173,7 @@ const SearchSelectInput = ({
         </InputGroup>
         {isOpen && (
           <Box
+            id="input-selection-list"
             zIndex="9999"
             border="1px solid #F2F2F2"
             position={['initial', 'absolute']}
