@@ -39,6 +39,7 @@ const Flag = ({ active }) => {
 
   const hoverStyle = img => ({
     width: 400,
+    background: `url(${img.childImageSharp.fixed.src}) !important`,
     backgroundImage: `url(${img.childImageSharp.fixed.src})`,
   });
 
@@ -51,10 +52,11 @@ const Flag = ({ active }) => {
       background:
         'linear-gradient(180deg, rgba(0,127,235,1) 0%, rgba(115,186,246,1) 59%, rgba(188,224,253,1) 100%)',
     },
+    red: { background: 'linear-gradient(180deg, rgba(252,156,153,1) 0%, rgba(235,71,76,1) 100%)' },
   };
 
   return (
-    <Box h={[390, 460]} bg="#EB474C">
+    <Box h={[390, 460]} style={linearGradientBackgrounds.red}>
       <Grid
         px={['40px', '80px', '120px']}
         w="100%"
@@ -86,20 +88,23 @@ const Flag = ({ active }) => {
 
         <PseudoBox
           w="100%"
-          bg="#EB474C"
           transition="width 500"
-          style={active === '/' ? hoverStyle(mapIt) : null}
+          style={active === '/' ? hoverStyle(mapIt) : linearGradientBackgrounds.red}
           _hover={hoverStyle(mapIt)}
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
         <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} gridRow="1 / span 2" />
-        <PseudoBox w="100%" bg="#EB474C" display={['block', 'none']} gridRow="1 / span 2" />
         <PseudoBox
           w="100%"
-          bg="#EB474C"
+          style={linearGradientBackgrounds.red}
+          display={['block', 'none']}
+          gridRow="1 / span 2"
+        />
+        <PseudoBox
+          w="100%"
           transition="width 500"
-          style={active === 'learn-more' ? hoverStyle(learnMore) : null}
+          style={active === 'learn-more' ? hoverStyle(learnMore) : linearGradientBackgrounds.red}
           onClick={() => navigate('/learn-more')}
           _hover={hoverStyle(learnMore)}
           display={['none', 'block']}
@@ -119,9 +124,8 @@ const Flag = ({ active }) => {
         />
         <PseudoBox
           w="100%"
-          bg="#EB474C"
           transition="width 500"
-          style={active === 'take-action' ? hoverStyle(takeAction) : null}
+          style={active === 'take-action' ? hoverStyle(takeAction) : linearGradientBackgrounds.red}
           onClick={() => navigate('/take-action')}
           _hover={hoverStyle(takeAction)}
           display={['none', 'block']}
@@ -135,9 +139,8 @@ const Flag = ({ active }) => {
         />
         <PseudoBox
           w="100%"
-          bg="#EB474C"
           transition="width 500"
-          style={active === 'about' ? hoverStyle(about) : null}
+          style={active === 'about' ? hoverStyle(about) : linearGradientBackgrounds.red}
           onClick={() => navigate('/about')}
           _hover={hoverStyle(about)}
           display={['none', 'block']}
@@ -150,9 +153,9 @@ const Flag = ({ active }) => {
           gridRow="1 / span 2"
         />
         <Box style={linearGradientBackgrounds.gray} />
-        <Box bg="#EB474C" />
+        <Box style={linearGradientBackgrounds.red} />
         <Box style={linearGradientBackgrounds.gray} />
-        <Box bg="#EB474C" display={['block', 'none']} />
+        <Box style={linearGradientBackgrounds.red} display={['block', 'none']} />
       </Grid>
     </Box>
   );
