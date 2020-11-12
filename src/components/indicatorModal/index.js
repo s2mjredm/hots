@@ -81,21 +81,22 @@ const renderTabList = categories => {
 const renderTabPanel = indicators => {
   return indicators.map(i => {
     return (
-      <PseudoBox
-        key={i}
-        py={2}
-        px={4}
-        bg="white"
-        fontFamily="News Cycle"
-        textAlign="start"
-        fontSize="18px"
-        borderBottom="1px solid #E5E5E5"
-        color="#707070"
-        cursor="pointer"
-        _hover={{ fontWeight: 'bold', bg: '#FFD285' }}
-      >
-        <Link to={`/${slugify(i)}`}>{i}</Link>
-      </PseudoBox>
+      <Link key={i} to={`/${slugify(i)}`}>
+        <PseudoBox
+          py={2}
+          px={4}
+          bg="white"
+          fontFamily="News Cycle"
+          textAlign="start"
+          fontSize="18px"
+          borderBottom="1px solid #E5E5E5"
+          color="#707070"
+          cursor="pointer"
+          _hover={{ fontWeight: 'bold', bg: '#FFD285' }}
+        >
+          {i}
+        </PseudoBox>
+      </Link>
     );
   });
 };
