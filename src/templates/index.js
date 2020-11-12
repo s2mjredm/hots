@@ -34,7 +34,7 @@ const Index = ({
             'linear-gradient(180deg, rgba(24,69,149,1) 0%, rgba(24,69,149,1) 45%, rgba(255,255,255,1) 100%)',
         }}
       >
-        <Box bg="white">
+        <Box bg="white" shadow="lg">
           <Box px={[5, 20]} pt={[10, 20]} color="gray.text">
             <Heading
               fontFamily="proxima-nova"
