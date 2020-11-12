@@ -238,14 +238,18 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           {dotScale && renderTicks()}
           {dotScale && renderDots()}
         </Box>
-        <Flex color="#403F3F" paddingTop="46px" justify="space-between">
+        <Flex color="#403F3F" paddingTop="46px" justify="space-between" align="center">
           <Flex justify="space-between">
             <Icon name="arrow-back" size="24px" />
-            <Text>{metadata.positive === 'TRUE' ? metadata.low : metadata.high}</Text>
+            <Text w="max-content">
+              {metadata.positive === 'TRUE' ? metadata.low : metadata.high}
+            </Text>
           </Flex>
-          <Divider />
+          <hr style={{ width: '100%', borderTop: '2px solid #b6b6b6', margin: '0px 20px' }} />
           <Flex justify="space-between">
-            <Text>{metadata.positive === 'TRUE' ? metadata.high : metadata.low}</Text>
+            <Text w="max-content">
+              {metadata.positive === 'TRUE' ? metadata.high : metadata.low}
+            </Text>
             <Icon name="arrow-forward" size="24px" />
           </Flex>
         </Flex>
