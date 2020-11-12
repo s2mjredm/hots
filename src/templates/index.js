@@ -27,7 +27,7 @@ const Index = ({
     <Layout location={location}>
       <Box
         px={[10, 20, 120]}
-        py={90}
+        py={[50, 80]}
         zIndex="2"
         style={{
           background:

@@ -54,13 +54,12 @@ const Flag = ({ active }) => {
   };
 
   return (
-    <Box h={500} bg="#EB474C">
+    <Box h={[390, 460]} bg="#EB474C">
       <Grid
         px={['40px', '80px', '120px']}
-        h={590}
         w="100%"
         templateColumns={['repeat(7, 1fr)', 'repeat(11, 1fr)']}
-        templateRows={['295px 205px', '396px 104px']}
+        templateRows={['295px 155px', '396px 145px']}
       >
         <Flex
           style={linearGradientBackgrounds.blue}
@@ -84,6 +83,7 @@ const Flag = ({ active }) => {
             Health, and the conditions for health, are different in each state
           </Text>
         </Flex>
+
         <PseudoBox
           w="100%"
           bg="#EB474C"
@@ -117,7 +117,6 @@ const Flag = ({ active }) => {
           display={['block', 'none']}
           gridRow="1 / span 2"
         />
-        <PseudoBox w="100%" bg="#EB474C" display={['block', 'none']} gridRow="1 / span 2" />
         <PseudoBox
           w="100%"
           bg="#EB474C"
@@ -153,6 +152,7 @@ const Flag = ({ active }) => {
         <Box style={linearGradientBackgrounds.gray} />
         <Box bg="#EB474C" />
         <Box style={linearGradientBackgrounds.gray} />
+        <Box bg="#EB474C" display={['block', 'none']} />
       </Grid>
     </Box>
   );
