@@ -61,16 +61,14 @@ const Footer = () => {
           CONTACT
         </Heading>
         <Text pb={4} fontFamily="proxima-nova" fontWeight="500">
-          We would love to hear from you!
-          <br />
-          Let us know how you’re using this data, or reach out with any comments or questions.
-          <br />
-          We can be reached at:
-          <br />
-          <a href="mailto:societyhealth@vcu.edu" style={{ textDecoration: 'underline' }}>
+          We would love to hear from you! Let us know how you’re using this data, or reach out with
+          any comments or questions. We can be reached at:
+          <a
+            href="mailto:societyhealth@vcu.edu"
+            style={{ textDecoration: 'underline', padding: '0 5px' }}
+          >
             societyhealth@vcu.edu
           </a>
-          <br />
           804-628-2462
         </Text>
       </Box>
