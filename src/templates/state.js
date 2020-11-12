@@ -255,14 +255,16 @@ const State = ({
             to="/learn-more"
             style={{ fontSize: 16, fontWeight: 700, textDecoration: 'underline', color: '#403F3F' }}
           >
-            Learn more about what shapes health
-            <Arrow
-              style={{
-                display: 'inline',
-                width: 16,
-                marginLeft: 5,
-              }}
-            />
+            <Text color="#403F3F" fontFamily="proxima-nova">
+              Learn more about what shapes health
+              <Arrow
+                style={{
+                  display: 'inline',
+                  width: 16,
+                  marginLeft: 5,
+                }}
+              />
+            </Text>
           </Link>
         </Flex>
         <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
@@ -290,10 +292,11 @@ const State = ({
           <Link
             to="/learn-more"
             style={{
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: 700,
               paddingBottom: '24px',
               textDecoration: 'underline',
+              fontFamily: 'proxima-nova',
             }}
           >
             Learn more about why these matter so much for health
