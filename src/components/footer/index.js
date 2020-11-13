@@ -46,6 +46,8 @@ const Footer = () => {
           policymakers and other change agents better understand the health of the states and
           conditions that could be prioritized to improve health and wellbeing.
           <br />
+          <span style={{ paddingTop: '8px' }} />
+          <br />
           The Center on Society and Health is an academic research center studying the impact of
           social factors on health. Learn more at
           <a
