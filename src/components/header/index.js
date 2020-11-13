@@ -52,7 +52,7 @@ const Header = ({ flag }) => {
           <Link to="/">
             <Flex direction="row" align="center" justify="center" w="100%">
               <Logo style={{ width: 40, margin: '5px 10px 0 0' }} />
-              <Heading fontFamily="News Cycle" color="#403F3F">
+              <Heading fontFamily="News Cycle" color="#403F3F" fontSize="26px">
                 State of Health
               </Heading>
             </Flex>
