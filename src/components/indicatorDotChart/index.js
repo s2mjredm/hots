@@ -3,7 +3,7 @@ import { extent, scaleLinear, scaleQuantize, bin } from 'd3';
 import { findIndex, some } from 'lodash';
 import PropTypes from 'prop-types';
 
-import { Box, Text, Flex, Divider, Icon } from '@chakra-ui/core';
+import { Box, Text, Flex, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
 import format from '../../utils/numberFormat';
