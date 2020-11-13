@@ -118,8 +118,10 @@ const State = ({
           shadow="lg"
         >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
-            <Icon name="arrow-back" />
-            BACK TO NATIONAL MAP AND RESULTS
+            <Flex>
+              <Icon name="arrow-back" paddingTop="1px" size="16px" />
+              BACK TO NATIONAL MAP AND RESULTS
+            </Flex>
           </Link>
           <IndicatorDropdown
             onShowAll={() => onOpen()}
@@ -134,8 +136,10 @@ const State = ({
       {!isMobile && (
         <Flex justify="space-between" align="center" px={100} py={18}>
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
-            <Icon name="arrow-back" />
-            BACK TO NATIONAL MAP AND RESULTS
+            <Flex>
+              <Icon name="arrow-back" paddingTop="1px" size="16px" />
+              BACK TO NATIONAL MAP AND RESULTS
+            </Flex>
           </Link>
           <IndicatorDropdown
             onShowAll={() => onOpen()}
