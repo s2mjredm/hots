@@ -41,6 +41,7 @@ const Flag = ({ active }) => {
     width: 400,
     background: `url(${img.childImageSharp.fixed.src}) !important`,
     backgroundImage: `url(${img.childImageSharp.fixed.src})`,
+    cursor: 'pointer',
   });
 
   // this is necessary as gradient is not supported by chakra-ui "bg" prop
