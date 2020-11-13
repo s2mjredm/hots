@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
 import { groupBy } from 'lodash';
-import { Box, Button } from '@chakra-ui/core';
+import { Box, Button, Icon } from '@chakra-ui/core';
 import DataProbe from './DataProbe';
 
 import { slugify } from '../../utils/slugify';
@@ -234,7 +234,12 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           color="#403F3F"
           colorScheme="gray.900"
         >
-          <ZoomButton />
+          {!isZoomOut && <ZoomButton />}
+          {isZoomOut && (
+            <Box bg="#403F3F" borderRadius="100%">
+              <Icon name="arrow-back" color="white" size="45px" />
+            </Box>
+          )}
         </Button>
       )}
 
