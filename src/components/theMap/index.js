@@ -97,6 +97,39 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
     });
   }, [isZoomOut]);
 
+  function getOffset(element) {
+    const bound = element.getBoundingClientRect();
+    const html = document.documentElement;
+
+    return {
+      top: bound.top + window.pageYOffset - html.clientTop + bound.height / 2,
+      left: bound.left + window.pageXOffset - html.clientLeft + bound.width / 2,
+    };
+  }
+
+  useEffect(() => {
+    if (!stateId) return;
+    const svg = svgRef.current;
+
+    const state = svg.querySelector(`#${stateId}`);
+    const pos = [getOffset(state).left, getOffset(state).top];
+
+    setDataPobreData({
+      selectedStateName: stateId,
+      pos,
+      indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
+      indicatorName: metadata.title,
+      dotColor: colorScale.scale(indicator[stateId]),
+      indicatorValue: format(
+        indicator[stateId],
+        metadata.unit,
+        metadata.rounding,
+        metadata.decimals,
+        metadata.factor
+      ),
+    });
+  }, [stateId]);
+
   useEffect(() => {
     if (!stateId) return;
     const svg = svgRef.current;
@@ -106,16 +139,6 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
     const state = isZoomOut ? svg : svg.querySelector(`#${stateId}`);
 
     const bbox = state.getBBox();
-
-    function getOffset(element) {
-      const bound = element.getBoundingClientRect();
-      const html = document.documentElement;
-
-      return {
-        top: bound.top + window.pageYOffset - html.clientTop + bound.height / 2,
-        left: bound.left + window.pageXOffset - html.clientLeft + bound.width / 2,
-      };
-    }
 
     const pos = [getOffset(svg).left, getOffset(svg).top];
 
@@ -134,7 +157,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           metadata.factor
         ),
       });
-    } else {
+    } else if (highRes) {
       setDataPobreData(null);
     }
 

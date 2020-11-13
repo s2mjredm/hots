@@ -134,7 +134,7 @@ IndicatorDropdown.defaultProps = {
   showAllColor: '#F06060',
   initialIndicator: '',
   initialState: '',
-  onSelectState: PropTypes.func,
+  onSelectState: () => {},
 };
 
 export default IndicatorDropdown;
