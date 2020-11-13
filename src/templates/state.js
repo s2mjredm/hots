@@ -141,7 +141,6 @@ const State = ({
             onShowAll={() => onOpen()}
             buttonText="GO"
             buttonColor="#184595"
-            showAllColor="#184595"
             initialIndicator={metadata.title}
             initialState={stateName.name}
           />
