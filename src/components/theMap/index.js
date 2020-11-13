@@ -66,6 +66,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
         .join(`#${state}`)
         .attr('fill', scale(indicator[state]))
         .attr('title', state)
+        .attr('cursor', 'pointer')
         .on('click', () => {
           let [, path] = window.location.pathname.split('/');
           path = path || 'life-expectancy';
