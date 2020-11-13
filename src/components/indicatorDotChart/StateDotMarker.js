@@ -77,6 +77,7 @@ const StateDotMarker = ({
           w="120px"
           h="62px"
           borderRadius="0px"
+          border="none"
         >
           <PopoverArrow
             ml={placement === 'top-start' ? '2px' : 0}
