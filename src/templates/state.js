@@ -119,8 +119,10 @@ const State = ({
         >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
-              <Icon name="arrow-back" paddingTop="1px" size="16px" />
-              BACK TO NATIONAL MAP AND RESULTS
+              <Icon name="arrow-back" size="16px" />
+              <Text fontSize="12px" fontWeight="900" fontFamily="proxima-nova" color="#403F3F">
+                BACK TO NATIONAL MAP AND RESULTS
+              </Text>
             </Flex>
           </Link>
           <IndicatorDropdown
@@ -137,8 +139,10 @@ const State = ({
         <Flex justify="space-between" align="center" px={100} py={18}>
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
-              <Icon name="arrow-back" paddingTop="1px" size="16px" />
-              BACK TO NATIONAL MAP AND RESULTS
+              <Icon name="arrow-back" size="16px" />
+              <Text fontSize="12px" fontWeight="900" fontFamily="proxima-nova" color="#403F3F">
+                BACK TO NATIONAL MAP AND RESULTS
+              </Text>
             </Flex>
           </Link>
           <IndicatorDropdown
