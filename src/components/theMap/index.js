@@ -197,7 +197,6 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
   return (
     <Box w="100%" h="100%" px={highRes ? '0px' : [5, 10]} bg="#E5E5E5" position="relative">
       {dataPobreData && <DataProbe {...dataPobreData} />}
-
       {!isMobile && (
         <Button
           onClick={() => onShare()}
@@ -206,20 +205,14 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           right={['10%']}
           variant="link"
           size={['sm', 'md']}
-          color="#403F3F"
+          bg="#403F3F"
+          color="white"
           colorScheme="gray.900"
+          py="6px"
+          px={2}
         >
           SHARE
-          <Button
-            as="div"
-            marginLeft={2}
-            leftIcon="share"
-            fontSize={['30px', '45px']}
-            variant="link"
-            size="md"
-            color="#403F3F"
-            colorScheme="gray.900"
-          />
+          <Icon name="share" size="36px" color="white" />
         </Button>
       )}
       {!isMobile && highRes && (
