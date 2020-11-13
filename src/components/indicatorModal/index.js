@@ -92,7 +92,7 @@ const renderTabPanel = indicators => {
           borderBottom="1px solid #E5E5E5"
           color="#707070"
           cursor="pointer"
-          _hover={{ fontWeight: 'bold', bg: '#FFD285' }}
+          _hover={{ fontWeight: 'bold', bg: '#FFD285', color: 'rgb(26, 32, 44)' }}
         >
           {i}
         </PseudoBox>
