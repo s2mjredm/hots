@@ -211,6 +211,8 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           colorScheme="gray.900"
           py="6px"
           px={2}
+          fontFamily="proxima-nova"
+          fontSize="12px"
         >
           SHARE
           <Icon name="share" size="36px" color="white" />
