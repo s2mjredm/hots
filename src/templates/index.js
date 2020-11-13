@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 
@@ -22,6 +22,7 @@ const Index = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: socialIsOpen, onOpen: socialOnOpen, onClose: socialOnClose } = useDisclosure();
+  const [selectedState, setSelectedState] = useState();
 
   return (
     <Layout location={location}>
@@ -55,10 +56,19 @@ const Index = ({
             </Text>
           </Box>
           <Box px={[5, 20]} paddingBottom={[10]}>
-            <IndicatorDropdown onShowAll={() => onOpen()} initialIndicator={metadata.title} />
+            <IndicatorDropdown
+              onShowAll={() => onOpen()}
+              initialIndicator={metadata.title}
+              onSelectState={state => setSelectedState(state)}
+            />
           </Box>
           <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
-          <TheMap indicator={indicator} onShare={() => socialOnOpen()} metadata={metadata} />
+          <TheMap
+            indicator={indicator}
+            onShare={() => socialOnOpen()}
+            metadata={metadata}
+            selectedState={selectedState}
+          />
           <Box
             px={[5, 20]}
             pt={[5, 16]}

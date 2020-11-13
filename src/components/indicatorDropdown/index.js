@@ -17,6 +17,7 @@ const IndicatorDropdown = ({
   showAllColor,
   initialIndicator,
   initialState,
+  onSelectState,
 }) => {
   const [selectedIndicator, setSelectedIndicator] = useState(initialIndicator);
   const [selectedState, setSelectedState] = useState(initialState);
@@ -26,6 +27,7 @@ const IndicatorDropdown = ({
     query DataQuery {
       allStatesJson {
         nodes {
+          state
           name
         }
       }
@@ -51,6 +53,7 @@ const IndicatorDropdown = ({
   };
   const handleStateSelection = state => {
     setSelectedState(state);
+    onSelectState(allStatesJson.nodes.find(_state => _state.name === state));
   };
 
   return (
@@ -122,6 +125,7 @@ IndicatorDropdown.propTypes = {
   showAllColor: PropTypes.string,
   initialIndicator: PropTypes.string,
   initialState: PropTypes.string,
+  onSelectState: PropTypes.func,
 };
 
 IndicatorDropdown.defaultProps = {
@@ -130,6 +134,7 @@ IndicatorDropdown.defaultProps = {
   showAllColor: '#F06060',
   initialIndicator: '',
   initialState: '',
+  onSelectState: PropTypes.func,
 };
 
 export default IndicatorDropdown;
