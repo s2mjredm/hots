@@ -329,7 +329,7 @@ const State = ({
             fixed={topPerforming.childImageSharp.fixed}
             style={{
               position: 'absolute',
-              marginTop: -250,
+              marginTop: -249,
               right: '50%',
             }}
           />
