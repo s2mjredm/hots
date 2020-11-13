@@ -74,7 +74,7 @@ const StateDotMarker = ({
         <PopoverContent
           zIndex={isAllwaysVisible ? 3 : 4}
           marginBottom="40px"
-          w="121px"
+          w="120px"
           h="62px"
           borderRadius="0px"
         >

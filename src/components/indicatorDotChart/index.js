@@ -178,13 +178,24 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
 
     return histo.map((group, index) => {
       const placement = () => {
-        switch (index) {
-          case 0:
-            return 'top-end';
-          case histo.length - 1:
-            return 'top-start';
-          default:
-            return 'top';
+        if (metadata.positive === 'FALSE') {
+          switch (index) {
+            case 0:
+              return 'top-end';
+            case histo.length - 1:
+              return 'top-start';
+            default:
+              return 'top';
+          }
+        } else {
+          switch (index) {
+            case 0:
+              return 'top-start';
+            case histo.length - 1:
+              return 'top-end';
+            default:
+              return 'top';
+          }
         }
       };
 
