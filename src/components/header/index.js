@@ -61,6 +61,8 @@ const Header = ({ flag }) => {
         <Box display={['none', 'block']}>
           <Link to="/" onMouseEnter={() => setHover('/')} onMouseLeave={() => setHover(null)}>
             <Button
+              w="50%"
+              textAlign="center"
               fontFamily="proxima-nova"
               color="#403F3F"
               variant="link"
@@ -78,6 +80,8 @@ const Header = ({ flag }) => {
             onMouseLeave={() => setHover(null)}
           >
             <Button
+              w="50%"
+              textAlign="center"
               fontFamily="proxima-nova"
               color="#403F3F"
               variant="link"
@@ -95,6 +99,8 @@ const Header = ({ flag }) => {
             onMouseLeave={() => setHover(null)}
           >
             <Button
+              w="50%"
+              textAlign="center"
               fontFamily="proxima-nova"
               color="#403F3F"
               variant="link"
@@ -112,6 +118,8 @@ const Header = ({ flag }) => {
             onMouseLeave={() => setHover(null)}
           >
             <Button
+              w="50%"
+              textAlign="center"
               fontFamily="proxima-nova"
               color="#403F3F"
               variant="link"
