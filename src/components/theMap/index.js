@@ -75,7 +75,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
         .on('mousemove', event => {
           if (isZoomOut) {
             setDataPobreData({
-              selectedStateName: state,
+              selectedState: state,
               pos: [event.pageX, event.pageY],
               indicatorRank: values.indexOf(parseFloat(indicator[state])) + 1,
               indicatorName: metadata.title,
@@ -116,7 +116,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
     const pos = [getOffset(state).left, getOffset(state).top];
 
     setDataPobreData({
-      selectedStateName: stateId,
+      selectedState: stateId,
       pos,
       indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
       indicatorName: metadata.title,
@@ -145,7 +145,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
 
     if (!isZoomOut) {
       setDataPobreData({
-        selectedStateName: stateId,
+        selectedState: stateId,
         pos,
         indicatorRank: values.indexOf(parseFloat(indicator[stateId])) + 1,
         indicatorName: metadata.title,

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Portal } from 'react-portal';
-
 import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
+import { Portal } from 'react-portal';
 import { Box, Flex, Text } from '@chakra-ui/core';
 
 const DataProbe = ({
-  selectedStateName,
+  selectedState,
   indicatorRank,
   indicatorName,
   indicatorValue,
@@ -14,6 +14,19 @@ const DataProbe = ({
 }) => {
   const height = 100;
   const width = 240;
+  const {
+    allStatesJson: { stateName },
+  } = useStaticQuery(graphql`
+    {
+      allStatesJson {
+        stateName: nodes {
+          name
+          state
+        }
+      }
+    }
+  `);
+  const selectedStateName = stateName.find(s => s.state === selectedState).name;
   return (
     <Portal>
       <Flex
@@ -75,7 +88,7 @@ const DataProbe = ({
 };
 DataProbe.propTypes = {
   indicatorRank: PropTypes.number.isRequired,
-  selectedStateName: PropTypes.string.isRequired,
+  selectedState: PropTypes.string.isRequired,
   indicatorName: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
   pos: PropTypes.arrayOf(PropTypes.number).isRequired,

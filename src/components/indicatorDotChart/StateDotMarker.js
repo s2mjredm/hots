@@ -15,7 +15,6 @@ import {
 import { slugify } from '../../utils/slugify';
 
 const StateDotMarker = ({
-  state,
   stateName,
   indicator,
   indicatorValue,
@@ -74,7 +73,7 @@ const StateDotMarker = ({
         <PopoverContent
           zIndex={isAllwaysVisible ? 3 : 4}
           marginBottom="40px"
-          w="120px"
+          w="auto"
           h="62px"
           borderRadius="0px"
           border="none"
@@ -100,10 +99,27 @@ const StateDotMarker = ({
             {indicatorPosition}
           </Box>
           <PopoverBody paddingLeft="28px">
-            <Text fontFamily="proxima-nova" color="#403F3F" size="16px" fontWeight="800" mb="3px">
-              {state}
+            <Text
+              fontFamily="proxima-nova"
+              color="#403F3F"
+              size="16px"
+              fontWeight="800"
+              display="inline-block"
+              w="90px"
+              h="20px"
+              overflow="hidden"
+              whiteSpace="nowrap"
+              textOverflow="ellipsis"
+            >
+              {stateName}
             </Text>
-            <Text fontFamily="proxima-nova" color={indicatorColor} size="16px" fontWeight="600">
+            <Text
+              fontFamily="proxima-nova"
+              color={indicatorColor}
+              size="16px"
+              fontWeight="600"
+              mt="-2px"
+            >
               {indicatorValue}
             </Text>
           </PopoverBody>
@@ -114,7 +130,6 @@ const StateDotMarker = ({
 };
 
 StateDotMarker.propTypes = {
-  state: PropTypes.string.isRequired,
   stateName: PropTypes.string.isRequired,
   indicator: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
