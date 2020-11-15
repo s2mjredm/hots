@@ -6,6 +6,7 @@ import parse from 'html-react-parser';
 import { Box, Grid, Heading, Text, Link } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
+import Covid19 from '../components/covid19';
 import '../css/wordpress.css';
 import File from '../svg/file.svg';
 
@@ -45,6 +46,7 @@ const About = ({
   },
 }) => (
   <Layout>
+    <Covid19 />
     <div className="hero">
       <div className="item">
         <h1>{title}</h1>
