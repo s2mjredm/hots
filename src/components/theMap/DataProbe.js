@@ -82,6 +82,17 @@ const DataProbe = ({
             {indicatorValue}
           </Text>
         </Box>
+        <div
+          style={{
+            width: 16,
+            height: 16,
+            backgroundColor: 'white',
+            position: 'absolute',
+            left: '50%',
+            bottom: -8,
+            transform: 'rotate(45deg)',
+          }}
+        />
       </Flex>
     </Portal>
   );
