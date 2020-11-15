@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import { Box, Heading, Text } from '@chakra-ui/core';
+import { Box, Heading, Text, Icon } from '@chakra-ui/core';
 import Masonry from 'react-masonry-component';
 import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
-import Arrow from '../svg/arrow.svg';
-import Globe from '../svg/globe.svg';
 
 export const query = graphql`
   query {
@@ -100,23 +98,30 @@ const TakeAction = ({
                 style={{ margin: '0 30px' }}
               />
             )}
-            <Box borderTop="1px solid #707070" mt={6} pt={4} px={30}>
+            <Box mt={6} pt={4} px={30} borderTop="1px solid #707070">
               {item.link.url && (
-                <a href={item.link.url}>
-                  <Globe style={{ display: 'inline-block' }} />
+                <a href={item.link.url} display="flex" mt={6} pt={4} px={30} width="100%">
+                  <Box
+                    position="absolute"
+                    right="30px"
+                    pl="40px"
+                    mt="-4px"
+                    bgImage="linear-gradient(90deg, #FFFFFF00 0%, #FFFFFF 64%, #FFFFFF 100%)"
+                  >
+                    <Icon name="arrow" />
+                  </Box>
                   <Text
                     display="inline-block"
-                    w={140}
+                    w={175}
                     overflow="hidden"
                     whiteSpace="nowrap"
                     mx={1}
-                    position="relative"
-                    top="6px"
+                    lineHeight="16px"
                     target="_blank"
                   >
+                    <Icon name="globe" mr={1} />
                     {item.link.url.replace(/https?:\/\/(www\.)?(.*)\/?.*/gm, '$2')}
                   </Text>
-                  <Arrow style={{ display: 'inline-block', height: 16 }} />
                 </a>
               )}
             </Box>
