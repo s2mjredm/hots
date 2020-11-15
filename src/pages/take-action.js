@@ -82,22 +82,25 @@ const TakeAction = ({
           <Box
             key={item.id}
             w={['calc(100% - 80px)', 'calc(50% - 80px)', 260]}
-            p={30}
+            py={30}
             my={35}
             mx={[0, 5, 35]}
             bg="white"
             shadow="lg"
           >
-            <Heading as="h4" fontSize={18}>
+            <Heading as="h4" fontSize={18} px={30}>
               {item.title}
             </Heading>
-            <Text fontSize={16} fontFamily="Jubilat" my={5}>
+            <Text fontSize={16} fontFamily="Jubilat" my={5} px={30}>
               {parse(item.content)}
             </Text>
             {item.featuredImage && (
-              <Img fixed={item.featuredImage.node.localFile.childImageSharp.fixed} />
+              <Img
+                fixed={item.featuredImage.node.localFile.childImageSharp.fixed}
+                style={{ margin: '0 30px' }}
+              />
             )}
-            <Box borderTop="1px solid #707070" mt={6} pt={4}>
+            <Box borderTop="1px solid #707070" mt={6} pt={4} px={30}>
               {item.link.url && (
                 <a href={item.link.url}>
                   <Globe style={{ display: 'inline-block' }} />
