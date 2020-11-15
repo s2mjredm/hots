@@ -97,13 +97,17 @@ const RankGraphic = ({ rankings }) => {
                   bottom={50}
                   left={80}
                   mb={-50}
-                  lineHeight="60px"
+                  pt="5px"
+                  lineHeight="40px"
                   textAlign="center"
                   color="white"
                   fontFamily="Jubilat"
                   fontSize={24}
                 >
                   {r.ranking}
+                  <Text as="div" fontSize="10px" lineHeight="1em" mt="-10px">
+                    RANK
+                  </Text>
                 </Box>
                 <Heading as="h2" fontFamily="Jubilat" fontSize={24} mx={5}>
                   {r.condition}
