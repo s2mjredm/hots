@@ -67,7 +67,7 @@ const TakeAction = ({
           <h1>{title}</h1>
           <h2>{subtitle}</h2>
         </div>
-        <div className="item" style={{ flex: 2 }}>
+        <div className="item" style={{ flex: 2, paddingBottom: 0 }}>
           <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
         </div>
       </div>
