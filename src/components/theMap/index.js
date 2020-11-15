@@ -215,7 +215,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           fontSize="12px"
         >
           SHARE
-          <Icon name="share" size="36px" color="white" />
+          <Icon name="share" size="36px" color="white" ml={2} />
         </Button>
       )}
       {!isMobile && highRes && (

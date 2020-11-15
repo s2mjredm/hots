@@ -4,12 +4,15 @@ import { theme } from '@chakra-ui/core';
 const customIcons = {
   share: {
     path: (
-      <path
-        fill="currentColor"
-        d="M352 320c-22.608 0-43.387 7.819-59.79 20.895l-102.486-64.054a96.551 96.551 0 0 0 0-41.683l102.486-64.054C308.613 184.181 329.392 192 352 192c53.019 0 96-42.981 96-96S405.019 0 352 0s-96 42.981-96 96c0 7.158.79 14.13 2.276 20.841L155.79 180.895C139.387 167.819 118.608 160 96 160c-53.019 0-96 42.981-96 96s42.981 96 96 96c22.608 0 43.387-7.819 59.79-20.895l102.486 64.054A96.291 96.291 0 0 0 256 416c0 53.019 42.981 96 96 96s96-42.981 96-96-42.981-96-96-96z"
-      />
+      <g>
+        <circle fill="currentColor" cx="7" cy="7" r="7" />
+        <circle fill="currentColor" cx="35" cy="22" r="7" />
+        <circle fill="currentColor" cx="7" cy="38" r="7" />
+        <line fill="none" stroke="currentColor" strokeWidth="3" x1="10" y1="8" x2="30" y2="20" />
+        <line fill="none" stroke="currentColor" strokeWidth="3" x1="10" y1="36" x2="30" y2="24" />
+      </g>
     ),
-    viewBox: '0 0 448 512',
+    viewBox: '0 0 42 45',
   },
   twitter: {
     path: (
