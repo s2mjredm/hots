@@ -45,12 +45,12 @@ const About = ({
   },
 }) => (
   <Layout>
-    <div className="hero" style={{ marginBottom: -160 }}>
+    <div className="hero">
       <div className="item">
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
       </div>
-      <div className="item" style={{ flex: 2 }}>
+      <div className="item" style={{ flex: 2, padding: 0 }}>
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>
