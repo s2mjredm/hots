@@ -6,6 +6,7 @@ import parse from 'html-react-parser';
 import { Box, Grid, Heading, Text, Link } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
+import '../css/wordpress.css';
 import File from '../svg/file.svg';
 
 export const query = graphql`
@@ -103,7 +104,7 @@ const About = ({
         <Box bg="white" px={15} py={4}>
           <File style={{ float: 'right' }} />
           <Text fontSize={12} fontWeight={500}>
-            {parse(download.fileText2)}
+            <div className="wordpress">{parse(download.fileText2)}</div>
           </Text>
           <Link
             fontSize={12}

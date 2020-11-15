@@ -8,6 +8,7 @@ import { Grid } from '@chakra-ui/core';
 
 import Layout from '../components/layout';
 import '../css/learn-more.css';
+import '../css/wordpress.css';
 
 export const query = graphql`
   fragment PageInfo on WpPage {
@@ -55,7 +56,7 @@ const LearnMore = ({
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>
-    <Grid templateColumns={['1fr', '1fr 60%']} className="learn-more">
+    <Grid templateColumns={['1fr', '1fr 60%']} className="wordpress learn-more">
       {parse(content)}
     </Grid>
   </Layout>
