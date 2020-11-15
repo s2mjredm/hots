@@ -29,6 +29,7 @@ const Header = ({ flag }) => {
           '80px 3fr repeat(4, 2fr) 80px',
           '120px 3fr repeat(4, 2fr) 120px',
         ]}
+        position="relative"
         py={4}
         shadow="lg"
         direction="row"
