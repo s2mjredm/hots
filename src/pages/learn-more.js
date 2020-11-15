@@ -18,7 +18,7 @@ export const query = graphql`
       node {
         localFile {
           childImageSharp {
-            fluid(maxWidth: 1125) {
+            fluid(maxWidth: 1060) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -52,7 +52,7 @@ const LearnMore = ({
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
       </div>
-      <div className="item" style={{ flex: 2, marginTop: 20 }}>
+      <div className="item" style={{ flex: 2 }}>
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>

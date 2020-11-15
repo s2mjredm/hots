@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   background-color: #f7f7f7;
+  padding: 40px;
 }
 
 .hero h1 {
@@ -20,7 +21,7 @@
 
 .hero .item {
   flex: 1;
-  padding: 60px 100px;
+  /* padding: 60px 100px; */
 }
 
 .learn-more p {
@@ -36,6 +37,12 @@
 }
 
 @media (max-width: 1125px) {
+  .learn-more .wp-block-group{
+    padding: 0 80px;
+  }
+}
+
+@media (max-width: 1060px) {
   .learn-more{
     grid-template-columns: 1fr !important;
   };
@@ -47,13 +54,11 @@
   .learn-more .wp-block-group,
   .learn-more figure {
     width: 100vw;
+    margin: 40px 0;
   }
 }
 @media (max-width: 40em) {
-  .hero .item {
-    padding: 50px;
-  }
-  .learn-more .wp-block-group {
-    padding: 40px;
+  .hero{
+    display: block;
   }
 }
