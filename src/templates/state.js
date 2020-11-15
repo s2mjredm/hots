@@ -19,7 +19,6 @@ import Social from '../components/social';
 import TheMap from '../components/theMap';
 
 import './state.css';
-import Arrow from '../svg/arrow.svg';
 
 const State = ({
   location,
@@ -258,21 +257,16 @@ const State = ({
               {parse(metadata.definition)}
             </Text>
           </Box>
-          <Link
-            to="/learn-more"
+          <a
+            href="/learn-more"
+            className="arrow"
             style={{ fontSize: 16, fontWeight: 700, textDecoration: 'underline', color: '#403F3F' }}
           >
             <Text color="#403F3F" fontFamily="proxima-nova">
               Learn more about what shapes health
-              <Arrow
-                style={{
-                  display: 'inline',
-                  width: 16,
-                  marginLeft: 5,
-                }}
-              />
+              <Icon name="arrow" />
             </Text>
-          </Link>
+          </a>
         </Flex>
         <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
           <TheMap
@@ -296,8 +290,9 @@ const State = ({
           >
             {`How ${stateName.name} ranks on some of the most important conditions for health`}
           </Heading>
-          <Link
-            to="/learn-more"
+          <a
+            href="/learn-more"
+            className="arrow"
             style={{
               fontSize: 18,
               fontWeight: 700,
@@ -307,14 +302,8 @@ const State = ({
             }}
           >
             Learn more about why these matter so much for health
-            <Arrow
-              style={{
-                display: 'inline',
-                width: 18,
-                marginLeft: 5,
-              }}
-            />
-          </Link>
+            <Icon name="arrow" />
+          </a>
         </Flex>
         <Img fluid={pentagon.childImageSharp.fluid} />
         <Box>

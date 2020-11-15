@@ -1,3 +1,12 @@
 .blur {
   backdrop-filter: blur(4px);
 }
+
+a.arrow svg{
+  position: relative;
+  left: 5px
+}
+
+a.arrow:hover svg{
+  left: 15px;
+}
