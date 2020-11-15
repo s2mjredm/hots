@@ -1,3 +1,8 @@
+.wp-block-group a{
+  color: #F06060;
+  text-decoration: underline;
+}
+
 .hero {
   display: flex;
   align-items: center;
