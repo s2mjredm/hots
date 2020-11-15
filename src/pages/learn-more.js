@@ -18,7 +18,7 @@ export const query = graphql`
       node {
         localFile {
           childImageSharp {
-            fluid(maxWidth: 800) {
+            fluid(maxWidth: 1125) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -52,11 +52,11 @@ const LearnMore = ({
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
       </div>
-      <div className="item" style={{ flex: 2 }}>
+      <div className="item" style={{ flex: 2, marginTop: 20 }}>
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>
-    <Grid templateColumns={['1fr', '1fr 60%']} className="wordpress learn-more">
+    <Grid templateColumns={['1fr', '1fr', '1fr 60%']} className="wordpress learn-more">
       {parse(content)}
     </Grid>
   </Layout>

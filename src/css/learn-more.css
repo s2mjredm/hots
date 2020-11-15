@@ -36,6 +36,9 @@
 }
 
 @media (max-width: 1125px) {
+  .learn-more{
+    grid-template-columns: 1fr !important;
+  };
   .learn-more,
   .hero {
     display: block;
