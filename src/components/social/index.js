@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
 
 import { FacebookShareButton, TwitterShareButton, PinterestShareButton } from 'react-share';
 
@@ -15,10 +16,27 @@ import {
   useDisclosure,
 } from '@chakra-ui/core';
 
-const Social = ({ onClose, isOpen, url }) => {
+const Social = ({ onClose, isOpen, url, pathname }) => {
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            siteUrl: url
+            defaultImage: image
+          }
+        }
+      }
+    `
+  );
+
+  const { siteUrl, defaultImage } = site.siteMetadata;
+
   const { isOpen: showEmbed, onOpen: onShowEmbed } = useDisclosure();
 
   const embedCode = `<iframe src="${url}" />`;
+  const image = pathname ? `og-images${pathname.replace(/\/$/, '')}.png` : null;
+  const imageUrl = `${siteUrl}${image || defaultImage}`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(url);
@@ -74,7 +92,7 @@ const Social = ({ onClose, isOpen, url }) => {
                   </Text>
                 </Flex>
               </FacebookShareButton>
-              <PinterestShareButton url={url}>
+              <PinterestShareButton url={url} media={imageUrl}>
                 <Flex direction="column" align="center" justify="center" cursor="pointer">
                   <Flex
                     w="60px"
@@ -159,6 +177,7 @@ Social.propTypes = {
   onClose: propTypes.func.isRequired,
   isOpen: propTypes.bool,
   url: propTypes.string.isRequired,
+  pathname: propTypes.string.isRequired,
 };
 
 Social.defaultProps = {

@@ -215,6 +215,7 @@ const State = ({
       <Social
         isOpen={socialIsOpen}
         url={location.href}
+        pathname={location.pathname}
         onOpen={() => socialOnOpen()}
         onClose={() => socialOnClose()}
       />
