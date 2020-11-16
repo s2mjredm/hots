@@ -250,18 +250,10 @@ const IndicatorModal = ({ onClose, isOpen }) => {
 
   if (!isMobile) {
     return (
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose} size="xl" isCentered>
         <ModalOverlay className="blur" bg="#2a69acc9" />
-        <Flex
-          w="100%"
-          h="100vh"
-          top="0"
-          left="0"
-          justify="center"
-          position="absolute"
-          zIndex="1301"
-        >
-          <Box width="630px">
+        <ModalContent bg="none" shadow="none">
+          <Box>
             <Flex justify="space-between" color="white" align="center">
               <Text fontSize="38px" fontFamily="Jubilat">
                 Health Statistics & Outcomes
@@ -288,15 +280,15 @@ const IndicatorModal = ({ onClose, isOpen }) => {
                     })}
 
                   {searchResults && (
-                    <TabPanel>
+                    <Box overflow="auto" overflowX="hidden" h="615px" w="300px">
                       <SearchResults isSearchingCovid={isSearchingCovid} results={searchResults} />
-                    </TabPanel>
+                    </Box>
                   )}
                 </TabPanels>
               </Tabs>
             </Box>
           </Box>
-        </Flex>
+        </ModalContent>
       </Modal>
     );
   }
