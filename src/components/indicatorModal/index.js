@@ -272,7 +272,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
                 <TabList minWidth="276px" flexDirection="column" borderRight="1px solid #F2F2F2">
                   {renderTabList(Object.keys(categories))}
                 </TabList>
-                <TabPanels width="100%" bg="white">
+                <TabPanels width="100%" bg="#F7F7F7">
                   {!searchResults &&
                     Object.values(categories).map(category => {
                       const indicators = category.map(c => c.title);
@@ -282,7 +282,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
                     })}
 
                   {searchResults && (
-                    <Box overflow="auto" overflowX="hidden" h="615px" w="300px">
+                    <Box overflow="auto" overflowX="hidden" h="615px" w="300px" bg="white">
                       <SearchResults isSearchingCovid={isSearchingCovid} results={searchResults} />
                     </Box>
                   )}
