@@ -13,7 +13,7 @@ const Layout = ({ location: { pathname }, children, ogImage, description }) => {
         image={ogImage && pathname ? `og-images${pathname.replace(/\/$/, '')}.png` : null}
       />
       <Header flag={pathname === '/'} />
-      <main>{children}</main>
+      <main style={{ color: ' #403f3f' }}>{children}</main>
       <Footer />
     </>
   );
