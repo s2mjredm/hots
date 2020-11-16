@@ -104,7 +104,7 @@ const renderTabPanel = indicators => {
 const SearchInput = ({ inputValue, onChange, onCloseSearch }) => {
   const [isOnFocus, setIsOnFocus] = useState(false);
 
-  const focusedStyles = { paddingLeft: '290px' };
+  const focusedStyles = { paddingLeft: '270px' };
 
   return (
     <Flex
@@ -116,9 +116,11 @@ const SearchInput = ({ inputValue, onChange, onCloseSearch }) => {
       style={isOnFocus ? focusedStyles : null}
     >
       <InputGroup fontFamily="Jubilat" size="lg" color="gray.300">
-        <InputLeftElement>
-          {isOnFocus && <Icon h="40px" name="search" paddingBottom="7px" />}
-        </InputLeftElement>
+        {isOnFocus && (
+          <InputLeftElement>
+            <Icon h="40px" name="search" paddingBottom="7px" />
+          </InputLeftElement>
+        )}
         <Input
           autoComplete="off"
           onChange={e => onChange(e)}
