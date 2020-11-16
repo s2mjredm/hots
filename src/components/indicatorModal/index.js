@@ -262,7 +262,7 @@ const IndicatorModal = ({ onClose, isOpen }) => {
               </Text>
               <CloseButton size="lg" fontSize="32px" onClick={onClose} />
             </Flex>
-            <Box bg="#E5E5E5">
+            <Box bg="#E5E5E5" shadow="0px 2px 15px 1px #124d8e;">
               <SearchInput
                 inputValue={inputValue}
                 onChange={e => handleChange(e)}
