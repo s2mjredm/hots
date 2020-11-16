@@ -289,10 +289,7 @@ const MapHigh = ({ svgRef }) => (
 );
 
 MapHigh.propTypes = {
-  svgRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  svgRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape()]).isRequired,
 };
 
 export default MapHigh;

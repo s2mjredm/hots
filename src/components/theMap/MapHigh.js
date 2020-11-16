@@ -505,10 +505,7 @@ const MapHigh = ({ svgRef, zoomedOut }) => (
 );
 
 MapHigh.propTypes = {
-  svgRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  svgRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape()]).isRequired,
   zoomedOut: PropTypes.bool,
 };
 
