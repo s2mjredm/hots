@@ -2,3 +2,22 @@
   stroke: #E2E8F0;
   stroke-width: 1px;
 }
+
+#states text, #statesHigh text{
+  fill: white;
+  font-family: 'News Cycle';
+  font-weight: bold;
+  pointer-events: none;
+}
+
+#states text{
+  font-size: 20px;
+}
+
+#statesHigh text{
+  font-size: 5px;
+}
+
+#statesHigh.zoomedOut text{
+  font-size: 8px;
+}
