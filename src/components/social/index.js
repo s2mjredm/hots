@@ -3,11 +3,28 @@ import propTypes from 'prop-types';
 
 import { FacebookShareButton, TwitterShareButton, PinterestShareButton } from 'react-share';
 
-import { Box, Button, CloseButton, Flex, Icon, Modal, ModalOverlay, Text } from '@chakra-ui/core';
+import {
+  Box,
+  Button,
+  CloseButton,
+  Flex,
+  Icon,
+  Modal,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/core';
 
 const Social = ({ onClose, isOpen, url }) => {
+  const { isOpen: showEmbed, onOpen: onShowEmbed } = useDisclosure();
+
+  const embedCode = `<iframe src="${url}" />`;
+
   const handleCopyLink = () => {
     navigator.clipboard.writeText(url);
+  };
+  const handleCopyEmbed = () => {
+    navigator.clipboard.writeText(embedCode);
   };
 
   return (
@@ -31,6 +48,7 @@ const Social = ({ onClose, isOpen, url }) => {
                   justify="center"
                   bg="#F7F7F7"
                   borderRadius="100%"
+                  onClick={onShowEmbed}
                 >
                   <Icon name="chevron-left" color="#707070" fontSize="30px" />
                   <Icon name="chevron-right" color="#707070" fontSize="30px" />
@@ -91,7 +109,7 @@ const Social = ({ onClose, isOpen, url }) => {
                 </Flex>
               </TwitterShareButton>
             </Flex>
-            <Flex p={2} bg="#F7F7F7" borderRadius="4px" justify="space-between" width="100%">
+            <Flex p={2} mb={2} bg="#F7F7F7" borderRadius="4px" justify="space-between" width="100%">
               <Text fontSize="18px" fontFamily="proxima-nova" fontWeight="700">
                 {url}
               </Text>
@@ -106,6 +124,30 @@ const Social = ({ onClose, isOpen, url }) => {
                 copy link
               </Button>
             </Flex>
+            {showEmbed && (
+              <Flex
+                p={2}
+                mb={2}
+                bg="#F7F7F7"
+                borderRadius="4px"
+                justify="space-between"
+                width="100%"
+              >
+                <Text fontSize="18px" fontFamily="proxima-nova" fontWeight="700">
+                  {embedCode}
+                </Text>
+
+                <Button
+                  variantColor="red"
+                  variant="link"
+                  size="sm"
+                  onClick={() => handleCopyEmbed()}
+                  mx={4}
+                >
+                  copy link
+                </Button>
+              </Flex>
+            )}
           </Flex>
         </Box>
       </Flex>
