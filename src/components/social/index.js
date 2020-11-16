@@ -92,10 +92,17 @@ const Social = ({ onClose, isOpen, url }) => {
               </TwitterShareButton>
             </Flex>
             <Flex p={2} bg="#F7F7F7" borderRadius="4px" justify="space-between" width="100%">
-              <Text fontSize="18px" fontFamily="proxima-nova" fontWeight="semi-bold">
+              <Text fontSize="18px" fontFamily="proxima-nova" fontWeight="700">
                 {url}
               </Text>
-              <Button variantColor="red" variant="link" size="sm" onClick={() => handleCopyLink()}>
+
+              <Button
+                variantColor="red"
+                variant="link"
+                size="sm"
+                onClick={() => handleCopyLink()}
+                mx={4}
+              >
                 copy link
               </Button>
             </Flex>
