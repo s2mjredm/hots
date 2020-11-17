@@ -12,6 +12,8 @@ import MapHigh from './MapHigh';
 import { slugify } from '../../utils/slugify';
 import format from '../../utils/numberFormat';
 import useIsMobile from '../../utils/useIsMobile';
+import useWindowSize from '../../utils/useWindowSize';
+
 import ZoomButton from '../../svg/zoom.svg';
 
 import './index.css';
@@ -38,6 +40,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
   const [isZoomOut, setIsZoomOut] = useState(!!zoomOut);
 
   const isMobile = useIsMobile();
+  const windowSize = useWindowSize();
 
   const [colorScale, setColorScale] = useState({ scale: () => '#0083E2' });
 
@@ -132,7 +135,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
         metadata.factor
       ),
     });
-  }, [stateId]);
+  }, [stateId, windowSize]);
 
   useEffect(() => {
     if (!stateId) return;
