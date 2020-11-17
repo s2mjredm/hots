@@ -199,7 +199,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
   }, [stateId, isZoomOut, colorScale]);
 
   return (
-    <Box w="100%" h="100%" px={highRes ? '0px' : [5, 10]} bg="#E5E5E5" position="relative">
+    <Box w="100%" px={highRes ? '0px' : [5, 10]} bg="#E5E5E5" position="relative">
       {dataPobreData && <DataProbe {...dataPobreData} />}
       {!isMobile && (
         <Button
