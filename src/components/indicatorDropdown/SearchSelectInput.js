@@ -119,7 +119,7 @@ const SearchSelectInput = ({
     <>
       <FormControl
         className="search-dropdown"
-        w={['100%', '100%', '20rem']}
+        w="100%"
         p={padding}
         mb={[3, 0]}
         position={position}

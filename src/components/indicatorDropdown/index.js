@@ -77,7 +77,8 @@ const IndicatorDropdown = ({
           />
         </Box>
         <Button
-          width="100%"
+          width="228px"
+          m={3}
           display={['none', 'block']}
           variant="link"
           size="md"
@@ -85,8 +86,6 @@ const IndicatorDropdown = ({
           fontWeight="800"
           fontSize="14px"
           color={showAllColor}
-          minW="100px"
-          my={3}
           onClick={() => onShowAll()}
         >
           SHOW ALL

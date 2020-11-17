@@ -135,7 +135,13 @@ const State = ({
         </Flex>
       )}
       {!isMobile && (
-        <Flex justify="space-between" align="center" px={100} py={18}>
+        <Grid
+          gridTemplateColumns="35% 1fr"
+          gridColumnGap="29px"
+          alignItems="baseline"
+          px={100}
+          py={18}
+        >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
               <Icon name="arrow-back" size="16px" />
@@ -151,7 +157,7 @@ const State = ({
             initialIndicator={metadata.title}
             initialState={stateName.name}
           />
-        </Flex>
+        </Grid>
       )}
       {/* mobile header  */}
       {isMobile && (
