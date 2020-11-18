@@ -141,7 +141,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
     if (!stateId) return;
     const svg = svgRef.current;
 
-    const zoomPaddingFactor = isZoomOut ? 1.1 : 2.8;
+    const zoomPaddingFactor = isZoomOut ? 1.05 : 1.8;
     // state is the state I want to zoom to
     const state = isZoomOut ? svg : svg.querySelector(`#${stateId}`);
 
@@ -190,8 +190,9 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
     const absoluteOffsetX = vbox[0] + newx - cx;
     const absoluteOffsetY = vbox[1] + newy - cy;
 
+    const biggerSide = bbox.width > bbox.height ? bbox.width : bbox.height;
     // the new scale
-    const scale = ((bbox.width * matrix.a) / vbox[2]) * zoomPaddingFactor;
+    const scale = ((biggerSide * matrix.a) / vbox[2]) * zoomPaddingFactor;
 
     const scaledOffsetX = absoluteOffsetX + (vbox[2] * (1 - scale)) / 2;
     const scaledOffsetY = absoluteOffsetY + (vbox[3] * (1 - scale)) / 2;
