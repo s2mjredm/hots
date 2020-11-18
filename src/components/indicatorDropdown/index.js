@@ -4,6 +4,8 @@ import { useStaticQuery, graphql, navigate } from 'gatsby';
 
 import { Box, Button, Flex } from '@chakra-ui/core';
 
+import chroma from 'chroma-js';
+
 import SearchSelectInput from './SearchSelectInput';
 import useNavigate from './useNavigate';
 import { slugify } from '../../utils/slugify';
@@ -104,7 +106,7 @@ const IndicatorDropdown = ({
           mt={[3, 3, 0]}
           isDisabled={!isNavigationEnabled}
           bg={buttonColor}
-          _hover={{ bg: '#FFB3B3' }}
+          _hover={{ bg: chroma(buttonColor).brighten(1).hex() }}
           color="white"
           size="lg"
           h={[12, 12]}
