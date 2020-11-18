@@ -111,6 +111,8 @@ const useGenStateDotMarkers = indicator => {
 
 const IndicatorDotChart = ({ indicator, metadata, states }) => {
   const [trackRef, setTrackRef] = useState({ current: null });
+  const [isTrackHoverd, setIsTrackHovered] = useState(false);
+
   const { width } = useContainerDimensions(trackRef);
   const [range /* ,setRange */] = useState(
     Object.keys(indicator)
@@ -145,6 +147,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           display="flex"
           flexDirection="column"
           alignItems="center"
+          pointerEvents="none"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
           <Text fontFamily="proxima-nova">
@@ -202,8 +205,11 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
       return group.map((marker, bottom) => {
         const rank = findIndex(values, d => marker.state === d.state) + 1;
         const isAllwaysVisible = rank === 1 || rank === values.length;
+
         return (
           <StateDotMarker
+            isTrackHoverd={isTrackHoverd}
+            setIsTrackHovered={setIsTrackHovered}
             key={marker.state}
             state={marker.state}
             stateName={states.find(s => s.state === marker.state).name}
@@ -240,6 +246,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
       </Box>
       <Box px={[5, 20]} py={16} bg="#E5E5E5" color="gray.text">
         <Box
+          id="track"
           ref={getTrackRef}
           position="relative"
           h="58px"

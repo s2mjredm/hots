@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 import {
@@ -25,19 +25,35 @@ const StateDotMarker = ({
   isAllwaysVisible,
   placement,
   size,
+  isTrackHoverd,
+  setIsTrackHovered,
 }) => {
   const [isOpen, setIsOpen] = useState(!!isAllwaysVisible);
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
   const open = () => {
+    setIsMouseOver(true);
+    setIsTrackHovered(true);
     if (!isAllwaysVisible) {
       setIsOpen(true);
     }
   };
 
   const close = () => {
+    setIsMouseOver(false);
+    setIsTrackHovered(false);
     if (!isAllwaysVisible) {
       setIsOpen(false);
     }
   };
+
+  useEffect(() => {
+    if (isTrackHoverd && isAllwaysVisible && !isMouseOver) {
+      setIsOpen(false);
+    } else if (!isTrackHoverd && isAllwaysVisible) {
+      setIsOpen(true);
+    }
+  }, [isTrackHoverd, isMouseOver]);
 
   const initialFocusRef = React.useRef();
 
@@ -140,6 +156,8 @@ StateDotMarker.propTypes = {
   isAllwaysVisible: PropTypes.bool.isRequired,
   placement: PropTypes.string,
   size: PropTypes.number,
+  isTrackHoverd: PropTypes.bool.isRequired,
+  setIsTrackHovered: PropTypes.func.isRequired,
 };
 
 StateDotMarker.defaultProps = {
