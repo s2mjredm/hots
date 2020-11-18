@@ -63,9 +63,12 @@ const renderTabList = categories => {
         w="100%"
         justifyContent="space-between"
         borderBottom="3px solid white"
-        fontFamily="Roboto"
+        fontFamily="proxima-nova"
         textAlign="start"
+        color="rgb(112, 112, 112)"
+        lineHeight="22px"
         _selected={{
+          color: '#403F3F',
           bg: 'white',
           borderLeft: '5px solid #FFD285',
           fontWeight: 'bold',

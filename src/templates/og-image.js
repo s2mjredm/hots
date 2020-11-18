@@ -38,7 +38,7 @@ const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
             <span> ranks for </span>
             <span style={{ color: '#009FFA' }}>{metadata.title}</span>
           </Text>
-          <Text fontFamily="Proxima Nova">
+          <Text fontFamily="proxima-nova">
             {`Out of 50 states, ${state.name} ranks ${ranking[metadata.variable]} for ${
               metadata.title
             }`}
@@ -50,7 +50,7 @@ const State = ({ data: { metadata, indicator, state, ranking, logo } }) => {
             <Box h="40px" w="80px" px="10px" ml="10px" borderLeft="2px solid black">
               <Logo />
             </Box>
-            <Text fontFamily="Proxima Nova" lineHeight="40px" fontSize="30px">
+            <Text fontFamily="proxima-nova" lineHeight="40px" fontSize="30px">
               State of Health
             </Text>
           </Flex>
