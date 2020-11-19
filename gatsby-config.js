@@ -71,18 +71,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          {
-            family: `News Cycle`,
-            variants: [`400`, `700`],
-          },
-          {
-            family: `Montserrat`,
-            variants: [`400`, `500`, `700`],
-          },
-        ],
+        fonts: [`Montserrat:400,500,700`, `News+Cycle:400,700`],
+        display: 'swap',
       },
     },
     `gatsby-plugin-open-graph-images`,
