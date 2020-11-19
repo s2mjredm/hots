@@ -150,7 +150,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           pointerEvents="none"
         >
           <Box display="table" bg="white" h="68px" w="1px" />
-          <Text fontFamily="proxima-nova">
+          <Text fontFamily="proxima-nova" whiteSpace="nowrap">
             {format(
               dotScale.invert(tickScale(tick)),
               metadata.unit,

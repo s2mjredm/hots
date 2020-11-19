@@ -121,7 +121,7 @@ const StateDotMarker = ({
               size="16px"
               fontWeight="800"
               display="inline-block"
-              w="90px"
+              w="100px"
               h="20px"
               overflow="hidden"
               whiteSpace="nowrap"
@@ -135,6 +135,7 @@ const StateDotMarker = ({
               size="16px"
               fontWeight="600"
               mt="-2px"
+              w="100px"
             >
               {indicatorValue}
             </Text>
