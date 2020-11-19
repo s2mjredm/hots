@@ -176,7 +176,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
         .filter(h => h.length);
     }
 
-    const values = dotMarkers;
+    const values = [...dotMarkers];
     if (metadata.positive === 'FALSE') values.reverse();
 
     return histo.map((group, index) => {
