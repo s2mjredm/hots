@@ -69,7 +69,7 @@ const RankGraphic = ({ rankings }) => {
       setNumSlides(Math.min(Math.floor((innerWidth - 80) / 220), 5));
     };
     window.addEventListener('resize', resize);
-  });
+  }, []);
 
   const order = [3, 2, 4, 1, 5];
 
