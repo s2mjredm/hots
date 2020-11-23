@@ -7,6 +7,7 @@ import { Box, Text, Flex, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
 import format from '../../utils/numberFormat';
+import useIsMobile from '../../utils/useIsMobile';
 import './index.css';
 
 // The number of tick markers in the chart
@@ -110,6 +111,7 @@ const useGenStateDotMarkers = indicator => {
 };
 
 const IndicatorDotChart = ({ indicator, metadata, states }) => {
+  const isMobile = useIsMobile();
   const [trackRef, setTrackRef] = useState({ current: null });
   const [isTrackHoverd, setIsTrackHovered] = useState(false);
 
@@ -223,7 +225,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
             setIsTrackHovered={setIsTrackHovered}
             key={marker.state}
             state={marker.state}
-            stateName={states.find(s => s.state === marker.state).name}
+            stateName={isMobile ? marker.state : states.find(s => s.state === marker.state).name}
             indicator={metadata.title}
             indicatorValue={format(
               marker.indicatorValue,
@@ -251,7 +253,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
       <Box px={[5, 20]} py="22px" color="gray.text" fontSize="14px">
         <Text bg="white">{metadata.definition}</Text>
       </Box>
-      <Box px={[5, 20]} py={16} bg="#E5E5E5" color="gray.text">
+      <Box px={[5, 20]} pt={[24, 16]} pb={16} bg="#E5E5E5" color="gray.text">
         <Box
           id="track"
           ref={getTrackRef}
@@ -260,24 +262,29 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           width="100%"
           className="indicator-dot-background"
         >
-          {dotScale && renderTicks()}
+          {isMobile && <Icon name="cursorArrow" w="60px" mt="20px" ml="calc(50% - 30px)" />}
+          {!isMobile && dotScale && renderTicks()}
           {dotScale && renderDots()}
         </Box>
-        <Flex color="#403F3F" paddingTop="46px" justify="space-between" align="center">
-          <Flex justify="space-between">
-            <Icon name="arrow-back" size="24px" />
-            <Text w="max-content">
-              {metadata.positive === 'TRUE' ? metadata.low : metadata.high}
-            </Text>
-          </Flex>
-          <hr style={{ width: '100%', borderTop: '2px solid #b6b6b6', margin: '0px 20px' }} />
-          <Flex justify="space-between">
-            <Text w="max-content">
-              {metadata.positive === 'TRUE' ? metadata.high : metadata.low}
-            </Text>
-            <Icon name="arrow-forward" size="24px" />
-          </Flex>
-        </Flex>
+        {!isMobile && (
+          <>
+            <Flex color="#403F3F" paddingTop="46px" justify="space-between" align="center">
+              <Flex justify="space-between">
+                <Icon name="arrow-back" size="24px" />
+                <Text w="max-content">
+                  {metadata.positive === 'TRUE' ? metadata.low : metadata.high}
+                </Text>
+              </Flex>
+              <hr style={{ width: '100%', borderTop: '2px solid #b6b6b6', margin: '0px 20px' }} />
+              <Flex justify="space-between">
+                <Text w="max-content">
+                  {metadata.positive === 'TRUE' ? metadata.high : metadata.low}
+                </Text>
+                <Icon name="arrow-forward" size="24px" />
+              </Flex>
+            </Flex>
+          </>
+        )}
       </Box>
     </Box>
   );

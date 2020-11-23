@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/core';
 
 import { slugify } from '../../utils/slugify';
+import useIsMobile from '../../utils/useIsMobile';
 
 const StateDotMarker = ({
   stateName,
@@ -28,6 +29,7 @@ const StateDotMarker = ({
   isTrackHoverd,
   setIsTrackHovered,
 }) => {
+  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(!!isAllwaysVisible);
   const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -72,6 +74,7 @@ const StateDotMarker = ({
       >
         <PopoverTrigger>
           <PseudoBox
+            visibility={['hidden', 'visible']}
             position="absolute"
             left={leftPosition}
             bottom={`${bottom * size}px`}
@@ -79,7 +82,7 @@ const StateDotMarker = ({
             bg="black"
             border="1px solid white"
             w={`${size}px`}
-            h={`${size}px`}
+            h={['100%', `${size}px`]}
             _hover={{ bg: 'white' }}
             onMouseEnter={open}
             onMouseLeave={close}
@@ -89,7 +92,7 @@ const StateDotMarker = ({
         <PopoverContent
           zIndex={isAllwaysVisible ? 3 : 4}
           marginBottom="40px"
-          w="auto"
+          w={[100, 'auto']}
           h="62px"
           borderRadius="0px"
           border="none"
@@ -99,29 +102,35 @@ const StateDotMarker = ({
             mr={placement === 'top-end' ? '2px' : 0}
           />
           <Box
-            w="48px"
-            h="48px"
-            bg={indicatorColor}
-            borderRadius="100%"
+            w={['50%', '48px']}
+            h={['auto', '48px']}
+            bg={['none', indicatorColor]}
+            borderRadius={[0, '100%']}
             position="absolute"
-            left="-24px"
+            left={[0, '-24px']}
             top="8px"
-            color="white"
+            color={['#403F3F', 'white']}
             textAlign="center"
-            lineHeight="49px"
+            lineHeight={['24px', '49px']}
             fontFamily="Jubilat"
             fontSize="24px"
+            borderRight={['1px solid #b4b4b4', 'none']}
           >
             {indicatorPosition}
+            {isMobile && (
+              <Text fontSize={16} fontFamily="News Cycle" fontWeight={700} color="#b4b4b4">
+                RANK
+              </Text>
+            )}
           </Box>
-          <PopoverBody paddingLeft="28px">
+          <PopoverBody paddingLeft={['calc(50% + 5px)', '28px']}>
             <Text
               fontFamily="proxima-nova"
               color="#403F3F"
               size="16px"
               fontWeight="800"
               display="inline-block"
-              w="100px"
+              w={['auto', '100px']}
               h="20px"
               overflow="hidden"
               whiteSpace="nowrap"
@@ -130,14 +139,14 @@ const StateDotMarker = ({
               {stateName}
             </Text>
             <Text
-              fontFamily="proxima-nova"
-              color={indicatorColor}
+              fontFamily={['News Cycle', 'proxima-nova']}
+              color={['#B4B4B4', indicatorColor]}
               size="16px"
-              fontWeight="600"
+              fontWeight={[700, 600]}
               mt="-2px"
-              w="100px"
+              w={['auto', '100px']}
             >
-              {indicatorValue}
+              {isMobile ? 'STATE' : indicatorValue}
             </Text>
           </PopoverBody>
         </PopoverContent>
