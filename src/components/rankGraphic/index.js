@@ -144,7 +144,8 @@ const RankGraphic = ({ rankings }) => {
                         bg="#184595"
                         position="relative"
                         bottom={50}
-                        left={80}
+                        left="50%"
+                        transform="translateX(-50%)"
                         mb={-50}
                         pt="5px"
                         lineHeight="40px"
