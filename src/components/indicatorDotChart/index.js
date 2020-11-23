@@ -206,6 +206,17 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
         const rank = findIndex(values, d => marker.state === d.state) + 1;
         const isAllwaysVisible = rank === 1 || rank === values.length;
 
+        const leftPosition = () => {
+          if (metadata.positive !== 'FALSE') {
+            return placement() === 'top-start'
+              ? dotScale(group.x0) - size / 2
+              : dotScale(group.x1) - size / 2;
+          }
+          return placement() === 'top-start'
+            ? dotScale(group.x1) - size / 2
+            : dotScale(group.x0) - size / 2;
+        };
+
         return (
           <StateDotMarker
             isTrackHoverd={isTrackHoverd}
@@ -222,11 +233,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
               metadata.factor
             )}
             indicatorPosition={rank}
-            leftPosition={
-              placement() === 'top-start'
-                ? dotScale(group.x1) - size / 2
-                : dotScale(group.x0) - size / 2
-            }
+            leftPosition={leftPosition()}
             bottom={bottom}
             indicatorColor={colorScale(marker.indicatorValue)}
             isAllwaysVisible={isAllwaysVisible}
