@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import { Box, Heading, Text } from '@chakra-ui/core';
-import SwiperCore, { Pagination } from 'swiper';
+import SwiperCore, { Pagination, Navigation, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSprings, animated } from 'react-spring';
 
@@ -13,6 +13,7 @@ import useWindowSize from '../../utils/useWindowSize';
 
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/navigation/navigation.scss';
 import '../../css/rank-graphic.css';
 
 const RankGraphic = ({ rankings }) => {
@@ -73,13 +74,15 @@ const RankGraphic = ({ rankings }) => {
     setNumSlides(Math.min(Math.floor((windowWidth - 80) / 220), 5));
   }, [windowWidth]);
 
-  SwiperCore.use([Pagination]);
+  SwiperCore.use(isMobile ? [Pagination] : [Pagination, Navigation, Keyboard]);
 
   return (
     <Box w={1100} maxW="calc(100vw - 80px)">
       <Swiper
         loop
         pagination={{ clickable: true }}
+        navigation={!isMobile}
+        keyboard={!isMobile}
         centeredSlides
         slidesPerView={numSlides}
         style={{
