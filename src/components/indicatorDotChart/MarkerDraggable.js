@@ -4,7 +4,7 @@ import { Icon, Box } from '@chakra-ui/core';
 import { sortBy, mapValues } from 'lodash';
 import DotMarkerProbe from './DotMarkerProbe';
 
-const MarkerDraggable = ({ indicator, width, positive }) => {
+const MarkerDraggable = ({ indicator, width, positive, setIsTrackHovered }) => {
   const ranked = sortBy(
     mapValues(indicator, (i, state) => ({ state, value: parseFloat(i) })),
     v => v.value
@@ -43,9 +43,13 @@ const MarkerDraggable = ({ indicator, width, positive }) => {
         left={position}
         ml="-30px"
         position="absolute"
-        onTouchStart={() => setDragging(true)}
+        onTouchStart={() => {
+          setDragging(true);
+          setIsTrackHovered(true);
+        }}
         onTouchEnd={() => {
           setDragging(false);
+          setIsTrackHovered(false);
           setPosition('50%');
         }}
         onTouchMove={onTouchMove}
@@ -60,6 +64,7 @@ MarkerDraggable.propTypes = {
   indicator: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   width: PropTypes.number.isRequired,
   positive: PropTypes.bool.isRequired,
+  setIsTrackHovered: PropTypes.func.isRequired,
 };
 
 export default MarkerDraggable;

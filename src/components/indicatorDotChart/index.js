@@ -264,7 +264,12 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           className="indicator-dot-background"
         >
           {isMobile && (
-            <MarkerDraggable indicator={indicator} width={width} positive={metadata.positive} />
+            <MarkerDraggable
+              indicator={indicator}
+              width={width}
+              positive={metadata.positive}
+              setIsTrackHovered={setIsTrackHovered}
+            />
           )}
           {!isMobile && dotScale && renderTicks()}
           {dotScale && renderDots()}
