@@ -262,7 +262,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           width="100%"
           className="indicator-dot-background"
         >
-          {isMobile && <Icon name="cursorArrow" w="60px" mt="20px" ml="calc(50% - 30px)" />}
+          {isMobile && <StateDotMarker draggable />}
           {!isMobile && dotScale && renderTicks()}
           {dotScale && renderDots()}
         </Box>

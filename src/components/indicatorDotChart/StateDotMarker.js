@@ -28,6 +28,7 @@ const StateDotMarker = ({
   size,
   isTrackHoverd,
   setIsTrackHovered,
+  draggable,
 }) => {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(!!isAllwaysVisible);
@@ -81,12 +82,13 @@ const StateDotMarker = ({
             borderRadius="100%"
             bg="black"
             border="1px solid white"
-            w={`${size}px`}
+            w={['40px', `${size}px`]}
             h={['100%', `${size}px`]}
+            ml={['-15px', 0]}
             _hover={{ bg: 'white' }}
             onMouseEnter={open}
             onMouseLeave={close}
-            onClick={() => navigate(`/${slugify(indicator)}/${slugify(stateName)}`)}
+            onClick={() => !isMobile && navigate(`/${slugify(indicator)}/${slugify(stateName)}`)}
           />
         </PopoverTrigger>
         <PopoverContent
@@ -96,6 +98,8 @@ const StateDotMarker = ({
           h="62px"
           borderRadius="0px"
           border="none"
+          ml={placement === 'top-start' ? '10px' : 0}
+          mr={placement === 'top-end' ? '10px' : 0}
         >
           <PopoverArrow
             ml={placement === 'top-start' ? '2px' : 0}
