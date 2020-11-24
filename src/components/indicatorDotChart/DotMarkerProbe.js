@@ -111,7 +111,7 @@ DotMarkerProbe.propTypes = {
   isOpen: PropTypes.bool,
   close: PropTypes.func.isRequired,
   isAllwaysVisible: PropTypes.bool,
-  indicatorColor: PropTypes.string.isRequired,
+  indicatorColor: PropTypes.string,
   indicatorPosition: PropTypes.number.isRequired,
   stateName: PropTypes.string.isRequired,
   indicatorValue: PropTypes.string.isRequired,
@@ -121,6 +121,7 @@ DotMarkerProbe.defaultProps = {
   placement: 'top',
   isOpen: false,
   isAllwaysVisible: false,
+  indicatorColor: '#ffffff',
 };
 
 export default DotMarkerProbe;

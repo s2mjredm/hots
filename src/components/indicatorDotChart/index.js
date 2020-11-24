@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Box, Text, Flex, Icon } from '@chakra-ui/core';
 
 import StateDotMarker from './StateDotMarker';
+import MarkerDraggable from './MarkerDraggable';
 import format from '../../utils/numberFormat';
 import useIsMobile from '../../utils/useIsMobile';
 import './index.css';
@@ -262,7 +263,9 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           width="100%"
           className="indicator-dot-background"
         >
-          {isMobile && <StateDotMarker draggable />}
+          {isMobile && (
+            <MarkerDraggable indicator={indicator} width={width} positive={metadata.positive} />
+          )}
           {!isMobile && dotScale && renderTicks()}
           {dotScale && renderDots()}
         </Box>
