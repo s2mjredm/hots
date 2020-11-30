@@ -80,6 +80,7 @@ const State = ({
     .map(a => parseFloat(a))
     .filter(a => a && !Number.isNaN(a))
     .sort((a, b) => b - a);
+  if (metadata.positive === 'FALSE') indicatorValues.reverse();
   const indicatorRank = indicatorValues.indexOf(parseFloat(indicator[stateName.state])) + 1;
 
   const categoryRankings = ranks
@@ -424,6 +425,7 @@ export const query = graphql`
       unit
       rounding
       decimals
+      positive
       factor
       high
       low
