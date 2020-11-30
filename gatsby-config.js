@@ -30,12 +30,7 @@ module.exports = {
         isUsingColorMode: false,
       },
     },
-    {
-      resolve: `gatsby-plugin-sass`,
-      options: {
-        includePaths: ['node_modules/swiper/components/'],
-      },
-    },
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
