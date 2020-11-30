@@ -10,7 +10,9 @@ const Layout = ({ location: { pathname }, children, ogImage, description }) => {
     <>
       <SEO
         description={description}
-        image={ogImage && pathname ? `og-images${pathname.replace(/\/$/, '')}.png` : null}
+        image={
+          ogImage && pathname ? `og-images${pathname.replace(/\/$/, '') || 'default'}.png` : null
+        }
       />
       <Header flag={pathname === '/'} />
       <main style={{ color: ' #403f3f' }}>{children}</main>

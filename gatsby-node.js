@@ -29,12 +29,27 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/${indicator}`,
       component: path.resolve('./src/templates/index.js'),
       context: meta,
+      ogImage: createOpenGraphImage(createPage, {
+        path: `og-images/${indicator}.png`,
+        component: path.resolve(`src/templates/og-indicator.js`),
+        context: { ...meta },
+      }),
     });
+    // createPage({
+    //   path: `/og/${indicator}`,
+    //   component: path.resolve(`src/templates/og-indicator.js`),
+    //   context: { ...meta },
+    // });
     if (i === 0) {
       createPage({
         path: '/',
         component: path.resolve('./src/templates/index.js'),
         context: meta,
+        ogImage: createOpenGraphImage(createPage, {
+          path: `og-images/default.png`,
+          component: path.resolve(`src/templates/og-indicator.js`),
+          context: { ...meta },
+        }),
       });
     }
     data.nodes.forEach(state => {
@@ -47,7 +62,7 @@ exports.createPages = async ({ graphql, actions }) => {
           state: state.state,
           ogImage: createOpenGraphImage(createPage, {
             path: `og-images/${indicator}/${stateName}.png`,
-            component: path.resolve(`src/templates/og-image.js`),
+            component: path.resolve(`src/templates/og-state.js`),
             context: {
               ...meta,
               state: state.state,
@@ -57,7 +72,7 @@ exports.createPages = async ({ graphql, actions }) => {
       });
       // createPage({
       //   path: `/og/${indicator}/${stateName}`,
-      //   component: path.resolve(`src/templates/og-image.js`),
+      //   component: path.resolve(`src/templates/og-state.js`),
       //   context: {
       //     ...meta,
       //     state: state.state,
