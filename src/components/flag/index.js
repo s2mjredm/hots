@@ -142,7 +142,7 @@ const Flag = ({ active }) => {
           w="100%"
           transition="width 500"
           style={active === 'about' ? hoverStyle(about) : linearGradientBackgrounds.red}
-          onClick={() => navigate('/about')}
+          onClick={() => navigate('/about-the-data')}
           _hover={hoverStyle(about)}
           display={['none', 'block']}
           gridRow="1 / span 2"
