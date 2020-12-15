@@ -100,7 +100,16 @@ const TakeAction = ({
             )}
             <Box mt={6} pt={4} px={30} borderTop="1px solid #707070">
               {item.link.url && (
-                <a href={item.link.url} display="flex" mt={6} pt={4} px={30} width="100%">
+                <a
+                  href={item.link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  display="flex"
+                  mt={6}
+                  pt={4}
+                  px={30}
+                  width="100%"
+                >
                   <Box
                     position="absolute"
                     right="30px"
