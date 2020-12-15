@@ -50,7 +50,7 @@ const Indicator = ({
         <Box>
           <Text fontFamily="Jubilat" pb="20px" fontSize="40px">
             <span style={{ color: '#009FFA' }}>{metadata.title}</span>
-            <span>in the United States </span>
+            <span> in the United States </span>
           </Text>
           <Text fontFamily="proxima-nova">
             <span>{`Out of 50 states ${rankings[0].name} ranks 1`}</span>
