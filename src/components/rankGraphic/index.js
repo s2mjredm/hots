@@ -7,14 +7,17 @@ import SwiperCore, { Pagination, Navigation, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSprings, animated } from 'react-spring';
 
+import swiperStyles from 'swiper/swiper.scss';
+import paginationStyles from 'swiper/components/pagination/pagination.scss';
+import navigationStyles from 'swiper/components/navigation/navigation.scss';
+
 import format from '../../utils/numberFormat';
 import useIsMobile from '../../utils/useIsMobile';
 import useWindowSize from '../../utils/useWindowSize';
 
-import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/navigation/navigation.scss';
 import '../../css/rank-graphic.css';
+
+console.log(swiperStyles, paginationStyles, navigationStyles);
 
 const RankGraphic = ({ rankings }) => {
   const images = useStaticQuery(graphql`

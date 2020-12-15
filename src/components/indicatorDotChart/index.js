@@ -61,7 +61,7 @@ const useScale = (width, domain, tickCount, positive, factor) => {
       '#50BEFA',
       '#A2DCEE',
     ];
-    if (positive) colors.reverse();
+    if (positive === 'FALSE') colors.reverse();
     return scaleQuantize().domain(extent(domain)).range(colors).nice();
   };
 

@@ -48,7 +48,8 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
 
   const values = Object.values(indicator)
     .map(a => parseFloat(a))
-    .sort((a, b) => (metadata.positive === 'TRUE' ? b - a : a - b));
+    .sort((a, b) => b - a);
+  if (metadata.positive === 'FALSE') values.reverse();
 
   useEffect(() => {
     const colors = [

@@ -25,7 +25,7 @@ const Index = ({
   const [selectedState, setSelectedState] = useState();
 
   return (
-    <Layout location={location}>
+    <Layout location={location} description={metadata.definition} ogImage>
       <Box
         px={[10, 20, 120]}
         py={[50, 80]}
