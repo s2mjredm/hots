@@ -17,6 +17,10 @@ const Header = ({ flag }) => {
     onClose: onCloseMobileMenu,
   } = useDisclosure();
 
+  const handleScrollToMapIt = () => {
+    window.scrollBy(0, 610 - window.pageYOffset);
+  };
+
   return (
     <>
       <IndicatorModal isOpen={isOpen} onClose={() => onClose()} />
@@ -69,6 +73,7 @@ const Header = ({ flag }) => {
               variant="link"
               size="sm"
               colorScheme="gray.800"
+              onClick={() => handleScrollToMapIt()}
             >
               MAP IT
             </Button>
@@ -148,7 +153,7 @@ const Header = ({ flag }) => {
           onClick={onOpenMobileMenu}
         />
       </Grid>
-      {flag && <Flag active={hover} />}
+      {flag && <Flag active={hover} onScrollToMapIt={handleScrollToMapIt} />}
     </>
   );
 };

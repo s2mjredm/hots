@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
 import { Grid, Box, PseudoBox, Flex, Text } from '@chakra-ui/core';
 
-const Flag = ({ active }) => {
+const Flag = ({ active, onScrollToMapIt }) => {
   const { about, learnMore, mapIt, takeAction } = useStaticQuery(graphql`
     {
       about: file(relativePath: { eq: "flag/about.png" }) {
@@ -92,6 +92,7 @@ const Flag = ({ active }) => {
           transition="width 500"
           style={active === '/' ? hoverStyle(mapIt) : linearGradientBackgrounds.red}
           _hover={hoverStyle(mapIt)}
+          onClick={() => onScrollToMapIt()}
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
@@ -164,6 +165,7 @@ const Flag = ({ active }) => {
 
 Flag.propTypes = {
   active: PropTypes.string,
+  onScrollToMapIt: PropTypes.func.isRequired,
 };
 
 Flag.defaultProps = {
