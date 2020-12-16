@@ -67,7 +67,7 @@ const IndicatorDropdown = ({
         alignItems={['center', 'center', 'flex-end']}
         justify={['start', 'start', 'space-between']}
       >
-        <Box zIndex="2" width="100%">
+        <Box zIndex="3" width="100%">
           <SearchSelectInput
             label="Health Statistics & Outcomes"
             placeholder="Select or Search"
@@ -92,7 +92,7 @@ const IndicatorDropdown = ({
         >
           SHOW ALL
         </Button>
-        <Box zIndex="1" width="100%">
+        <Box zIndex="2" width="100%">
           <SearchSelectInput
             label="State"
             placeholder="Select or Search"
