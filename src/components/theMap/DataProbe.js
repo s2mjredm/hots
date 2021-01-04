@@ -30,6 +30,7 @@ const DataProbe = ({
   return (
     <Portal>
       <Flex
+        className="to-print-s1-dataprobe"
         h={height}
         borderRadius="1px"
         zIndex={1}

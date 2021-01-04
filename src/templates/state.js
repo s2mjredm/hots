@@ -116,6 +116,7 @@ const State = ({
           top="0"
           zIndex="30"
           shadow="lg"
+          className="header-no-print"
         >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
@@ -142,6 +143,7 @@ const State = ({
           alignItems="baseline"
           px={100}
           py={18}
+          className="header-no-print"
         >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
@@ -225,6 +227,7 @@ const State = ({
         onOpen={() => socialOnOpen()}
         onClose={() => socialOnClose()}
       />
+
       <Grid
         w="100%"
         templateColumns={['1fr', '35% 1fr']}
@@ -232,8 +235,13 @@ const State = ({
         gridColumnGap={[0, '29px']}
         px={[0, 100]}
         pb={[0, 100]}
+        className="to-print-s1"
       >
-        <Box gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']} p={['40px', 0]}>
+        <Box
+          className="to-print-s1-title"
+          gridArea={['1 / 1 / 2 / 3', '1 / 1 / 2 / 2']}
+          p={['40px', 0]}
+        >
           <Heading as="h1" fontFamily="Jubilat" fontSize="38px" fontWeight="normal" color="#403F3F">
             {stateName.name}
           </Heading>
@@ -255,6 +263,7 @@ const State = ({
           justify="flex-end"
           pb={100}
           p={['40px', 0]}
+          className="to-print-s1-description"
         >
           <Box marginBottom={[0, '50px']} marginRight={[0, '80px']}>
             <Text fontFamily="proxima-nova" fontSize="18px" fontWeight="500" pb={['20px', '40px']}>
@@ -267,7 +276,12 @@ const State = ({
           <a
             href="/learn-more"
             className="arrow"
-            style={{ fontSize: 16, fontWeight: 700, textDecoration: 'underline', color: '#403F3F' }}
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              textDecoration: 'underline',
+              color: '#403F3F',
+            }}
           >
             <Text color="#403F3F" fontFamily="proxima-nova">
               Learn more about what shapes health
@@ -275,7 +289,7 @@ const State = ({
             </Text>
           </a>
         </Flex>
-        <Box gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
+        <Box className="to-print-s1-map" gridArea={['2 / 1 / 3 / 3', '1 / 2 / 4 / 3']}>
           <TheMap
             indicator={indicator}
             selectedState={stateName}
@@ -286,9 +300,16 @@ const State = ({
           />
         </Box>
       </Grid>
-      <Grid w="100%" templateColumns={['1fr', '50% 50%']} bg="#FFD285" p={['40px', '100px']}>
+      <Grid
+        className="to-print-s2"
+        w="100%"
+        templateColumns={['1fr', '50% 50%']}
+        bg="#FFD285"
+        p={['40px', '100px']}
+      >
         <Flex direction="column" justify="space-around">
           <Heading
+            className="to-print-s2-heading"
             display={['none', 'block']}
             fontSize="30px"
             fontFamily="proxima-nova"
