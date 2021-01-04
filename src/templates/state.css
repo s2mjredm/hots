@@ -60,5 +60,7 @@ a.arrow:hover svg {
     z-index: 1;
   }
   .to-print-footer {
+    flex-direction: row !important;
+    padding-top: 160px !important;
   }
 }

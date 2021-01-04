@@ -33,6 +33,7 @@ const Footer = () => {
       direction={['column', 'column', 'row']}
       spacing="24px"
       fontSize="sm"
+      className="to-print-footer"
     >
       <Box pr={5} pb={4}>
         <Heading size="md" pb={2} fontFamily="proxima-nova" fontWeight="500">
