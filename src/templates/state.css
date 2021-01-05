@@ -63,4 +63,12 @@ a.arrow:hover svg {
     flex-direction: row !important;
     padding-top: 160px !important;
   }
+
+  .to-print-index-page {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .to-print-dotchart {
+    padding: 150px 150px 150px 100px !important;
+  }
 }

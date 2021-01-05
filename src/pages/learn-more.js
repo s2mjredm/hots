@@ -56,7 +56,10 @@ const LearnMore = ({
         <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
       </div>
     </div>
-    <Grid templateColumns={['1fr', '1fr', '1fr 60%']} className="wordpress learn-more">
+    <Grid
+      templateColumns={['1fr', '1fr', '1fr 60%']}
+      className="wordpress learn-more to-print-learn-more"
+    >
       {parse(content)}
     </Grid>
   </Layout>

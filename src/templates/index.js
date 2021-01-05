@@ -27,6 +27,7 @@ const Index = ({
   return (
     <Layout location={location} description={metadata.definition} ogImage>
       <Box
+        className="to-print-index-page"
         px={[10, 20, 120]}
         py={[50, 80]}
         zIndex="2"
@@ -90,6 +91,7 @@ const Index = ({
           >
             {`Tap to explore how U.S. States rank for ${metadata.title}.`}
           </Box>
+
           <IndicatorDotChart indicator={indicator} metadata={metadata} states={stateName} />
           <Social
             isOpen={socialIsOpen}

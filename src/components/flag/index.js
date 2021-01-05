@@ -57,7 +57,7 @@ const Flag = ({ active, onScrollToMapIt }) => {
   };
 
   return (
-    <Box h={[390, 460]} style={linearGradientBackgrounds.red}>
+    <Box h={[390, 460]} style={linearGradientBackgrounds.red} className="header-no-print">
       <Grid
         px={['40px', '80px', '120px']}
         w="100%"

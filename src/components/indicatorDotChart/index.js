@@ -254,7 +254,14 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
       <Box px={[5, 20]} py="22px" color="gray.text" fontSize="14px">
         <Text bg="white">{metadata.definition}</Text>
       </Box>
-      <Box px={[5, 20]} pt={[24, 16]} pb={16} bg="#E5E5E5" color="gray.text">
+      <Box
+        className="to-print-dotchart"
+        px={[5, 20]}
+        pt={[24, 16]}
+        pb={16}
+        bg="#E5E5E5"
+        color="gray.text"
+      >
         <Box
           id="track"
           ref={getTrackRef}
