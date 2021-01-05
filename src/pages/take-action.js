@@ -8,6 +8,8 @@ import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
 
+import '../css/take-action.css';
+
 export const query = graphql`
   query {
     page: wpPage(id: { eq: "cG9zdDoxNjc=" }) {
@@ -69,7 +71,9 @@ const TakeAction = ({
           <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
         </div>
       </div>
+
       <Masonry
+        className="to-print-masonry"
         style={{
           padding: '60px 40px',
           backgroundImage: `url(${backgroundImage.childImageSharp.fluid.src})`,
@@ -78,6 +82,7 @@ const TakeAction = ({
       >
         {nodes.map(item => (
           <Box
+            className="to-print-masonry-card"
             key={item.id}
             w={['calc(100% - 80px)', 'calc(50% - 80px)', 260]}
             py={30}
@@ -86,10 +91,10 @@ const TakeAction = ({
             bg="white"
             shadow="lg"
           >
-            <Heading as="h4" fontSize={18} px={30}>
+            <Heading className="to-print-card-h4" as="h4" fontSize={18} px={30}>
               {item.title}
             </Heading>
-            <Text fontSize={16} fontFamily="Jubilat" my={5} px={30}>
+            <Text className="to-print-card-p" fontSize={16} fontFamily="Jubilat" my={5} px={30}>
               {parse(item.content)}
             </Text>
             {item.featuredImage && (
@@ -98,6 +103,7 @@ const TakeAction = ({
                 style={{ margin: '0 30px' }}
               />
             )}
+
             <Box mt={6} pt={4} px={30} borderTop="1px solid #707070">
               {item.link.url && (
                 <a
@@ -111,6 +117,7 @@ const TakeAction = ({
                   width="100%"
                 >
                   <Box
+                    className="no-print"
                     position="absolute"
                     right="30px"
                     pl="40px"
@@ -120,6 +127,7 @@ const TakeAction = ({
                     <Icon name="arrow" />
                   </Box>
                   <Text
+                    className="to-print-card-p"
                     display="inline-block"
                     w={175}
                     overflow="hidden"

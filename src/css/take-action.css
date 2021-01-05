@@ -1,0 +1,21 @@
+@media print {
+  .to-print-masonry {
+    padding: 30px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    height: fit-content !important;
+  }
+  .to-print-masonry-card {
+    position: unset !important;
+    height: fit-content !important;
+  }
+  .to-print-card-h4 {
+    font-size: 14px !important;
+  }
+  .to-print-card-p {
+    font-size: 12px !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
