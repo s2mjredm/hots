@@ -11,6 +11,7 @@ const DataProbe = ({
   indicatorValue,
   pos,
   dotColor,
+  shoudDisplayOnPrinting,
 }) => {
   const height = 100;
   const width = 240;
@@ -30,7 +31,7 @@ const DataProbe = ({
   return (
     <Portal>
       <Flex
-        className="to-print-s1-dataprobe"
+        className={shoudDisplayOnPrinting ? 'to-print-s1-dataprobe' : 'no-print'}
         h={height}
         borderRadius="1px"
         zIndex={1}
@@ -105,6 +106,7 @@ DataProbe.propTypes = {
   indicatorValue: PropTypes.string.isRequired,
   pos: PropTypes.arrayOf(PropTypes.number).isRequired,
   dotColor: PropTypes.string.isRequired,
+  shoudDisplayOnPrinting: PropTypes.bool.isRequired,
 };
 
 export default DataProbe;

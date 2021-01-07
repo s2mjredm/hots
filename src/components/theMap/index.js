@@ -205,7 +205,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
 
   return (
     <Box w="100%" px={highRes ? '0px' : [5, 10]} bg="#E5E5E5" position="relative">
-      {dataPobreData && <DataProbe {...dataPobreData} />}
+      {dataPobreData && <DataProbe {...dataPobreData} shoudDisplayOnPrinting={!isZoomOut} />}
       {!isMobile && (
         <Button
           onClick={() => onShare()}
