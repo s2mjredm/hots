@@ -15,20 +15,20 @@ export const query = graphql`
     wpPage(id: { eq: "cG9zdDo3" }) {
       ...PageInfo
       download {
-        dataIntro
-        dataTitle
+        dataintro
+        datatitle
         file1 {
           localFile {
             url
           }
         }
-        fileText
+        filetextone
         file2 {
           localFile {
             url
           }
         }
-        fileText2
+        filetexttwo
       }
     }
   }
@@ -83,15 +83,15 @@ const About = ({
         maxHeight="570px"
       >
         <Heading as="h4" fontSize={24} fontWeight={900} mb={4}>
-          {download.dataTitle}
+          {download.datatitle}
         </Heading>
         <Text mb={5} fontFamily="Jubilat">
-          {parse(download.dataIntro)}
+          {parse(download.dataintro)}
         </Text>
         <Box bg="white" px={15} py={4} mb={10}>
           <File style={{ float: 'right' }} />
           <Text fontSize={12} fontWeight={500}>
-            {parse(download.fileText)}
+            {parse(download.filetextone)}
           </Text>
           <Link
             fontSize={12}
@@ -106,7 +106,7 @@ const About = ({
         <Box bg="white" px={15} py={4}>
           <File style={{ float: 'right' }} />
           <Text fontSize={12} fontWeight={500}>
-            <div className="wordpress">{parse(download.fileText2)}</div>
+            <div className="wordpress">{parse(download.filetexttwo)}</div>
           </Text>
           <Link
             fontSize={12}

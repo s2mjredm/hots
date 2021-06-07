@@ -12,7 +12,7 @@ import '../css/take-action.css';
 
 export const query = graphql`
   query {
-    page: wpPage(id: { eq: "cG9zdDoxNjc=" }) {
+    page: wpPage(id: { eq: "cG9zdDo2NA==" }) {
       ...PageInfo
     }
     items: allWpPost(

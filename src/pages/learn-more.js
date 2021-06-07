@@ -30,7 +30,7 @@ export const query = graphql`
     }
   }
   query {
-    page: wpPage(id: { eq: "cG9zdDo2OQ==" }) {
+    page: wpPage(id: { eq: "cG9zdDoyNg==" }) {
       ...PageInfo
     }
   }
