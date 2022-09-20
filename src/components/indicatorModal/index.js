@@ -31,7 +31,7 @@ import { slugify } from '../../utils/slugify';
 import useIsMobile from '../../utils/useIsMobile';
 
 import './index.css';
-import { ChevronRightIcon, SearchIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, SearchIcon, SmallCloseIcon } from '@chakra-ui/icons';
 
 const CustomTab = React.forwardRef((props, ref) => {
   return (
@@ -139,7 +139,12 @@ const SearchInput = ({ inputValue, onChange, onCloseSearch }) => {
           focusBorderColor="#FFD285"
         />
         <InputRightElement onClick={() => onCloseSearch()}>
-          <Icon h="40px" name={isOnFocus ? 'small-close' : 'search'} paddingBottom="7px" />
+          {isOnFocus ? (
+            <SmallCloseIcon w={8} h={8} paddingBottom="7px" />
+          ) : (
+            <SearchIcon w={8} h={8} paddingBottom="7px" />
+          )}
+
         </InputRightElement>
       </InputGroup>
     </Flex>
@@ -157,7 +162,7 @@ const SearchInputMobile = ({ inputValue, onChange }) => {
   return (
     <InputGroup fontFamily="Jubilat" size="lg" color="#403F3F">
       <InputLeftElement>
-        <Icon size="20px" h="40px" name="search" paddingBottom="8px" />
+        <SearchIcon w={8} h={8} name="search" paddingBottom="7px" />
       </InputLeftElement>
       <Input
         variant="unstyled"

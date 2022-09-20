@@ -17,6 +17,7 @@ import useWindowSize from '../../utils/useWindowSize';
 import ZoomButton from '../../svg/zoom.svg';
 
 import './index.css';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut }) => {
   let {
@@ -249,7 +250,7 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           {!isZoomOut && <ZoomButton />}
           {isZoomOut && (
             <Box bg="#403F3F" borderRadius="100%">
-              <Icon name="arrow-back" color="white" size="45px" />
+              <ArrowBackIcon color="white" w={8} h={8} />
             </Box>
           )}
         </Button>

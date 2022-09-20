@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 import { Stack, Box, Icon } from '@chakra-ui/react';
 
 import { slugify } from '../../utils/slugify';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const RankResult = ({ state, indicator, rank, value, best }) => {
   return (
@@ -30,10 +31,10 @@ const RankResult = ({ state, indicator, rank, value, best }) => {
             <b>{indicator}</b>
             <p>{value}</p>
           </div>
-          <Icon
+          <ArrowForwardIcon
             name="arrow"
-            w="30px"
-            h="30px"
+            w={6}
+            h={6}
             ml="auto"
             mr="40px"
             color={best ? '#184595' : '#F06060'}

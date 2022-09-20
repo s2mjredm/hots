@@ -6,6 +6,7 @@ import { graphql, Link } from 'gatsby';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
+import { ArrowBackIcon, ArrowForwardIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
 
 import useIsMobile from '../utils/useIsMobile';
 
@@ -120,7 +121,7 @@ const State = ({
         >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
-              <Icon name="arrow-back" size="16px" />
+              <ArrowBackIcon w={4} h={4} />
               <Text fontSize="12px" fontWeight="900" fontFamily="proxima-nova" color="#403F3F">
                 BACK TO NATIONAL MAP AND RESULTS
               </Text>
@@ -147,7 +148,7 @@ const State = ({
         >
           <Link to="/" style={{ fontSize: 12, fontWeight: 900 }}>
             <Flex>
-              <Icon name="arrow-back" size="16px" />
+              <ArrowBackIcon w={4} h={4} />
               <Text fontSize="12px" fontWeight="900" fontFamily="proxima-nova" color="#403F3F">
                 BACK TO NATIONAL MAP AND RESULTS
               </Text>
@@ -179,7 +180,7 @@ const State = ({
                 display: 'flex',
               }}
             >
-              <Icon name="arrow-back" fontSize="27px" />
+              <ArrowBackIcon />
               <Text>BACK</Text>
               <span />
             </Link>
@@ -197,8 +198,8 @@ const State = ({
             >
               <span />
               <Text paddingLeft={2}>Life Expectancy, Virginia </Text>
-              {!isIndicatorOpen && <Icon name="edit" fontSize="27px" />}
-              {isIndicatorOpen && <Icon name="small-close" fontSize="27px" />}
+              {!isIndicatorOpen && <EditIcon />}
+              {isIndicatorOpen && <SmallCloseIcon />}
             </Flex>
           </Flex>
           {isIndicatorOpen && (
@@ -285,7 +286,7 @@ const State = ({
           >
             <Text color="#403F3F" fontFamily="proxima-nova">
               Learn more about what shapes health
-              <Icon name="arrow" />
+              <ArrowForwardIcon />
             </Text>
           </a>
         </Flex>
@@ -330,7 +331,7 @@ const State = ({
             }}
           >
             Learn more about why these matter so much for health
-            <Icon name="arrow" />
+            <ArrowForwardIcon />
           </a>
         </Flex>
         <GatsbyImage image={pentagon.childImageSharp.gatsbyImageData} />
