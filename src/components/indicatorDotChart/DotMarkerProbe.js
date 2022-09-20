@@ -35,12 +35,14 @@ const DotMarkerProbe = ({
         transformOrigin="45px"
         isOpen={isOpen}
         onClose={close}
+        arrowSize={16}
+        arrowPadding={3}
         initialFocusRef={initialFocusRef}
       >
         <PopoverTrigger>{children}</PopoverTrigger>
         <PopoverContent
           zIndex={isAllwaysVisible ? 3 : 4}
-          marginBottom="40px"
+          marginBottom="5px"
           w={[100, 'auto']}
           h="62px"
           borderRadius="0px"
