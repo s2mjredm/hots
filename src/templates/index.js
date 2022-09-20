@@ -30,7 +30,7 @@ const Index = ({
       <Box
         className="to-print-index-page"
         px={[10, 20, 120]}
-        py={[50, 80]}
+        py={[50]}
         zIndex="2"
         style={{
           background:

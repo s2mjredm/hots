@@ -154,3 +154,18 @@ const theme = {
 
 
 export default extendTheme(theme)
+
+
+// import { extendTheme } from '@chakra-ui/react'
+
+// const breakpoints = {
+//   sm: '52em',
+//   md: '62em',
+//   lg: '80em'
+// }
+
+// const theme = {
+//   breakpoints
+// }
+
+// export default extendTheme(theme)
