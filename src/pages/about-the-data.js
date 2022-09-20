@@ -53,7 +53,7 @@ const About = ({
         <h2>{subtitle}</h2>
       </div>
       <div className="item" style={{ flex: 2, padding: 0 }}>
-        <GatsbyImage image={featuredImage.node.localFile.childImageSharp.gatsbyImageData} />
+        <GatsbyImage alt='' image={featuredImage.node.localFile.childImageSharp.gatsbyImageData} />
       </div>
     </div>
     <Grid

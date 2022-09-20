@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { Heading, Box, Flex, Grid, Button, useDisclosure } from '@chakra-ui/react';
+import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 
 import MobileMenu from './MobileMenu';
 import IndicatorModal from '../indicatorModal';
@@ -47,7 +48,7 @@ const Header = ({ flag }) => {
       >
         <Button
           display={['block', 'none']}
-          leftIcon="search"
+          leftIcon={<SearchIcon />}
           onClick={onOpen}
           variant="link"
           size="lg"
@@ -138,7 +139,7 @@ const Header = ({ flag }) => {
         </Box>
         <Button
           display={['none', 'block']}
-          leftIcon="search"
+          leftIcon={<SearchIcon />}
           variant="link"
           size="md"
           colorScheme="gray.800"
@@ -146,7 +147,7 @@ const Header = ({ flag }) => {
         />
         <Button
           display={['block', 'none']}
-          leftIcon="bars"
+          leftIcon={<HamburgerIcon />}
           variant="link"
           size="lg"
           colorScheme="gray.800"

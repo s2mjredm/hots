@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Text, Collapse, Icon } from '@chakra-ui/react';
+import { AddIcon, WarningIcon } from '@chakra-ui/icons';
 
 const Covid19 = () => {
   const [show, setShow] = useState(false);
@@ -19,7 +20,7 @@ const Covid19 = () => {
           cursor="pointer"
           w={10}
         >
-          <Icon name="plus" />
+          <AddIcon w={5} h={5} />
         </Box>
         <Text
           fontFamily="proxima-nova"
@@ -28,13 +29,15 @@ const Covid19 = () => {
           color="white"
           textAlign="center"
         >
-          <Icon name="attention" mr={1} />
+          <WarningIcon w={4} h={4} mr={1} />
           COVID-19
         </Text>
       </Box>
-      <Collapse isOpen={show} bg="#F06060">
+      <Collapse in={show} >
+
         <Text
           px={[10, 20]}
+          bgColor="#F06060"
           pb="10"
           color="white"
           fontFamily="proxima-nova"

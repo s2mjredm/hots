@@ -4,6 +4,7 @@ import { findIndex, some } from 'lodash';
 import PropTypes from 'prop-types';
 
 import { Box, Text, Flex, Icon } from '@chakra-ui/react';
+import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons';
 
 import StateDotMarker from './StateDotMarker';
 import MarkerDraggable from './MarkerDraggable';
@@ -285,7 +286,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
           <>
             <Flex color="#403F3F" paddingTop="46px" justify="space-between" align="center">
               <Flex justify="space-between">
-                <Icon name="arrow-back" size="24px" />
+                <ArrowBackIcon w={6} h={6} />
                 <Text w="max-content">
                   {metadata.positive === 'TRUE' ? metadata.low : metadata.high}
                 </Text>
@@ -295,7 +296,7 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
                 <Text w="max-content">
                   {metadata.positive === 'TRUE' ? metadata.high : metadata.low}
                 </Text>
-                <Icon name="arrow-forward" size="24px" />
+                <ArrowForwardIcon w={6} h={6} />
               </Flex>
             </Flex>
           </>

@@ -223,7 +223,15 @@ const TheMap = ({ indicator, onShare, metadata, selectedState, highRes, zoomOut 
           fontSize="12px"
         >
           SHARE
-          <Icon name="share" size="29px" color="white" ml={2} transform="rotate(180deg)" />
+          <Icon viewBox='0 0 42 45' w={8} h={8} name="share" color="white" ml={2} transform="rotate(180deg)" >
+            <g>
+              <circle fill="currentColor" cx="7" cy="7" r="7" />
+              <circle fill="currentColor" cx="35" cy="22" r="7" />
+              <circle fill="currentColor" cx="7" cy="38" r="7" />
+              <line fill="none" stroke="currentColor" strokeWidth="3" x1="10" y1="8" x2="30" y2="20" />
+              <line fill="none" stroke="currentColor" strokeWidth="3" x1="10" y1="36" x2="30" y2="24" />
+            </g>
+          </Icon>
         </Button>
       )}
       {!isMobile && highRes && (
@@ -263,7 +271,7 @@ TheMap.propTypes = {
 
 TheMap.defaultProps = {
   selectedState: { stateName: null, stateId: null },
-  onShare: () => {},
+  onShare: () => { },
   highRes: false,
   zoomOut: true,
 };

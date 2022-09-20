@@ -31,15 +31,16 @@ import { slugify } from '../../utils/slugify';
 import useIsMobile from '../../utils/useIsMobile';
 
 import './index.css';
+import { ChevronRightIcon, SearchIcon } from '@chakra-ui/icons';
 
 const CustomTab = React.forwardRef((props, ref) => {
   return (
     <Tab ref={ref} isSelected={props.isSelected} {...props}>
       {props.children}
       {props.isSelected ? (
-        <Icon name="chevron-right" size="24px" color="#FFD285" />
+        <ChevronRightIcon w={6} h={6} color="#FFD285" />
       ) : (
-        <Icon name="chevron-right" size="24px" color="white" />
+        <ChevronRightIcon w={6} h={6} color="white" />
       )}
     </Tab>
   );
@@ -120,7 +121,7 @@ const SearchInput = ({ inputValue, onChange, onCloseSearch }) => {
       <InputGroup fontFamily="Jubilat" size="lg" color="gray.300">
         {isOnFocus && (
           <InputLeftElement>
-            <Icon h="40px" name="search" paddingBottom="7px" />
+            <SearchIcon w={8} h={8} name="search" paddingBottom="7px" />
           </InputLeftElement>
         )}
         <Input

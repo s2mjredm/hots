@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Fuse from 'fuse.js';
+import { SearchIcon, ChevronDownIcon, ChevronUpIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 import './index.css';
 
@@ -138,7 +139,7 @@ const SearchSelectInput = ({
         <InputGroup fontFamily="Jubilat" size="lg">
           {!isMobile && isOpen && (
             <InputLeftElement zIndex="3">
-              <Icon name="search" color="gray.700" />
+              <SearchIcon color="gray.700" />
             </InputLeftElement>
           )}
           <Input
@@ -156,7 +157,7 @@ const SearchSelectInput = ({
           />
           {isOpen && (
             <InputRightElement zIndex="3" cursor="pointer" onClick={() => onClose()}>
-              <Icon name="chevron-up" color="gray.700" />
+              <ChevronUpIcon color="gray.700" />
             </InputRightElement>
           )}
           {!isOpen && (
@@ -166,7 +167,7 @@ const SearchSelectInput = ({
               onClick={() => onOpen()}
               paddingTop={['15px', 0]}
             >
-              <Icon name="chevron-down" color="gray.700" />
+              <ChevronDownIcon color="gray.700" />
             </InputRightElement>
           )}
         </InputGroup>
@@ -207,7 +208,7 @@ const SearchSelectInput = ({
                 px={5}
               >
                 See all 84 Variables
-                <Icon name="bigArrow" />
+                <ArrowForwardIcon h={6} w={6} />
               </Box>
             )}
           </Box>
