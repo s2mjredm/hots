@@ -5,6 +5,17 @@ import SEO from '../seo';
 import { Script } from "gatsby";
 import Header from '../header';
 import Footer from '../footer';
+import { extendTheme } from '@chakra-ui/react'
+
+// 2. Update the breakpoints as key-value pairs
+const breakpoints = {
+  sm: '52em',
+  md: '62em',
+  lg: '80em'
+}
+
+// 3. Extend the theme
+const theme = extendTheme({ breakpoints })
 
 const Layout = ({ location: { pathname }, children, ogImage, description }) => {
   return (
