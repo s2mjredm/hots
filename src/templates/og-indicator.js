@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import { Box, Grid, Flex, Text } from '@chakra-ui/core';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { Box, Grid, Flex, Text } from '@chakra-ui/react';
 import { last } from 'lodash';
 
 import TheMap from '../components/theMap';
@@ -62,7 +62,7 @@ const Indicator = ({
         </Box>
         <Box>
           <Flex>
-            <Img fixed={logo.childImageSharp.fixed} />
+            <GatsbyImage image={logo.childImageSharp.gatsbyImageData} />
             <Box h="40px" w="80px" px="10px" ml="10px" borderLeft="2px solid black">
               <Logo />
             </Box>
@@ -85,27 +85,24 @@ Indicator.propTypes = {
 
 export default Indicator;
 
-export const query = graphql`
-  query indexPageOG($id: String) {
-    metadata: indicatorsJson(id: { eq: $id }) {
-      title
-      positive
-    }
-    indicator: indicatorsJson(id: { eq: $id }) {
-      ...States
-    }
-    states: allStatesJson {
-      stateName: nodes {
-        name
-        state
-      }
-    }
-    logo: file(relativePath: { eq: "logos/center-logo-small.png" }) {
-      childImageSharp {
-        fixed(width: 40) {
-          ...GatsbyImageSharpFixed
-        }
-      }
+export const query = graphql`query indexPageOG($id: String) {
+  metadata: indicatorsJson(id: {eq: $id}) {
+    title
+    positive
+  }
+  indicator: indicatorsJson(id: {eq: $id}) {
+    ...States
+  }
+  states: allStatesJson {
+    stateName: nodes {
+      name
+      state
     }
   }
+  logo: file(relativePath: {eq: "logos/center-logo-small.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 40, layout: FIXED)
+    }
+  }
+}
 `;

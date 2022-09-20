@@ -16,18 +16,18 @@ module.exports = {
   /* Your site config here */
   plugins: [
     {
-      resolve: 'gatsby-plugin-chakra-ui',
+      resolve: '@chakra-ui/gatsby-plugin',
       options: {
         /**
-         * @property {boolean} [isResettingCSS=true]
+         * @property {boolean} [resetCSS=true]
          * if false, this plugin will not use `<CSSReset />
          */
-        isResettingCSS: true,
+        resetCSS: true,
         /**
          * @property {boolean} [isUsingColorMode=true]
          * if false, this plugin will not use <ColorModeProvider />
          */
-        isUsingColorMode: false,
+        isUsingColorMode: true,
       },
     },
     `gatsby-plugin-sass`,
@@ -49,9 +49,9 @@ module.exports = {
     },
     `gatsby-transformer-json`,
     {
-      resolve: `gatsby-source-wordpress-experimental`,
+      resolve: `gatsby-source-wordpress`,
       options: {
-        url: 'http://cms.hots.axismaps.io/graphql',
+        url: 'https://societyhealth.blog/hotsheadless/graphql',
       },
     },
     {

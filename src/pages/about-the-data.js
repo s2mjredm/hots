@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
-import { Box, Grid, Heading, Text, Link } from '@chakra-ui/core';
+import { Box, Grid, Heading, Text, Link } from '@chakra-ui/react';
 
 import Layout from '../components/layout';
 import Covid19 from '../components/covid19';
@@ -53,7 +53,7 @@ const About = ({
         <h2>{subtitle}</h2>
       </div>
       <div className="item" style={{ flex: 2, padding: 0 }}>
-        <Img fluid={featuredImage.node.localFile.childImageSharp.fluid} />
+        <GatsbyImage image={featuredImage.node.localFile.childImageSharp.gatsbyImageData} />
       </div>
     </div>
     <Grid

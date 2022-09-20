@@ -3,7 +3,7 @@ import { extent, scaleLinear, scaleQuantize, bin } from 'd3';
 import { findIndex, some } from 'lodash';
 import PropTypes from 'prop-types';
 
-import { Box, Text, Flex, Icon } from '@chakra-ui/core';
+import { Box, Text, Flex, Icon } from '@chakra-ui/react';
 
 import StateDotMarker from './StateDotMarker';
 import MarkerDraggable from './MarkerDraggable';
@@ -306,9 +306,9 @@ const IndicatorDotChart = ({ indicator, metadata, states }) => {
 };
 
 IndicatorDotChart.propTypes = {
-  indicator: PropTypes.shape().isRequired,
-  metadata: PropTypes.shape().isRequired,
-  states: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  indicator: PropTypes.shape(),
+  metadata: PropTypes.shape(),
+  states: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 export default IndicatorDotChart;

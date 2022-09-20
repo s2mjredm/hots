@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { Stack, Box, Icon } from '@chakra-ui/core';
+import { Stack, Box, Icon } from '@chakra-ui/react';
 
 import { slugify } from '../../utils/slugify';
 

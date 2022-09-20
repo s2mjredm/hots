@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Box } from '@chakra-ui/core';
+import { Icon, Box } from '@chakra-ui/react';
 import { sortBy, mapValues } from 'lodash';
 import DotMarkerProbe from './DotMarkerProbe';
 
@@ -61,10 +61,10 @@ const MarkerDraggable = ({ indicator, width, positive, setIsTrackHovered }) => {
 };
 
 MarkerDraggable.propTypes = {
-  indicator: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  width: PropTypes.number.isRequired,
-  positive: PropTypes.bool.isRequired,
-  setIsTrackHovered: PropTypes.func.isRequired,
+  indicator: PropTypes.PropTypes.shape(),
+  width: PropTypes.number,
+  positive: PropTypes.string,
+  setIsTrackHovered: PropTypes.func,
 };
 
 export default MarkerDraggable;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { theme } from '@chakra-ui/core';
+import { extendTheme } from '@chakra-ui/react';
 
 const customIcons = {
   share: {
@@ -145,13 +145,12 @@ const customIcons = {
   },
 };
 
-const ctheme = {
-  ...theme,
+const theme = {
   breakpoints: ['52em', '62em', '80em'],
   icons: {
-    ...theme.icons,
-    ...customIcons,
+    customIcons
   },
 };
 
-export default ctheme;
+
+export default extendTheme(theme)

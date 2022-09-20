@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Grid, useDisclosure, Heading, Flex, Icon, Text } from '@chakra-ui/core';
+import { Box, Grid, useDisclosure, Heading, Flex, Icon, Text } from '@chakra-ui/react';
 import { find, groupBy } from 'lodash';
 import { graphql, Link } from 'gatsby';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
 
 import useIsMobile from '../utils/useIsMobile';
 
 import format from '../utils/numberFormat';
-import IndicatorDropdown from '../components/indicatorDropdown';
 import IndicatorModal from '../components/indicatorModal';
+import IndicatorDropdown from '../components/indicatorDropdown';
 import Layout from '../components/layout';
 import RankGraphic from '../components/rankGraphic';
 import RankResult from '../components/rankResult';
@@ -333,7 +333,7 @@ const State = ({
             <Icon name="arrow" />
           </a>
         </Flex>
-        <Img fluid={pentagon.childImageSharp.fluid} />
+        <GatsbyImage image={pentagon.childImageSharp.gatsbyImageData} />
         <Box>
           <RankGraphic rankings={categoryRankings} />
         </Box>
@@ -350,8 +350,8 @@ const State = ({
           p={100}
           background="transparent linear-gradient(322deg, #009FFA 0%, #A0DDF9 80%, #A0DDF9 100%) 0% 0% no-repeat padding-box"
         >
-          <Img
-            fixed={topPerforming.childImageSharp.fixed}
+          <GatsbyImage
+            image={topPerforming.childImageSharp.gatsbyImageData}
             style={{
               position: 'absolute',
               marginTop: -249,
@@ -417,8 +417,8 @@ const State = ({
               />
             );
           })}
-          <Img
-            fixed={bottomPerforming.childImageSharp.fixed}
+          <GatsbyImage
+            image={bottomPerforming.childImageSharp.gatsbyImageData}
             style={{
               position: 'absolute',
               marginTop: 150,
@@ -438,231 +438,224 @@ State.propTypes = {
 
 export default State;
 
-export const query = graphql`
-  query statePage($id: String, $state: String) {
-    metadata: indicatorsJson(id: { eq: $id }) {
+export const query = graphql`query statePage($id: String, $state: String) {
+  metadata: indicatorsJson(id: {eq: $id}) {
+    title
+    definition
+    unit
+    rounding
+    decimals
+    positive
+    factor
+    high
+    low
+  }
+  indicator: indicatorsJson(id: {eq: $id}) {
+    ...States
+  }
+  allIndicators: allIndicatorsJson {
+    nodes {
       title
-      definition
+      variable
       unit
       rounding
       decimals
-      positive
       factor
-      high
-      low
-    }
-    indicator: indicatorsJson(id: { eq: $id }) {
-      ...States
-    }
-    allIndicators: allIndicatorsJson {
-      nodes {
-        title
-        variable
-        unit
-        rounding
-        decimals
-        factor
-        category
-        condition
-        conditionDefinition
-      }
-    }
-    stateName: statesJson(state: { eq: $state }) {
-      name
-      state
-    }
-    state: statesJson(state: { eq: $state }) {
-      D_H
-      D_w
-      D_b
-      D_aian
-      D_a
-      D_limitedeng
-      HS13a_uninsured
-      HS13b_PrivateIns
-      SEF05_married
-      SEF14b_CollageBAPlus
-      SEF19_employed
-      SEF25_severehouse
-      sef26_occupantsrm
-      SEF27_housingburden30
-      SEF28_medHHInc
-      SEF31_SingleParent
-      SEF36_ChildPoverty
-      SEF37_GiniInd
-      SEF38_poverty
-      HO49_Diabetes
-      HO53_ActivityLimit
-      HB50_Fruit
-      HB38_inactivity
-      HB41_currentsmoker
-      HO22_ExVgGoodHealthStatAdult
-      HO24_PhysUnhealthyDays
-      HO25_MentUnhealthyDays
-      HO33_OverwtAdult
-      HO47_CVD
-      HO48_Stroke
-      HS11_NotAffordDoc
-      HS19_DentalVisit
-      HS21_Mammogram
-      HB06_AnyBreastfeed
-      HO30_Chlamydia
-      HO32_HIV
-      PS03_TobaccoTax
-      hs23_crcscreen
-      HO01_AllMort
-      HO02_CVDMort
-      HO03_CancerMort
-      HO04_LowerRespMort
-      HO05_CerebroMort
-      HO06_AlzheimersMort
-      HO07_DiabetesMort
-      HO08_KidneyMort
-      HO15_SuicideMort
-      HO16_HomicideMort
-      HO17_InfantMort
-      HO18_LifeExpect
-      HO20_YLL75
-      HS02_ACSdischarge
-      PSE44_violentcrimerate
-      PS78b_Income_FPL1
-      PS76a_Education_All
-      HS07b_PCPratio2000
-      HS08_MentCarShort
-      HS25_AcuteReAdm
-      PSE05b_WalkabilityPop
-      PSE45_SocialCapital
-      PSE60_FineParticulateMatter
-      SEF40a_ConPov20
-      SEF42a_HighMinority
-      SEF42b_PoorHighMinority
-      Ho27_LBW
-      Ho28a_TeenBirth15to19
-      SEF07_ECEnoHS
-      SEF12_ReadProf8
-      pse06_parks
-      SEF45_adultjail
-      PSE35b_ACES2
-      PSE36_VIOLCRIME
-      PSE25_SafeSchool
-      PSE01_NHamenities
-      HB03_Binge
-      HO35_OverwtChild
-      HO39_OralProbs
-      HO40_adolasthma
-      HB10_RxAbuse
-      HB09_IllicitDrug
-      PSE41_TeenMentor
-      SEF48_foodinsecure
-      HO11_MotorVehMort
-      PS_PolicyRankings
-    }
-    ranking: rankingJson(state: { eq: $state }) {
-      D_H
-      D_w
-      D_b
-      D_aian
-      D_a
-      D_limitedeng
-      HS13a_uninsured
-      HS13b_PrivateIns
-      SEF05_married
-      SEF14b_CollageBAPlus
-      SEF19_employed
-      SEF25_severehouse
-      sef26_occupantsrm
-      SEF27_housingburden30
-      SEF28_medHHInc
-      SEF31_SingleParent
-      SEF36_ChildPoverty
-      SEF37_GiniInd
-      SEF38_poverty
-      HO49_Diabetes
-      HO53_ActivityLimit
-      HB50_Fruit
-      HB38_inactivity
-      HB41_currentsmoker
-      HO22_ExVgGoodHealthStatAdult
-      HO24_PhysUnhealthyDays
-      HO25_MentUnhealthyDays
-      HO33_OverwtAdult
-      HO47_CVD
-      HO48_Stroke
-      HS11_NotAffordDoc
-      HS19_DentalVisit
-      HS21_Mammogram
-      HB06_AnyBreastfeed
-      HO30_Chlamydia
-      HO32_HIV
-      PS03_TobaccoTax
-      hs23_crcscreen
-      HO01_AllMort
-      HO02_CVDMort
-      HO03_CancerMort
-      HO04_LowerRespMort
-      HO05_CerebroMort
-      HO06_AlzheimersMort
-      HO07_DiabetesMort
-      HO08_KidneyMort
-      HO15_SuicideMort
-      HO16_HomicideMort
-      HO17_InfantMort
-      HO18_LifeExpect
-      HO20_YLL75
-      HS02_ACSdischarge
-      PSE44_violentcrimerate
-      PS78b_Income_FPL1
-      PS76a_Education_All
-      HS07b_PCPratio2000
-      HS08_MentCarShort
-      HS25_AcuteReAdm
-      PSE05b_WalkabilityPop
-      PSE45_SocialCapital
-      PSE60_FineParticulateMatter
-      SEF40a_ConPov20
-      SEF42a_HighMinority
-      SEF42b_PoorHighMinority
-      Ho27_LBW
-      Ho28a_TeenBirth15to19
-      SEF07_ECEnoHS
-      SEF12_ReadProf8
-      pse06_parks
-      SEF45_adultjail
-      PSE35b_ACES2
-      PSE36_VIOLCRIME
-      PSE25_SafeSchool
-      PSE01_NHamenities
-      HB03_Binge
-      HO35_OverwtChild
-      HO39_OralProbs
-      HO40_adolasthma
-      HB10_RxAbuse
-      HB09_IllicitDrug
-      PSE41_TeenMentor
-      SEF48_foodinsecure
-      HO11_MotorVehMort
-      PS_PolicyRankings
-    }
-    pentagon: file(relativePath: { eq: "social-determinants-pentagon.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 800) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    bottomPerforming: file(relativePath: { eq: "bottom-performing.png" }) {
-      childImageSharp {
-        fixed(height: 150) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    topPerforming: file(relativePath: { eq: "top-performing.png" }) {
-      childImageSharp {
-        fixed(height: 150) {
-          ...GatsbyImageSharpFixed
-        }
-      }
+      category
+      condition
+      conditionDefinition
     }
   }
+  stateName: statesJson(state: {eq: $state}) {
+    name
+    state
+  }
+  state: statesJson(state: {eq: $state}) {
+    D_H
+    D_w
+    D_b
+    D_aian
+    D_a
+    D_limitedeng
+    HS13a_uninsured
+    HS13b_PrivateIns
+    SEF05_married
+    SEF14b_CollageBAPlus
+    SEF19_employed
+    SEF25_severehouse
+    sef26_occupantsrm
+    SEF27_housingburden30
+    SEF28_medHHInc
+    SEF31_SingleParent
+    SEF36_ChildPoverty
+    SEF37_GiniInd
+    SEF38_poverty
+    HO49_Diabetes
+    HO53_ActivityLimit
+    HB50_Fruit
+    HB38_inactivity
+    HB41_currentsmoker
+    HO22_ExVgGoodHealthStatAdult
+    HO24_PhysUnhealthyDays
+    HO25_MentUnhealthyDays
+    HO33_OverwtAdult
+    HO47_CVD
+    HO48_Stroke
+    HS11_NotAffordDoc
+    HS19_DentalVisit
+    HS21_Mammogram
+    HB06_AnyBreastfeed
+    HO30_Chlamydia
+    HO32_HIV
+    PS03_TobaccoTax
+    hs23_crcscreen
+    HO01_AllMort
+    HO02_CVDMort
+    HO03_CancerMort
+    HO04_LowerRespMort
+    HO05_CerebroMort
+    HO06_AlzheimersMort
+    HO07_DiabetesMort
+    HO08_KidneyMort
+    HO15_SuicideMort
+    HO16_HomicideMort
+    HO17_InfantMort
+    HO18_LifeExpect
+    HO20_YLL75
+    HS02_ACSdischarge
+    PSE44_violentcrimerate
+    PS78b_Income_FPL1
+    PS76a_Education_All
+    HS07b_PCPratio2000
+    HS08_MentCarShort
+    HS25_AcuteReAdm
+    PSE05b_WalkabilityPop
+    PSE45_SocialCapital
+    PSE60_FineParticulateMatter
+    SEF40a_ConPov20
+    SEF42a_HighMinority
+    SEF42b_PoorHighMinority
+    Ho27_LBW
+    Ho28a_TeenBirth15to19
+    SEF07_ECEnoHS
+    SEF12_ReadProf8
+    pse06_parks
+    SEF45_adultjail
+    PSE35b_ACES2
+    PSE36_VIOLCRIME
+    PSE25_SafeSchool
+    PSE01_NHamenities
+    HB03_Binge
+    HO35_OverwtChild
+    HO39_OralProbs
+    HO40_adolasthma
+    HB10_RxAbuse
+    HB09_IllicitDrug
+    PSE41_TeenMentor
+    SEF48_foodinsecure
+    HO11_MotorVehMort
+    PS_PolicyRankings
+  }
+  ranking: rankingJson(state: {eq: $state}) {
+    D_H
+    D_w
+    D_b
+    D_aian
+    D_a
+    D_limitedeng
+    HS13a_uninsured
+    HS13b_PrivateIns
+    SEF05_married
+    SEF14b_CollageBAPlus
+    SEF19_employed
+    SEF25_severehouse
+    sef26_occupantsrm
+    SEF27_housingburden30
+    SEF28_medHHInc
+    SEF31_SingleParent
+    SEF36_ChildPoverty
+    SEF37_GiniInd
+    SEF38_poverty
+    HO49_Diabetes
+    HO53_ActivityLimit
+    HB50_Fruit
+    HB38_inactivity
+    HB41_currentsmoker
+    HO22_ExVgGoodHealthStatAdult
+    HO24_PhysUnhealthyDays
+    HO25_MentUnhealthyDays
+    HO33_OverwtAdult
+    HO47_CVD
+    HO48_Stroke
+    HS11_NotAffordDoc
+    HS19_DentalVisit
+    HS21_Mammogram
+    HB06_AnyBreastfeed
+    HO30_Chlamydia
+    HO32_HIV
+    PS03_TobaccoTax
+    hs23_crcscreen
+    HO01_AllMort
+    HO02_CVDMort
+    HO03_CancerMort
+    HO04_LowerRespMort
+    HO05_CerebroMort
+    HO06_AlzheimersMort
+    HO07_DiabetesMort
+    HO08_KidneyMort
+    HO15_SuicideMort
+    HO16_HomicideMort
+    HO17_InfantMort
+    HO18_LifeExpect
+    HO20_YLL75
+    HS02_ACSdischarge
+    PSE44_violentcrimerate
+    PS78b_Income_FPL1
+    PS76a_Education_All
+    HS07b_PCPratio2000
+    HS08_MentCarShort
+    HS25_AcuteReAdm
+    PSE05b_WalkabilityPop
+    PSE45_SocialCapital
+    PSE60_FineParticulateMatter
+    SEF40a_ConPov20
+    SEF42a_HighMinority
+    SEF42b_PoorHighMinority
+    Ho27_LBW
+    Ho28a_TeenBirth15to19
+    SEF07_ECEnoHS
+    SEF12_ReadProf8
+    pse06_parks
+    SEF45_adultjail
+    PSE35b_ACES2
+    PSE36_VIOLCRIME
+    PSE25_SafeSchool
+    PSE01_NHamenities
+    HB03_Binge
+    HO35_OverwtChild
+    HO39_OralProbs
+    HO40_adolasthma
+    HB10_RxAbuse
+    HB09_IllicitDrug
+    PSE41_TeenMentor
+    SEF48_foodinsecure
+    HO11_MotorVehMort
+    PS_PolicyRankings
+  }
+  pentagon: file(relativePath: {eq: "social-determinants-pentagon.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 800, layout: CONSTRAINED)
+    }
+  }
+  bottomPerforming: file(relativePath: {eq: "bottom-performing.png"}) {
+    childImageSharp {
+      gatsbyImageData(height: 150, layout: FIXED)
+    }
+  }
+  topPerforming: file(relativePath: {eq: "top-performing.png"}) {
+    childImageSharp {
+      gatsbyImageData(height: 150, layout: FIXED)
+    }
+  }
+}
 `;

@@ -18,14 +18,13 @@ import {
   ModalContent,
   ModalBody,
   ModalOverlay,
-  PseudoBox,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
   Text,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 import SearchResults from './SearchResults';
 import { slugify } from '../../utils/slugify';
@@ -85,7 +84,7 @@ const renderTabPanel = indicators => {
   return indicators.map(i => {
     return (
       <Link key={i} to={`/${slugify(i)}`}>
-        <PseudoBox
+        <Box
           py={2}
           px={4}
           bg="white"
@@ -98,7 +97,7 @@ const renderTabPanel = indicators => {
           _hover={{ fontWeight: 'bold', bg: '#FFD285', color: 'rgb(26, 32, 44)' }}
         >
           {i}
-        </PseudoBox>
+        </Box>
       </Link>
     );
   });

@@ -1,28 +1,23 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
-import { Box, Heading, Text, Flex } from '@chakra-ui/core';
+import { Box, Heading, Text, Flex } from '@chakra-ui/react';
 
 const Footer = () => {
-  const data = useStaticQuery(graphql`
-    {
-      centerLogo: file(relativePath: { eq: "logos/center-logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 230) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      vcuLogo: file(relativePath: { eq: "logos/vcu-logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 230) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  centerLogo: file(relativePath: {eq: "logos/center-logo.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 230, layout: CONSTRAINED)
     }
-  `);
+  }
+  vcuLogo: file(relativePath: {eq: "logos/vcu-logo.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 230, layout: CONSTRAINED)
+    }
+  }
+}
+`);
 
   return (
     <Flex
@@ -78,24 +73,24 @@ const Footer = () => {
       <Box w={['lg']} display={['none', 'none', 'none', 'block']} />
       <Flex align="flex-start" w={['100%', 'md']} direction={['column', 'row', 'column']}>
         <a href="https://societyhealth.vcu.edu/">
-          <Img
+          <GatsbyImage
             style={{
               minWidth: 100,
               width: 230,
               marginRight: 40,
             }}
-            fluid={data.centerLogo.childImageSharp.fluid}
+            image={data.centerLogo.childImageSharp.gatsbyImageData}
             alt="Center on Society and Health"
           />
         </a>
         <a href="https://www.vcu.edu">
-          <Img
+          <GatsbyImage
             style={{
               minWidth: 100,
               width: 230,
               marginTop: 40,
             }}
-            fluid={data.vcuLogo.childImageSharp.fluid}
+            image={data.vcuLogo.childImageSharp.gatsbyImageData}
             alt="VCU"
           />
         </a>

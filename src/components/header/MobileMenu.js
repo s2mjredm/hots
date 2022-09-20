@@ -10,7 +10,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 import Logo from '../../svg/logo.svg';
 

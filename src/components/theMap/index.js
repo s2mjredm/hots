@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { select, extent, scaleQuantize } from 'd3';
 import { groupBy } from 'lodash';
-import { Box, Button, Icon } from '@chakra-ui/core';
+import { Box, Button, Icon } from '@chakra-ui/react';
 
 import DataProbe from './DataProbe';
 import MapLow from './MapLow';

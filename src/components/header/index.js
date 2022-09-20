@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { Heading, Box, Flex, Grid, Button, useDisclosure } from '@chakra-ui/core';
+import { Heading, Box, Flex, Grid, Button, useDisclosure } from '@chakra-ui/react';
 
 import MobileMenu from './MobileMenu';
 import IndicatorModal from '../indicatorModal';

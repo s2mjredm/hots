@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
-import { Box, Heading, Text } from '@chakra-ui/core';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import SwiperCore, { Pagination, Navigation, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSprings, animated } from 'react-spring';
 
-import swiperStyles from 'swiper/swiper.scss';
-import paginationStyles from 'swiper/components/pagination/pagination.scss';
-import navigationStyles from 'swiper/components/navigation/navigation.scss';
+// import swiperStyles from 'swiper/swiper.scss';
+// import paginationStyles from 'swiper/components/pagination/pagination.scss';
+// import navigationStyles from 'swiper/components/navigation/navigation.scss';
 
 import format from '../../utils/numberFormat';
 import useIsMobile from '../../utils/useIsMobile';
@@ -17,48 +17,37 @@ import useWindowSize from '../../utils/useWindowSize';
 
 import '../../css/rank-graphic.css';
 
-console.log(swiperStyles, paginationStyles, navigationStyles);
+// console.log(swiperStyles, paginationStyles, navigationStyles);
 
 const RankGraphic = ({ rankings }) => {
-  const images = useStaticQuery(graphql`
-    {
-      education: file(relativePath: { eq: "cards/education.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      healthcare: file(relativePath: { eq: "cards/healthcare.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      housing: file(relativePath: { eq: "cards/housing.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      income: file(relativePath: { eq: "cards/income.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      policy: file(relativePath: { eq: "cards/policy.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
+  const images = useStaticQuery(graphql`{
+  education: file(relativePath: {eq: "cards/education.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 300, layout: CONSTRAINED)
     }
-  `);
+  }
+  healthcare: file(relativePath: {eq: "cards/healthcare.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 300, layout: CONSTRAINED)
+    }
+  }
+  housing: file(relativePath: {eq: "cards/housing.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 300, layout: CONSTRAINED)
+    }
+  }
+  income: file(relativePath: {eq: "cards/income.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 300, layout: CONSTRAINED)
+    }
+  }
+  policy: file(relativePath: {eq: "cards/policy.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 300, layout: CONSTRAINED)
+    }
+  }
+}
+`);
 
   const [springs, set] = useSprings(rankings.length, () => ({
     height: 0,
@@ -174,11 +163,10 @@ const RankGraphic = ({ rankings }) => {
                           height: springs[i].height,
                         }}
                       >
-                        <Img
+                        <GatsbyImage
                           style={{ margin: '10px 0' }}
-                          fluid={
-                            images[r.condition.replace(/\W/, '').toLowerCase()].childImageSharp
-                              .fluid
+                          image={
+                            images[r.condition.replace(/\W/, '').toLowerCase()].childImageSharp.gatsbyImageData
                           }
                         />
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
 
-import { Box, Button, Flex } from '@chakra-ui/core';
+import { Box, Button, Flex } from '@chakra-ui/react';
 
 import chroma from 'chroma-js';
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
-import { PseudoBox } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 
 import DotMarkerProbe from './DotMarkerProbe';
 import { slugify } from '../../utils/slugify';
@@ -63,7 +63,7 @@ const StateDotMarker = props => {
       stateName={stateName}
       indicatorValue={indicatorValue}
     >
-      <PseudoBox
+      <Box
         visibility={['hidden', 'visible']}
         position="absolute"
         left={leftPosition}
@@ -84,18 +84,18 @@ const StateDotMarker = props => {
 };
 
 StateDotMarker.propTypes = {
-  stateName: PropTypes.string.isRequired,
-  indicator: PropTypes.string.isRequired,
-  indicatorValue: PropTypes.string.isRequired,
-  leftPosition: PropTypes.number.isRequired,
+  stateName: PropTypes.string,
+  indicator: PropTypes.string,
+  indicatorValue: PropTypes.string,
+  leftPosition: PropTypes.number,
   bottom: PropTypes.number,
-  indicatorColor: PropTypes.string.isRequired,
-  indicatorPosition: PropTypes.number.isRequired,
-  isAllwaysVisible: PropTypes.bool.isRequired,
+  indicatorColor: PropTypes.string,
+  indicatorPosition: PropTypes.number,
+  isAllwaysVisible: PropTypes.bool,
   placement: PropTypes.string,
   size: PropTypes.number,
-  isTrackHoverd: PropTypes.bool.isRequired,
-  setIsTrackHovered: PropTypes.func.isRequired,
+  isTrackHoverd: PropTypes.bool,
+  setIsTrackHovered: PropTypes.func,
 };
 
 StateDotMarker.defaultProps = {

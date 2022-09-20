@@ -1,48 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
-import { Grid, Box, PseudoBox, Flex, Text } from '@chakra-ui/core';
+import { Grid, Box, Flex, Text } from '@chakra-ui/react';
+import { getSrc } from 'gatsby-plugin-image';
 
 const Flag = ({ active, onScrollToMapIt }) => {
-  const { about, learnMore, mapIt, takeAction } = useStaticQuery(graphql`
-    {
-      about: file(relativePath: { eq: "flag/about.png" }) {
-        childImageSharp {
-          fixed(width: 400, pngQuality: 100) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-      learnMore: file(relativePath: { eq: "flag/learn-more.png" }) {
-        childImageSharp {
-          fixed(width: 400, pngQuality: 100) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-      mapIt: file(relativePath: { eq: "flag/map-it.png" }) {
-        childImageSharp {
-          fixed(width: 400, pngQuality: 100) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-      takeAction: file(relativePath: { eq: "flag/take-action.png" }) {
-        childImageSharp {
-          fixed(width: 400, pngQuality: 100) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
+  const { about, learnMore, mapIt, takeAction } = useStaticQuery(graphql`{
+  about: file(relativePath: {eq: "flag/about.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 400,  layout: FIXED)
     }
-  `);
+  }
+  learnMore: file(relativePath: {eq: "flag/learn-more.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 400,  layout: FIXED)
+    }
+  }
+  mapIt: file(relativePath: {eq: "flag/map-it.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 400,  layout: FIXED)
+    }
+  }
+  takeAction: file(relativePath: {eq: "flag/take-action.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 400,  layout: FIXED)
+    }
+  }
+}
+`);
 
-  const hoverStyle = img => ({
-    width: 400,
-    background: `url(${img.childImageSharp.fixed.src}) !important`,
-    backgroundImage: `url(${img.childImageSharp.fixed.src})`,
-    cursor: 'pointer',
-  });
+
+
+  const hoverStyle = img => {
+    const imgSource = getSrc(img.childImageSharp.gatsbyImageData);
+    return ({
+      width: 400,
+      background: `url(${imgSource}) !important`,
+      backgroundImage: `url(${imgSource})`,
+      cursor: 'pointer',
+    })
+  };
 
   // this is necessary as gradient is not supported by chakra-ui "bg" prop
   const linearGradientBackgrounds = {
@@ -87,7 +84,7 @@ const Flag = ({ active, onScrollToMapIt }) => {
           </Text>
         </Flex>
 
-        <PseudoBox
+        <Box
           w="100%"
           transition="width 500"
           style={active === '/' ? hoverStyle(mapIt) : linearGradientBackgrounds.red}
@@ -97,13 +94,13 @@ const Flag = ({ active, onScrollToMapIt }) => {
           gridRow="1 / span 2"
         />
         <Box w="100%" h="100%" style={linearGradientBackgrounds.gray} gridRow="1 / span 2" />
-        <PseudoBox
+        <Box
           w="100%"
           style={linearGradientBackgrounds.red}
           display={['block', 'none']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           transition="width 500"
           style={active === 'learn-more' ? hoverStyle(learnMore) : linearGradientBackgrounds.red}
@@ -112,19 +109,19 @@ const Flag = ({ active, onScrollToMapIt }) => {
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           style={linearGradientBackgrounds.gray}
           display={['block', 'none']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           transition="width 500"
           style={active === 'take-action' ? hoverStyle(takeAction) : linearGradientBackgrounds.red}
@@ -133,13 +130,13 @@ const Flag = ({ active, onScrollToMapIt }) => {
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           transition="width 500"
           style={active === 'about' ? hoverStyle(about) : linearGradientBackgrounds.red}
@@ -148,7 +145,7 @@ const Flag = ({ active, onScrollToMapIt }) => {
           display={['none', 'block']}
           gridRow="1 / span 2"
         />
-        <PseudoBox
+        <Box
           w="100%"
           style={linearGradientBackgrounds.gray}
           display={['none', 'block']}

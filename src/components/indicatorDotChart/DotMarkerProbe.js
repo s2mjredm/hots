@@ -8,7 +8,7 @@ import {
   Box,
   PopoverBody,
   Text,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 import useIsMobile from '../../utils/useIsMobile';
 
@@ -106,15 +106,15 @@ const DotMarkerProbe = ({
   );
 };
 DotMarkerProbe.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   placement: PropTypes.string,
   isOpen: PropTypes.bool,
-  close: PropTypes.func.isRequired,
+  close: PropTypes.func,
   isAllwaysVisible: PropTypes.bool,
   indicatorColor: PropTypes.string,
-  indicatorPosition: PropTypes.number.isRequired,
-  stateName: PropTypes.string.isRequired,
-  indicatorValue: PropTypes.string.isRequired,
+  indicatorPosition: PropTypes.number,
+  stateName: PropTypes.string,
+  indicatorValue: PropTypes.string,
 };
 
 DotMarkerProbe.defaultProps = {

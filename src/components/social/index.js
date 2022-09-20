@@ -14,7 +14,7 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 const Social = ({ onClose, isOpen, url, pathname }) => {
   const { site } = useStaticQuery(

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
-import { Flex, Box, Text, Icon } from '@chakra-ui/core';
+import { Flex, Box, Text, Icon } from '@chakra-ui/react';
 
 import { slugify } from '../../utils/slugify';
 import './index.css';
@@ -84,8 +84,8 @@ const SearchResults = ({ results, isSearchingCovid }) => {
   return <>{renderSearchResults()}</>;
 };
 SearchResults.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isSearchingCovid: PropTypes.bool.isRequired,
+  results: PropTypes.arrayOf(PropTypes.object),
+  isSearchingCovid: PropTypes.bool,
 };
 
 export default SearchResults;

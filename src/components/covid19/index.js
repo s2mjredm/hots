@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text, Collapse, Icon } from '@chakra-ui/core';
+import { Box, Text, Collapse, Icon } from '@chakra-ui/react';
 
 const Covid19 = () => {
   const [show, setShow] = useState(false);

@@ -14,15 +14,14 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  PseudoBox,
   useDisclosure,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 import useIsMobile from '../../utils/useIsMobile';
 
 const SelectButton = ({ label, onClick }) => {
   return (
-    <PseudoBox
+    <Box
       as="div"
       onClick={() => onClick(label)}
       cursor="pointer"
@@ -48,7 +47,7 @@ const SelectButton = ({ label, onClick }) => {
       }}
     >
       {label}
-    </PseudoBox>
+    </Box>
   );
 };
 

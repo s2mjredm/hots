@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 
-import { Box, useDisclosure, Heading, Text, Icon } from '@chakra-ui/core';
+import { Box, useDisclosure, Heading, Text, Icon } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 import Layout from '../components/layout';
+import IndicatorModal from '../components/indicatorModal';
 import IndicatorDropdown from '../components/indicatorDropdown';
 import TheMap from '../components/theMap';
-import IndicatorModal from '../components/indicatorModal';
 import IndicatorDotChart from '../components/indicatorDotChart';
 import Social from '../components/social';
 
@@ -120,7 +121,7 @@ const Index = ({
             w="260px"
           >
             Learn how, and what states can do to improve health
-            <Icon name="arrow-forward" />
+            <ArrowForwardIcon />
           </Text>
         </Link>
       </Box>
