@@ -64,7 +64,7 @@ const Header = ({ flag }) => {
             </Flex>
           </Link>
         </Box>
-        <Box display={['none', 'block']}>
+        <Box display={['none', 'block']} align="left">
           <Link to="/" onMouseEnter={() => setHover('/')} onMouseLeave={() => setHover(null)}>
             <Button
               w="50%"
@@ -80,7 +80,7 @@ const Header = ({ flag }) => {
             </Button>
           </Link>
         </Box>
-        <Box display={['none', 'block']}>
+        <Box display={['none', 'block']} align="left">
           <Link
             to="/learn-more"
             onMouseEnter={() => setHover('learn-more')}
@@ -99,7 +99,7 @@ const Header = ({ flag }) => {
             </Button>
           </Link>
         </Box>
-        <Box display={['none', 'block']}>
+        <Box display={['none', 'block']} align="left">
           <Link
             to="/take-action"
             onMouseEnter={() => setHover('take-action')}
@@ -118,7 +118,7 @@ const Header = ({ flag }) => {
             </Button>
           </Link>
         </Box>
-        <Box display={['none', 'block']}>
+        <Box display={['none', 'block']} align="left">
           <Link
             to="/about-the-data"
             onMouseEnter={() => setHover('about')}
