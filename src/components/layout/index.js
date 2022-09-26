@@ -26,6 +26,14 @@ const Layout = ({ location: { pathname }, children, ogImage, description }) => {
         a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
       `}</Script>
+      <Script id="ga-1" async src="https://www.googletagmanager.com/gtag/js?id=G-RMQMT2L5BV"></Script>
+      <Script id="ga-2">{`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RMQMT2L5BV');`}
+      </Script>
       <Header flag={pathname === '/'} />
       <main style={{ color: ' #403f3f' }}>{children}</main>
       <Footer />

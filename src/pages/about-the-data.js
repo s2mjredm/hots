@@ -89,7 +89,10 @@ const About = ({
           {parse(download.dataintro)}
         </Text>
         <Box bg="white" px={15} py={4} mb={10}>
-          <File style={{ float: 'right' }} />
+          <Link
+            href={download.file1.localFile.url}
+            target="_blank"
+          ><File style={{ float: 'right' }} /></Link>
           <Text fontSize={12} fontWeight={500}>
             {parse(download.filetextone)}
           </Text>
@@ -104,7 +107,10 @@ const About = ({
           </Link>
         </Box>
         <Box bg="white" px={15} py={4}>
-          <File style={{ float: 'right' }} />
+          <Link
+            href={download.file2.localFile.url}
+            target="_blank"
+          ><File style={{ float: 'right' }} /></Link>
           <Text fontSize={12} fontWeight={500}>
             <div className="wordpress">{parse(download.filetexttwo)}</div>
           </Text>

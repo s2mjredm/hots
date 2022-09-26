@@ -10,7 +10,7 @@ module.exports = {
     description: ``,
     titleTemplate: '',
     author: `Axis Maps`,
-    url: 'https://comfy-tulumba-589690.netlify.app/',
+    url: 'https://stateofhealth.us/',
     image: '',
   },
   /* Your site config here */
